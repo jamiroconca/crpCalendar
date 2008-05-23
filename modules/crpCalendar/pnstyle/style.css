@@ -1,0 +1,195 @@
+/* text styles */
+.crpcalendar-required {
+	color: #C00;
+	border-bottom: 1px solid #C00;
+}
+
+.crpcalendar-upcoming {
+	font-weight: bold;
+	color: #C00;
+}
+
+/* position styles */ 
+.crpcalendar-rss {
+	float: right;
+	position: relative;
+	display: inline;
+	margin: 4px 4px 4px 4px;
+}
+
+.crpcalendar-right {text-align:right;}
+
+/* tables styles */
+table.crpcalendar-table {
+  	color: inherit;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc; 
+	border-right: 1px solid #ccc; 
+	margin-top: 0px;
+	margin-bottom: 1em;
+	padding: 5px 5px 10px 5px;
+	width: 100%;
+}
+
+table.crpcalendar-table caption {
+	background-color: #f3f3f3;
+	font-weight: bold;
+	border-bottom: 2px solid #CFCFCF;
+	text-transform: uppercase;
+	padding:10px;
+}
+
+table.crpcalendar-table thead tr {
+	background-color: #CFCFCF;
+}
+
+/* stying for the cell elements in admin tables */
+table.crpcalendar-table tbody td, table.pn-admintable thead th{
+	padding: 5px;
+	border-width: 0px;
+}
+
+/* style to highlight a default row in a table */
+table.crpcalendar-table tbody tr.pn-defaulttablerow {
+  background-color: #add8e6;
+  color: inherit;
+}
+
+/* style for column width */
+.crpcalendar_w1 {width: 5%;}
+.crpcalendar_w2 {width: 10%;}
+.crpcalendar_w3 {width: 15%;}
+
+/* classes to define two colors for alternating rows in admin views */
+table.crpcalendar-table tbody tr.pn-even {
+	background-color: #fff;
+  color: inherit;
+}
+table.crpcalendar-table tbody tr.pn-odd {
+	background-color: #f3f3f3;
+ 	color: inherit;
+}
+
+/* style to add to current row when hovered over */
+table.crpcalendar-table tbody tr:hover {
+	background-color: #CFCFCF;
+}
+
+table.crpcalendar-table .month-cell{
+	padding: 5px;
+	border: 1px solid #CCC;
+	vertical-align:top;
+}
+
+table.crpcalendar-table div{
+	padding: 1px;
+}
+
+.day-off-default {background-color: #A4D6FF;}
+.day-off-tan {background-color: #F0EAD8;}
+.day-off-grey {background-color: #a1a1a1;}
+.day-on {background-color: white;}
+.day-today {border: 2px solid red; padding: 1px;}
+
+/* style for event form */
+
+/* styles to ensure that control elements inside the floated div directly above
+don't themselves float*/
+div.crpcalendar-formrow div input, div.crpcalendar-formrow div textarea,
+div.crpcalendar-formrow div select {
+	float: none;
+}
+
+div.crpcalendar-formrow {
+	border-top: 0px solid #ccc;
+	padding: 5px 0px 10px 0px; /* top, right, bottom, left */
+	min-height: 2em;
+}
+
+div.crpcalendar-formrow>label {
+	float: left;
+	width: 23em;
+	margin-left: 5px;
+  padding: 0px 5px 0px 0px;
+	text-align: right;
+}
+
+form.crpcalendar-formrow div.formbuttons {
+	text-align: left;
+	margin-left: 15em;
+}
+
+form.crpcalendar-form div.formbuttons input, form.crpcalendar-form div.formbuttons img {
+	margin: 5px;	
+}
+
+form.crpcalendar-form button {
+  border: 0px;
+	padding: 0px;
+	background-color: transparent;
+}
+
+/* style for event visualization */
+div.crpcalendar_container {
+    margin-bottom: 5px;
+}
+div.crpcalendar_header {
+    border-bottom: 1px solid black;
+    padding: 5px;
+}
+
+div.crpcalendar_body {
+    margin: 10px;
+}
+
+div.crpcalendar_footer {
+    border: 1px dashed black;
+    padding: 5px;
+    text-align: right;
+}
+
+.crpcalendar-box {
+	padding: 8px;
+	border: 1px dashed black;
+	margin: 0 0 16px 0;
+}
+
+/* block style*/
+.block-crpcalendar {
+	background: url(../pnimages/mini-calendar.gif) no-repeat left center;
+	padding-left: 20px;
+	float: right;
+	font-size: 95%;
+	color: #999999;
+}
+.event-date {
+	width: 45px;
+	height: 49px;
+	float:left;
+	position: relative;
+	background: url(../pnimages/date-bg.gif) no-repeat;
+}
+.event-month {
+	font-size: 11px;
+	text-transform: uppercase;
+	color: #FFFFFF;
+	text-align: center;
+	display:block;
+	line-height: 11px;
+	padding-top: 2px;
+	margin-left: -3px;
+}
+.event-day {
+	font-size: 18px;
+	text-transform: uppercase;
+	color: #999999;
+	text-align: center;
+	display:block;
+	line-height: 18px;
+	padding-top: 7px;
+	margin-left: -3px;
+}
+
+/* hcalendar styles */
+abbr{ border:0; }

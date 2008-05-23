@@ -1,0 +1,32 @@
+<!--[pnajaxheader noscriptaculous=true nobehaviour=true lightbox=true]-->
+<!--[modulestylesheet modname=crpCalendar]-->
+
+<div class="crpcalendar_container">
+
+<h2><!--[$event.title|pnvarprephtmldisplay]--></h2>
+
+<div class="crpcalendar_header">
+	<!--[pnusergetvar name=uname uid=$event.cr_uid assign=cr_uname]-->
+	<!--[pnmodurl modname=Profile func=view uname=$cr_uname assign=cr_profilelink]-->
+	<!--[pnml name=_CREATEDBYON html=1 username="<a href='$cr_profilelink'>$cr_uname</a>" date=$event.cr_date|pndate_format html=true]-->
+</div>
+
+<div class="crpcalendar_body"">
+	<!--[if $event.image]-->
+	<div>
+		<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="get_image" eventid=$event.eventid]-->" title="<!--[$event.title]-->" rel="lightbox">
+		<!--[if $crpcalendar_use_gd eq '1']-->
+		<img src="<!--[pnmodurl modname="crpCalendar" type="user" func="get_thumbnail" eventid=$event.eventid]-->" alt="<!--[$event.title]-->" title="<!--[$event.title]-->"/>
+		<!--[else]-->
+		<img src="<!--[pnmodurl modname="crpCalendar" type="user" func="get_image" eventid=$event.eventid]-->" alt="<!--[$event.title]-->" title="<!--[$event.title]-->" width="<!--[$image_width]-->px"/>
+		<!--[/if]-->
+		</a>
+	</div>
+	<!--[/if]-->
+	<div><strong><!--[pnml name="_CRPCALENDAR_START_DATE" html=1]--></strong>: <!--[$event.start_date|pndate_format:"%d/%m/%Y - %H:%M"]--></div>
+	<div><strong><!--[pnml name="_CRPCALENDAR_END_DATE" html=1]--></strong>: <!--[$event.end_date|pndate_format:"%d/%m/%Y - %H:%M"]--></div>
+	<br />
+	<!--[$event.event_text|pnvarprephtmldisplay]-->
+</div>
+
+</div>

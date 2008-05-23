@@ -1,0 +1,74 @@
+<!--[if $crpcalendar_userlist_image]-->
+<!--[pnajaxheader modname="crpCalendar" nobehaviour=true noscriptaculous=true lightbox=true]-->
+<!--[/if]-->
+<!--[include file="crpcalendar_user_menu.htm"]-->
+
+<!--[include file="crpcalendar_user_filtermenu.htm"]-->
+
+<div class="crpcalendar-right"><a href="<!--[pnmodurl modname=crpCalendar func=ical_exports]-->"><!--[pnimg modname=crpCalendar altml=true src="ical.gif" alt=_CRPCALENDAR_ICAL]--></a></div>
+
+<table class="crpcalendar-table">
+	
+	<tr>
+		<!--[if $crpcalendar_userlist_image]-->
+      	<th class="crpcalendar_w1"><!--[pnml name="_CRPCALENDAR_IMAGES" html=1]--></th>
+	  	<!--[/if]-->
+      	<th><!--[pnml name="_CRPCALENDAR_TITLE" html=1]--></th>
+	  	<th class="crpcalendar_w3"><!--[pnml name="_CRPCALENDAR_CONTENT" html=1]--></th>
+	</tr>
+	
+	<!--[foreach from=$events item=event]-->
+    <tr class="<!--[cycle values="pn-odd,pn-even"]-->">
+      
+		<!--[if $crpcalendar_userlist_image]-->
+		<td>
+			<!--[if $event.image]-->
+			<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="get_image" eventid=$event.eventid]-->" title="<!--[$event.title]-->" rel="lightbox">
+			<!--[if $crpcalendar_use_gd eq '1']-->
+			<img src="<!--[pnmodurl modname="crpCalendar" type="user" func="get_thumbnail" eventid=$event.eventid width=$userlist_width]-->" alt="<!--[$event.title]-->" title="<!--[$event.title]-->"/>
+			<!--[else]-->
+			<img src="<!--[pnmodurl modname="crpCalendar" type="user" func="get_image" eventid=$event.eventid]-->" alt="<!--[$event.title]-->" title="<!--[$event.title]-->" width="<!--[$userlist_width]-->px"/>
+			<!--[/if]-->
+			</a>
+			<!--[/if]-->
+		</td>
+		<!--[/if]-->
+	  
+		<td>	
+	  	<div class="vevent">
+		  	<div>
+		  		<!--[if $event.__CATEGORIES__.Main.__ATTRIBUTES__.Color]--><span  style="background-color:<!--[$event.__CATEGORIES__.Main.__ATTRIBUTES__.Color]-->">&nbsp;&nbsp;</span><!--[/if]-->
+			  	<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="display" eventid=$event.eventid]-->" title="<!--[$event.title]-->">
+	      		<span class="<!--[if $event.start_date > date("Y-m-d")]-->crpcalendar-upcoming<!--[/if]--> summary">
+	      			<!--[$event.title|pnvarprephtmldisplay]-->
+				</span>
+				</a>
+				<!--[if $enablecategorization]-->
+				<!--[ foreach from=$event.__CATEGORIES__ item=cat ]-->
+			    <strong>&middot;</strong> <!--[pnml name="_CATEGORY"]-->: <span class="category"><!--[ $cat.display_name.$lang ]--></span>
+			    <!--[ /foreach ]-->	
+			    <!--[/if]-->				
+			</div>
+			<!--[pnmodurl modname=Profile func=view uname=$event.cr_uid assign=cr_profilelink]-->
+			<div>
+				<!--[pnml name=_CRPCALENDAR_CREATEDON html=1]--> <abbr class="dtstamp" title="<!--[$event.cr_date|date_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.cr_date|date_format]--></abbr>
+				<!--[pnml name=_BY]--> <span class="uid"><a href="<!--[$cr_profilelink]-->"><!--[pnusergetvar name=uname uid=$event.cr_uid]--></a></span>
+			</div>
+			<div>
+				<!--[pnml name="_CRPCALENDAR_START_DATE" html=1]-->: <strong><abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.start_date|pndate_format:"%d/%m/%Y - %H:%M"]--></abbr></strong>
+   				<strong>&middot;</strong> <!--[pnml name="_CRPCALENDAR_END_DATE" html=1]-->: <strong><abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.end_date|pndate_format:"%d/%m/%Y - %H:%M"]--></abbr></strong>
+   			</div>
+   		</div>
+		</td>
+		
+		<td>
+		<!--[assign var="options" value=$event.options]-->
+        <!--[section name=options loop=$options]-->
+        	<a href="<!--[$options[options].url|pnvarprepfordisplay]-->"><!--[pnimg modname=core set=icons/extrasmall src=$options[options].image alt=$options[options].title]--></a>
+        <!--[/section]-->
+      	</td>
+    
+    </tr>
+  <!--[/foreach]-->
+</table>
+<!--[pager rowcount=$pager.numitems limit=$pager.itemsperpage posvar=startnum shift=1 img_prev=images/icons/extrasmall/previous.gif img_next=images/icons/extrasmall/next.gif]-->

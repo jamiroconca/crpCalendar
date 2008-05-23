@@ -1,0 +1,28 @@
+<!--[pngetstatusmsg]-->
+
+<div class="crpcalendar-rss">
+	<a href="http://microformats.org/wiki/hcalendar" title="hCalendar Wiki">
+		<!--[pnimg modname=crpCalendar src=microformat_hcalendar.png alt="_CRPCALENDAR_HCALENDAR" title="_CRPCALENDAR_HCALENDAR" altml=true titleml=true]-->
+	</a>
+	<!--[if pnModGetVar('crpCalendar','crpcalendar_show_rss')]-->
+	<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="getfeed"]-->">
+		<!--[pnimg modname=crpCalendar src=rss_button.gif alt="_CRPCALENDAR_RSS" title="_CRPCALENDAR_RSS" altml=true titleml=true]-->
+	</a>
+	<!--[/if]-->
+</div>
+
+<div class="crpcalendar-box">
+	<h1><!--[sitename]--> <!--[pnml name="_CRPCALENDAR" html=1]--></h1>
+	<div class="pn-menu">
+	<!--[pnsessiongetvar name="crpCalendar_choosed_view" assign=choosed_view]-->
+	<!--[securityutil_checkpermission component="crpCalendar::" instance="::" level="ACCESS_COMMENT" assign="can_submit"]-->
+	[&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func=$choosed_view]-->"><!--[pnml name="_CRPCALENDAR_VIEW" html=1]--></a>&nbsp;<!--[if $can_submit]-->|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="new"]-->"><!--[pnml name="_CRPCALENDAR_SUBMIT" html=1]--></a>&nbsp;<!--[/if]-->]
+	
+	</div>
+	<div class="crpcalendar-right">
+		<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="view"]-->"><!--[pnimg modname=crpCalendar altml=true src=$crpcalendar_theme|cat:"/list_on.gif" alt=_CRPCALENDAR_VIEW]--></a>
+		<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="day_view"]-->"><!--[pnimg modname=crpCalendar altml=true src=$crpcalendar_theme|cat:"/day_on.gif" alt=_CRPCALENDAR_VIEW_DAY]--></a>
+		<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="week_view"]-->"><!--[pnimg modname=crpCalendar altml=true src=$crpcalendar_theme|cat:"/week_on.gif" alt=_CRPCALENDAR_VIEW_WEEK]--></a>
+		<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="month_view"]-->"><!--[pnimg modname=crpCalendar altml=true src=$crpcalendar_theme|cat:"/month_on.gif" alt=_CRPCALENDAR_VIEW_MONTH]--></a>
+	</div>
+</div>
