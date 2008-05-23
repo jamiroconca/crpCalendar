@@ -1,0 +1,18 @@
+<!--[pnpageaddvar name=stylesheet value="modules/crpCalendar/pnstyle/style.css"]-->
+<!--[foreach from=$events item=event]-->
+<div class="vevent">
+<span class="event-date">
+	<span class="event-month">
+		<!--[$event.start_date|pndate_format:'%b']-->
+	</span>
+	<span class="event-day">
+		<!--[$event.start_date|pndate_format:'%d']-->
+	</span>
+</span>
+<a href="<!--[pnmodurl modname=crpCalendar func=display eventid=$event.eventid]-->">
+	<span class="summary"><!--[$event.title|pnvarprephtmldisplay]--></span>
+</a> (<abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%M%sZ"]-->"><!--[$event.start_date|pndate_format:"%d/%m/%Y"]--></abbr><!--[if $event.end_date neq $event.start_date]-->-<abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%M%sZ"]-->"><!--[$event.end_date|pndate_format:"%d/%m/%Y"]--></abbr><!--[/if]-->)
+<div class="description"><!--[$event.event_text|truncate:"50"|pnvarprephtmldisplay]--></div>
+<div style="clear:left"></div>
+</div>
+<!--[/foreach]-->

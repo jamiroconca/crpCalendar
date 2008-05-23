@@ -1,0 +1,24 @@
+INSTALL:
+- requirements are postnuke 0.8 and Categories module 
+- default module installation procedure
+- for event submission, grant crpCalendar::.* .* ACCESS_COMMENT permission for users groups, while ACCESS_DELETE gives control over module administration, except for confinguration which needs ACCESS_ADMIN
+- rss feed are enabled by default, change module settings as required
+- max upload (image) file size is set to 35000 ~ 35kB
+- resize width for image is set by default to 150px
+- clicking image in display event will show the *real image*, it's better to have default javascript/ajax/prototype.js javascript/ajax/scriptaculous.js javascript/ajax/pnajax.js javascript/ajax/lightbox.js
+- calendar theme is set to "default": a blue theme
+- calendar start year (for event's navigation) is set by default to installation year
+- take advantage from Categories creating a property named "Color", this (#FC0, #080 and so on) will be use in event's presentation
+
+Permissions Summary:
+ACCESS_READ : can view user list and details, can get rss feed
+ACCESS_COMMENT : can add his own events (status: Pending)
+ACCESS_MODERATE : can add and edit his own approved events
+ACCESS_EDIT : can view admin's pages and can create and edit his own events
+ACCESS_ADD : can view admin's pages, can create and edit every events
+ACCESS_DELETE : can view admin's pages, can create, edit and delete every events
+ACCESS_ADMIN : complete control (configuration included)
+
+UNINSTALL:
+- default module uninstallation procedure
+- remeber to delete crpCalendar category and sub-categories before attempting a new installation

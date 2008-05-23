@@ -1,0 +1,33 @@
+crpCalendar
+v0.4.3 - ??? April 2008
+- user can add/delete himself to the event
+v0.4.2 - 18 April 2008
+- added ajax status admin management
+- added a slot for attachment
+- added clone event function
+v0.4.1 - 30 March 2008
+- added month, week and day views
+- added start year, for calendar jump to
+- added jump to date
+- added theme settings for table views
+v0.4.0 - 19 March 2008
+- added plugin for Content module
+- formatted user list and display to hCalendar microformat
+- added location, url, contact and organizer fields
+- fixed countitems bug
+- more complex permission level use
+- added numitems to eventblocks
+- added Account Panel link
+- added .ics event and eventlist export
+v0.3.1 - 23 December 2007
+- fixed exit() malfunction
+- added GD library function for thumbnail generation
+- added thumbnails in userlist
+v0.3.0 - 27 September 2007
+- Added event image management: images are stored in the db(limited in size and width by settings) and displayed with the help of lightbox.js, minor bug-fix
+v0.2.0 - 8 August 2007
+- Added rss calendar feed, block for category's events, bug-fix
+v0.1.1 - 17 May 2007
+- Added event's counter, first complete release
+v0.1.0 - 10 May 2007
+- Initial version 
