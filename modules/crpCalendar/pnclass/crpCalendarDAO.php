@@ -660,17 +660,17 @@ class crpCalendarDAO
 		$pntable = pnDBGetTables();
     $crpcalendarcolumn = $pntable['crpcalendar_column'];
     
-		$catFilter= array ();
 		$where = '';
 		
-		if (isset ($category) && !empty ($category))
-		{
-			$catFilter[]= $category;
-		}
+		$catFilter = array();
+		if (is_array($category)) 
+			$catFilter = $category;
+    else if ($category)
+    	$catFilter['Main'] = $category;
 		
 		if ($active)
 			$where = " WHERE $crpcalendarcolumn[obj_status]='".DataUtil::formatForStore($active)."'";
-				
+
 		// Return the number of items
 		return DBUtil :: selectObjectCount('crpcalendar', $where, 'eventid', false, $catFilter);
 	}
