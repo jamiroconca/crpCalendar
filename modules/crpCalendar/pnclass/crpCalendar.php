@@ -1520,7 +1520,7 @@ class crpCalendar
 		  	header('Pragma: cache'); // My PHP insists on putting a pragma "no-cache", so this is an attempt to avoid that
 		  	header('Cache-Control: public');
 		    header("ETag: \"$params[modifiedDate]\"");
-		    return true;
+		    pnShutDown();
 		  }
   			
   		header("Expires: " . date('D, d M Y H:i:s T', time()+180*24*3600));
