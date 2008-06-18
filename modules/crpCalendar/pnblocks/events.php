@@ -3,9 +3,9 @@
  * crpCalendar
  *
  * @copyright (c) 2007, Daniele Conca
- * @link http://noc.postnuke.com/projects/crpcalendar Support and documentation
- * @author Daniele Conca <jami at cremonapalloza dot org>
- * @license GNU/GPL - v.2
+ * @link http://code.zikula.org/projects/crpcalendar Support and documentation
+ * @author Daniele Conca <conca.daniele@gmail.com>
+ * @license GNU/GPL - v.2.1
  * @package crpCalendar
  */
 
@@ -70,15 +70,12 @@ function crpCalendar_eventsblock_display($blockinfo)
 
   // call the api
   $items = pnModAPIFunc('crpCalendar', 'user', 'getall', $apiargs);
-
-  // check for an empty return
-  if (empty($items))
-    return;
   
   // create the output object
   $pnRender = pnRender::getInstance('crpCalendar',false);
 	
   $pnRender->assign('events', $items);
+  $pnRender->assign('interval', $vars['limit']);
 
   $blockinfo['content'] = $pnRender->fetch('blocks/crpcalendar_block_events.htm');
   return pnBlockThemeBlock($blockinfo);
