@@ -2,9 +2,9 @@
 /**
  * crpCalendar
  *
- * @copyright (c) 2007, Daniele Conca
- * @link http://noc.postnuke.com/projects/crpcalendar Support and documentation
- * @author Daniele Conca <conca dot daniele at gmail dot com>
+ * @copyright (c) 2007-2008, Daniele Conca
+ * @link http://code.zikula.org/projects/crpcalendar Support and documentation
+ * @author Daniele Conca <conca.daniele@gmail.com>
  * @license GNU/GPL - v.2.1
  * @package crpCalendar
  */
@@ -51,8 +51,11 @@ class crpCalendarDAO
 		if (is_array($category)) 
 			$catFilter = $category;
     else if ($category)
+    {
     	$catFilter['Main'] = $category;
-
+    	$catFilter['__META__']['module'] = 'crpCalendar';
+    }
+    
     $items = array();
 
     // Security check
@@ -155,8 +158,11 @@ class crpCalendarDAO
 		if (is_array($category)) 
 			$catFilter = $category;
     else if ($category)
+    {
     	$catFilter['Main'] = $category;
-
+    	$catFilter['__META__']['module'] = 'crpCalendar';
+    }
+    
     $items = array();
 
     // Security check
@@ -666,7 +672,10 @@ class crpCalendarDAO
 		if (is_array($category)) 
 			$catFilter = $category;
     else if ($category)
+    {
     	$catFilter['Main'] = $category;
+    	$catFilter['__META__']['module'] = 'crpCalendar';
+    }
 		
 		if ($active)
 			$where = " WHERE $crpcalendarcolumn[obj_status]='".DataUtil::formatForStore($active)."'";
