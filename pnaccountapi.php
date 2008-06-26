@@ -2,10 +2,10 @@
 /**
  * crpCalendar
  *
- * @copyright (c) 2007, Daniele Conca
- * @link http://noc.postnuke.com/projects/crpcalendar Support and documentation
- * @author Daniele Conca <jami at cremonapalloza dot org>
- * @license GNU/GPL - v.2
+ * @copyright (c) 2007-2008, Daniele Conca
+ * @link http://code.zikula.org/projects/crpcalendar Support and documentation
+ * @author Daniele Conca <conca.daniele@gmail.com>
+ * @license GNU/GPL - v.2.1
  * @package crpCalendar
  */
 
@@ -32,11 +32,17 @@ function crpCalendar_accountapi_getall($args)
   if ($uname != null) 
   {
   	pnModLangLoad('crpCalendar');
-    $items = array(array('url'     => pnModURL('crpCalendar', 'user', 'new'),
+    $items[] = array('url'     => pnModURL('crpCalendar', 'user', 'new'),
                          'module'  => 'crpCalendar',
                          'set'     => 'pnimages',
                          'title'   => _CRPCALENDAR_SUBMIT,
-                         'icon'    => 'admin.gif'));
+                         'icon'    => 'admin.gif');
+    if (pnModGetVar('crpCalendar','enable_partecipation'))           
+        $items[] = array('url'     => pnModURL('crpCalendar', 'user', 'get_partecipations'),
+                         'module'  => 'crpCalendar',
+                         'set'     => 'pnimages',
+                         'title'   => _CRPCALENDAR_EVENTS_MYLIST,
+                         'icon'    => 'userdate.gif');
   } 
   else 
   	$items = null;
