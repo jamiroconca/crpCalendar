@@ -7,8 +7,12 @@
 
 <div class="crpcalendar-right"><a href="<!--[pnmodurl modname=crpCalendar func=ical_exports]-->"><!--[pnimg modname=crpCalendar altml=true src="ical.gif" alt=_CRPCALENDAR_ICAL]--></a></div>
 
-<table class="crpcalendar-table">
+<table class="pn-datatable">
 	
+	<!--[pnml name="_CRPCALENDAR_EVENTS_LIST" html=1 assign="table_caption"]-->
+	<caption><!--[$table_caption]--></caption>
+	
+	<thead>
 	<tr>
 		<!--[if $crpcalendar_userlist_image]-->
       	<th class="crpcalendar_w1"><!--[pnml name="_CRPCALENDAR_IMAGES" html=1]--></th>
@@ -16,9 +20,10 @@
       	<th><!--[pnml name="_CRPCALENDAR_TITLE" html=1]--></th>
 	  	<th class="crpcalendar_w3"><!--[pnml name="_CRPCALENDAR_CONTENT" html=1]--></th>
 	</tr>
+	</thead>
 	
 	<!--[foreach from=$events item=event]-->
-    <tr class="<!--[cycle values="pn-odd,pn-even"]-->">
+    <tr class="<!--[cycle values="odd,even"]-->">
       
 		<!--[if $crpcalendar_userlist_image]-->
 		<td>
