@@ -2,11 +2,10 @@
 /**
  * crpCalendar
  *
- * @copyright (c) 2007, Daniele Conca
- * @link http://noc.postnuke.com/projects/crpcalendar Support and documentation
- * @version $Id: $
- * @author Daniele Conca <jami at cremonapalloza dot org>
- * @license GNU/GPL - v.2
+ * @copyright (c) 2007-2008, Daniele Conca
+ * @link http://code.zikula.org/projects/crpcalendar Support and documentation
+ * @author Daniele Conca <conca.daniele@gmail.com>
+ * @license GNU/GPL - v.2.1
  * @package crpCalendar
  */
 
@@ -21,6 +20,8 @@ define('_CRPCALENDAR_CREATEDON','Posted on');
 define('_CRPCALENDAR_DELETE_PARTECIPATION','Delete partecipation');
 define('_CRPCALENDAR_EVENT', 'Event');
 define('_CRPCALENDAR_EVENTS', 'Calendar');
+define('_CRPCALENDAR_EVENTS_MYLIST', 'Your event\'s partecipations');
+define('_CRPCALENDAR_EVENTS_LIST', 'Calendar event\'s list');
 define('_CRPCALENDAR_IMAGES','Images');
 define('_CRPCALENDAR_INVALID_DATE', 'Invalid date');
 define('_CRPCALENDAR_LOCATION','Location');
