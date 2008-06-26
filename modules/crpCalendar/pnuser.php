@@ -2,9 +2,9 @@
 /**
  * crpCalendar
  *
- * @copyright (c) 2007, Daniele Conca
- * @link http://noc.postnuke.com/projects/crpcalendar Support and documentation
- * @author Daniele Conca <jami at cremonapalloza dot org>
+ * @copyright (c) 2007-2008, Daniele Conca
+ * @link http://code.zikula.org/projects/crpcalendar Support and documentation
+ * @author Daniele Conca <conca.daniele@gmail.com>
  * @license GNU/GPL - v.2.1
  * @package crpCalendar
  */
@@ -150,6 +150,23 @@ function crpCalendar_user_get_image()
 	
 	$calendar = new crpCalendar();
 	return $calendar->dao->getImage();
+}
+
+/**
+ * get user's partecipations
+ * 
+ * @return html
+ */
+function crpCalendar_user_get_partecipations()
+{
+	// Security check
+	if (!pnUserLoggedIn() && pnModGetVar('crpCalendar','enable_partecipation'))
+	{
+		return LogUtil::registerPermissionError();
+	}
+	
+	$calendar = new crpCalendar();
+	return $calendar->listUserPartecipations();
 }
 
 /**
