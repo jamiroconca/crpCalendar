@@ -473,7 +473,7 @@ class crpCalendar
 		pnSessionSetVar('crpCalendar_export_events', $exports);
 		pnSessionSetVar('crpCalendar_choosed_view', 'get_partecipations');
 		
-		return $this->ui->userPartecipations($rows, $navigationValues['category'], $navigationValues['mainCat'], $navigationValues['modvars']);
+		return $this->ui->userPartecipations($rows, $navigationValues['uid'], $navigationValues['category'], $navigationValues['mainCat'], $navigationValues['modvars']);
 	}
 	
 	
