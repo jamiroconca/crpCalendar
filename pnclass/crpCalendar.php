@@ -2,9 +2,9 @@
 /**
  * crpCalendar
  *
- * @copyright (c) 2007, Daniele Conca
- * @link http://noc.postnuke.com/projects/crpcalendar Support and documentation 
- * @author Daniele Conca <conca dot daniele at gmail dot com>
+ * @copyright (c) 2007-2008, Daniele Conca
+ * @link http://code.zikula.org/projects/crpcalendar Support and documentation
+ * @author Daniele Conca <conca.daniele@gmail.com>
  * @license GNU/GPL - v.2.1
  * @package crpCalendar
  */
@@ -395,6 +395,85 @@ class crpCalendar
 		return $this->ui->userDayList($items, $day, $navigationValues['t'], $date,
 																		$navigationValues['startDate'], $navigationValues['endDate'], $today,
 																		$navigationValues['category'], $navigationValues['mainCat'], $navigationValues['modvars']);
+	}
+	
+	
+	/**
+	 * List event's partecipation by current user
+	 */
+	function listUserPartecipations()
+	{
+		$navigationValues = $this->collectNavigationFromInput();
+		$navigationValues['uid'] = (int) FormUtil :: getPassedValue('uid', pnUserGetVar('uid'), 'GET');
+		//
+		$items = pnModAPIFunc('crpCalendar', 'user', 'getall_partecipations', $navigationValues);		
+		
+		$rows = array ();
+		$exports = array();
+		foreach ($items as $kevent => $item)
+		{
+			$options = array ();
+			$options[] = array (
+				'url' => pnModURL('crpCalendar',
+				'user',
+				'display',
+				array (
+					'eventid' => $item['eventid']
+				)
+			), 'image' => 'demo.gif', 'title' => _VIEW);
+
+			if (SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_ADD))
+			{
+				$options[] = array (
+					'url' => pnModURL('crpCalendar',
+					'admin',
+					'modify',
+					array (
+						'eventid' => $item['eventid']
+					)
+				), 'image' => 'xedit.gif', 'title' => _EDIT);
+				$options[] = array (
+					'url' => pnModURL('crpCalendar',
+					'admin',
+					'clone',
+					array (
+						'eventid' => $item['eventid']
+					)
+				), 'image' => 'editcopy.gif', 'title' => _COPY);
+				if (SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_DELETE))
+				{
+					$options[] = array (
+						'url' => pnModURL('crpCalendar',
+						'admin',
+						'delete',
+						array (
+							'eventid' => $item['eventid']
+						)
+					), 'image' => '14_layer_deletelayer.gif', 'title' => _DELETE);
+				}
+			}
+			elseif ((SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_MODERATE) && $this->isAuthor($item['eventid'])))
+			{
+				$options[] = array (
+					'url' => pnModURL('crpCalendar',
+					'user',
+					'modify',
+					array (
+						'eventid' => $item['eventid']
+					)
+				), 'image' => 'xedit.gif', 'title' => _EDIT);
+			}
+			
+			// Add the calculated menu options to the item array
+			$item['options'] = $options;
+			$rows[] = $item;
+			$exports[] = $item['eventid'];
+		}
+		
+		pnSessionSetVar('crpCalendar_export_events', $exports);
+		pnSessionSetVar('crpCalendar_choosed_view', 'get_partecipations');
+		
+		return $this->ui->userPartecipations($rows, $navigationValues['category'], $navigationValues['mainCat'], $navigationValues['modvars']);
 	}
 	
 	
