@@ -7,7 +7,7 @@
   	<!--[ pnml assign="lblDef" name="_ALLCATEGORIES" html=1]-->
   	<!--[ selector_category category=$mainCategory name="events_category" selectedValue=$events_category defaultValue="0" defaultText="$lblDef" ]-->
   	<!--[/if]-->
-  	<!--[if $choosed_view neq "view"]-->
+  	<!--[if $choosed_view neq "view" && $choosed_view neq "get_partecipations"]-->
   	<!--[html_select_date time=$t start_year=$crpcalendar_start_year]-->
   	<!--[/if]-->
   	<input name="submit" type="submit" value="<!--[pnml name="_SUBMIT" html=1]-->" />
