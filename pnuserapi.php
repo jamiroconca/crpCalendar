@@ -2,9 +2,9 @@
 /**
  * crpCalendar
  *
- * @copyright (c) 2007, Daniele Conca
- * @link http://noc.postnuke.com/projects/crpcalendar Support and documentation
- * @author Daniele Conca <jami at cremonapalloza dot org>
+ * @copyright (c) 2007-2008, Daniele Conca
+ * @link http://code.zikula.org/projects/crpcalendar Support and documentation
+ * @author Daniele Conca <conca.daniele@gmail.com>
  * @license GNU/GPL - v.2.1
  * @package crpCalendar
  */
@@ -29,6 +29,25 @@ function crpCalendar_userapi_getall($navigationValues)
 																		$navigationValues['modvars'], $navigationValues['mainCat'], 'A',
 																		$navigationValues['interval'], $navigationValues['sortOrder'],
 																		$navigationValues['startDate'], $navigationValues['endDate']);
+}
+
+/**
+ * Retrieve list of events, filtered by uid
+ */
+function crpCalendar_userapi_getall_partecipations($navigationValues)
+{
+	// Security check
+	if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_READ))
+	{
+		return LogUtil::registerPermissionError();
+	}
+	
+	$calendar = new crpCalendar();
+
+	return $calendar->dao->getPartecipations($navigationValues['uid'], null, 
+																		$navigationValues['startnum'], 
+																		$navigationValues['modvars'], $navigationValues['mainCat'], 'A',
+																		$navigationValues['sortOrder']);
 }
 
 /**
@@ -89,7 +108,7 @@ function crpCalendar_userapi_countitems($args)
 	
 	$calendar = new crpCalendar();
 	
-	return $calendar->dao->countItems($args['category'], $args['active']);
+	return $calendar->dao->countItems($args['category'], $args['active'], $args['uid']);
 }
 
 ?>
