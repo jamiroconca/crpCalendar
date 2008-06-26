@@ -36,7 +36,7 @@ class crpCalendarDAO
 	 * @return array element list
 	 */
 	function adminList($startnum=1, $category=null, $clear=false, $ignoreml=true, 
-											$modvars=array(), $mainCat, $active=null, $interval=null, 
+											$modvars=array(), $mainCat=null, $active=null, $interval=null, 
 											$sortOrder='DESC', $startDate=null, $endDate=null)
 	{
 		(empty($startnum))?$startnum=1:'';
@@ -561,40 +561,106 @@ class crpCalendarDAO
 	}
 	
 	/**
-	 * Update event counter
+	 * Retrieve partecipations list
 	 * 
 	 * @param eventid item identifier
 	 * @param uid item identifier
 	 * 
 	 * @return array on success
 	 */
-	function getPartecipations($uid=null,$eventid=null)
+	function getPartecipations($uid=null, $eventid=null, $startnum=1, 
+											$modvars=array(), $mainCat=null, $active=null, $sortOrder='DESC')
 	{
+		(empty($startnum))?$startnum=1:'';
+		(empty($modvars['itemsperpage']))?$modvars['itemsperpage']=pnModGetVar('crpCalendar','itemsperpage'):'';
+		
+		if (!is_numeric($startnum) ||
+        !is_numeric($modvars['itemsperpage'])) {
+        return LogUtil::registerError (_MODARGSERROR);
+    }
+    
+    /*
+    $catFilter = array();
+		if (is_array($category)) 
+			$catFilter = $category;
+    else if ($category)
+    {
+    	$catFilter['Main'] = $category;
+    	$catFilter['__META__']['module'] = 'crpCalendar';
+    }
+    */
+    
 		$pntable = pnDBGetTables();
-    $crpcalendarcolumn = $pntable['crpcalendar_attendee_column'];
+    $crpcalendarcolumn = $pntable['crpcalendar_column'];
+    $crpcalendarAttendeeColumn = $pntable['crpcalendar_attendee_column'];
     
     $queryargs = array();
+    if (pnConfigGetVar('multilingual') == 1 && !$ignoreml) {
+        $queryargs[] = "(tbl.$crpcalendarcolumn[language]='" . DataUtil::formatForStore(pnUserGetLang()) . "' 
+												OR tbl.$crpcalendarcolumn[language]='')";
+    }
+    
+    if ($active) {
+        $queryargs[] = "(tbl.$crpcalendarcolumn[obj_status]='".DataUtil::formatForStore($active)."')";
+    }
+    
     if (pnModGetVar('crpCalendar','enable_partecipation') && $uid) {
-        $queryargs[] = "($crpcalendarcolumn[uid]='" . DataUtil::formatForStore($uid) . "')";
+        $queryargs[] = "(a.$crpcalendarAttendeeColumn[uid]='" . DataUtil::formatForStore($uid) . "')";
     }    
     if (pnModGetVar('crpCalendar','enable_partecipation') && $eventid) {
-        $queryargs[] = "($crpcalendarcolumn[eventid]='".DataUtil::formatForStore($eventid)."')";
-    } 
+        $queryargs[] = "(tbl.$crpcalendarcolumn[eventid]='".DataUtil::formatForStore($eventid)."')";
+    }
 
     $where = null;
     if (count($queryargs) > 0) {
         $where = ' WHERE ' . implode(' AND ', $queryargs);
     }
     
+    foreach ($crpcalendarAttendeeColumn as $kcolumn => $vcolumn)
+    {
+    	$joinInfo[] = array('join_table' => 'crpcalendar_attendee',
+      	                	'join_field' => $kcolumn,
+        	              	'object_field_name' => $kcolumn,
+          	            	'compare_field_table' => 'eventid',
+            	          	'compare_field_join' => 'eventid');
+    }
+    
+    // define the permission filter to apply
+    $permFilter = array(array('realm'           => 0,
+                              'component_left'  => 'crpCalendar',
+                              'component_right' => 'Event',
+                              'instance_left'   => 'cr_uid',
+                              'instance_center' => 'title',
+                              'instance_right'  => 'eventid',
+                              'level'           => ACCESS_READ));
+		
+		$orderby = "GROUP BY tbl.$crpcalendarcolumn[eventid] ORDER BY $crpcalendarcolumn[start_date] $sortOrder";
+    
     // get the objects from the db
-    $objArray = DBUtil::selectObjectArray('crpcalendar_attendee', $where);
+    $objArray = DBUtil::selectExpandedObjectArray('crpcalendar', $joinInfo, $where, $orderby, $startnum-1, $modvars['itemsperpage'],
+                                        '', $permFilter);
 
     // Check for an error with the database code, and if so set an appropriate
     // error message and return
     if ($objArray === false) {
         return LogUtil::registerError (_GETFAILED);
     }
-     
+
+    // need to do this here as the category expansion code can't know the
+    // root category which we need to build the relative path component
+     if ($objArray && isset($mainCat) && $mainCat) {
+        if (!Loader::loadClass ('CategoryUtil')) {
+            pn_exit('Unable to load class [CategoryUtil]');
+	    }
+        ObjectUtil::postProcessExpandedObjectArrayCategories ($objArray, $mainCat);
+    }
+    
+    if ($modvars['crpcalendar_userlist_image'])
+    {
+    	foreach ($objArray as $kObj => $vObj)
+    		$objArray[$kObj]['image'] = $this->getFile($vObj['eventid'], 'image');
+    }
+    
     // Return the items
     return $objArray;
 	}
@@ -661,7 +727,7 @@ class crpCalendarDAO
 	 * 
 	 * @return int on success
 	 */
-	function countItems($category=null, $active=null)
+	function countItems($category=null, $active=null, $uid=null)
 	{
 		$pntable = pnDBGetTables();
     $crpcalendarcolumn = $pntable['crpcalendar_column'];
@@ -676,12 +742,16 @@ class crpCalendarDAO
     	$catFilter['Main'] = $category;
     	$catFilter['__META__']['module'] = 'crpCalendar';
     }
-		
+    
+    
 		if ($active)
 			$where = " WHERE $crpcalendarcolumn[obj_status]='".DataUtil::formatForStore($active)."'";
-
+		
 		// Return the number of items
-		return DBUtil :: selectObjectCount('crpcalendar', $where, 'eventid', false, $catFilter);
+		if ($uid)
+			return DBUtil :: selectObjectCountByID ('crpcalendar_attendee', $uid, 'uid');
+		else
+			return DBUtil :: selectObjectCount('crpcalendar', $where, 'eventid', false, $catFilter);
 	}
 	
 	
