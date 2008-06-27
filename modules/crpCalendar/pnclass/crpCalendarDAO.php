@@ -666,6 +666,89 @@ class crpCalendarDAO
 	}
 	
 	/**
+	 * Retrieve partecipations list
+	 * 
+	 * @param eventid item identifier
+	 * @param uid item identifier
+	 * 
+	 * @return array on success
+	 */
+	function getEventPartecipations($uid = null, $eventid = null, $startnum = 1, $modvars = array (), $mainCat = null, $active = null, $sortOrder = 'DESC')
+	{
+
+		$pntable = pnDBGetTables();
+		$crpcalendarcolumn = $pntable['crpcalendar_column'];
+		$crpcalendarAttendeeColumn = $pntable['crpcalendar_attendee_column'];
+
+		if ($active)
+		{
+			$queryargs[] = "(a.$crpcalendarcolumn[obj_status]='" . DataUtil :: formatForStore($active) . "')";
+		}
+
+		if (pnModGetVar('crpCalendar', 'enable_partecipation') && $uid)
+		{
+			$queryargs[] = "(tbl.$crpcalendarAttendeeColumn[uid]='" . DataUtil :: formatForStore($uid) . "')";
+		}
+		if (pnModGetVar('crpCalendar', 'enable_partecipation') && $eventid)
+		{
+			$queryargs[] = "(a.$crpcalendarcolumn[eventid]='" . DataUtil :: formatForStore($eventid) . "')";
+		}
+
+		$where = null;
+		if (count($queryargs) > 0)
+		{
+			$where = ' WHERE ' . implode(' AND ', $queryargs);
+		}
+
+		$joinInfo[] = array (
+				'join_table' => 'crpcalendar',
+				'join_field' => 'obj_status',
+				'object_field_name' => 'obj_status',
+				'compare_field_table' => 'eventid',
+				'compare_field_join' => 'eventid'
+			);
+
+		// define the permission filter to apply
+		$permFilter = array (
+			array (
+				'realm' => 0,
+				'component_left' => 'crpCalendar',
+				'component_right' => 'Event',
+				'instance_left' => 'cr_uid',
+				'instance_center' => 'title',
+				'instance_right' => 'eventid',
+				'level' => ACCESS_READ
+			)
+		);
+
+		$orderby = "ORDER BY $crpcalendarcolumn[start_date] $sortOrder";
+
+		// get the objects from the db
+		$objArray = DBUtil :: selectExpandedObjectArray('crpcalendar_attendee', $joinInfo, $where, $orderby, $startnum -1, $modvars['itemsperpage'], '', $permFilter);
+
+		// Check for an error with the database code, and if so set an appropriate
+		// error message and return
+		if ($objArray === false)
+		{
+			return LogUtil :: registerError(_GETFAILED);
+		}
+
+		// need to do this here as the category expansion code can't know the
+		// root category which we need to build the relative path component
+		if ($objArray && isset ($mainCat) && $mainCat)
+		{
+			if (!Loader :: loadClass('CategoryUtil'))
+			{
+				pn_exit('Unable to load class [CategoryUtil]');
+			}
+			ObjectUtil :: postProcessExpandedObjectArrayCategories($objArray, $mainCat);
+		}
+
+		// Return the items
+		return $objArray;
+	}
+	
+	/**
 	 * Add event partecipation
 	 * 
 	 * @param int $eventid item identifier
