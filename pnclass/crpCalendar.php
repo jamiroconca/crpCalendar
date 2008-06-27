@@ -547,7 +547,7 @@ class crpCalendar
 		
 		$item['options'] = $options;
 		
-		$item['partecipations'] = $this->dao->getPartecipations(null,$item['eventid']);
+		$item['partecipations'] = $this->dao->getEventPartecipations(null,$item['eventid'], $startnum = 1, $modvars, null, 'A');
 		
 		$dayDate = DateUtil::formatDatetime($item['start_date'], '%Y-%m-%d');
 		
