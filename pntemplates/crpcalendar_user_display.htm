@@ -82,7 +82,10 @@
 	<ul id="event_partecipation">	
 	<!--[section name=partecipations loop=$partecipations]-->
 		<!--[pnmodurl modname=Profile func=view uid=$partecipations[partecipations].uid assign=partecipation_profilelink]-->
-		<li><a href="<!--[$partecipation_profilelink]-->"><!--[pnusergetvar name=uname uid=$partecipations[partecipations].uid]--></a></li>
+		<li>
+			<a href="<!--[$partecipation_profilelink]-->"><!--[pnusergetvar name=uname uid=$partecipations[partecipations].uid]--></a>
+			- <a href="<!--[pnmodurl modname=crpCalendar func=get_partecipations uid=$partecipations[partecipations].uid]-->"><!--[pnml name=_CRPCALENDAR_USER_PARTECIPATIONS html=1]--></a>
+		</li>
 	<!--[/section]-->
 	</ul>	
 </div>
