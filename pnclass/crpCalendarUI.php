@@ -128,6 +128,7 @@ class crpCalendarUI
 
 		// Assign the items to the template
 		$pnRender->assign('events', $rows);
+		$pnRender->assign('uid', $uid);
 		$pnRender->assign('events_category', $category);
 		$pnRender->assign('mainCategory', $mainCat);
 		$pnRender->assign('lang', pnUserGetLang());
