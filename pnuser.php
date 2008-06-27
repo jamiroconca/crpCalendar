@@ -160,7 +160,7 @@ function crpCalendar_user_get_image()
 function crpCalendar_user_get_partecipations()
 {
 	// Security check
-	if (!pnUserLoggedIn() && pnModGetVar('crpCalendar','enable_partecipation'))
+	if (!pnModGetVar('crpCalendar','enable_partecipation'))
 	{
 		return LogUtil::registerPermissionError();
 	}
