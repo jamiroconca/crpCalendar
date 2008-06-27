@@ -20,7 +20,7 @@ define('_CRPCALENDAR_CREATEDON','Posted on');
 define('_CRPCALENDAR_DELETE_PARTECIPATION','Delete partecipation');
 define('_CRPCALENDAR_EVENT', 'Event');
 define('_CRPCALENDAR_EVENTS', 'Calendar');
-define('_CRPCALENDAR_EVENTS_MYLIST', 'Your event\'s partecipations');
+define('_CRPCALENDAR_EVENTS_MYLIST', 'attendance to events');
 define('_CRPCALENDAR_EVENTS_LIST', 'Calendar event\'s list');
 define('_CRPCALENDAR_IMAGES','Images');
 define('_CRPCALENDAR_INVALID_DATE', 'Invalid date');
@@ -45,6 +45,7 @@ define('_CRPCALENDAR_READS', 'Reads');
 define('_CRPCALENDAR_START_DATE','Start date');
 define('_CRPCALENDAR_SUBMIT', 'Submit event');
 define('_CRPCALENDAR_VIEW', 'Events list');
+define('_CRPCALENDAR_USER_PARTECIPATIONS', 'user\'s attendance to events');
 define('_CRPCALENDAR_WORDSINTHISTEXT', 'Words in text');
 
 // form define
