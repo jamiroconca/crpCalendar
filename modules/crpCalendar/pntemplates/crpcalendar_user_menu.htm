@@ -2,11 +2,14 @@
 
 <div class="crpcalendar-rss">
 	<a href="http://microformats.org/wiki/hcalendar" title="hCalendar Wiki">
-		<!--[pnimg modname=crpCalendar src=microformat_hcalendar.png alt="_CRPCALENDAR_HCALENDAR" title="_CRPCALENDAR_HCALENDAR" altml=true titleml=true]-->
+		<!--[pnimg modname=crpCalendar src=microformat_hcalendar.png alt="_CRPCALENDAR_HCALENDAR" altml=true]-->
+	</a>
+	<a href="http://microformats.org/wiki/hcard" title="hCard Wiki">
+		<!--[pnimg modname=crpCalendar src=microformat_hcard.png alt="_CRPCALENDAR_HCARD" altml=true]-->
 	</a>
 	<!--[if $crpcalendar_show_rss]-->
 	<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="getfeed"]-->">
-		<!--[pnimg modname=crpCalendar src=rss_button.gif alt="_CRPCALENDAR_RSS" title="_CRPCALENDAR_RSS" altml=true titleml=true]-->
+		<!--[pnimg modname=crpCalendar src=rss_button.gif alt="_CRPCALENDAR_RSS" altml=true]-->
 	</a>
 	<!--[/if]-->
 </div>
@@ -22,7 +25,12 @@
 	<div class="crpcalendar-right">
 		<!--[if $enable_partecipation && pnUserLoggedIn()]-->
 		<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="get_partecipations"]-->">
-		<!--[pnimg modname=core set=icons/small src=edit_user.gif alt="_CRPCALENDAR_EVENTS_MYLIST" title="_CRPCALENDAR_EVENTS_MYLIST" altml=true titleml=true]-->
+		<!--[pnimg modname=core set=icons/small src=edit_user.gif alt="_CRPCALENDAR_EVENTS_MYLIST" altml=true]-->
+		</a>&nbsp;
+		<!--[/if]-->
+		<!--[if $enable_partecipation]-->
+		<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="get_attendees"]-->">
+		<!--[pnimg modname=core set=icons/small src=edit_group.gif alt="_CRPCALENDAR_EVENTS_ATTENDEES" altml=true]-->
 		</a>&nbsp;
 		<!--[/if]-->
 		<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="view"]-->"><!--[pnimg modname=crpCalendar altml=true src=$crpcalendar_theme|cat:"/list_on.gif" alt=_CRPCALENDAR_VIEW]--></a>
