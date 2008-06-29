@@ -7,7 +7,16 @@
 
 <table class="pn-datatable">
 	
-	<caption><!--[pnusergetvar name=uname uid=$uid]--> <!--[pnml name=_CRPCALENDAR_EVENTS_MYLIST html=1]--></caption>
+	<caption>		
+		<p>
+		<!--[pnusergetvar name=uname uid=$uid]--> <!--[pnml name=_CRPCALENDAR_EVENTS_MYLIST html=1]-->
+		</p>
+		<!--[if pnModAvailable("Avatar") && $user_avatar neq '']-->
+			<img src="<!--[pnmodgetvar module="Avatar" name="avatardir"]-->/<!--[$user_avatar]-->" alt="Avatar" />
+		<!--[ else ]-->
+			<!--[pnimg modname=crpCalendar altml=true src="blank.jpg" altml=true alt=_CRPCALENDAR_NOAVATARSELECTED]-->
+		<!--[/if]-->
+	</caption>
 	
 	<thead>
 	<tr>
