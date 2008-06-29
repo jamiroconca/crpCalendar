@@ -1,5 +1,11 @@
 crpCalendar
-v0.4.3 - ??? April 2008
+v0.4.4 - ??? July 2008
+- bugfixing
+- adapt to Zikula 1.0.0
+- more complex attendance to events (personal and by others)
+- module scribite! suggested for textarea
+- module Avatar suggested for user's image with partecipations enabled 
+v0.4.3 - 27 April 2008
 - user can add/delete himself to the event
 v0.4.2 - 18 April 2008
 - added ajax status admin management
