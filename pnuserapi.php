@@ -44,10 +44,9 @@ function crpCalendar_userapi_getall_partecipations($navigationValues)
 	
 	$calendar = new crpCalendar();
 
-	return $calendar->dao->getPartecipations($navigationValues['uid'], null, 
-																		$navigationValues['startnum'], 
+	return $calendar->dao->getPartecipations($navigationValues['uid'], $navigationValues['startnum'],
 																		$navigationValues['modvars'], $navigationValues['mainCat'], 'A',
-																		$navigationValues['sortOrder']);
+																		$navigationValues['sortOrder'], null, null);
 }
 
 /**
@@ -108,7 +107,24 @@ function crpCalendar_userapi_countitems($args)
 	
 	$calendar = new crpCalendar();
 	
-	return $calendar->dao->countItems($args['category'], $args['active'], $args['uid']);
+	return $calendar->dao->countItems($args['category'], $args['active'], $args['uid'], $args['eventid']);
+}
+
+/**
+ * utility function to count the number of items held by this module
+ * @return integer number of items held by this module
+ */
+function crpCalendar_userapi_countitems_attendance($args)
+{
+	// Security check
+	if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_READ))
+	{
+		return LogUtil::registerPermissionError();
+	}
+	
+	$calendar = new crpCalendar();
+	
+	return $calendar->dao->countAttendeeItems($args['category'], $args['active'], $args['uid'], $args['eventid']);
 }
 
 ?>
