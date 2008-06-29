@@ -170,6 +170,23 @@ function crpCalendar_user_get_partecipations()
 }
 
 /**
+ * get attendees partecipations
+ * 
+ * @return html
+ */
+function crpCalendar_user_get_attendees()
+{
+	// Security check
+	if (!pnModGetVar('crpCalendar','enable_partecipation'))
+	{
+		return LogUtil::registerPermissionError();
+	}
+	
+	$calendar = new crpCalendar();
+	return $calendar->listAttendees();
+}
+
+/**
  * get event's file
  * 
  * @return blob image
