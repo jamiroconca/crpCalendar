@@ -27,6 +27,7 @@ define('_CRPCALENDAR_INVALID_DATE', 'Data utilizzate non valida');
 define('_CRPCALENDAR_LOCATION','Luogo');
 define('_CRPCALENDAR_LOCATIONS','dal modulo Locations');
 define('_CRPCALENDAR_NOT_SPECIFIED','Non specificato');
+define('_CRPCALENDAR_NOAVATARSELECTED','Avatar non selezionato');
 define('_CRPCALENDAR_ORGANISER','Organizzazione');
 define('_CRPCALENDAR_STATUS', 'Stato');
 define('_CRPCALENDAR_TITLE', 'Titolo evento');
