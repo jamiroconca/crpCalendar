@@ -25,7 +25,9 @@
 		<td>
 			<!--[if pnModAvailable("Avatar") && pnUserGetVar('_YOURAVATAR',$uid)]-->
 				<img class="photo" src="<!--[pnmodgetvar module="Avatar" name="avatardir"]-->/<!--[pnusergetvar name=_YOURAVATAR uid=$uid]-->" alt="Avatar" />
-			<!--[ else ]-->
+			<!--[ elseif pnUserGetVar('_YOURAVATAR',$uid) neq '']-->
+				<img class="photo" src="images/avatar/<!--[pnusergetvar name=_YOURAVATAR uid=$uid]-->" alt="Avatar" />
+			<!--[else]-->
 				<!--[pnimg modname=crpCalendar altml=true src="blank.jpg" class="photo" altml=true alt=_CRPCALENDAR_NOAVATARSELECTED]-->
 			<!--[/if]-->
 		</td>
