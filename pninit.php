@@ -56,6 +56,7 @@ function crpCalendar_init() {
 	pnModSetVar('crpCalendar', 'document_dimension', '100000');
 	pnModSetVar('crpCalendar', 'enable_partecipation', false);
 	pnModSetVar('crpCalendar', 'enable_locations', false);
+	pnModSetVar('crpCalendar', 'crpcalendar_notification', null);
 
 	// Initialisation successful
 	return true;
@@ -129,7 +130,11 @@ function crpCalendar_upgrade($oldversion)
   		pnModSetVar('crpCalendar', 'enable_locations', false);
   		return crpCalendar_upgrade("0.4.4");		
   	case "0.4.4":
-  		break;		  	
+  		pnModSetVar('crpCalendar', 'crpcalendar_notification', null);
+  		return crpCalendar_upgrade("0.4.5");
+  		break;
+  	case "0.4.5":
+  		break;	  	
   }  	
 	return true;
 }
