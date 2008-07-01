@@ -1,4 +1,5 @@
 <?php
+
 /**
  * crpCalendar
  *
@@ -582,9 +583,9 @@ class crpCalendar
 		}
 
 		$item['options']= $options;
-		
+
 		// no pager for users
-		$modvars['itemsperpage'] = -1;
+		$modvars['itemsperpage']= -1;
 		$item['partecipations']= $this->dao->getEventPartecipations($item['eventid'], -1, $modvars, null, 'A', 'DESC', null, 'uid');
 
 		$dayDate= DateUtil :: formatDatetime($item['start_date'], '%Y-%m-%d');
@@ -708,12 +709,18 @@ class crpCalendar
 			LogUtil :: registerError(_CRPCALENDAR_INVALID_INTERVAL);
 			return pnRedirect(pnModUrl('crpCalendar', $returnType, 'new'));
 		}
-
-		if (!$this->dao->create($inputValues))
+		
+		$eventid = $this->dao->create($inputValues);
+		
+		if (!$eventid)
 		{
 			// Error
 			return pnRedirect(pnModUrl('crpCalendar', $returnType, 'new'));
 		}
+
+		// notify by mail if not an admin
+		if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_EDIT) && $inputValues['modvars']['crpcalendar_notification'])
+			$this->notifyByMail($inputValues, $eventid);
 
 		// all went fine
 		LogUtil :: registerStatus(_CREATESUCCEDED . ' ' . (($returnType == 'user') ? _CRPCALENDAR_WAITING : ''));
@@ -1142,6 +1149,8 @@ class crpCalendar
 		pnModSetVar('crpCalendar', 'enable_partecipation', $enable_partecipation);
 		$enable_locations= (bool) FormUtil :: getPassedValue('enable_locations', false, 'POST');
 		pnModSetVar('crpCalendar', 'enable_locations', $enable_locations);
+		$crpcalendar_notification= FormUtil :: getPassedValue('crpcalendar_notification', null, 'POST');
+		pnModSetVar('crpCalendar', 'crpcalendar_notification', $crpcalendar_notification);
 
 		// Let any other modules know that the modules configuration has been updated
 		pnModCallHooks('module', 'updateconfig', 'crpCalendar', array (
@@ -1799,6 +1808,32 @@ class crpCalendar
 		}
 
 		return $locations;
+	}
+
+	/**
+	* send an email notification
+	*/
+	function notifyByMail($inputValues= array(), $eventid=null)
+	{
+		// send the email
+		$pnRender= pnRender :: getInstance('crpCalendar', false);
+		$pnRender->assign('inputValues', $inputValues['event']);
+		$pnRender->assign('eventid', $eventid);
+		$body= $pnRender->fetch('crpcalendar_user_notify_newevent.htm');
+
+		$subject= _CRPCALENDAR_EVENT_NOTIFICATION;
+		$to= pnModGetVar('crpCalendar', 'crpcalendar_notification');;
+
+		$result= pnModAPIFunc('Mailer', 'user', 'sendmessage', array (
+			'toaddress' => $to,
+			'subject' => $subject,
+			'body' => $body,
+			'html' => true,
+			'fromname' => pnConfigGetVar('sitename'),
+			'fromaddress' => pnConfigGetVar('adminmail'),
+			'replytoname' => pnConfigGetVar('sitename'),
+			'replytoaddress' => pnConfigGetVar('adminmail')
+		));
 	}
 
 }
