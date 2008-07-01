@@ -58,6 +58,7 @@ define('_CRPCALENDAR_FILE_DIMENSION','Max upload image size (bytes)');
 define('_CRPCALENDAR_GD_AVAILABLE','GD Library');
 define('_CRPCALENDAR_IMAGE_RESIZE','Image would be resized to');
 define('_CRPCALENDAR_IMAGES','Images');
+define('_CRPCALENDAR_NOTIFICATION_MAIL','Notification for user\'s creation (none if empty)');
 define('_CRPCALENDAR_OTHER_MODULES','Other modules');
 define('_CRPCALENDAR_START_YEAR','Calendar start Year');
 define('_CRPCALENDAR_USE_BROWSER','GD Library requirement failed');

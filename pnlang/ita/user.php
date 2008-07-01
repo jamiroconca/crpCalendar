@@ -89,4 +89,8 @@ define('_CRPCALENDAR_VIEW_DAY','Vista giornaliera');
 define('_CRPCALENDAR_VIEW_MONTH','Vista mensile');
 define('_CRPCALENDAR_VIEW_WEEK','Vista settimanale');
 
+// mail text
+define('_CRPCALENDAR_EVENT_NOTIFICATION','Inserimento Evento');
+define('_CRPCALENDAR_NOTIFICATION','Notifica di creazione evento');
+define('_CRPCALENDAR_DONOTREPLY','Non rispondere a questa email, serve semplicemente da notifica');
 ?>
