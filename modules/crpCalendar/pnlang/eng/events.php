@@ -14,3 +14,6 @@ define('_CRPCALENDAR_MAXDAY', 'Days interval to show');
 define('_CRPCALENDAR_MAXEVENTS','Maximum number of events');
 // 
 define('_CRPCALENDAR_BLOCK_NO_EVENTS','There are no events in the next');
+//
+define('_CRPCALENDAR_SUBMIT','Submit event');
+define('_CRPCALENDAR_VIEW','Events list');
