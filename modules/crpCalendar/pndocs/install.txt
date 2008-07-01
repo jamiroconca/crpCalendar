@@ -9,6 +9,7 @@ INSTALL:
 - calendar theme is set to "default": a blue theme
 - calendar start year (for event's navigation) is set by default to installation year
 - take advantage from Categories creating a property named "Color", this (#FC0, #080 and so on) will be use in event's presentation
+- e-mail notification are active for user submission (level <= ACCESS_EDIT) if a valid e-mail is inserted
 
 Permissions Summary:
 ACCESS_READ : can view user list and details, can get rss feed
