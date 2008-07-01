@@ -423,15 +423,11 @@ class crpCalendarDAO
 		}
 
 		// Let any other modules know we have created an item
-		pnModCallHooks('item', 'create', $inputValues['eventid'], array (
+		pnModCallHooks('item', 'create', $object['eventid'], array (
 			'module' => 'crpCalendar'
 		));
 
-		// The item has been modified, so we clear all cached pages of this item.
-		$pnRender = new pnRender('crpCalendar');
-		$pnRender->clear_cache(null, $inputValues['eventid']);
-
-		return true;
+		return $object['eventid'];
 	}
 
 	/**
