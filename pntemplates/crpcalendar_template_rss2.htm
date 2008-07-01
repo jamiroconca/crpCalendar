@@ -1,30 +1,52 @@
 <?xml version="1.0" encoding="<!--[pnml name=_CHARSET]-->"?>
 <rss version="2.0">
-	<channel>
-		<title><!--[pnconfiggetvar name="sitename"]--> :: <!--[pnconfiggetvar name="slogan"]--> :: <!--[$data.format|pnvarprepfordisplay]--></title>
-    <link><!--[pngetbaseurl]--></link>
-    <description><!--[$data.descr|pnvarprepfordisplay]--></description>
-    <!--[if $data.xml_lang]-->
-    	<language><!--[$data.xml_lang|pnvarprepfordisplay]--></language>
-    <!--[/if]-->
-    <image>
-    	<title><!--[pnconfiggetvar name="sitename"]--></title>
-    	<url><!--[pngetbaseurl]-->images/logo.gif</url>
-    	<link><!--[pngetbaseurl]--></link>
-    </image>
-
-    <pubDate><!--[$data.publ_date|pndate_format:"%d/%m/%Y - %H:%M"]--></pubDate>
-    <lastBuildDate><!--[$data.publ_date|pndate_format:"%d/%m/%Y - %H:%M"]--></lastBuildDate>
-    <webMaster><!--[pnconfiggetvar name="adminmail"]--></webMaster>
-
-		<!--[section name=k loop=$list]-->
-		<item>
-      <title><!--[$list[k].title|pnvarprepfordisplay]-->  (<!--[$list[k].start_date|pndate_format:"%d/%m/%Y, %H:%M"|pnvarprephtmldisplay]--> - <!--[$list[k].end_date|pndate_format:"%d/%m/%Y, %H:%M"|pnvarprephtmldisplay]-->)</title>
-      <link><!--[$list[k].link|pnvarprepfordisplay]--></link>
-      <description><!--[$list[k].descr|pnvarprepfordisplay]--></description>
-      <pubDate><!--[$list[k].publ_date|pndate_format:"%d/%m/%Y - %H:%M"]--></pubDate>
-      <guid><!--[$list[k].link|pnvarprepfordisplay]--></guid>
-    </item>
-		<!--[/section]-->
-  </channel>
+    <channel>
+        <title><!--[pnconfiggetvar name="sitename"]-->:: <!--[pnconfiggetvar name="slogan"]-->:: <!--[$data.format|pnvarprepfordisplay]--></title>
+        <link>
+        <!--[pngetbaseurl]-->
+        </link>
+        <description>
+            <!--[$data.descr|pnvarprepfordisplay]-->
+        </description>
+        <!--[if $data.xml_lang]-->
+        <language>
+            <!--[$data.xml_lang|pnvarprepfordisplay]-->
+        </language>
+    		<!--[/if]-->
+        <image>
+            <title><!--[pnconfiggetvar name="sitename"]--></title>
+            <url>
+                <!--[pngetbaseurl]-->images/<!--[pnconfiggetvar name="site_logo"]-->
+            </url>
+            <link>
+            <!--[pngetbaseurl]-->
+            </link>
+        </image>
+        <pubDate>
+            <!--[$data.publ_date|pndate_format:"%d/%m/%Y - %H:%M"]-->
+        </pubDate>
+        <lastBuildDate>
+            <!--[$data.publ_date|pndate_format:"%d/%m/%Y - %H:%M"]-->
+        </lastBuildDate>
+        <webMaster>
+            <!--[pnconfiggetvar name="adminmail"]-->
+        </webMaster>
+        <!--[section name=k loop=$list]-->
+        <item>
+            <title><!--[$list[k].title|pnvarprepfordisplay]-->(<!--[$list[k].start_date|pndate_format:"%d/%m/%Y, %H:%M"|pnvarprephtmldisplay]--> - <!--[$list[k].end_date|pndate_format:"%d/%m/%Y, %H:%M"|pnvarprephtmldisplay]-->)</title>
+            <link>
+            <!--[$list[k].link|pnvarprepfordisplay]-->
+            </link>
+            <description>
+                <!--[$list[k].descr|pnvarprepfordisplay]-->
+            </description>
+            <pubDate>
+                <!--[$list[k].publ_date|pndate_format:"%d/%m/%Y - %H:%M"]-->
+            </pubDate>
+            <guid>
+                <!--[$list[k].link|pnvarprepfordisplay]-->
+            </guid>
+        </item>
+        <!--[/section]-->
+    </channel>
 </rss>
