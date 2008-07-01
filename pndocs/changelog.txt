@@ -1,5 +1,7 @@
 crpCalendar
-v0.4.4 - ??? July 2008
+v0.4.5 - ??? July 2008
+- added e-mail notification for user submission
+v0.4.4 - 28 July 2008
 - bugfixing
 - adapt to Zikula 1.0.0
 - more complex attendance to events (personal and by others)
