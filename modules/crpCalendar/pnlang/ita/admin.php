@@ -58,6 +58,7 @@ define('_CRPCALENDAR_FILE_DIMENSION','Massima dimensione delle immagini per l\'u
 define('_CRPCALENDAR_GD_AVAILABLE','GD Library');
 define('_CRPCALENDAR_IMAGE_RESIZE','Le immagini saranno scalate (dal browser) a');
 define('_CRPCALENDAR_IMAGES','Immagini');
+define('_CRPCALENDAR_NOTIFICATION_MAIL','Indirizzo per notifiche di creazione eventi (nessuna se vuoto)');
 define('_CRPCALENDAR_OTHER_MODULES','Altri moduli');
 define('_CRPCALENDAR_START_YEAR','Anno d\'inizio del calendario');
 define('_CRPCALENDAR_USE_BROWSER','Le GD Library richieste non sono state trovate');
