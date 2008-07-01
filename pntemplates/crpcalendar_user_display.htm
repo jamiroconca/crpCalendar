@@ -61,7 +61,7 @@
 		<div><strong><!--[pnml name="_CRPCALENDAR_URL" html=1]--></strong>: <span class="url"><!--[$event.url|activatelinks]--></span></div>
 		<!--[/if]-->
 		<br />
-		<div class="description"><!--[$event.event_text|pnvarprephtmldisplay]--></div>
+		<div class="description"><!--[$event.event_text|nl2paragraphs|pnvarprephtmldisplay]--></div>
 		<!--[if $event.document]-->
 		<div>
 			<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="get_file" eventid=$event.eventid]-->" title="<!--[$event.title]-->">
