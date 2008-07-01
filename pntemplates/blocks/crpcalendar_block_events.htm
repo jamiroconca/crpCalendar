@@ -1,4 +1,9 @@
 <!--[pnpageaddvar name=stylesheet value="modules/crpCalendar/pnstyle/style.css"]-->
+<div class="pn-menu">
+<!--[securityutil_checkpermission component="crpCalendar::" instance="::" level="ACCESS_COMMENT" assign="can_submit"]-->
+[&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func=$choosed_view]-->"><!--[pnml name="_CRPCALENDAR_VIEW" html=1]--></a>&nbsp;<!--[if $can_submit]-->|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="new"]-->"><!--[pnml name="_CRPCALENDAR_SUBMIT" html=1]--></a>&nbsp;<!--[/if]-->]
+</div>
+
 <!--[foreach from=$events item=event]-->
 <div class="vevent">
 <span class="event-date">
