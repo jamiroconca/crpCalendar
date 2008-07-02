@@ -16,7 +16,7 @@
 </span>
 <a href="<!--[pnmodurl modname=crpCalendar func=display eventid=$event.eventid]-->">
 	<span class="summary"><!--[$event.title|pnvarprephtmldisplay]--></span>
-</a> (<abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%M%sZ"]-->"><!--[$event.start_date|pndate_format:"%d/%m/%Y"]--></abbr><!--[if $event.end_date neq $event.start_date]-->-<abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%M%sZ"]-->"><!--[$event.end_date|pndate_format:"%d/%m/%Y"]--></abbr><!--[/if]-->)
+</a> (<abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%M%sZ"]-->"><!--[$event.start_date|pndate_format:"%d/%m/%Y"]--></abbr><span class="<!--[if $event.day_event]-->pn-hide<!--[/if]-->">-<abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%M%sZ"]-->"><!--[$event.end_date|pndate_format:"%d/%m/%Y"]--></abbr></span>)
 <div class="description"><!--[$event.event_text|truncate:"50"|pnvarprephtmldisplay]--></div>
 <div style="clear:left"></div>
 </div>

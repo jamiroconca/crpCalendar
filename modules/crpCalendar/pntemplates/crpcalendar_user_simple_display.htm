@@ -23,8 +23,14 @@
 		</a>
 	</div>
 	<!--[/if]-->
+	
+	<!--[if !$event.day_event]-->
 	<div><strong><!--[pnml name="_CRPCALENDAR_START_DATE" html=1]--></strong>: <!--[$event.start_date|pndate_format:"%d/%m/%Y - %H:%M"]--></div>
 	<div><strong><!--[pnml name="_CRPCALENDAR_END_DATE" html=1]--></strong>: <!--[$event.end_date|pndate_format:"%d/%m/%Y - %H:%M"]--></div>
+	<!--[else]-->
+	<div><strong><!--[pnml name="_CRPCALENDAR_START_DATE" html=1]--></strong>: <!--[$event.start_date|pndate_format:"%d/%m/%Y"]--></div>
+	<!--[/if]-->
+	
 	<br />
 	<!--[$event.event_text|nl2paragraphs|pnvarprephtmldisplay]-->
 </div>
