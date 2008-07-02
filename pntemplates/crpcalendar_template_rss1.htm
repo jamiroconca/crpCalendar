@@ -1,51 +1,59 @@
 <?xml version="1.0" encoding="<!--[pnml name=_CHARSET]-->"?>
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://purl.org/rss/1.0/">
-    <channel rdf:about="<!--[pnmodurl modname="crpCalendar" func="getfeed" id_rss=$data.id_rss|pnvarprepfordisplay]-->">
-        <title><!--[pnconfiggetvar name="sitename"]--> :: <!--[pnconfiggetvar name="slogan"]-->:: <!--[$data.format|pnvarprepfordisplay]--></title>
-        <link>
-        <!--[pngetbaseurl]-->
-        </link>
-        <description>
-            <!--[$data.descr|strip_tags]-->
-        </description>
-        <image rdf:resource="<!--[pngetbaseurl]-->/images/logo.gif" />
-        <items>
-            <rdf:Seq>
-                <!--[section name=k loop=$list]--><rdf:li resource="<!--[$list[k].link|pnvarprepfordisplay]-->" /><!--[/section]-->
-            </rdf:Seq>
-        </items><!--[pnmodurl modname="Search" assign=searchurl]--><textinput rdf:resource="<!--[$searchurl|pnvarprepfordisplay]-->" />
-    </channel>
-    <image rdf:about="<!--[pngetbaseurl]-->images/<!--[pnconfiggetvar name="site_logo"]-->">
-        <title><!--[$data.name|pnvarprepfordisplay]--></title>
-        <link>
-        <!--[pngetbaseurl]-->
-        </link>
-        <url>
-            <!--[pngetbaseurl]-->images/<!--[pnconfiggetvar name="site_logo"]-->
-        </url>
-    </image>
-    <!--[section name=k loop=$list]-->
-    <item rdf:about="<!--[$list[k].link|pnvarprepfordisplay]-->">
-        <title><!--[$list[k].title|pnvarprepfordisplay]--> (<!--[$list[k].start_date|pndate_format:"%d/%m/%Y, %H:%M"|pnvarprephtmldisplay]--> - <!--[$list[k].end_date|pndate_format:"%d/%m/%Y, %H:%M"|pnvarprephtmldisplay]-->)</title>
-        <link>
-        <!--[$list[k].link|pnvarprepfordisplay]-->
-        </link>
-        <description>
-            <!--[$list[k].descr|pnvarprepfordisplay]-->
-        </description>
-    </item>
-    <!--[/section]-->
-    <textinput rdf:about="<!--[$searchurl|pnvarprepfordisplay]-->">
-        <title><!--[pnml name=_CRPCALENDAR_SEARCH_THIS_SITE html=1]--><!--[pnconfiggetvar name="sitename"|pnvarprepfordisplay]--></title>
-        <description>
-            <!--[pnml name=_CRPCALENDAR_SEARCH_THIS_SITE html=1]-->
-            <!--[pnconfiggetvar name="sitename"|pnvarprepfordisplay]-->
-        </description>
-        <name>
-            s
-        </name>
-        <link>
-        <!--[$searchurl|pnvarprepfordisplay]-->
-        </link>
-    </textinput>
+	<channel rdf:about="<!--[pnmodurl modname=" crpCalendar " func=" getfeed " id_rss=$data.id_rss|pnvarprepfordisplay]-->">
+		<title>
+			<!--[pnconfiggetvar name="sitename"]-->::<!--[pnconfiggetvar name="slogan"]-->::<!--[$data.format|pnvarprepfordisplay]-->
+		</title>
+		<link>
+			<!--[pngetbaseurl]-->
+		</link>
+		<description>
+			<!--[$data.descr|strip_tags]-->
+		</description>
+		<image rdf:resource="<!--[pngetbaseurl]-->/images/logo.gif"/>
+		<items>
+			<rdf:Seq>
+				<!--[section name=k loop=$list]--><rdf:li resource="<!--[$list[k].link|pnvarprepfordisplay]-->"/><!--[/section]-->
+			</rdf:Seq>
+		</items><!--[pnmodurl modname="Search" assign=searchurl]--><textinput rdf:resource="<!--[$searchurl|pnvarprepfordisplay]-->"/>
+	</channel>
+	<image rdf:about="<!--[pngetbaseurl]-->images/<!--[pnconfiggetvar name=" site_logo "]-->">
+		<title>
+			<!--[$data.name|pnvarprepfordisplay]-->
+		</title>
+		<link>
+			<!--[pngetbaseurl]-->
+		</link>
+		<url>
+			<!--[pngetbaseurl]-->images/<!--[pnconfiggetvar name="site_logo"]-->
+		</url>
+	</image>
+	<!--[section name=k loop=$list]-->
+	<item rdf:about="<!--[$list[k].link|pnvarprepfordisplay]-->">
+		<title>
+			<!--[$list[k].title|pnvarprepfordisplay]-->(<!--[$list[k].start_date|pndate_format:"%d/%m/%Y, %H:%M"|pnvarprephtmldisplay]-->-<!--[$list[k].end_date|pndate_format:"%d/%m/%Y, %H:%M"|pnvarprephtmldisplay]-->)
+		</title>
+		<link>
+			<!--[$list[k].link|pnvarprepfordisplay]-->
+		</link>
+		<description>
+			<!--[$list[k].descr|pnvarprepfordisplay]-->
+		</description>
+	</item>
+	<!--[/section]-->
+	<textinput rdf:about="<!--[$searchurl|pnvarprepfordisplay]-->">
+		<title>
+			<!--[pnml name=_CRPCALENDAR_SEARCH_THIS_SITE html=1]--><!--[pnconfiggetvar name="sitename"|pnvarprepfordisplay]-->
+		</title>
+		<description>
+			<!--[pnml name=_CRPCALENDAR_SEARCH_THIS_SITE html=1]-->
+			<!--[pnconfiggetvar name="sitename"|pnvarprepfordisplay]-->
+		</description>
+		<name>
+			s
+		</name>
+		<link>
+			<!--[$searchurl|pnvarprepfordisplay]-->
+		</link>
+	</textinput>
 </rdf:RDF>
