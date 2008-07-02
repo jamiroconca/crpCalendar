@@ -687,7 +687,7 @@ class crpCalendar
 
 		$startDate= $this->buildDate($inputValues['event']['startDay'], $inputValues['event']['startMonth'], $inputValues['event']['startYear']);
 
-		if ($inputValues['event']['day_event'] == '0')
+		if (!$inputValues['event']['day_event'])
 			$endDate= $this->buildDate($inputValues['event']['endDay'], $inputValues['event']['endMonth'], $inputValues['event']['endYear']);
 		else
 			$endDate= $startDate;
@@ -704,7 +704,7 @@ class crpCalendar
 		$inputValues['event']['start_date']= $startDate . ' ' . $startTime;
 		$inputValues['event']['end_date']= $endDate . ' ' . $endTime;
 
-		if (strtotime($inputValues['event']['start_date']) > strtotime($inputValues['event']['end_date']))
+		if (!$inputValues['event']['day_event'] && (strtotime($inputValues['event']['start_date']) > strtotime($inputValues['event']['end_date'])))
 		{
 			LogUtil :: registerError(_CRPCALENDAR_INVALID_INTERVAL);
 			return pnRedirect(pnModUrl('crpCalendar', $returnType, 'new'));
@@ -840,7 +840,7 @@ class crpCalendar
 
 		$startDate= $this->buildDate($inputValues['event']['startDay'], $inputValues['event']['startMonth'], $inputValues['event']['startYear']);
 
-		if ($inputValues['event']['day_event'] == '0')
+		if (!$inputValues['event']['day_event'])
 			$endDate= $this->buildDate($inputValues['event']['endDay'], $inputValues['event']['endMonth'], $inputValues['event']['endYear']);
 		else
 			$endDate= $startDate;
@@ -859,7 +859,7 @@ class crpCalendar
 		$inputValues['event']['start_date']= $startDate . ' ' . $startTime;
 		$inputValues['event']['end_date']= $endDate . ' ' . $endTime;
 
-		if (strtotime($inputValues['event']['start_date']) > strtotime($inputValues['event']['end_date']))
+		if (!$inputValues['event']['day_event'] && (strtotime($inputValues['event']['start_date']) > strtotime($inputValues['event']['end_date'])))
 		{
 			LogUtil :: registerError(_CRPCALENDAR_INVALID_INTERVAL);
 			return pnRedirect(pnModUrl('crpCalendar', 'admin', 'modify', array (
