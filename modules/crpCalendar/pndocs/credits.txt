@@ -1,7 +1,11 @@
 crpCalendar  
 ==============================================
-(C) Daniele Conca 2007
+(C) Daniele Conca 2007-2008
 
 PostNuke .8 (adam_baum) Credits
 ==============================================
 Please refer to the file included in PostNuke package available from http://www.postnuke.com or http://noc.postnuke.com for full credits.
+
+Unobtrusive Date-Picker Widget
+==============================================
+Please refer to http://www.frequency-decoder.com/2006/10/02/unobtrusive-date-picker-widgit-update

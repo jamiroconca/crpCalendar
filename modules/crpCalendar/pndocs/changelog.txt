@@ -3,6 +3,7 @@ v0.4.5 - ??? July 2008
 - added e-mail notification for user submission
 - added display/hide event end date based on "day event" check
 - better visualization for "day event" date
+- new unobtrusive datepicker
 v0.4.4 - 28 July 2008
 - bugfixing
 - adapt to Zikula 1.0.0
