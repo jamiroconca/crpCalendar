@@ -81,6 +81,7 @@ define('_CRPCALENDAR_ERROR_DOCUMENT_FILE_SIZE_TOO_BIG','Dimiensioni del document
 define('_CRPCALENDAR_ERROR_DOCUMENT_NO_FILE','File del documento non caricato');
 define('_CRPCALENDAR_ERROR_IMAGE_FILE_SIZE_TOO_BIG','Dimensioni dell\'immagine non permesse');
 define('_CRPCALENDAR_ERROR_IMAGE_NO_FILE','Immagine non caricata');
+define('_CRPCALENDAR_INVALID_NOTIFICATION','E-mail per le notifiche in formato non valido');
 define('_CRPCALENDAR_IMAGE_INVALID_TYPE','Formato di immagine non valido');
 define('_CRPCALENDAR_INVALID_URL','URL non valido');
 

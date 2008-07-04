@@ -1150,6 +1150,11 @@ class crpCalendar
 		$enable_locations= (bool) FormUtil :: getPassedValue('enable_locations', false, 'POST');
 		pnModSetVar('crpCalendar', 'enable_locations', $enable_locations);
 		$crpcalendar_notification= FormUtil :: getPassedValue('crpcalendar_notification', null, 'POST');
+		if ($crpcalendar_notification && !pnVarValidate($crpcalendar_notification,'email'))
+		{
+			LogUtil :: registerError(_CRPCALENDAR_INVALID_NOTIFICATION);
+			return pnRedirect(pnModUrl('crpCalendar', 'admin', 'modifyconfig'));
+		}
 		pnModSetVar('crpCalendar', 'crpcalendar_notification', $crpcalendar_notification);
 
 		// Let any other modules know that the modules configuration has been updated
