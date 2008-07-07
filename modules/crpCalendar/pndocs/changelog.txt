@@ -4,6 +4,7 @@ v0.4.5 - ??? July 2008
 - added display/hide event end date based on "day event" check
 - better visualization for "day event" date
 - new unobtrusive datepicker
+- if locations module is enabled, you can take places from there 
 v0.4.4 - 28 July 2008
 - bugfixing
 - adapt to Zikula 1.0.0
