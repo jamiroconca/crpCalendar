@@ -594,6 +594,12 @@ class crpCalendar
 		pnSessionSetVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'display', array (
 			'eventid' => $item['eventid']
 		)));
+		
+		if (pnModAvailable('locations') && pnModGetVar('crpCalendar', 'enable_locations') && is_numeric($item['location']))
+		{
+			pnModLangLoad('locations');
+			$item['location']= pnModAPIFunc('locations','user','getLocationByID',array('locationid' => $item['location']));
+		}
 		//pnSessionSetVar('crpCalendar_choosed_view', 'display');
 		//pnSessionSetVar('crpCalendar_choosed_event', $item['eventid']);
 
