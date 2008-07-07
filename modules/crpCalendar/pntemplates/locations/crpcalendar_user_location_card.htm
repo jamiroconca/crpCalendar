@@ -10,7 +10,7 @@
 		<!--[if $event.location.street]--><span class="street-address"><!--[$event.location.street|default:""]--></span>
 		<br/>
 		<!--[/if]-->
-		<!--[if $event.location.city]--><span class="postal-code"><!--[$event.location.zip|default:""]--></span><span class="locality"><!--[$event.location.city|default:""]--></span>
+		<!--[if $event.location.city]--><span class="postal-code"><!--[$event.location.zip|default:""]--></span> <span class="locality"><!--[$event.location.city|default:""]--></span>
 		<br/>
 		<!--[/if]-->
 		<!--[if $event.location.state]--><span class="region"><!--[$event.location.state|default:""]--></span>
@@ -28,8 +28,7 @@
 		<br/>
 		<!--[/if]-->
 		<!--[if $event.location.email]-->
-		<!--[pnml name="_LOCATIONS_LOCATION_EMAIL"]-->
-		: 
+		<!--[pnml name="_LOCATIONS_LOCATION_EMAIL"]-->: 
 		<a class="email" href="mailto:<!--[$event.location.email|default:""]-->">
 			<!--[$event.location.email|default:""]-->
 		</a>
