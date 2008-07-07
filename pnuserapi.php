@@ -28,7 +28,8 @@ function crpCalendar_userapi_getall($navigationValues)
 																		$navigationValues['clear'], $navigationValues['ignoreml'],
 																		$navigationValues['modvars'], $navigationValues['mainCat'], 'A',
 																		$navigationValues['interval'], $navigationValues['sortOrder'],
-																		$navigationValues['startDate'], $navigationValues['endDate']);
+																		$navigationValues['startDate'], $navigationValues['endDate'], 
+																		$navigationValues['typeList']);
 }
 
 /**
@@ -107,7 +108,7 @@ function crpCalendar_userapi_countitems($args)
 	
 	$calendar = new crpCalendar();
 	
-	return $calendar->dao->countItems($args['category'], $args['active'], $args['uid'], $args['eventid']);
+	return $calendar->dao->countItems($args['category'], $args['active'], $args['uid'], $args['eventid'], $args['typeList']);
 }
 
 /**
