@@ -9,6 +9,14 @@
 	color: #C00;
 }
 
+.crpcalendar-quote {
+	margin: 0px;
+ 	padding: 2px 4px 2px 36px;
+	background: #FAFAE7 url(../pnimages/quote.jpg) no-repeat;
+  border: 1px dashed #6C6E3A;
+	color: #976957;
+}
+
 /* position styles */ 
 .crpcalendar-rss {
 	float: right;
