@@ -82,7 +82,8 @@ class crpCalendarUI
 	 * 
 	 * @return string html code
 	 */
-	function userList($rows=array(), $category=null, $mainCat=null, $modvars=array(), $arrayExport=array())
+	function userList($rows=array(), $category=null, $mainCat=null, $modvars=array(), 
+										$arrayExport=array(), $typeList=null)
 	{
 		// Create output object
 		$pnRender = pnRender::getInstance('crpCalendar');
@@ -94,6 +95,7 @@ class crpCalendarUI
 		$pnRender->assign('lang', pnUserGetLang());
 		$pnRender->assign($modvars);
 		$pnRender->assign('exports', $arrayExport);
+		$pnRender->assign('typeList', $typeList);
 
 		// Assign the information required to create the pager
 		$pnRender->assign('pager', array (
@@ -102,7 +104,8 @@ class crpCalendarUI
 			'countitems',
 			array (
 				'category' => $category,
-				'active' => 'A'
+				'active' => 'A',
+				'typeList' => $typeList
 			)
 		), 'itemsperpage' => $modvars['itemsperpage']));
 
