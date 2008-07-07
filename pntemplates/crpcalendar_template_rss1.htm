@@ -31,7 +31,7 @@
 	<!--[section name=k loop=$list]-->
 	<item rdf:about="<!--[$list[k].link|pnvarprepfordisplay]-->">
 		<title>
-			<!--[$list[k].title|pnvarprepfordisplay]-->(<!--[$list[k].start_date|pndate_format:"%d/%m/%Y, %H:%M"|pnvarprephtmldisplay]-->-<!--[$list[k].end_date|pndate_format:"%d/%m/%Y, %H:%M"|pnvarprephtmldisplay]-->)
+			<!--[$list[k].title|pnvarprepfordisplay]-->(<!--[$list[k].start_date|pndate_format:"%d/%m/%Y, %H:%M"|pnvarprephtmldisplay]--><!--[if !$list[k].day_event]-->-<!--[$list[k].end_date|pndate_format:"%d/%m/%Y, %H:%M"|pnvarprephtmldisplay]--><!--[/if]-->)
 		</title>
 		<link>
 			<!--[$list[k].link|pnvarprepfordisplay]-->
