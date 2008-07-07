@@ -51,8 +51,8 @@
 		<!--[if $event.location]-->
 		<div>
 			<strong><!--[pnml name="_CRPCALENDAR_LOCATION" html=1]--></strong>:
-			<!--[if $enable_locations && pnModAvailable('locations') && is_numeric($event.location)]-->
-			<a href="<!--[pnmodurl modname="locations" func=display ot="location" locationid=$event.location]-->"><span class="location"><!--[$event.location]--></span></a>
+			<!--[if $enable_locations && pnModAvailable('locations') && is_numeric($event.location.locationid)]-->
+			<!--[include file="locations/crpcalendar_user_location_card.htm"]-->
 			<!--[else]-->
 			<span class="location"><!--[$event.location]--></span>
 			<!--[/if]-->
