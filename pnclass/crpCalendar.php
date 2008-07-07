@@ -215,7 +215,8 @@ class crpCalendar
 		pnSessionSetVar('crpCalendar_choosed_view', 'view');
 		pnSessionSetVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'view'));
 
-		return $this->ui->userList($rows, $navigationValues['category'], $navigationValues['mainCat'], $navigationValues['modvars']);
+		return $this->ui->userList($rows, $navigationValues['category'], $navigationValues['mainCat'], 
+																$navigationValues['modvars'], array(), $navigationValues['typeList']);
 	}
 
 	/**
@@ -1194,6 +1195,7 @@ class crpCalendar
 		$month= FormUtil :: getPassedValue('Date_Month', null);
 		$year= FormUtil :: getPassedValue('Date_Year', null);
 		$day= FormUtil :: getPassedValue('Date_Day', null);
+		$typeList= FormUtil :: getPassedValue('typeList', null);
 
 		if ($day && $month && $year)
 			pnSessionSetVar('crpCalendar_choosed_time', DateUtil :: makeTimestamp($year . '-' . $month . '-' . $day));
@@ -1205,6 +1207,7 @@ class crpCalendar
 			$active= null;
 			$category= null;
 			$t= time();
+			$typeList =null;
 		}
 
 		$ignoreml= FormUtil :: getPassedValue('ignoreml', true);
@@ -1222,7 +1225,7 @@ class crpCalendar
 		// get all module vars
 		$modvars= pnModGetVar('crpCalendar');
 
-		$data= compact('startnum', 'category', 'active', 'clear', 'ignoreml', 'mainCat', 'cats', 'modvars', 'sortOrder', 't');
+		$data= compact('startnum', 'category', 'active', 'clear', 'ignoreml', 'mainCat', 'cats', 'modvars', 'sortOrder', 't', 'typeList');
 
 		return $data;
 	}
