@@ -14,6 +14,7 @@ define('_CRPCALENDAR', 'Calendario');
 
 // user list
 define('_CRPCALENDAR_ADD_PARTECIPATION','Aggiungi partecipazione');
+define('_CRPCALENDAR_ARCHIVED','Archiviati');
 define('_CRPCALENDAR_CONTACT','Contatto');
 define('_CRPCALENDAR_CONTENT', 'Dettaglio evento');
 define('_CRPCALENDAR_CREATEDON','Inserito il');
@@ -31,6 +32,7 @@ define('_CRPCALENDAR_NOAVATARSELECTED','Avatar non selezionato');
 define('_CRPCALENDAR_ORGANISER','Organizzazione');
 define('_CRPCALENDAR_STATUS', 'Stato');
 define('_CRPCALENDAR_TITLE', 'Titolo evento');
+define('_CRPCALENDAR_UPCOMING','a venire');
 define('_CRPCALENDAR_URL','URL');
 define('_CRPCALENDAR_URL_HINT','URL (iniziare con http://)');
 
