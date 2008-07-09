@@ -17,3 +17,5 @@ define('_CRPCALENDAR_BLOCK_NO_EVENTS','Non ci sono eventi per i prossimi');
 //
 define('_CRPCALENDAR_SUBMIT','Inserisci evento');
 define('_CRPCALENDAR_VIEW','Elenco eventi');
+//
+define('_CRPCALENDAR_RSS','crpCalendar feed');
