@@ -7,6 +7,7 @@ v0.4.5 - ??? July 2008
 - if locations module is enabled, you can take places from there
 - added automatic categories feeds to browser address-bar (where supported ;-) )
 - added upcoming/archive filter into list view
+- it's possible to turn monthly view into a list and viceversa
 v0.4.4 - 28 July 2008
 - bugfixing
 - adapt to Zikula 1.0.0
