@@ -32,7 +32,7 @@ define('_CRPCALENDAR_NOAVATARSELECTED','Avatar non selezionato');
 define('_CRPCALENDAR_ORGANISER','Organizzazione');
 define('_CRPCALENDAR_STATUS', 'Stato');
 define('_CRPCALENDAR_TITLE', 'Titolo evento');
-define('_CRPCALENDAR_UPCOMING','a venire');
+define('_CRPCALENDAR_UPCOMING','Prossimi');
 define('_CRPCALENDAR_URL','URL');
 define('_CRPCALENDAR_URL_HINT','URL (iniziare con http://)');
 
