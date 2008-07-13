@@ -1,5 +1,5 @@
 INSTALL:
-- requirements are postnuke 0.8 and Categories module 
+- requirements are Zikula (at least postnuke 0.8 RCs) 
 - default module installation procedure
 - for event submission, grant crpCalendar::.* .* ACCESS_COMMENT permission for users groups, while ACCESS_DELETE gives control over module administration, except for confinguration which needs ACCESS_ADMIN
 - rss feed are enabled by default, change module settings as required
