@@ -42,10 +42,10 @@
 		
 		<!--[if !$event.day_event]-->
 		<div><strong><!--[pnml name="_CRPCALENDAR_START_DATE" html=1]--></strong>: <abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.start_date|pndate_format:"%d/%m/%Y - %H:%M"]--></abbr></div>
-	  <div><strong><!--[pnml name="_CRPCALENDAR_END_DATE" html=1]--></strong>: <abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.end_date|pndate_format:"%d/%m/%Y - %H:%M"]--></abbr></div>
+	  	<div><strong><!--[pnml name="_CRPCALENDAR_END_DATE" html=1]--></strong>: <abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.end_date|pndate_format:"%d/%m/%Y - %H:%M"]--></abbr></div>
 		<!--[else]-->
 		<div><strong><!--[pnml name="_CRPCALENDAR_START_DATE" html=1]--></strong>: <abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%d"]-->"><!--[$event.start_date|pndate_format:"%d/%m/%Y"]--></abbr></div>
-	  <div class="pn-hide"><strong><!--[pnml name="_CRPCALENDAR_END_DATE" html=1]--></strong>: <abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%d"]-->"><!--[$event.end_date|pndate_format:"%d/%m/%Y"]--></abbr></div>
+	  	<div class="pn-hide"><strong><!--[pnml name="_CRPCALENDAR_END_DATE" html=1]--></strong>: <abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%d"]-->"><!--[$event.end_date|pndate_format:"%d/%m/%Y"]--></abbr></div>
 		<!--[/if]-->
 		
 		<!--[if $event.location]-->
