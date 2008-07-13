@@ -176,8 +176,7 @@ class crpCalendarUI
 		$pnRender->assign('mainCategory', $mainCat);
 		$pnRender->assign('lang', pnUserGetLang());
 		$pnRender->assign($modvars);
-		/* TODO : 9999 -> $navigationValues['modvars'] to be changed when Zikula 1.0.1 is released
-		// Assign the information required to create the pager
+		/* TODO : 9999 -> $navigationValues['modvars'] to be changed when Zikula ticket #49 is resolved 
 		$pnRender->assign('pager', array (
 			'numitems' => pnModAPIFunc('crpCalendar',
 			'user',
