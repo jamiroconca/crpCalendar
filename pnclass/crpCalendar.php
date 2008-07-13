@@ -488,7 +488,7 @@ class crpCalendar
 	function listAttendees()
 	{
 		$navigationValues = $this->collectNavigationFromInput();
-		// TODO : 9999 -> $navigationValues['modvars'] to be changed when Zikula 1.0.1 is released
+		// TODO : 9999 -> $navigationValues['modvars'] to be changed when Zikula ticket #49 is resolved
 		$items = $this->dao->getEventPartecipations(null, $navigationValues['startnum'], 9999, null, 'A', 'DESC', null, 'uid');
 
 		$rows = array ();
