@@ -64,6 +64,10 @@ class crpCalendarDAO
 		{
 			return $items;
 		}
+		if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_ADD) && $active)
+		{ // userapi should not query pending or rejected events 
+			$active='A';
+		}
 
 		$pntable= pnDBGetTables();
 		$crpcalendarcolumn= $pntable['crpcalendar_column'];
