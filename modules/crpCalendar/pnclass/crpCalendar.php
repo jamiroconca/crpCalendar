@@ -225,6 +225,142 @@ class crpCalendar
 	 * 
 	 * @return string html 
 	 */
+	function listYearEvents()
+	{
+		$navigationValues = $this->collectNavigationFromInput();
+		pnSessionDelVar('crpCalendar_export_events');
+		pnSessionDelVar('crpCalendar_choosed_time');
+		
+		$date = $this->timeToDMY($navigationValues['t']);
+
+		$startYear = DateUtil :: getDatetime(mktime(0, 0, 0, 1, 1, $date['y']));
+		$endYear = DateUtil :: getDatetime(mktime(0, 0, 0, 12, 31, $date['y']));
+
+		$navigationValues['startDate'] = DateUtil :: getDatetime(DateUtil :: parseUIDateTime($startYear));
+		$navigationValues['endDate'] = DateUtil :: getDatetime(DateUtil :: parseUIDateTime($endYear));
+		$navigationValues['sortOrder'] = 'ASC';
+		// reset page limit for daylist
+		$navigationValues['modvars']['itemsperpage'] = '9999' ;
+		// Get all matching pages
+		$items = pnModAPIFunc('crpCalendar', 'user', 'getall', $navigationValues);
+
+		if (!$items)
+			$items = array ();
+
+		$rows = array ();
+		$exports = array ();
+		foreach ($items as $key => $item)
+		{
+			$options = array ();
+			$options[] = array (
+				'url' => pnModURL('crpCalendar',
+				'user',
+				'display',
+				array (
+					'eventid' => $item['eventid']
+				)
+			), 'image' => 'demo.gif', 'title' => _VIEW);
+
+			// subscribe to event
+			if (pnUserLoggedIn() && pnModGetVar('crpCalendar', 'enable_partecipation') && !$this->dao->existPartecipation(pnUserGetVar('uid'), $item['eventid']))
+			{
+				$options[] = array (
+					'url' => pnModURL('crpCalendar',
+					'user',
+					'add_partecipation',
+					array (
+						'eventid' => $item['eventid']
+					)
+				), 'image' => 'add_user.gif', 'title' => _CRPCALENDAR_ADD_PARTECIPATION);
+			}
+			elseif (pnUserLoggedIn() && pnModGetVar('crpCalendar', 'enable_partecipation') && $this->dao->existPartecipation(pnUserGetVar('uid'), $item['eventid']))
+			{
+				$options[] = array (
+					'url' => pnModURL('crpCalendar',
+					'user',
+					'delete_partecipation',
+					array (
+						'eventid' => $item['eventid']
+					)
+				), 'image' => 'delete_user.gif', 'title' => _CRPCALENDAR_DELETE_PARTECIPATION);
+			}
+
+			if (SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_ADD))
+			{
+				$options[] = array (
+					'url' => pnModURL('crpCalendar',
+					'admin',
+					'modify',
+					array (
+						'eventid' => $item['eventid']
+					)
+				), 'image' => 'xedit.gif', 'title' => _EDIT);
+				$options[] = array (
+					'url' => pnModURL('crpCalendar',
+					'admin',
+					'clone',
+					array (
+						'eventid' => $item['eventid']
+					)
+				), 'image' => 'editcopy.gif', 'title' => _COPY);
+				if (SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_DELETE))
+				{
+					$options[] = array (
+						'url' => pnModURL('crpCalendar',
+						'admin',
+						'delete',
+						array (
+							'eventid' => $item['eventid']
+						)
+					), 'image' => '14_layer_deletelayer.gif', 'title' => _DELETE);
+				}
+			}
+			elseif ((SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_MODERATE) && $this->isAuthor($item['eventid'])))
+			{
+				$options[] = array (
+					'url' => pnModURL('crpCalendar',
+					'user',
+					'modify',
+					array (
+						'eventid' => $item['eventid']
+					)
+				), 'image' => 'xedit.gif', 'title' => _EDIT);
+			}
+
+			// Add the calculated menu options to the item array
+			$item['options'] = $options;
+			$rows[] = $item;
+			$exports[] = $item['eventid'];
+		}
+		
+		if ($navigationValues['modvars']['yearlist_categorized'])
+		{
+			$cats= CategoryUtil :: getCategoriesByParentID($navigationValues['mainCat']);
+			$userLang = pnUserGetLang();
+			foreach ($cats as $cat)
+			{
+				foreach ($items as $kitem => $vitem)
+				{
+					if ($cat['id'] == $vitem[__CATEGORIES__]['Main']['id'])
+						$categorizedEvents[$vitem[__CATEGORIES__]['Main']['display_name'][$userLang]][] = $vitem;
+				}
+			}
+			$rows = $categorizedEvents;
+		}
+
+		pnSessionSetVar('crpCalendar_export_events', $exports);
+		pnSessionSetVar('crpCalendar_choosed_view', 'year_view');
+		pnSessionSetVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'year_view'));
+
+		return $this->ui->userYearList($rows, $navigationValues['category'], $navigationValues['mainCat'],
+																$navigationValues['modvars'], $navigationValues['t'], $date);
+	}
+	
+	/**
+	 * Page with month's events list
+	 * 
+	 * @return string html 
+	 */
 	function listMonthEvents()
 	{
 		$navigationValues = $this->collectNavigationFromInput();
@@ -1186,9 +1322,11 @@ class crpCalendar
 		pnModSetVar('crpCalendar', 'enable_partecipation', $enable_partecipation);
 		$enable_locations = (bool) FormUtil :: getPassedValue('enable_locations', false, 'POST');
 		pnModSetVar('crpCalendar', 'enable_locations', $enable_locations);
-		$crpcalendar_notification = FormUtil :: getPassedValue('crpcalendar_notification', null, 'POST');
 		$daylist_categorized = (bool) FormUtil :: getPassedValue('daylist_categorized', false, 'POST');
 		pnModSetVar('crpCalendar', 'daylist_categorized', $daylist_categorized);
+		$yearlist_categorized = (bool) FormUtil :: getPassedValue('yearlist_categorized', false, 'POST');
+		pnModSetVar('crpCalendar', 'yearlist_categorized', $yearlist_categorized);
+		$crpcalendar_notification = FormUtil :: getPassedValue('crpcalendar_notification', null, 'POST');
 		if ($crpcalendar_notification && !pnVarValidate($crpcalendar_notification, 'email'))
 		{
 			LogUtil :: registerError(_CRPCALENDAR_INVALID_NOTIFICATION);
