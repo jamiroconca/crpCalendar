@@ -83,12 +83,14 @@ define('_CRPCALENDAR_NEXT_DAY','Next day');
 define('_CRPCALENDAR_NEXT_MONTH','Next month');
 define('_CRPCALENDAR_NEXT_YEAR','Next year');
 define('_CRPCALENDAR_NEXT_WEEK','Next week');
+define('_CRPCALENDAR_NO_EVENTS','No events to be shown');
 define('_CRPCALENDAR_PREV_DAY','Previous day');
 define('_CRPCALENDAR_PREV_MONTH','Previous month');
 define('_CRPCALENDAR_PREV_YEAR','Previous year');
 define('_CRPCALENDAR_PREV_WEEK','Previous week');
 define('_CRPCALENDAR_VIEW_DAY','Daily view');
 define('_CRPCALENDAR_VIEW_MONTH','Monthly view');
+define('_CRPCALENDAR_VIEW_YEAR','Yearly view');
 define('_CRPCALENDAR_VIEW_WEEK','Weekly view');
 //
 define('_CRPCALENDAR_VIEW_FORM','View as');
