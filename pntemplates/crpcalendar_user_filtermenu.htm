@@ -7,7 +7,7 @@
   	<!--[ pnml assign="lblDef" name="_ALLCATEGORIES" html=1]-->
   	<!--[ selector_category category=$mainCategory name="events_category" selectedValue=$events_category defaultValue="0" defaultText="$lblDef" ]-->
   	<!--[/if]-->
-  	<!--[if $choosed_view neq "view" && $choosed_view neq "get_partecipations"]-->
+  	<!--[if $choosed_view neq "view" && $choosed_view neq "get_partecipations"  && $choosed_view neq "year_view"]-->
   	<!--[if $choosed_view eq "month_view"]-->
   	<label for="crpcalendar_viewForm"><!--[pnml name=_CRPCALENDAR_VIEW_FORM html=1]--></label>
   	<select id="crpcalendar_viewForm" name="viewForm">
@@ -20,7 +20,7 @@
   	<!--[html_select_date time=$t end_year="+4" display_months=false display_years=false id="start_datefield-dd"]-->
 	<!--[html_select_date time=$t end_year="+4" display_days=false display_years=false id="start_datefield-mm"]-->
 	<!--[html_select_date time=$t start_year=$crpcalendar_start_year end_year="+4" display_days=false display_months=false id="start_datefield" class="highlight-days-67 no-transparency split-date"]-->
-  	<!--[elseif $choosed_view neq "get_partecipations"]-->
+  	<!--[elseif $choosed_view neq "get_partecipations"  && $choosed_view neq "year_view"]-->
   	<label for="crpcalendar_typeList"><!--[pnml name=_CRPCALENDAR_STATUS html=1]--></label>
   	<select id="crpcalendar_typeList" name="typeList">
   		<option value=""><!--[pnml name="_CRPCALENDAR_NOT_SPECIFIED" html=1]--></option>
