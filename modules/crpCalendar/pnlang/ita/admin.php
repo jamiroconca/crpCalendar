@@ -67,6 +67,7 @@ define('_CRPCALENDAR_USE_GD','crpCalendar usa le GD Library');
 define('_CRPCALENDAR_USERLIST_IMAGE','Thumbnail nell\'elenco utenti');
 define('_CRPCALENDAR_USERLIST_WIDTH','Larghezza delle thumbnail nell\'elenco utenti');
 define('_CRPCALENDAR_THEME','crpCalendar theme');
+define('_CRPCALENDAR_YEARLIST_CATEGORIZED','Vista annuale categorizzata');
 
 // RSS define
 define('_CRPCALENDAR_ATOM','ATOM');
