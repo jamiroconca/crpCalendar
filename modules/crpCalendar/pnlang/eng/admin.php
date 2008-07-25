@@ -51,6 +51,7 @@ define('_CRPCALENDAR_INVALID_INTERVAL', 'Invalid date interval');
 define('_CRPCALENDAR_SHOW_FILE','Show file');
 
 // config
+define('_CRPCALENDAR_DAYLIST_CATEGORIZED','Categorized day-list view');
 define('_CRPCALENDAR_DOCUMENT_DIMENSION','Max upload document size (bytes)');
 define('_CRPCALENDAR_ENABLE_LOCATIONS','Enable Locations');
 define('_CRPCALENDAR_ENABLE_PARTECIPATION','Enable user\'s partecipation to events');
