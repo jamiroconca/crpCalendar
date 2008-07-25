@@ -349,7 +349,8 @@ class crpCalendar
 		$navigationValues['startDate'] = DateUtil :: getDatetime(DateUtil :: parseUIDateTime($day));
 		$navigationValues['endDate'] = DateUtil :: getDatetime(DateUtil :: parseUIDateTime($tomorrow));
 		$navigationValues['sortOrder'] = 'ASC';
-
+		// reset page limit for daylist
+		$navigationValues['modvars']['itemsperpage'] = '9999' ;
 		// Get all matching events
 		$items = pnModAPIFunc('crpCalendar', 'user', 'getall', $navigationValues);
 
@@ -396,6 +397,21 @@ class crpCalendar
 		pnSessionSetVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'day_view'));
 
 		$today = DateUtil :: getDatetime(time());
+		
+		if ($navigationValues['modvars']['daylist_categorized'])
+		{
+			$cats= CategoryUtil :: getCategoriesByParentID($navigationValues['mainCat']);
+			$userLang = pnUserGetLang();
+			foreach ($cats as $cat)
+			{
+				foreach ($items as $kitem => $vitem)
+				{
+					if ($cat['id'] == $vitem[__CATEGORIES__]['Main']['id'])
+						$categorizedEvents[$vitem[__CATEGORIES__]['Main']['display_name'][$userLang]][] = $vitem;
+				}
+			}
+			$items = $categorizedEvents;
+		}
 
 		return $this->ui->userDayList($items, $day, $navigationValues['t'], $date,
 																	$navigationValues['startDate'], $navigationValues['endDate'],
@@ -1171,6 +1187,8 @@ class crpCalendar
 		$enable_locations = (bool) FormUtil :: getPassedValue('enable_locations', false, 'POST');
 		pnModSetVar('crpCalendar', 'enable_locations', $enable_locations);
 		$crpcalendar_notification = FormUtil :: getPassedValue('crpcalendar_notification', null, 'POST');
+		$daylist_categorized = (bool) FormUtil :: getPassedValue('daylist_categorized', false, 'POST');
+		pnModSetVar('crpCalendar', 'daylist_categorized', $daylist_categorized);
 		if ($crpcalendar_notification && !pnVarValidate($crpcalendar_notification, 'email'))
 		{
 			LogUtil :: registerError(_CRPCALENDAR_INVALID_NOTIFICATION);
