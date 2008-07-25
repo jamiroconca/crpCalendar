@@ -50,6 +50,23 @@ function crpCalendar_user_view()
 }
 
 /**
+ * view year items
+ *
+ * @return string HTML output
+ */
+function crpCalendar_user_year_view()
+{
+	// Security check
+	if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_READ))
+	{
+		return LogUtil::registerPermissionError();
+	}
+
+	$calendar = new crpCalendar();
+	return $calendar->listYearEvents();
+}
+
+/**
  * view month items
  *
  * @return string HTML output
