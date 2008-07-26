@@ -39,7 +39,7 @@ function smarty_function_crpcalendar_feeds($params, &$smarty)
 
 		foreach ($cats as $cat)
 		{
-			PageUtil :: addVar('rawtext','<link rel="alternate" type="application/rss+xml" href="'.pnModUrl('crpCalendar','user','get_feed',array('events_category'=>$cat['id'])).'" title="'._CRPCALENDAR_RSS.' '.$cat['display_name'][$userLang].'" />');
+			PageUtil :: addVar('rawtext','<link rel="alternate" type="application/rss+xml" href="'.pnModUrl('crpCalendar','user','getfeed',array('events_category'=>$cat['id'])).'" title="'._CRPCALENDAR_RSS.' '.$cat['display_name'][$userLang].'" />');
 		}
 	}
 	
