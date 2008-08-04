@@ -83,14 +83,18 @@ function crpCalendar_userapi_get($args)
 		return LogUtil::registerPermissionError();
 	}
 	
-	$calendar = new crpCalendar();
-	
+	// optional arguments
+  if (isset($args['objectid'])) {
+     $args['eventid'] = $args['objectid'];
+  }
+		
 	// Argument check
   if ((!isset($args['eventid']) || !is_numeric($args['eventid'])) &&
        !isset($args['title'])) {
       return LogUtil::registerError (_MODARGSERROR);
   }
-    
+  
+  $calendar = new crpCalendar(); 
 	return $calendar->dao->getAdminData($args['eventid']);
 }
 
