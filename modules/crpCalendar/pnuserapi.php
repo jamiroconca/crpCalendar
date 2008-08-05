@@ -132,4 +132,21 @@ function crpCalendar_userapi_countitems_attendance($args)
 	return $calendar->dao->countAttendeeItems($args['category'], $args['active'], $args['uid'], $args['eventid']);
 }
 
+/**
+ * get meta data for the module
+ *
+ */
+function crpCalendar_userapi_getmodulemeta()
+{
+   return array('viewfunc'    => 'view',
+                'displayfunc' => 'display',
+                'newfunc'     => 'new',
+                'createfunc'  => 'create',
+                'modifyfunc'  => 'modify',
+                'updatefunc'  => 'update',
+                'deletefunc'  => 'delete',
+                'titlefield'  => 'title',
+                'itemid'      => 'eventid');
+}
+
 ?>
