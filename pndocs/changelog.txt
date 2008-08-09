@@ -1,8 +1,9 @@
 crpCalendar
-v0.4.6 - 25 July 2008
+v0.4.6 - ??? august 2008
 - categorized day-list view(settings): show day events grouped by category(ordered)
 - categorized or not year-list view(settings): show year events grouped by category(ordered) or not
 - added table sort by title
+- added events block by location
 v0.4.5 - 13 July 2008
 - added e-mail notification for user submission
 - added display/hide event end date based on "day event" check
