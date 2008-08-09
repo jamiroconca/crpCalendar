@@ -246,4 +246,34 @@ function crpCalendar_admin_updateconfig()
 	return $calendar->updateConfig();
 }
 
+/**
+ * import events from an ical file
+ * 
+ * @return string 
+ */
+function crpCalendar_admin_import_ical($args)
+{
+	// Security check
+  if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_EDIT)) {
+      return LogUtil::registerPermissionError();
+  }
+	$calendar = new crpCalendar();
+	return $calendar->importIcs();
+}
+
+/**
+ * import events from an ical file
+ * 
+ * @return string 
+ */
+function crpCalendar_admin_import_create($args)
+{
+	// Security check
+  if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_EDIT)) {
+      return LogUtil::registerPermissionError();
+  }
+	$calendar = new crpCalendar();
+	return $calendar->createIcs();
+}
+
 ?>
