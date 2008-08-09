@@ -8,14 +8,5 @@
  * @license GNU/GPL - v.2.1
  * @package crpCalendar
  */
-
-//
-define('_CRPCALENDAR_MAXDAY', 'Days interval to show');
-define('_CRPCALENDAR_MAXEVENTS','Maximum number of events');
-// 
-define('_CRPCALENDAR_BLOCK_NO_EVENTS','There are no events in the next');
-//
-define('_CRPCALENDAR_SUBMIT','Submit event');
-define('_CRPCALENDAR_VIEW','Events list');
-//
-define('_CRPCALENDAR_RSS','crpCalendar feed');
+ 
+Loader :: includeOnce('modules/crpCalendar/pnlang/eng/global_block.php');
