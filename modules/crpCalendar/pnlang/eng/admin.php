@@ -13,6 +13,7 @@
 //
 define('_CRPCALENDAR', 'Calendar');
 define('_CRPCALENDAR_GENERAL','General');
+define('_CRPCALENDAR_IMPORT_ICAL','iCal import');
 
 // admin list
 define('_CRPCALENDAR_CONTENT', 'Event detail');
