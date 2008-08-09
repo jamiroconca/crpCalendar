@@ -29,7 +29,7 @@ function crpCalendar_userapi_getall($navigationValues)
 																		$navigationValues['modvars'], $navigationValues['mainCat'], 'A',
 																		$navigationValues['interval'], $navigationValues['sortOrder'],
 																		$navigationValues['startDate'], $navigationValues['endDate'], 
-																		$navigationValues['typeList']);
+																		$navigationValues['typeList'], $navigationValues['bylocation']);
 }
 
 /**
