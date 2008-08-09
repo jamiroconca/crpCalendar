@@ -38,7 +38,8 @@ class crpCalendarDAO
 	 */
 	function adminList($startnum= 1, $category= null, $clear= false, $ignoreml= true,
 											$modvars= array (), $mainCat= null, $active= null, $interval= null, 
-											$sortOrder= 'DESC', $startDate= null, $endDate= null, $typeList= null)
+											$sortOrder= 'DESC', $startDate= null, $endDate= null, $typeList= null,
+											$bylocation=null)
 	{
 		(empty ($startnum)) ? $startnum= 1 : '';
 		(empty ($modvars['itemsperpage'])) ? $modvars['itemsperpage']= pnModGetVar('crpCalendar', 'itemsperpage') : '';
@@ -109,6 +110,11 @@ class crpCalendarDAO
 				$queryargs[]= "($crpcalendarcolumn[start_date] <= NOW())";
 				break;
 			default: break;
+		}
+		
+		if ($bylocation)
+		{
+			$queryargs[]= "($crpcalendarcolumn[location] LIKE '" . DataUtil :: formatForStore($bylocation) . "')";
 		}
 
 		$where= null;
