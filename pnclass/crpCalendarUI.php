@@ -637,6 +637,15 @@ class crpCalendarUI
 	
 		return $cache_gd_version;
 	}
+	
+	function drawImportForm($mainCat)
+	{
+		$pnRender = pnRender::getInstance('crpCalendar', false);
+		
+		$pnRender->assign('mainCategory', $mainCat);
+
+		return $pnRender->fetch('ical/crpcalendar_admin_import_ics.htm');
+	}
 
 }
 ?>
