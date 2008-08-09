@@ -1316,5 +1316,34 @@ class crpCalendarDAO
 
 		return $validateOK;
 	}
+	
+	/**
+	 * Create event from ics data
+	 * 
+	 * @param array data
+	 * @return long id of created object
+	 * */
+	function createFromIcs($data=array(),$key=null, $id_category=null)
+	{
+	
+		$data['start_date'] = $data['start_date']." ".$data['start_time'];
+		$data['end_date'] = $data['end_date']." ".$data['end_time'];
+		($data['day_event'])?$data['end_date']=$data['start_date']:'';
+		($data['start_date']!=$data['end_date'])?$data['day_event']='0':$data['day_event']='1';
+		$data['__CATEGORIES__']['Main'] = $id_category;
+		//die('<pre>'.print_r($data,1).'</pre>');
+		$object= DBUtil :: insertObject($data, 'crpcalendar', 'eventid');
+		if (!$object)
+		{
+			LogUtil :: registerError(_CREATEFAILED);
+			return false;
+		}
+		// Let any other modules know we have created an item
+		pnModCallHooks('item', 'create', $object['eventid'], array (
+			'module' => 'crpCalendar'
+		));
+
+		return $object['eventid'];
+	}
 }
 ?>
