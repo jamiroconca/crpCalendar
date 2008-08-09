@@ -4,6 +4,7 @@ v0.4.6 - ??? august 2008
 - categorized or not year-list view(settings): show year events grouped by category(ordered) or not
 - added table sort by title
 - added events block by location
+- basic iCal import
 v0.4.5 - 13 July 2008
 - added e-mail notification for user submission
 - added display/hide event end date based on "day event" check
