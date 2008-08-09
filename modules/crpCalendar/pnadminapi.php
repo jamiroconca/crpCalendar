@@ -57,6 +57,9 @@ function crpCalendar_adminapi_getlinks()
   if (SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_EDIT)) {
       $links[] = array('url' => pnModURL('crpCalendar', 'admin', 'new'), 'text' => pnML('_CREATEITEM', array('i' => $itemname)));
   }
+  if (SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_EDIT)) {
+      $links[] = array('url' => pnModURL('crpCalendar', 'admin', 'import_ical'), 'text' => _CRPCALENDAR_IMPORT_ICAL);
+  }
   if (SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_ADMIN)) {
       $links[] = array('url' => pnModURL('crpCalendar', 'admin', 'modifyconfig'), 'text' => _MODIFYCONFIG);
   }
