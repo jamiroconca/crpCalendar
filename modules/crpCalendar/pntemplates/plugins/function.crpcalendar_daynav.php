@@ -56,7 +56,7 @@ function smarty_function_crpcalendar_daynav($params, &$smarty)
 	
 	$navbar .= '<'.$container.'>';
 	$navbar .= '<a href="'.pnModUrl('crpCalendar','user','day_view', array('t' => $nav['prev_week_time'])).'" title="'._CRPCALENDAR_PREV_WEEK.'">'."\n";
-	$navbar .= _CRPCALENDAR_PREV_WEEK."\n";
+	$navbar .= $prev_week_char."\n";
 	$navbar .= '</a>'."\n";
 	
 	$navbar .= $separator;
