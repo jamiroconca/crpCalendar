@@ -5,6 +5,7 @@ v0.4.6 - ??? august 2008
 - added table sort by title
 - added events block by location
 - basic iCal import
+- added events month block
 v0.4.5 - 13 July 2008
 - added e-mail notification for user submission
 - added display/hide event end date based on "day event" check
