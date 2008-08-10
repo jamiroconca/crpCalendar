@@ -372,6 +372,8 @@ class crpCalendar
 		$navigationValues['startDate'] = DateUtil :: getDatetime($this->backToFirstDOW(DateUtil :: parseUIDateTime($monthFirstDay)));
 		$navigationValues['endDate'] = DateUtil :: getDatetime($this->forwardToLastDOW(DateUtil :: parseUIDateTime($monthLastDay)));
 		$navigationValues['sortOrder'] = 'ASC';
+		// reset page limit for monthlist
+		$navigationValues['modvars']['itemsperpage'] = '9999';
 
 		// Get all matching events
 		$items = pnModAPIFunc('crpCalendar', 'user', 'getall', $navigationValues);
@@ -419,6 +421,8 @@ class crpCalendar
 		$navigationValues['startDate'] = DateUtil :: getDatetime($this->backToFirstDOW(DateUtil :: parseUIDateTime($weekDay)));
 		$navigationValues['endDate'] = DateUtil :: getDatetime($this->forwardToLastDOW(DateUtil :: parseUIDateTime($weekDay)));
 		$navigationValues['sortOrder'] = 'ASC';
+		// reset page limit for weeklist
+		$navigationValues['modvars']['itemsperpage'] = '9999';
 
 		// Get all matching events
 		$items = pnModAPIFunc('crpCalendar', 'user', 'getall', $navigationValues);
