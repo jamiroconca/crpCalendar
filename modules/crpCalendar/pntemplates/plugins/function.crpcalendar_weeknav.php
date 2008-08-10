@@ -28,7 +28,7 @@ function smarty_function_crpcalendar_weeknav($params, &$smarty)
 		return LogUtil::registerPermissionError();
 	}
 	
-	if (!$params['t'])
+	if (!$params['date'] || !$params['t'])
 		return LogUtil::registerError (_MODARGSERROR);
 	else
 	{
@@ -37,6 +37,7 @@ function smarty_function_crpcalendar_weeknav($params, &$smarty)
 	}
 
   $navbar = '';
+  ($params['dateview'])?$dateview=false:$dateview=true;
 	($params['space'])?	$space = $params['space']:$space = '&nbsp;';
   ($params['separator'])?$separator = $params['separator']:$separator = $space.'|'.$space."\n";
   ($params['container'])?$container = $params['container']:$container = 'span';
@@ -64,7 +65,7 @@ function smarty_function_crpcalendar_weeknav($params, &$smarty)
 	$navbar .= $prev_week_char."\n";
 	$navbar .= '</a>'."\n";
 	
-	$navbar .= $space._WEEK.$space.DateUtil::getDatetime($t, $dateformat).$space."\n";
+	($dateview)?$navbar .= $space._WEEK.$space.DateUtil::getDatetime($t, $dateformat).$space."\n":$navbar.= $separator."\n";
 	
 	$navbar .= '<a href="'.pnModUrl('crpCalendar','user','week_view', array('t' => $nav['next_week_time'])).'" title="'._CRPCALENDAR_NEXT_WEEK.'">'."\n";
 	$navbar .= $next_week_char."\n";
