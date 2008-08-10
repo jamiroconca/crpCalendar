@@ -20,7 +20,8 @@ class crpCalendarUI
 		// none
 		$this->theme_options = array('default' => 'default',
 																	'tan' => 'tan',
-																	'grey' => 'grey');
+																	'grey' => 'grey',
+																	'green' => 'green');
 																	
 		$this->day_of_week_short = array (_CRPCALENDAR_MON,
 																			_CRPCALENDAR_TUE,
