@@ -9,7 +9,7 @@
 <div class="crpcalendar-right"><a href="<!--[pnmodurl modname=crpCalendar func=ical_exports]-->"><!--[pnimg modname=crpCalendar altml=true src="ical.gif" alt=_CRPCALENDAR_ICAL]--></a></div>
 
 <div class="crpcalendar-box">
-	<h3><!--[$t|date_format:"%B %Y"]--></h3>
+	<h3><!--[$t|pndate_format:"%B %Y"]--></h3>
 </div>
 
 <table class="pn-datatable">
@@ -61,7 +61,7 @@
 				</div>
 				<!--[pnmodurl modname=Profile func=view uname=$event.cr_uid assign=cr_profilelink]-->
 				<div>
-					<!--[pnml name=_CRPCALENDAR_CREATEDON html=1]--> <abbr class="dtstamp" title="<!--[$event.cr_date|date_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.cr_date|date_format]--></abbr>
+					<!--[pnml name=_CRPCALENDAR_CREATEDON html=1]--> <abbr class="dtstamp" title="<!--[$event.cr_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.cr_date|pndate_format]--></abbr>
 					<!--[pnml name=_BY]--> <span class="uid"><a href="<!--[$cr_profilelink]-->"><!--[pnusergetvar name=uname uid=$event.cr_uid]--></a></span>
 				</div>
 				<!--[if !$event.day_event]-->

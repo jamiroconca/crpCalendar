@@ -47,7 +47,7 @@
 				</div>
 				<!--[pnmodurl modname=Profile func=view uname=$event.cr_uid assign=cr_profilelink]-->
 				<div>
-					<!--[pnml name=_CRPCALENDAR_CREATEDON html=1]--> <abbr class="dtstamp" title="<!--[$event.cr_date|date_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.cr_date|date_format]--></abbr>
+					<!--[pnml name=_CRPCALENDAR_CREATEDON html=1]--> <abbr class="dtstamp" title="<!--[$event.cr_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.cr_date|pndate_format]--></abbr>
 					<!--[pnml name=_BY]--> <span class="uid"><a href="<!--[$cr_profilelink]-->"><!--[pnusergetvar name=uname uid=$event.cr_uid]--></a></span>
 				</div>
 				<!--[if !$event.day_event]-->
