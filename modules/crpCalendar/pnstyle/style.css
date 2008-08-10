@@ -17,6 +17,11 @@
 	color: #976957;
 }
 
+.crpcalendar-reduced {
+	font-size: 85%;
+	text-align: center;
+}
+
 /* position styles */
 .crpcalendar-rss {
 	float: right;
@@ -38,16 +43,18 @@ table.crpcalendar-table {
 	border-right: 1px solid #ccc;
 	margin-top: 0px;
 	margin-bottom: 1em;
-	padding: 5px 5px 10px 5px;
+	padding: 4px 4px 6px 4px;
 	width: 100%;
 }
+
+* html table.crpcalendar-table {width: 98%;}
 
 table.crpcalendar-table caption {
 	background-color: #f3f3f3;
 	font-weight: bold;
 	border-bottom: 2px solid #CFCFCF;
 	text-transform: uppercase;
-	padding: 10px;
+	padding: 6px;
 }
 
 table.crpcalendar-table thead tr {
@@ -56,7 +63,7 @@ table.crpcalendar-table thead tr {
 
 /* stying for the cell elements in admin tables */
 table.crpcalendar-table tbody td,table.pn-admintable thead th {
-	padding: 5px;
+	padding: 4px;
 	border-width: 0px;
 }
 
@@ -96,7 +103,7 @@ table.crpcalendar-table tbody tr:hover {
 }
 
 table.crpcalendar-table .month-cell {
-	padding: 5px;
+	padding: 4px;
 	border: 1px solid #CCC;
 	vertical-align: top;
 }
@@ -115,6 +122,10 @@ table.crpcalendar-table div {
 
 .day-off-grey {
 	background-color: #a1a1a1;
+}
+
+.day-off-green {
+	background-color: #b6d2c3;
 }
 
 .day-on {
@@ -185,7 +196,7 @@ div.crpcalendar_footer {
 }
 
 .crpcalendar-box {
-	padding: 8px;
+	padding: 2px;
 	border: 1px dashed black;
 	margin: 0 0 16px 0;
 }
