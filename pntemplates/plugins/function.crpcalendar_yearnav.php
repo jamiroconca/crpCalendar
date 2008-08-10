@@ -2,9 +2,9 @@
 /**
  * crpCalendar
  *
- * @copyright (c) 2007-2008, Daniele Conca
- * @link http://code.zikula.org/projects/crpcalendar Support and documentation
- * @author Daniele Conca <conca.daniele@gmail.com>
+ * @copyright (c) 2007, Daniele Conca
+ * @link http://noc.postnuke.com/projects/crpcalendar Support and documentation
+ * @author Daniele Conca <conca dot daniele at gmail dot com>
  * @license GNU/GPL - v.2.1
  * @package crpCalendar
  */
@@ -17,8 +17,6 @@
  * 
  * @param array $params All attributes passed to this function from the template
  * @param object &$smarty Reference to the Smarty object
- * @param int $status status flag
- * @param int $eventid item_identifier
  * 
  * @return string the results of the module function
  */
@@ -39,21 +37,29 @@ function smarty_function_crpcalendar_yearnav($params, &$smarty)
 	}
 
   $navbar = '';
+  ($params['space'])?	$space = $params['space']:$space = '&nbsp;';
+  ($params['separator'])?$separator = $params['separator']:$separator = $space.'|'.$space."\n";
+  ($params['container'])?$container = $params['container']:$container = 'span';
+  ($params['prev_year_char'])?$prev_year_char = $params['prev_year_char']:$prev_year_char = '&lt;&lt;';
+  ($params['next_year_char'])?$next_year_char = $params['next_year_char']:$next_year_char = '&gt;&gt;';
+  ($params['dateformat'])?$dateformat = $params['dateformat']:$dateformat = '%Y';
 
 	$nav['next_year_time'] = mktime(0,0,0,$date['m'], 1, $date['y']+1);
 	$nav['prev_year_time'] = mktime(0,0,0,$date['m'], 1, $date['y']-1);
 	$nav['year_time'] = mktime(0,0,0,$date['m'], 1, $date['y']);
 	$nav['t'] = $t;
 	
+	$navbar .= '<'.$container.'>';
 	$navbar .= '<a href="'.pnModUrl('crpCalendar','user','year_view', array('t' => $nav['prev_year_time'])).'" title="'._CRPCALENDAR_PREV_YEAR.'">'."\n";
-	$navbar .= '&lt;&lt;'."\n";
+	$navbar .= $prev_year_char."\n";
 	$navbar .= '</a>'."\n";
 	
-	$navbar .= '&nbsp;<strong>'.DateUtil::getDatetime($t, '%Y').'</strong>&nbsp;'."\n";
+	$navbar .= $space.'<strong>'.DateUtil::getDatetime($t, $dateformat).'</strong>'.$space."\n";
 	
 	$navbar .= '<a href="'.pnModUrl('crpCalendar','user','year_view', array('t' => $nav['next_year_time'])).'" title="'._CRPCALENDAR_NEXT_YEAR.'">'."\n";
-	$navbar .= '&gt;&gt;'."\n";
+	$navbar .= $next_year_char."\n";
 	$navbar .= '</a>'."\n";
+	$navbar .= '</'.$container.'>';
 	
   return $navbar;
 }
