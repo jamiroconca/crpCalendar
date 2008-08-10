@@ -49,6 +49,12 @@ table.crpcalendar-table {
 
 * html table.crpcalendar-table {width: 98%;}
 
+table.mini {
+	padding: 1px 1px 2px 1px;
+	width: 90%;
+}
+
+
 table.crpcalendar-table caption {
 	background-color: #f3f3f3;
 	font-weight: bold;
