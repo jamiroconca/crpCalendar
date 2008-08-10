@@ -37,6 +37,7 @@ function smarty_function_crpcalendar_daynav($params, &$smarty)
 	}
 	
 	$navbar = '';
+	($params['dateview'])?$dateview=false:$dateview=true;
 	($params['space'])?	$space = $params['space']:$space = '&nbsp;';
   ($params['separator'])?$separator = $params['separator']:$separator = $space.'|'.$space."\n";
   ($params['container'])?$container = $params['container']:$container = 'span';
@@ -55,7 +56,7 @@ function smarty_function_crpcalendar_daynav($params, &$smarty)
 	
 	$navbar .= '<'.$container.'>';
 	$navbar .= '<a href="'.pnModUrl('crpCalendar','user','day_view', array('t' => $nav['prev_week_time'])).'" title="'._CRPCALENDAR_PREV_WEEK.'">'."\n";
-	$navbar .= $prev_week_char."\n";
+	$navbar .= _CRPCALENDAR_PREV_WEEK."\n";
 	$navbar .= '</a>'."\n";
 	
 	$navbar .= $separator;
@@ -64,7 +65,7 @@ function smarty_function_crpcalendar_daynav($params, &$smarty)
 	$navbar .= $prev_day_char."\n";
 	$navbar .= '</a>'."\n";
 	
-	$navbar .= $space.DateUtil::getDatetime($t, $dateformat).$space."\n";
+	($dateview)?$navbar .= $space.DateUtil::getDatetime($t, $dateformat).$space."\n":$navbar.= $separator."\n";
 	
 	$navbar .= '<a href="'.pnModUrl('crpCalendar','user','day_view', array('t' => $nav['next_day_time'])).'" title="'._CRPCALENDAR_NEXT_DAY.'">'."\n";
 	$navbar .= $next_day_char."\n";

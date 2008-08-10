@@ -36,7 +36,8 @@ function smarty_function_crpcalendar_monthnav($params, &$smarty)
 		$t = $params['t'];
 	}
 
-  $navbar = '';
+  $navbar = '';	
+	($params['dateview'])?$dateview=false:$dateview=true;
   ($params['space'])?	$space = $params['space']:$space = '&nbsp;';
   ($params['separator'])?$separator = $params['separator']:$separator = $space.'|'.$space."\n";
   ($params['container'])?$container = $params['container']:$container = 'span';
@@ -64,7 +65,7 @@ function smarty_function_crpcalendar_monthnav($params, &$smarty)
 	$navbar .= $prev_month_char."\n";
 	$navbar .= '</a>'."\n";
 	
-	$navbar .= '&nbsp;'.DateUtil::getDatetime($t, $dateformat).'&nbsp;'."\n";
+	($dateview)?$navbar .= '&nbsp;'.DateUtil::getDatetime($t, $dateformat).'&nbsp;'."\n":$navbar.= $separator."\n";
 	
 	$navbar .= '<a href="'.pnModUrl('crpCalendar','user','month_view', array('t' => $nav['next_month_time'])).'" title="'._CRPCALENDAR_NEXT_MONTH.'">'."\n";
 	$navbar .= $next_month_char."\n";
