@@ -100,7 +100,7 @@
 		</div>
 		<!--[/if]-->
     	<div class="pn-adminformrow">
-		    <label for="crpcalendar_event_text"><!--[pnml name="_CONTENT" html=1]--> <span class="crpcalendar-required"><!--[pnml name="_CRPCALENDAR_REQUIRED" html=1]--></span></label>
+		    <label for="crpcalendar_event_text"><!--[pnml name="_CONTENT" html=1]--> <span class="crpcalendar-required"><!--[if $mandatory_description]--><!--[pnml name="_CRPCALENDAR_REQUIRED"]--><!--[/if]--></span></label>
     		<textarea id="crpcalendar_event_text" name="event[event_text]" rows="12" cols="64"><!--[$event_text|pnvarprepfordisplay]--></textarea>
 	    </div>
 			<div class="pn-adminformrow">
