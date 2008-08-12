@@ -12,7 +12,7 @@
 $modversion['name'] = _CRPCALENDAR_NAME;
 $modversion['displayname'] = _CRPCALENDAR_DISPLAYNAME;
 $modversion['description'] = _CRPCALENDAR_DESCRIPTION;
-$modversion['version'] = '0.4.6';
+$modversion['version'] = '0.4.7';
 $modversion['credits'] = 'pndocs/credits.txt';
 $modversion['help'] = 'pndocs/install.txt';
 $modversion['changelog'] = 'pndocs/changelog.txt';
