@@ -14,6 +14,7 @@
 define('_CRPCALENDAR', 'Calendar');
 define('_CRPCALENDAR_GENERAL','General');
 define('_CRPCALENDAR_IMPORT_ICAL','iCal import');
+define('_CRPCALENDAR_PURGE_EVENTS','Purge events');
 
 // admin list
 define('_CRPCALENDAR_CONTENT', 'Event detail');
@@ -46,7 +47,9 @@ define('_CRPCALENDAR_URL_HINT','URL (with http://)');
 // form define
 define('_CRPCALENDAR_CURRENT_FILE','Current file');
 define('_CRPCALENDAR_DELETE_FILE','Delete file');
+define('_CRPCALENDAR_FROM_DATE','Including from date');
 define('_CRPCALENDAR_NONE', 'None');
+define('_CRPCALENDAR_NOT_REVERSIBLE','action not reversible, events will be deleted from database');
 define('_CRPCALENDAR_REQUIRED','*');
 define('_CRPCALENDAR_INVALID_INTERVAL', 'Invalid date interval');
 define('_CRPCALENDAR_SHOW_FILE','Show file');
@@ -60,6 +63,7 @@ define('_CRPCALENDAR_FILE_DIMENSION','Max upload image size (bytes)');
 define('_CRPCALENDAR_GD_AVAILABLE','GD Library');
 define('_CRPCALENDAR_IMAGE_RESIZE','Image would be resized to');
 define('_CRPCALENDAR_IMAGES','Images');
+define('_CRPVIDEO_MANDATORY_DESCRIPTION','Mandatory event description');
 define('_CRPCALENDAR_NOTIFICATION_MAIL','Notification for user\'s creation (none if empty)');
 define('_CRPCALENDAR_OTHER_MODULES','Other modules');
 define('_CRPCALENDAR_START_YEAR','Calendar start Year');
