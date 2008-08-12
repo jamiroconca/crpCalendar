@@ -1322,7 +1322,9 @@ class crpCalendar
 			return pnRedirect(pnModUrl('crpCalendar', 'admin', 'modifyconfig'));
 		}
 		pnModSetVar('crpCalendar', 'crpcalendar_notification', $crpcalendar_notification);
-
+		$mandatory_description = (bool) FormUtil :: getPassedValue('mandatory_description', false, 'POST');
+		pnModSetVar('crpCalendar', 'mandatory_description', $mandatory_description);
+		
 		// Let any other modules know that the modules configuration has been updated
 		pnModCallHooks('module', 'updateconfig', 'crpCalendar', array (
 			'module' => 'crpCalendar'
@@ -2642,6 +2644,42 @@ class crpCalendar
 	function compare($a, $b)
 	{
 		return strnatcasecmp($a['start_unix'], $b['start_unix']);
+	}
+	
+	/**
+	 * Purge events from database 
+	 * */
+	function purgeEvents()
+	{
+		return $this->ui->drawPurgeEvents();
+	}
+	
+	/**
+	 * Delete events
+	 * 	 
+	 * @param int $eventid item identifier
+	 * 
+	 * @return string html
+	 */
+	function removePurge()
+	{
+		// Confirm authorisation code
+		if (!SecurityUtil :: confirmAuthKey())
+			return LogUtil :: registerAuthidError(pnModURL('crpCalendar', 'admin', 'view'));
+
+		$event = FormUtil :: getPassedValue('event', null, 'POST');
+
+		// Security check
+		if (!SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_DELETE))
+		{
+			return LogUtil :: registerPermissionError();
+		}
+
+		// Delete the page
+		if ($this->dao->removePurge($event['endDay'],$event['endMonth'],$event['endYear']))
+			LogUtil :: registerStatus(_DELETESUCCEDED);
+
+		return pnRedirect(pnModURL('crpCalendar', 'admin', 'view'));
 	}
 
 }

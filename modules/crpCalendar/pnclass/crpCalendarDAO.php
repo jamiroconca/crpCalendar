@@ -1263,7 +1263,7 @@ class crpCalendarDAO
 	{
 		$validateOK= false;
 
-		if (!$data['event']['title'] || !$data['event']['event_text'])
+		if (!$data['event']['title'] || (!$data['event']['event_text'] && pnModGetVar('crpCalendar', 'mandatory_description')))
 		{
 			LogUtil :: registerError(_MODARGSERROR);
 		}
@@ -1344,6 +1344,79 @@ class crpCalendarDAO
 		));
 
 		return $object['eventid'];
+	}
+	
+	/**
+	 * Remove events from a date
+	 * 
+	 * @return bool true on succes
+	 */
+	function removePurge($endDay=null,$endMonth=null,$endYear=null)
+	{
+		// Argument check
+		if (!$endDay || !$endMonth || !$endYear)
+			return LogUtil :: registerError(_MODARGSERROR);
+		
+		$pntable= pnDBGetTables();
+		$crpcalendarcolumn= $pntable['crpcalendar_column'];
+		$queryargs= array ();
+		
+		$queryargs[]= "($crpcalendarcolumn[start_date] <= '$endYear-$endMonth-$endDay')";
+		
+		$where= null;
+		if (count($queryargs) > 0)
+		{
+			$where= ' WHERE ' . implode(' AND ', $queryargs);
+		}
+		
+		// define the permission filter to apply
+		$permFilter= array (
+			array (
+				'realm' => 0,
+				'component_left' => 'crpCalendar',
+				'component_right' => 'Event',
+				'instance_left' => 'cr_uid',
+				'instance_center' => 'title',
+				'instance_right' => 'eventid',
+				'level' => ACCESS_READ
+			)
+		);
+
+		$orderby= "ORDER BY $crpcalendarcolumn[start_date] $sortOrder";
+		
+		$columnArray= array (
+			'eventid',
+		);
+		
+		// get the objects from the db
+		$objArray= DBUtil :: selectObjectArray('crpcalendar', $where, $orderby, -1, -1, '', $permFilter, null, $columnArray);
+
+		// Check for an error with the database code, and if so set an appropriate
+		// error message and return
+		if ($objArray === false)
+		{
+			return LogUtil :: registerError(_GETFAILED);
+		}
+
+		foreach ($objArray as $purgetitem)
+		{
+			if ($purgetitem['eventid'] == false)
+				return LogUtil :: registerError(_NOSUCHITEM);
+	
+			if (!DBUtil :: deleteObjectByID('crpcalendar', $purgetitem['eventid'], 'eventid'))
+				return LogUtil :: registerError(_DELETEFAILED);
+	
+			$this->deleteFile('image', $purgetitem['eventid']);
+			$this->deleteFile('document', $purgetitem['eventid']);
+			$this->deletePartecipation(null, $purgetitem['eventid'], true);
+	
+			// Let any hooks know that we have deleted an item.
+			pnModCallHooks('item', 'delete', $purgetitem['eventid'], array (
+				'module' => 'crpCalendar'
+			));
+		}
+
+		return true;
 	}
 }
 ?>
