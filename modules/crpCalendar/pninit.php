@@ -59,6 +59,7 @@ function crpCalendar_init() {
 	pnModSetVar('crpCalendar', 'crpcalendar_notification', null);
 	pnModSetVar('crpCalendar', 'daylist_categorized', false);
 	pnModSetVar('crpCalendar', 'yearlist_categorized', false);
+	pnModSetVar('crpCalendar', 'mandatory_description', true);
 
 	// Initialisation successful
 	return true;
@@ -141,6 +142,10 @@ function crpCalendar_upgrade($oldversion)
   		return crpCalendar_upgrade("0.4.6");
   		break;
   	case "0.4.6":
+  		pnModSetVar('crpCalendar', 'mandatory_description', true);
+  		return crpCalendar_upgrade("0.4.7");
+  		break;
+  	case "0.4.7":
   		break;  	
   }  	
 	return true;
