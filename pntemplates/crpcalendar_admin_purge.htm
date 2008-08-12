@@ -1,0 +1,28 @@
+<!--[pnpageaddvar name="javascript" value="modules/crpCalendar/pnjavascript/datepicker/datepicker.js"]-->
+<!--[pnpageaddvar name="stylesheet" value="modules/crpCalendar/pnjavascript/datepicker/css/datepicker.css"]-->
+
+<!--[include file="crpcalendar_admin_menu.htm"]-->
+<!--[pnml name=_CRPCALENDAR_EVENT html=1 assign=itemname]-->
+<!--[pnml name="_CRPCALENDAR_PURGE_EVENTS" html=1 i=$itemname assign=templatetitle]-->
+<div class="pn-admincontainer">
+<div class="pn-adminpageicon"><!--[pnimg modname=core src=editdelete.gif set=icons/large alt=$templatetitle]--></div>
+<h2><!--[$templatetitle]--></h2>
+<form class="pn-adminform" action="<!--[pnmodurl modname="crpCalendar" type="admin" func="purge_remove"]-->" method="post" enctype="application/x-www-form-urlencoded">
+<div>
+    <input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="crpCalendar"]-->" />
+    <div class="pn-adminformrow">
+		<p><!--[pnml name="_CONFIRMDELETE" html=1]--> (<!--[pnml name="_CRPCALENDAR_NOT_REVERSIBLE" html=1]-->)</p>
+	</div>
+	<div class="pn-adminformrow" id="end_date_block">
+		<label><!--[pnml name="_CRPCALENDAR_FROM_DATE" html=1]--></label>
+		<!--[html_select_date prefix="end" end_year="+4" time=$end_date field_array=event display_months=false display_years=false id="end_datefield-dd"]-->
+		<!--[html_select_date prefix="end" end_year="+4" time=$end_date field_array=event display_days=false display_years=false id="end_datefield-mm"]-->
+		<!--[html_select_date prefix="end" start_year="-4" end_year="+4" time=$end_date field_array=event display_days=false display_months=false id="end_datefield" class="highlight-days-67 no-transparency split-date"]-->
+	</div>
+    <div class="pn-adminformrow pn-adminformbuttons">
+    <a href="<!--[pnmodurl modname=crpCalendar type=admin func=view]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt="_CANCEL" title="_CANCEL"]--></a>
+    <!--[pnbutton src=button_ok.gif set=icons/small altml=true titleml=true alt="_CONFIRMDELETE" title="_CONFIRMDELETE"]-->
+    </div>
+</div>
+</form>
+</div>
