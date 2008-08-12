@@ -1,5 +1,8 @@
 crpCalendar
-v0.4.6 - ??? august 2008
+v0.4.7 - ??? august 2008
+- added setting for mandatory/not mandatory event content
+- added purge event from a date
+v0.4.6 - 11 august 2008
 - categorized day-list view(settings): show day events grouped by category(ordered)
 - categorized or not year-list view(settings): show year events grouped by category(ordered) or not
 - added table sort by title
