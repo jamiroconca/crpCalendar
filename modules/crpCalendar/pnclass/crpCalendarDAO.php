@@ -16,6 +16,9 @@
 class crpCalendarDAO
 {
 
+	/**
+	 * constructor, set values
+	 */
 	function crpCalendarDAO()
 	{
 		// images allowed
@@ -25,19 +28,32 @@ class crpCalendarDAO
 		$this->ImageTypes[]= 'image/png';
 	}
 
+	function getAuth($level=0, $author_object='', $id_object='', $name_object='')
+	{
+		$result = SecurityUtil::checkPermission("crpCalendar::", "$author_object:$name_object:$id_object", $level);
+		return $result;
+	}
+
 	/**
-	 * Return administrative list of events
-	 * 
+	 * return administrative list of events
+	 *
 	 * @param int $startnum pager offset
 	 * @param int $category current category if specified
 	 * @param bool $ignoreml ignore multilanguage
 	 * @param array $modvars module's variables
 	 * @param int $mainCat main module's category
-	 * 
-	 * @return array element list
+	 * @param int $active event status
+	 * @param int $interval event date interval
+	 * @param string $sortOrder results sort order
+	 * @param string $startDate start date filter
+	 * @param string $endDate end date filter
+	 * @param string $typeList output type
+	 * @param string $bylocation location filter
+	 *
+	 * @return array events list
 	 */
 	function adminList($startnum= 1, $category= null, $clear= false, $ignoreml= true,
-											$modvars= array (), $mainCat= null, $active= null, $interval= null, 
+											$modvars= array (), $mainCat= null, $active= null, $interval= null,
 											$sortOrder= 'DESC', $startDate= null, $endDate= null, $typeList= null,
 											$bylocation=null)
 	{
@@ -61,19 +77,19 @@ class crpCalendarDAO
 		$items= array ();
 
 		// Security check
-		if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
+		if (!$this->getAuth(ACCESS_READ))
 		{
 			return $items;
 		}
-		if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_ADD) && $active)
-		{ // userapi should not query pending or rejected events 
+		if (!$this->getAuth(ACCESS_ADD) && $active)
+		{ // userapi should not query pending or rejected events
 			$active='A';
 		}
 
 		$pntable= pnDBGetTables();
 		$crpcalendarcolumn= $pntable['crpcalendar_column'];
 		$queryargs= array ();
-		
+
 		if (pnConfigGetVar('multilingual') == 1 && !$ignoreml)
 		{
 			$queryargs[]= "($crpcalendarcolumn[language]='" . DataUtil :: formatForStore(pnUserGetLang()) . "' " .
@@ -100,8 +116,8 @@ class crpCalendarDAO
 			"OR (('" . DataUtil :: formatForStore($startDate) . "' BETWEEN $crpcalendarcolumn[start_date] AND $crpcalendarcolumn[end_date]) " .
 			"AND ('" . DataUtil :: formatForStore($endDate) . "' BETWEEN $crpcalendarcolumn[start_date] AND $crpcalendarcolumn[end_date])) )";
 		}
-		
-		switch ($typeList) 
+
+		switch ($typeList)
 		{
 			case "upcoming":
 				$queryargs[]= "($crpcalendarcolumn[start_date] > NOW())";
@@ -111,7 +127,7 @@ class crpCalendarDAO
 				break;
 			default: break;
 		}
-		
+
 		if ($bylocation)
 		{
 			$queryargs[]= "($crpcalendarcolumn[location] LIKE '" . DataUtil :: formatForStore($bylocation) . "')";
@@ -139,7 +155,8 @@ class crpCalendarDAO
 		$orderby= "ORDER BY $crpcalendarcolumn[start_date] $sortOrder";
 
 		// get the objects from the db
-		$objArray= DBUtil :: selectObjectArray('crpcalendar', $where, $orderby, $startnum -1, $modvars['itemsperpage'], '', $permFilter, $catFilter);
+		$objArray= DBUtil :: selectObjectArray('crpcalendar', $where, $orderby, $startnum -1, $modvars['itemsperpage'],
+																						'', $permFilter, $catFilter);
 
 		// Check for an error with the database code, and if so set an appropriate
 		// error message and return
@@ -170,17 +187,21 @@ class crpCalendarDAO
 	}
 
 	/**
-	 * Return form list of events
-	 * 
+	 * return form list of events
+	 *
 	 * @param int $startnum pager offset
 	 * @param int $category current category if specified
 	 * @param bool $ignoreml ignore multilanguage
 	 * @param array $modvars module's variables
 	 * @param int $mainCat main module's category
-	 * 
+	 * @param int $active event status
+	 * @param int $interval event date interval
+	 * @param string $sortOrder results sort order
+	 *
 	 * @return array element list
 	 */
-	function formList($startnum= 1, $category= null, $clear= false, $ignoreml= true, $modvars= array (), $mainCat, $active= null, $interval= null, $sortOrder= 'DESC')
+	function formList($startnum= 1, $category= null, $clear= false, $ignoreml= true, $modvars= array (), $mainCat,
+										$active= null, $interval= null, $sortOrder= 'DESC')
 	{
 		if (!is_numeric($startnum) || !is_numeric($modvars['itemsperpage']))
 		{
@@ -200,7 +221,7 @@ class crpCalendarDAO
 		$items= array ();
 
 		// Security check
-		if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
+		if (!$this->getAuth(ACCESS_READ))
 		{
 			return $items;
 		}
@@ -254,7 +275,8 @@ class crpCalendarDAO
 		);
 
 		// get the objects from the db
-		$objArray= DBUtil :: selectObjectArray('crpcalendar', $where, $orderby, $startnum -1, '9999', '', $permFilter, $catFilter, $columnArray);
+		$objArray= DBUtil :: selectObjectArray('crpcalendar', $where, $orderby, $startnum -1, '9999', '', $permFilter,
+																						$catFilter, $columnArray);
 
 		// Check for an error with the database code, and if so set an appropriate
 		// error message and return
@@ -277,10 +299,10 @@ class crpCalendarDAO
 
 	/**
 	 * get a specific admin item data
-	 * 
+	 *
 	 * @param int $eventid item identifier
-	 * @param string $title item title
-	 * 
+	 * @param bool $extend add image and document if true
+	 *
 	 * @return array item value
 	 */
 	function getAdminData($eventid= null, $extend= true)
@@ -324,9 +346,9 @@ class crpCalendarDAO
 
 	/**
 	 * get a specific admin lite data
-	 * 
+	 *
 	 * @param int $eventid item identifier
-	 * 
+	 *
 	 * @return string item value
 	 */
 	function isAuthor($eventid= null)
@@ -358,10 +380,10 @@ class crpCalendarDAO
 
 	/**
 	 * get a specific event date
-	 * 
+	 *
 	 * @param int $eventid item identifier
 	 * @param int $dateType date type
-	 * 
+	 *
 	 * @return string item value
 	 */
 	function getEventDate($eventid= null, $dateType= null)
@@ -391,10 +413,10 @@ class crpCalendarDAO
 	}
 
 	/**
-	 * Create item details
-	 * 
+	 * create item details
+	 *
 	 * @param array $inputValues array of new values
-	 * 
+	 *
 	 * @return bool true if success
 	 */
 	function create($inputValues= array ())
@@ -412,7 +434,7 @@ class crpCalendarDAO
 		{
 			$inputValues['event']['language']= '';
 		}
-		if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_EDIT))
+		if (!$this->getAuth(ACCESS_EDIT))
 			$inputValues['event']['obj_status']= 'P';
 
 		if (pnModAvailable('locations') && pnModGetVar('crpCalendar', 'enable_locations') && $inputValues['event']['locations'])
@@ -454,10 +476,10 @@ class crpCalendarDAO
 	}
 
 	/**
-	 * Update item details
-	 * 
+	 * update item details
+	 *
 	 * @param array $inputValues array of new values
-	 * 
+	 *
 	 * @return bool true if success
 	 */
 	function update($inputValues= array ())
@@ -528,10 +550,10 @@ class crpCalendarDAO
 	}
 
 	/**
-	 * Update item details
-	 * 
+	 * update item details
+	 *
 	 * @param array $inputValues array of new values
-	 * 
+	 *
 	 * @return bool true if success
 	 */
 	function cloneEvent($inputValues= array ())
@@ -596,11 +618,11 @@ class crpCalendarDAO
 	}
 
 	/**
-	 * Update event status
-	 * 
+	 * update event status
+	 *
 	 * @param int $eventid item identifier
 	 * @param string $obj_status active or pending
-	 * 
+	 *
 	 * @return bool true on succes
 	 */
 	function updateStatus($eventid, $obj_status)
@@ -619,10 +641,10 @@ class crpCalendarDAO
 	}
 
 	/**
-	 * Update event counter
-	 * 
+	 * update event counter
+	 *
 	 * @param int $eventid item identifier
-	 * 
+	 *
 	 * @return bool true on success
 	 */
 	function updateCounter($eventid)
@@ -636,20 +658,23 @@ class crpCalendarDAO
 	}
 
 	/**
-	 * Retrieve partecipations list
-	 * 
-	 * @param eventid item identifier
-	 * @param uid item identifier
-	 * @param startnum list start
-	 * @param ignoreml multilanguage or not
-	 * @param modvars module's variables
-	 * @param mainCat cat identifier
-	 * @param active status
-	 * @param sortOrder list order
-	 * 
+	 * retrieve partecipations list
+	 *
+	 * @param int eventid item identifier
+	 * @param int uid item identifier
+	 * @param int startnum list start
+	 * @param bool ignoreml multilanguage or not
+	 * @param array modvars module's variables
+	 * @param int mainCat cat identifier
+	 * @param string active status
+	 * @param string sortOrder list order
+	 * @param string $orderby field for order
+	 * @param string $groupby field for group
+	 *
 	 * @return array on success
 	 */
-	function getPartecipations($uid= null, $startnum= 1, $modvars= array (), $mainCat= null, $active= null, $sortOrder= 'DESC', $orderby= null, $groupby= null)
+	function getPartecipations($uid= null, $startnum= 1, $modvars= array (), $mainCat= null, $active= null, $sortOrder= 'DESC',
+															$orderby= null, $groupby= null)
 	{
 		(empty ($startnum)) ? $startnum= 1 : '';
 		(empty ($modvars['itemsperpage'])) ? $modvars['itemsperpage']= pnModGetVar('crpCalendar', 'itemsperpage') : '';
@@ -757,14 +782,21 @@ class crpCalendarDAO
 	}
 
 	/**
-	 * Retrieve partecipations list
-	 * 
-	 * @param eventid item identifier
-	 * @param uid item identifier
-	 * 
+	 * retrieve partecipations list
+	 *
+	 * @param int eventid item identifier
+	 * @param int startnum list start
+	 * @param array modvars module's variables
+	 * @param int mainCat cat identifier
+	 * @param string active status
+	 * @param string sortOrder list order
+	 * @param string $orderby field for order
+	 * @param string $groupby field for group
+	 *
 	 * @return array on success
 	 */
-	function getEventPartecipations($eventid= null, $startnum= 1, $modvars= array (), $mainCat= null, $active= null, $sortOrder= 'DESC', $orderby= null, $groupby= null)
+	function getEventPartecipations($eventid= null, $startnum= 1, $modvars= array (), $mainCat= null, $active= null,
+																	$sortOrder= 'DESC', $orderby= null, $groupby= null)
 	{
 
 		$pntable= pnDBGetTables();
@@ -833,10 +865,11 @@ class crpCalendarDAO
 	}
 
 	/**
-	 * Add event partecipation
-	 * 
+	 * add event partecipation
+	 *
+	 * @param int $uid user identifier
 	 * @param int $eventid item identifier
-	 * 
+	 *
 	 * @return bool true on success
 	 */
 	function addPartecipation($uid= null, $eventid= null)
@@ -854,10 +887,12 @@ class crpCalendarDAO
 	}
 
 	/**
-	 * Add event partecipation
-	 * 
+	 * delete event partecipations
+	 *
+	 * @param int $uid user identifier
 	 * @param int $eventid item identifier
-	 * 
+	 * @param int $clean clear all partecipations
+	 *
 	 * @return bool true on success
 	 */
 	function deletePartecipation($uid= null, $eventid= null, $clean= null)
@@ -889,11 +924,13 @@ class crpCalendarDAO
 	}
 
 	/**
-	 * Return items count
-	 * 
+	 * return items count
+	 *
 	 * @param int $category category identifier
 	 * @param string $active status required
-	 * 
+	 * @param int $uid user identifier
+	 * @param int $eventid item identifier
+	 *
 	 * @return int on success
 	 */
 	function countAttendeeItems($category= null, $active= null, $uid= null, $eventid= null)
@@ -951,10 +988,13 @@ class crpCalendarDAO
 
 	/**
 	 * Return items count
-	 * 
+	 *
 	 * @param int $category category identifier
 	 * @param string $active status required
-	 * 
+	 * @param int $uid user identifier
+	 * @param int $eventid item identifier
+	 * @param string $typeList output type
+	 *
 	 * @return int on success
 	 */
 	function countItems($category= null, $active= null, $uid= null, $eventid= false, $typeList=null)
@@ -973,8 +1013,8 @@ class crpCalendarDAO
 				$catFilter['Main']= $category;
 				$catFilter['__META__']['module']= 'crpCalendar';
 			}
-		
-		switch ($typeList) 
+
+		switch ($typeList)
 		{
 			case "upcoming":
 				$queryargs[]= "($crpcalendarcolumn[start_date] > NOW())";
@@ -984,7 +1024,7 @@ class crpCalendarDAO
 				break;
 			default: break;
 		}
-		
+
 		if ($active)
 		{
 			$queryargs[]= "($crpcalendarcolumn[obj_status]='" . DataUtil :: formatForStore($active) . "')";
@@ -1004,10 +1044,10 @@ class crpCalendarDAO
 	}
 
 	/**
-	 * Remove an event
-	 * 
+	 * remove an event
+	 *
 	 * @param int $eventid item identifier
-	 * 
+	 *
 	 * @return bool true on succes
 	 */
 	function removeEvent($eventid= null)
@@ -1038,7 +1078,12 @@ class crpCalendarDAO
 	}
 
 	/**
-	 * Save file into DB
+	 * save file into DB
+	 *
+	 * @param array $data file values
+	 * @param bool $fromDB uploaded or cloned
+	 *
+	 * @return int file identifier
 	 */
 	function setFile($data= array (), $fromDB= false)
 	{
@@ -1093,7 +1138,13 @@ class crpCalendarDAO
 	}
 
 	/**
-	 * Retrieve binary files
+	 * retrieve binary files
+	 *
+	 * @param int $eventid item identifier
+	 * @param string $file_type document type
+	 * @param bool $load_binary include blob or not
+	 *
+	 * @return array file values
 	 */
 	function getFile($eventid, $file_type, $load_binary= false)
 	{
@@ -1126,10 +1177,11 @@ class crpCalendarDAO
 	}
 
 	/**
-	 * Get image for an event
-	 * 
+	 * get image for an event
+	 *
 	 * @param int $eventid event identifier
-	 * 
+	 *
+	 * @return blob image string
 	 */
 	function getImage()
 	{
@@ -1199,9 +1251,11 @@ class crpCalendarDAO
 
 	/**
 	 * delete file
-	 * 
+	 *
 	 * @param int $file_type file identifier
 	 * @param int $eventid event identifier
+	 *
+	 * @return bool true on success
 	 */
 	function deleteFile($file_type= null, $eventid= null)
 	{
@@ -1218,11 +1272,10 @@ class crpCalendarDAO
 	}
 
 	/**
-	 * Verify binary existence
-	 * 
+	 * verify binary existence
+	 *
 	 * @param int $eventid event identifier
-	 * @param string $documentType tipe of file
-	 * 
+	 *
 	 * @return int count
 	 */
 	function existFile($eventid= null)
@@ -1233,11 +1286,11 @@ class crpCalendarDAO
 	}
 
 	/**
-	 * Verify partecipation existence
-	 * 
+	 * verify partecipation existence
+	 *
 	 * @param int $uid user identifier
 	 * @param int $eventid event identifier
-	 * 
+	 *
 	 * @return int count
 	 */
 	function existPartecipation($uid= null, $eventid= null)
@@ -1254,9 +1307,10 @@ class crpCalendarDAO
 	}
 
 	/**
-	 * Validate submitted data
-	 * 
-	 * @param array data submitted data
+	 * validate submitted data
+	 *
+	 * @param array $data submitted data
+	 *
 	 * @return boolean true if data are OK
 	 */
 	function validateData(& $data)
@@ -1316,22 +1370,25 @@ class crpCalendarDAO
 
 		return $validateOK;
 	}
-	
+
 	/**
-	 * Create event from ics data
-	 * 
-	 * @param array data
-	 * @return long id of created object
+	 * create event from ics data
+	 *
+	 * @param array $data event values
+	 * @param int $key
+	 * @param int $id_category value to set
+	 *
+	 * @return int id of created object
 	 * */
 	function createFromIcs($data=array(),$key=null, $id_category=null)
 	{
-	
+
 		$data['start_date'] = $data['start_date']." ".$data['start_time'];
 		$data['end_date'] = $data['end_date']." ".$data['end_time'];
 		($data['day_event'])?$data['end_date']=$data['start_date']:'';
 		($data['start_date']!=$data['end_date'])?$data['day_event']='0':$data['day_event']='1';
 		$data['__CATEGORIES__']['Main'] = $id_category;
-		//die('<pre>'.print_r($data,1).'</pre>');
+
 		$object= DBUtil :: insertObject($data, 'crpcalendar', 'eventid');
 		if (!$object)
 		{
@@ -1345,10 +1402,14 @@ class crpCalendarDAO
 
 		return $object['eventid'];
 	}
-	
+
 	/**
-	 * Remove events from a date
-	 * 
+	 * remove events from a date
+	 *
+	 * @param int $endDay value filter
+	 * @param int $endMonth value filter
+	 * @param int $endYear value filter
+	 *
 	 * @return bool true on succes
 	 */
 	function removePurge($endDay=null,$endMonth=null,$endYear=null)
@@ -1356,19 +1417,19 @@ class crpCalendarDAO
 		// Argument check
 		if (!$endDay || !$endMonth || !$endYear)
 			return LogUtil :: registerError(_MODARGSERROR);
-		
+
 		$pntable= pnDBGetTables();
 		$crpcalendarcolumn= $pntable['crpcalendar_column'];
 		$queryargs= array ();
-		
+
 		$queryargs[]= "($crpcalendarcolumn[start_date] <= '$endYear-$endMonth-$endDay')";
-		
+
 		$where= null;
 		if (count($queryargs) > 0)
 		{
 			$where= ' WHERE ' . implode(' AND ', $queryargs);
 		}
-		
+
 		// define the permission filter to apply
 		$permFilter= array (
 			array (
@@ -1383,11 +1444,11 @@ class crpCalendarDAO
 		);
 
 		$orderby= "ORDER BY $crpcalendarcolumn[start_date] $sortOrder";
-		
+
 		$columnArray= array (
 			'eventid',
 		);
-		
+
 		// get the objects from the db
 		$objArray= DBUtil :: selectObjectArray('crpcalendar', $where, $orderby, -1, -1, '', $permFilter, null, $columnArray);
 
@@ -1402,14 +1463,14 @@ class crpCalendarDAO
 		{
 			if ($purgetitem['eventid'] == false)
 				return LogUtil :: registerError(_NOSUCHITEM);
-	
+
 			if (!DBUtil :: deleteObjectByID('crpcalendar', $purgetitem['eventid'], 'eventid'))
 				return LogUtil :: registerError(_DELETEFAILED);
-	
+
 			$this->deleteFile('image', $purgetitem['eventid']);
 			$this->deleteFile('document', $purgetitem['eventid']);
 			$this->deletePartecipation(null, $purgetitem['eventid'], true);
-	
+
 			// Let any hooks know that we have deleted an item.
 			pnModCallHooks('item', 'delete', $purgetitem['eventid'], array (
 				'module' => 'crpCalendar'

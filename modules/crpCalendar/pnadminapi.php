@@ -5,14 +5,16 @@
  * @copyright (c) 2007, Daniele Conca
  * @link http://noc.postnuke.com/projects/crpcalendar Support and documentation
  * @author Daniele Conca <jami at cremonapalloza dot org>
- * @license GNU/GPL - v.2
+ * @license GNU/GPL - v.2.1
  * @package crpCalendar
  */
 
 Loader :: includeOnce('modules/crpCalendar/pnclass/crpCalendar.php');
 
 /**
- * Retrieve list of events, filtered if specified
+ * retrieve list of events, filtered if specified
+ * 
+ * @return array events
  */
 function crpCalendar_adminapi_getall($navigationValues)
 {
@@ -32,9 +34,8 @@ function crpCalendar_adminapi_getall($navigationValues)
 
 /**
  * get available admin panel links
- *
- * @author Mark West
- * @return array array of admin links
+ * 
+ * @return array admin links
  */
 function crpCalendar_adminapi_getlinks()
 {
@@ -73,7 +74,7 @@ function crpCalendar_adminapi_getlinks()
 /**
  * modify item status
  * 
- * @return string HTML output
+ * @return void
  */
 function crpCalendar_adminapi_change_status($args=array())
 {

@@ -5,21 +5,25 @@
  * @copyright (c) 2007, Daniele Conca
  * @link http://noc.postnuke.com/projects/crpcalendar Support and documentation
  * @author Daniele Conca <jami at cremonapalloza dot org>
- * @license GNU/GPL - v.2
+ * @license GNU/GPL - v.2.1
  * @package crpCalendar
  */
 
 /**
- * Search plugin info
+ * search plugin info
+ *
+ * @return array info
  **/
 function crpCalendar_searchapi_info()
 {
-  return array('title' =>'crpCalendar', 
+  return array('title' =>'crpCalendar',
                  'functions' => array('crpCalendar' => 'search'));
 }
 
 /**
- * Search form component
+ * search form component
+ *
+ * @return html form
  **/
 function crpCalendar_searchapi_options($args)
 {
@@ -35,7 +39,9 @@ function crpCalendar_searchapi_options($args)
 }
 
 /**
- * Search plugin main function
+ * search plugin main function
+ *
+ * @return bool true on success
  **/
 function crpCalendar_searchapi_search($args)
 {
@@ -44,7 +50,7 @@ function crpCalendar_searchapi_search($args)
 	{
 		return LogUtil::registerPermissionError();
 	}
-	
+
  	pnModLangLoad('crpCalendar', 'search');
  	$startnum     = (int)$args['startnum'];
   $total        = (int)$args['total'];
@@ -58,7 +64,7 @@ function crpCalendar_searchapi_search($args)
   if (isset($total) && !is_numeric($total)) {
       unset($total);
   }
-  
+
 	// get the db and table info
   pnModDBInfoLoad('Search');
   $pntable = pnDBGetTables();
@@ -69,7 +75,7 @@ function crpCalendar_searchapi_search($args)
   $eventscolumn = $pntable['crpcalendar_column'];
   $searchTable = &$pntable['search_result'];
   $searchColumn = &$pntable['search_result_column'];
-  
+
   $query = "SELECT $eventscolumn[title] as title,
                    $eventscolumn[event_text] as event_text,
 									 $eventscolumn[cr_date] as cr_date,
@@ -97,13 +103,13 @@ function crpCalendar_searchapi_search($args)
   (!$archive)?$query .= " AND $eventscolumn[start_date] > NOW() ":'';
   $query .= " AND $eventscolumn[obj_status]='A' ";
   $query .= " ORDER BY $eventscolumn[start_date] DESC";
-	
+
 	$result = DBUtil::executeSQL($query);
   if (!$result) {
       return LogUtil::registerError (_GETFAILED);
   }
   //$result = $dbconn->SelectLimit($query, pnModGetVar('Search', 'itemsperpage'), $startnum-1);
-	
+
 	$insertSql = "INSERT INTO $searchTable
 								  ($searchColumn[title],
 								   $searchColumn[text],
@@ -112,14 +118,14 @@ function crpCalendar_searchapi_search($args)
 								   $searchColumn[created],
 								   $searchColumn[session])
 								VALUES ";
-	
+
 	$sessionId = session_id();
 
   // Process the result set and insert into search result table
   for (; !$result->EOF; $result->MoveNext()) {
       $event = $result->GetRowAssoc(2);
-      if (SecurityUtil::checkPermission('crpCalendar::Event', "$item[title]::$item[eventid]", ACCESS_READ)) {
-          $sql = $insertSql . '(' 
+      if (SecurityUtil::checkPermission('crpCalendar::', "$item[cr_uid]:$item[title]:$item[eventid]", ACCESS_READ)) {
+          $sql = $insertSql . '('
                  . '\'' . DataUtil::formatForStore($event['title']) . '\', '
                  . '\'' . DataUtil::formatForStore($event['event_text']) . '\', '
                  . '\'' . DataUtil::formatForStore($event['eventid']) . '\', '
@@ -137,18 +143,20 @@ function crpCalendar_searchapi_search($args)
 }
 
 /**
- * Do last minute access checking and assign URL to items
+ * do last minute access checking and assign URL to items
  *
- * Both access checking and URL creation is ignored: access check has
+ * both access checking and URL creation is ignored: access check has
  * already been done and there's no URL to the events.
+ *
+ * @return bool true
  */
 function crpCalendar_searchapi_search_check(&$args)
 {
 	$datarow = &$args['datarow'];
   $eventid = $datarow['extra'];
-  
+
   $datarow['url'] = pnModUrl('crpCalendar', 'user', 'display', array('eventid' => $eventid));
-  
+
   // True = has access
   return true;
 }

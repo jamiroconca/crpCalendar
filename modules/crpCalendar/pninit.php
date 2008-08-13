@@ -11,6 +11,8 @@
 
 /**
  * init crpCalendar module
+ * 
+ * @return bool true on success
  */
 function crpCalendar_init() {
 	// create table
@@ -67,6 +69,8 @@ function crpCalendar_init() {
 
 /**
  * upgrade the pages module
+ * 
+ * @return bool true on success
  */
 function crpCalendar_upgrade($oldversion) 
 {
@@ -152,7 +156,9 @@ function crpCalendar_upgrade($oldversion)
 }
 
 /**
- * delete the pages module
+ * uninstall the module
+ * 
+ * @return bool true on success
  */
 function crpCalendar_delete() {
 	// drop table
@@ -175,6 +181,11 @@ function crpCalendar_delete() {
 	return true;
 }
 
+/**
+ * create default category for module
+ * 
+ * @return bool true on success
+ */
 function _crpCalendar_createdefaultcategory() {
 	// load necessary classes
 	Loader :: loadClass('CategoryUtil');

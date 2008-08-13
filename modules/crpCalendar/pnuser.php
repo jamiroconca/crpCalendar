@@ -33,7 +33,7 @@ function crpCalendar_user_main()
 
 
 /**
- * view items
+ * view items list
  *
  * @return string HTML output
  */
@@ -118,7 +118,7 @@ function crpCalendar_user_day_view()
 }
 
 /**
- * view item
+ * display item
  *
  * @return string HTML output
  */
@@ -135,7 +135,7 @@ function crpCalendar_user_display()
 }
 
 /**
- * view item
+ * diaplay item, for content module
  *
  * @return string HTML output
  */
@@ -266,7 +266,7 @@ function crpCalendar_user_new()
 
 
 /**
- * new item
+ * create item
  * 
  * @return string HTML output
  */
@@ -301,7 +301,7 @@ function crpCalendar_user_modify()
 
 
 /**
- * modify item
+ * update item
  * 
  * @return string HTML output
  */
@@ -336,7 +336,7 @@ function crpCalendar_user_getfeed()
 }
 
 /**
- * feed ics
+ * build ical output
  * 
  * @return string HTML output
  */
@@ -353,7 +353,7 @@ function crpCalendar_user_getICal()
 }
 
 /**
- * feed ics
+ * build ical output
  * 
  * @return string HTML output
  */
@@ -370,7 +370,7 @@ function crpCalendar_user_ical_exports()
 }
 
 /**
- * Add user's partecipation
+ * add user's partecipation
  *
  * @return string HTML output
  */
@@ -388,7 +388,7 @@ function crpCalendar_user_add_partecipation()
 }
 
 /**
- * Delete user's partecipation
+ * delete user's partecipation
  *
  * @return string HTML output
  */

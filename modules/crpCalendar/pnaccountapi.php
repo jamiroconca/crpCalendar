@@ -10,9 +10,9 @@
  */
 
 /**
- * Return an array of items to show in the your account panel
+ * return an array of items to show in the your account panel
  *
- * @return   array   array of items, or false on failure
+ * @return array array of items, or false on failure
  */
 function crpCalendar_accountapi_getall($args)
 {
