@@ -1,5 +1,7 @@
 crpCalendar
-v0.4.7 - ??? august 2008
+v0.4.8 - ??? august 2008
+- added module var for events submitted by users initial status
+v0.4.7 - 13 august 2008
 - added setting for mandatory/not mandatory event content
 - added purge event from a date
 v0.4.6 - 11 august 2008
