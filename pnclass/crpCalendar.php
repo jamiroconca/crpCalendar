@@ -1343,6 +1343,8 @@ class crpCalendar
 		pnModSetVar('crpCalendar', 'crpcalendar_notification', $crpcalendar_notification);
 		$mandatory_description = (bool) FormUtil :: getPassedValue('mandatory_description', false, 'POST');
 		pnModSetVar('crpCalendar', 'mandatory_description', $mandatory_description);
+		$submitted_status = FormUtil :: getPassedValue('submitted_status', 'P', 'POST');
+		pnModSetVar('crpCalendar', 'submitted_status', $submitted_status);
 
 		// Let any other modules know that the modules configuration has been updated
 		pnModCallHooks('module', 'updateconfig', 'crpCalendar', array (

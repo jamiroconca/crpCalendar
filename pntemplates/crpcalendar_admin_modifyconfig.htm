@@ -52,6 +52,14 @@
 			<label for="crpcalendar_mandatory_description"><!--[pnml name="_CRPVIDEO_MANDATORY_DESCRIPTION"]--></label>
 			<input id="crpcalendar_mandatory_description" type="checkbox" name="mandatory_description"<!--[if $mandatory_description]--> checked="checked"<!--[/if]--> />
 		</div>
+		<div class="pn-adminformrow">
+				<label for="crpcalendar_submitted_status"><!--[pnml name="_CRPCALENDAR_SUBMITTED_STATUS" html=1]--></label>
+				<select id="crpcalendar_submitted_status" name="submitted_status">
+					<option value="A"<!--[if $submitted_status eq 'A']--> selected="selected"<!--[/if]-->><!--[pnml name="_ACTIVE" html=1]--></option>
+					<option value="P"<!--[if $submitted_status eq 'P']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_PENDING"]--></option>
+					<option value="R"<!--[if $submitted_status eq 'R']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_REJECTED" html=1]--></option>
+				</select>
+			</div>
 	</fieldset>
 	<fieldset>
 		<legend><!--[pnml name=_CRPCALENDAR_IMAGES html=1]--></legend>		
