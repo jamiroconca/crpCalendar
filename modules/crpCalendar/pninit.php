@@ -11,7 +11,7 @@
 
 /**
  * init crpCalendar module
- * 
+ *
  * @return bool true on success
  */
 function crpCalendar_init() {
@@ -19,23 +19,23 @@ function crpCalendar_init() {
 	if (!DBUtil :: createTable('crpcalendar')) {
 		return false;
 	}
-	
+
 	if (!DBUtil :: createTable('crpcalendar_files')) {
 		return false;
 	}
-	
+
 	if (!DBUtil :: createTable('crpcalendar_attendee')) {
 		return false;
 	}
-	
+
 	// Create the index
   if (!DBUtil :: createIndex('event_image', 'crpcalendar_files', array('eventid', 'document_type'), array('UNIQUE' => '1')))
   	return false;
-  
+
   // Create the index
   if (!DBUtil :: createIndex('event_uid', 'crpcalendar_attendee', array('uid', 'eventid'), array('UNIQUE' => '1')))
   	return false;
-  		
+
 	// create our default category
 	if (!_crpCalendar_createdefaultcategory()) {
 		return LogUtil :: registerError(_CREATEFAILED);
@@ -62,6 +62,7 @@ function crpCalendar_init() {
 	pnModSetVar('crpCalendar', 'daylist_categorized', false);
 	pnModSetVar('crpCalendar', 'yearlist_categorized', false);
 	pnModSetVar('crpCalendar', 'mandatory_description', true);
+	pnModSetVar('crpCalendar', 'submitted_status', 'P');
 
 	// Initialisation successful
 	return true;
@@ -69,13 +70,13 @@ function crpCalendar_init() {
 
 /**
  * upgrade the pages module
- * 
+ *
  * @return bool true on success
  */
-function crpCalendar_upgrade($oldversion) 
+function crpCalendar_upgrade($oldversion)
 {
 	$tables = pnDBGetTables();
-	
+
 	// Upgrade dependent on old version number
   switch($oldversion) {
   	case "0.1.0":
@@ -91,11 +92,11 @@ function crpCalendar_upgrade($oldversion)
   	case "0.2.0":
   		pnModSetVar('crpCalendar', 'file_dimension', '35000');
   		pnModSetVar('crpCalendar', 'image_width', '150');
-  		
+
   		if (!DBUtil :: createTable('crpcalendar_files')) {
 				return LogUtil::registerError (_UPDATETABLEFAILED);
 			}
-			
+
 			if (!DBUtil::createIndex('event_image', 'crpcalendar_files', array('eventid', 'document_type'), array('UNIQUE' => '1')))
 				LogUtil::registerError (_UPDATETABLEFAILED);
 			return crpCalendar_upgrade("0.3.0");
@@ -128,14 +129,14 @@ function crpCalendar_upgrade($oldversion)
   	case "0.4.2":
   		if (!DBUtil :: createTable('crpcalendar_attendee')) {
 				return LogUtil::registerError (_UPDATETABLEFAILED);
-			}			
+			}
 			if (!DBUtil :: createIndex('event_uid', 'crpcalendar_attendee', array('uid', 'eventid'), array('UNIQUE' => '1')))
-  			LogUtil::registerError (_UPDATETABLEFAILED);  		
-  		pnModSetVar('crpCalendar', 'enable_partecipation', false);  		
+  			LogUtil::registerError (_UPDATETABLEFAILED);
+  		pnModSetVar('crpCalendar', 'enable_partecipation', false);
   		return crpCalendar_upgrade("0.4.3");
   	case "0.4.3":
   		pnModSetVar('crpCalendar', 'enable_locations', false);
-  		return crpCalendar_upgrade("0.4.4");		
+  		return crpCalendar_upgrade("0.4.4");
   	case "0.4.4":
   		pnModSetVar('crpCalendar', 'crpcalendar_notification', null);
   		return crpCalendar_upgrade("0.4.5");
@@ -150,14 +151,18 @@ function crpCalendar_upgrade($oldversion)
   		return crpCalendar_upgrade("0.4.7");
   		break;
   	case "0.4.7":
-  		break;  	
-  }  	
+  		pnModSetVar('crpCalendar', 'submitted_status', 'P');
+  		return crpCalendar_upgrade("0.4.8");
+  		break;
+  	case "0.4.8":
+  		break;
+  }
 	return true;
 }
 
 /**
  * uninstall the module
- * 
+ *
  * @return bool true on success
  */
 function crpCalendar_delete() {
@@ -165,11 +170,11 @@ function crpCalendar_delete() {
 	if (!DBUtil :: dropTable('crpcalendar')) {
 		return false;
 	}
-	
+
 	if (!DBUtil :: dropTable('crpcalendar_files')) {
 		return false;
 	}
-	
+
 	if (!DBUtil :: dropTable('crpcalendar_attendee')) {
 		return false;
 	}
@@ -183,7 +188,7 @@ function crpCalendar_delete() {
 
 /**
  * create default category for module
- * 
+ *
  * @return bool true on success
  */
 function _crpCalendar_createdefaultcategory() {
@@ -203,15 +208,15 @@ function _crpCalendar_createdefaultcategory() {
 	$cat->setDataField('parent_id', $rootcat['id']);
 	$cat->setDataField('name', 'crpCalendar');
 	$cat->setDataField('value', '-1');
-	
+
 	$cat->setDataField('display_name', array (
 		$lang => _CRPCALENDAR_NAME
-	));	
+	));
 	$cat->setDataField('display_desc', array (
 		$lang => _CRPCALENDAR_CATEGORY_DESCRIPTION
-	));	
+	));
 	$cat->setDataField('security_domain', $rootcat['security_domain']);
-	
+
 	if (!$cat->validate('admin')) {
 		return false;
 	}
