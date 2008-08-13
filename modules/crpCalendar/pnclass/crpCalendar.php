@@ -211,7 +211,7 @@ class crpCalendar
 					), 'image' => '14_layer_deletelayer.gif', 'title' => _DELETE);
 				}
 			}
-			elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title'] && $this->isAuthor($item['eventid'])))
+			elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid']))
 			{
 				$options[] = array (
 					'url' => pnModURL('crpCalendar',
