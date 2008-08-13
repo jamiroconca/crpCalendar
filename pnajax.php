@@ -5,10 +5,15 @@
  * @copyright (c) 2007, Daniele Conca
  * @link http://noc.postnuke.com/projects/crpcalendar Support and documentation
  * @author Daniele Conca <jami at cremonapalloza dot org>
- * @license GNU/GPL - v.2
+ * @license GNU/GPL - v.2.1
  * @package crpCalendar
  */
 
+/**
+ * get form list of categorized events
+ * 
+ * @return array events
+ */
 function crpCalendar_ajax_getCategorizedEvent()
 {
 	if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_READ))
@@ -40,6 +45,11 @@ function crpCalendar_ajax_getCategorizedEvent()
 	return $resultlist;
 }
 
+/**
+ * swap obj_status	value
+ * 
+ * @return array event status
+ */
 function crpCalendar_ajax_toggleStatus()
 {
 	if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_ADD))

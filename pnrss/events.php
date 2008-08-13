@@ -1,6 +1,4 @@
 <?php
-
-
 /**
  * crpCalendar
  *
@@ -23,6 +21,7 @@ function crpCalendar_events_rss_init()
 /**
  * get information on rss
  * 
+ * @return array info
  */
 function crpCalendar_events_rss_info()
 {
@@ -36,8 +35,9 @@ function crpCalendar_events_rss_info()
 /**
  * display rss
  *
- * @param        array       $rssinfo     a rssinfo structure
- * @return       output      the rendered rss
+ * @param array $rssinfo a rssinfo structure
+ * 
+ * @return array feed list
  */
 function crpCalendar_events_rss_feed($rssinfo)
 {

@@ -18,6 +18,9 @@ Loader :: includeOnce('modules/crpCalendar/pnclass/crpCalendarDAO.php');
 class crpCalendar
 {
 
+	/**
+	 * constructor, set values
+	 */
 	function crpCalendar()
 	{
 		$this->ui = new crpCalendarUI();
@@ -28,10 +31,10 @@ class crpCalendar
 
 	/**
 	 * Return a condition about an event
-	 * 
+	 *
 	 * @param int $eventid identifier
-	 * 
-	 * return bool
+	 *
+	 * @return bool
 	 */
 	function isAuthor($eventid = null)
 	{
@@ -42,9 +45,24 @@ class crpCalendar
 	}
 
 	/**
+	 * see if a user is authorised to carry out a particular task
+	 *
+	 * @param int $level level of access required
+	 * @param int $author_object object's author id
+	 * @param int $id_object object's id
+	 * @param int $name_object object's title
+	 *
+	 * @return boolean true if authorized
+	 */
+	function authAction($level=0, $author_object='', $id_object='', $name_object='')
+	{
+		return $this->dao->getAuth($level, $author_object, $id_object, $name_object);
+	}
+
+	/**
 	 * Main administrative page with event's list
-	 * 
-	 * @return string html 
+	 *
+	 * @return string html
 	 */
 	function manageEvents()
 	{
@@ -68,7 +86,8 @@ class crpCalendar
 					'eventid' => $item['eventid']
 				)
 			), 'image' => 'demo.gif', 'title' => _VIEW);
-			if (SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_ADD) || (SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_EDIT) && $this->isAuthor($item['eventid'])))
+			if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title'])
+					|| ($this->authAction(ACCESS_EDIT, $item['cr_uid'], $item['eventid'], $item['title'])	&& $this->isAuthor($item['eventid'])))
 			{
 				$options[] = array (
 					'url' => pnModURL('crpCalendar',
@@ -86,7 +105,7 @@ class crpCalendar
 						'eventid' => $item['eventid']
 					)
 				), 'image' => 'editcopy.gif', 'title' => _COPY);
-				if (SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_DELETE))
+				if ($this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
 				{
 					$options[] = array (
 						'url' => pnModURL('crpCalendar',
@@ -109,8 +128,8 @@ class crpCalendar
 
 	/**
 	 * Main user page with event's list
-	 * 
-	 * @return string html 
+	 *
+	 * @return string html
 	 */
 	function listEvents()
 	{
@@ -162,7 +181,7 @@ class crpCalendar
 				), 'image' => 'delete_user.gif', 'title' => _CRPCALENDAR_DELETE_PARTECIPATION);
 			}
 
-			if (SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_ADD))
+			if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']))
 			{
 				$options[] = array (
 					'url' => pnModURL('crpCalendar',
@@ -180,7 +199,7 @@ class crpCalendar
 						'eventid' => $item['eventid']
 					)
 				), 'image' => 'editcopy.gif', 'title' => _COPY);
-				if (SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_DELETE))
+				if ($this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
 				{
 					$options[] = array (
 						'url' => pnModURL('crpCalendar',
@@ -192,7 +211,7 @@ class crpCalendar
 					), 'image' => '14_layer_deletelayer.gif', 'title' => _DELETE);
 				}
 			}
-			elseif ((SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_MODERATE) && $this->isAuthor($item['eventid'])))
+			elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title'] && $this->isAuthor($item['eventid'])))
 			{
 				$options[] = array (
 					'url' => pnModURL('crpCalendar',
@@ -219,8 +238,8 @@ class crpCalendar
 
 	/**
 	 * Page with month's events list
-	 * 
-	 * @return string html 
+	 *
+	 * @return string html
 	 */
 	function listYearEvents()
 	{
@@ -282,7 +301,7 @@ class crpCalendar
 				), 'image' => 'delete_user.gif', 'title' => _CRPCALENDAR_DELETE_PARTECIPATION);
 			}
 
-			if (SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_ADD))
+			if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']))
 			{
 				$options[] = array (
 					'url' => pnModURL('crpCalendar',
@@ -300,7 +319,7 @@ class crpCalendar
 						'eventid' => $item['eventid']
 					)
 				), 'image' => 'editcopy.gif', 'title' => _COPY);
-				if (SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_DELETE))
+				if ($this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
 				{
 					$options[] = array (
 						'url' => pnModURL('crpCalendar',
@@ -312,7 +331,7 @@ class crpCalendar
 					), 'image' => '14_layer_deletelayer.gif', 'title' => _DELETE);
 				}
 			}
-			elseif ((SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_MODERATE) && $this->isAuthor($item['eventid'])))
+			elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid']))
 			{
 				$options[] = array (
 					'url' => pnModURL('crpCalendar',
@@ -354,8 +373,8 @@ class crpCalendar
 
 	/**
 	 * Page with month's events list
-	 * 
-	 * @return string html 
+	 *
+	 * @return string html
 	 */
 	function listMonthEvents()
 	{
@@ -403,8 +422,8 @@ class crpCalendar
 
 	/**
 	 * Page with week's events list
-	 * 
-	 * @return string html 
+	 *
+	 * @return string html
 	 */
 	function listWeekEvents()
 	{
@@ -463,8 +482,8 @@ class crpCalendar
 
 	/**
 	 * Page with day's events list
-	 * 
-	 * @return string html 
+	 *
+	 * @return string html
 	 */
 	function listDayEvents()
 	{
@@ -570,7 +589,7 @@ class crpCalendar
 				)
 			), 'image' => 'demo.gif', 'title' => _VIEW);
 
-			if (SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_ADD))
+			if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']))
 			{
 				$options[] = array (
 					'url' => pnModURL('crpCalendar',
@@ -588,7 +607,7 @@ class crpCalendar
 						'eventid' => $item['eventid']
 					)
 				), 'image' => 'editcopy.gif', 'title' => _COPY);
-				if (SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_DELETE))
+				if ($this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
 				{
 					$options[] = array (
 						'url' => pnModURL('crpCalendar',
@@ -600,7 +619,7 @@ class crpCalendar
 					), 'image' => '14_layer_deletelayer.gif', 'title' => _DELETE);
 				}
 			}
-			elseif ((SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_MODERATE) && $this->isAuthor($item['eventid'])))
+			elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid']))
 			{
 				$options[] = array (
 					'url' => pnModURL('crpCalendar',
@@ -668,8 +687,8 @@ class crpCalendar
 
 	/**
 	 * Display user page with event
-	 * 
-	 * @return string html 
+	 *
+	 * @return string html
 	 */
 	function displayEvent()
 	{
@@ -692,7 +711,7 @@ class crpCalendar
 		$modvars = pnModGetVar('crpCalendar');
 
 		// The return value of the function is checked here
-		if ($item == false || ($item['obj_status'] == 'P' && !SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_EDIT)))
+		if ($item == false || ($item['obj_status'] == 'P' && !$this->authAction(ACCESS_EDIT, $item['cr_uid'], $item['eventid'], $item['title'])))
 		{
 			return LogUtil :: registerError(_NOSUCHITEM);
 		}
@@ -764,8 +783,8 @@ class crpCalendar
 
 	/**
 	 * Display simple event
-	 * 
-	 * @return string html 
+	 *
+	 * @return string html
 	 */
 	function simpleDisplayEvent($eventid = null)
 	{
@@ -776,7 +795,7 @@ class crpCalendar
 		$modvars = pnModGetVar('crpCalendar');
 
 		// The return value of the function is checked here
-		if ($item == false || ($item['obj_status'] == 'P' && !SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_EDIT)))
+		if ($item == false || ($item['obj_status'] == 'P' && !$this->authAction(ACCESS_EDIT, $item['cr_uid'], $item['eventid'], $item['title'])))
 		{
 			return LogUtil :: registerError(_NOSUCHITEM);
 		}
@@ -788,7 +807,7 @@ class crpCalendar
 
 	/**
 	 * Insert an event
-	 * 
+	 *
 	 * @return string html
 	 */
 	function newEvent()
@@ -806,7 +825,7 @@ class crpCalendar
 
 	/**
 	 * Insert an event
-	 * 
+	 *
 	 * @return string html
 	 */
 	function submitEvent()
@@ -824,10 +843,10 @@ class crpCalendar
 
 	/**
 	 * update an event
-	 * 
+	 *
 	 * @param int $eventid item identifier
 	 * @param array $inputValues array of updated values
-	 * 
+	 *
 	 * @return string html
 	 */
 	function createEvent()
@@ -835,7 +854,7 @@ class crpCalendar
 		$returnType = '';
 		$inputValues = array ();
 
-		if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_EDIT))
+		if (!$this->authAction(ACCESS_EDIT))
 			$returnType = 'user';
 		else
 			$returnType = 'admin';
@@ -881,7 +900,7 @@ class crpCalendar
 		}
 
 		// notify by mail if not an admin
-		if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_EDIT) && $inputValues['modvars']['crpcalendar_notification'])
+		if (!$this->authAction(ACCESS_EDIT) && $inputValues['modvars']['crpcalendar_notification'])
 			$this->notifyByMail($inputValues, $eventid);
 
 		// all went fine
@@ -893,9 +912,9 @@ class crpCalendar
 
 	/**
 	 * Modify an event
-	 * 
+	 *
 	 * @param int $eventid item identifier
-	 * 
+	 *
 	 * @return string html
 	 */
 	function modifyEvent()
@@ -911,7 +930,7 @@ class crpCalendar
 		}
 
 		// Security check
-		if (!SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_ADD) && !(SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_EDIT) && $this->isAuthor($item['eventid'])))
+		if (!$this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']) && (!$this->authAction(ACCESS_EDIT, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid'])))
 		{
 			return LogUtil :: registerPermissionError();
 		}
@@ -933,9 +952,9 @@ class crpCalendar
 
 	/**
 	 * Modify an event
-	 * 
+	 *
 	 * @param int $eventid item identifier
-	 * 
+	 *
 	 * @return string html
 	 */
 	function editEvent()
@@ -951,7 +970,7 @@ class crpCalendar
 		}
 
 		// Security check
-		if (!(SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_MODERATE) && $this->isAuthor($item['eventid'])))
+		if (!$this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid']))
 		{
 			return LogUtil :: registerPermissionError();
 		}
@@ -973,10 +992,10 @@ class crpCalendar
 
 	/**
 	 * update an event
-	 * 
+	 *
 	 * @param int $eventid item identifier
 	 * @param array $inputValues array of updated values
-	 * 
+	 *
 	 * @return string html
 	 */
 	function updateEvent()
@@ -995,7 +1014,7 @@ class crpCalendar
 		$inputValues = $this->collectDataFromInput();
 
 		// Security check
-		if (!SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_ADD) && !(SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_MODERATE) && $this->isAuthor($inputValues['eventid'])))
+		if (!$this->authAction(ACCESS_ADD) && !($this->authAction(ACCESS_MODERATE) && $this->isAuthor($inputValues['eventid'])))
 		{
 			return LogUtil :: registerPermissionError();
 		}
@@ -1045,9 +1064,9 @@ class crpCalendar
 
 	/**
 	 * Clone an event
-	 * 
+	 *
 	 * @param int $eventid item identifier
-	 * 
+	 *
 	 * @return string html
 	 */
 	function cloneEvent()
@@ -1088,7 +1107,7 @@ class crpCalendar
 		);
 
 		// Security check
-		if (!SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_ADD) && !(SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_EDIT) && $this->isAuthor($item['eventid'])))
+		if (!$this->authAction(ACCESS_ADD) && !($this->authAction(ACCESS_EDIT, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid'])))
 		{
 			return LogUtil :: registerPermissionError();
 		}
@@ -1108,9 +1127,9 @@ class crpCalendar
 
 	/**
 	 * Delete an event
-	 * 	 
+	 *
 	 * @param int $eventid item identifier
-	 * 
+	 *
 	 * @return string html
 	 */
 	function deleteEvent()
@@ -1126,7 +1145,7 @@ class crpCalendar
 		}
 
 		// Security check
-		if (!SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_DELETE))
+		if (!$this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
 		{
 			return LogUtil :: registerPermissionError();
 		}
@@ -1136,9 +1155,9 @@ class crpCalendar
 
 	/**
 	 * Delete afile
-	 * 	 
+	 *
 	 * @param int $eventid item identifier
-	 * 
+	 *
 	 * @return string html
 	 */
 	function deleteFile()
@@ -1147,7 +1166,7 @@ class crpCalendar
 		$file_type = FormUtil :: getPassedValue('file_type', null, 'GET');
 
 		// Security check
-		if (!SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_ADD) && !(SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_EDIT) && $this->isAuthor($eventid)))
+		if (!$this->authAction(ACCESS_ADD) && !($this->authAction(ACCESS_EDIT) && $this->isAuthor($eventid)))
 		{
 			return LogUtil :: registerPermissionError();
 		}
@@ -1160,9 +1179,9 @@ class crpCalendar
 
 	/**
 	 * Delete an event
-	 * 	 
+	 *
 	 * @param int $eventid item identifier
-	 * 
+	 *
 	 * @return string html
 	 */
 	function removeEvent()
@@ -1174,7 +1193,7 @@ class crpCalendar
 		$eventid = FormUtil :: getPassedValue('eventid', null);
 
 		// Security check
-		if (!SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_DELETE))
+		if (!$this->authAction(ACCESS_DELETE))
 		{
 			return LogUtil :: registerPermissionError();
 		}
@@ -1188,10 +1207,10 @@ class crpCalendar
 
 	/**
 	 * Change item status
-	 * 
+	 *
 	 * @param int $eventid item identifier
 	 * @param string $obj_status active or pending
-	 * 
+	 *
 	 * @return string html
 	 */
 	function changeStatus()
@@ -1215,9 +1234,9 @@ class crpCalendar
 
 	/**
 	 * Add event partecipation
-	 * 
+	 *
 	 * @param int $eventid item identifier
-	 *  
+	 *
 	 * @return string html
 	 */
 	function addPartecipation()
@@ -1234,9 +1253,9 @@ class crpCalendar
 
 	/**
 	 * Delete event partecipation
-	 * 
+	 *
 	 * @param int $eventid item identifier
-	 *  
+	 *
 	 * @return string html
 	 */
 	function deletePartecipation()
@@ -1324,7 +1343,7 @@ class crpCalendar
 		pnModSetVar('crpCalendar', 'crpcalendar_notification', $crpcalendar_notification);
 		$mandatory_description = (bool) FormUtil :: getPassedValue('mandatory_description', false, 'POST');
 		pnModSetVar('crpCalendar', 'mandatory_description', $mandatory_description);
-		
+
 		// Let any other modules know that the modules configuration has been updated
 		pnModCallHooks('module', 'updateconfig', 'crpCalendar', array (
 			'module' => 'crpCalendar'
@@ -1338,13 +1357,13 @@ class crpCalendar
 
 	/**
 	 * Collect navigation input value
-	 * 
+	 *
 	 * @param int $startnum pager offset
 	 * @param int $category current category if specified
 	 * @param bool clear clean category
 	 * @param bool $ignoreml ignore multilanguage
-	 * 
-	 * @return array input values 
+	 *
+	 * @return array input values
 	 */
 	function collectNavigationFromInput()
 	{
@@ -1395,11 +1414,11 @@ class crpCalendar
 
 	/**
 	 * Collect data from insert/modification form
-	 * 
+	 *
 	 * @param int $eventid item identifier
 	 * @param int $objectid object identifier
 	 * @param array page item values
-	 * 
+	 *
 	 * @return array collection of values
 	 */
 	function collectDataFromInput()
@@ -1437,11 +1456,11 @@ class crpCalendar
 
 	/**
 	 * Build date
-	 * 
+	 *
 	 * @param int $day day number
 	 * @param int $month month number
 	 * @param int $year year value
-	 * 
+	 *
 	 * @return string yyyy-mm-dd
 	 */
 	function buildDate($day = null, $month = null, $year = null)
@@ -1456,10 +1475,10 @@ class crpCalendar
 
 	/**
 	 * Build date
-	 * 
+	 *
 	 * @param int $day day number
 	 * @param int $month month number
-	 *  
+	 *
 	 * @return string hh:mm:00
 	 */
 	function buildTime($minute, $hour)
@@ -1471,9 +1490,9 @@ class crpCalendar
 
 	/**
 	 * Return event last modified date
-	 * 
+	 *
 	 * @param int $eventid identifier
-	 * 
+	 *
 	 * return bool
 	 */
 	function getEventDate($eventid = null, $dateType = null)
@@ -1486,7 +1505,7 @@ class crpCalendar
 
 	/**
 	 * Retrieve info about a rss module plugin
-	 * 
+	 *
 	 *
 	 * */
 	function loadRSS($modname, $modrss, $id_lang = '')
@@ -1539,7 +1558,7 @@ class crpCalendar
 
 	/**
 	 * Display RSS content
-	 * 
+	 *
 	 * */
 	function getFeed()
 	{
@@ -1578,7 +1597,7 @@ class crpCalendar
 
 	/**
 	 * Display iCal content
-	 * 
+	 *
 	 * */
 	function getICal()
 	{
@@ -1618,7 +1637,7 @@ class crpCalendar
 
 	/**
 	 * Display iCal content
-	 * 
+	 *
 	 * */
 	function listICal()
 	{
@@ -1659,7 +1678,7 @@ class crpCalendar
 
 	/**
 	 * Generate thumbnail for image
-	 * 
+	 *
 	 * @param int id doc
 	 * @param string width doc
 	 * @return nothing
@@ -1855,7 +1874,7 @@ class crpCalendar
 
 	/**
 	 * Retrieve time of first DayOfWeek from given time
-	 * 
+	 *
 	 * @param long time starting time
 	 * @return long time for first DayOfWeek
 	 * */
@@ -1880,7 +1899,7 @@ class crpCalendar
 
 	/**
 	 * Retrieve time of last DayOfWeek from given time
-	 * 
+	 *
 	 * @param long time starting time
 	 * @return long time for last DayOfWeek
 	 * */
@@ -1905,7 +1924,7 @@ class crpCalendar
 
 	/**
 	 * Retrieve time of first DayOfWeek from given time
-	 * 
+	 *
 	 * @param long time starting time
 	 * @return long time for first DayOfWeek
 	 * */
@@ -1931,7 +1950,7 @@ class crpCalendar
 
 	/**
 	 * Retrieve time of last DayOfWeek from given time
-	 * 
+	 *
 	 * @param long time starting time
 	 * @return long time for last DayOfWeek
 	 * */
@@ -1957,7 +1976,7 @@ class crpCalendar
 
 	/**
 	 * Transform time into a d,m,y array
-	 * 
+	 *
 	 * @param int time
 	 * @return array data splitted into d,m,y components
 	 * */
@@ -2012,7 +2031,7 @@ class crpCalendar
 	}
 
 	/**
-	 * Display form for import ical files 
+	 * Display form for import ical files
 	 * */
 	function importIcs()
 	{
@@ -2027,8 +2046,8 @@ class crpCalendar
 	}
 
 	/**
-	 * Create from a new import 
-	 * 
+	 * Create from a new import
+	 *
 	 */
 	function createIcs()
 	{
@@ -2094,7 +2113,7 @@ class crpCalendar
 		$event = 0;
 		$cal[0]['generator'] = 'Menial iCal Parser';
 
-		// Set variable to enable sorting of array. 
+		// Set variable to enable sorting of array.
 		$cal[0]['start_unix'] = '';
 		$flag_valarm = false;
 
@@ -2254,7 +2273,7 @@ class crpCalendar
 								$cal[$event]['start_unix'] = mktime($date[4], $date[5], $date[6], $date[2], $date[3], $date[1]);
 							}
 							break;
-						
+
 						// Start time of event
 						case 'CREATED' :
 							$date = '';
@@ -2266,7 +2285,7 @@ class crpCalendar
 
 							$cal[$event]['cr_date'] = $date[1] . '-' . $date[2] . '-' . $date[3].' '.$date[4] .':'. $date[5];
 							break;
-						
+
 						// Start time of event
 						case 'LAST-MODIFIED' :
 							$date = '';
@@ -2278,7 +2297,7 @@ class crpCalendar
 
 							$cal[$event]['lu_date'] = $date[1] . '-' . $date[2] . '-' . $date[3].' '.$date[4] .':'. $date[5];
 							break;
-							
+
 						// End time of event
 						case 'DTEND' :
 
@@ -2361,17 +2380,17 @@ class crpCalendar
 										$cal[$event]['attendee'][$attendee]['cutype'] = $att_content[1];
 										break;
 
-										// 
+										//
 									case 'MEMBER' :
 
 										break;
 
-										// 
+										//
 									case 'PARTSTAT' :
 
 										break;
 
-										// 
+										//
 									case 'ROLE' :
 										$cal[$event]['attendee'][$attendee]['role'] = $att_content[1];
 										break;
@@ -2381,7 +2400,7 @@ class crpCalendar
 										$cal[$event]['attendee'][$attendee]['rsvp'] = $att_content[1];
 										break;
 
-										// 
+										//
 									case 'SENT-BY' :
 
 										break;
@@ -2391,17 +2410,17 @@ class crpCalendar
 										$cal[$event]['attendee'][$attendee]['name'] = $att_content[1];
 										break;
 
-										// 
+										//
 									case 'DIR' :
 
 										break;
 
-										// 
+										//
 									case 'DELEGATED-TO' :
 
 										break;
 
-										// 
+										//
 									case 'DELEGATED-FROM' :
 
 										break;
@@ -2412,7 +2431,7 @@ class crpCalendar
 							$attendee++;
 							unset ($temp, $att, $value);
 							break;
-						
+
 						// List of organiser
 						case 'ORGANIZER' :
 
@@ -2428,7 +2447,7 @@ class crpCalendar
 										$cal[$event]['organiser'] = $org_content[1];
 										break;
 
-										// 
+										//
 									case 'MAILTO' :
 										$cal[$event]['contact'] = $org_content[1];
 										break;
@@ -2478,7 +2497,7 @@ class crpCalendar
 							unset ($temp);
 							break;
 
-						// Alarm description handler is joined 
+						// Alarm description handler is joined
 						// with event description handler
 
 						/********** END ALARM INFO ***********/
@@ -2581,9 +2600,9 @@ class crpCalendar
 							unset ($rrule, $rrule_content, $value);
 							break;
 							*/
-							
+
 						/********** RECURRENCE RULE INFO ***********/
-						
+
 						/* TODO: implement with recursion
 						case 'EXDATE' :
 							$data = str_replace('T', '', $data);
@@ -2639,26 +2658,26 @@ class crpCalendar
 		return $cal;
 	}
 
-	// The function that does the comparing to 
+	// The function that does the comparing to
 	// order events.
 	function compare($a, $b)
 	{
 		return strnatcasecmp($a['start_unix'], $b['start_unix']);
 	}
-	
+
 	/**
-	 * Purge events from database 
+	 * Purge events from database
 	 * */
 	function purgeEvents()
 	{
 		return $this->ui->drawPurgeEvents();
 	}
-	
+
 	/**
 	 * Delete events
-	 * 	 
+	 *
 	 * @param int $eventid item identifier
-	 * 
+	 *
 	 * @return string html
 	 */
 	function removePurge()
@@ -2670,7 +2689,7 @@ class crpCalendar
 		$event = FormUtil :: getPassedValue('event', null, 'POST');
 
 		// Security check
-		if (!SecurityUtil :: checkPermission('crpCalendar::', "::", ACCESS_DELETE))
+		if (!$this->authAction(ACCESS_DELETE))
 		{
 			return LogUtil :: registerPermissionError();
 		}

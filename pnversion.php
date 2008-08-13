@@ -20,7 +20,7 @@ $modversion['license'] = 'pndocs/license.txt';
 $modversion['official'] = 1;
 $modversion['author'] = 'Daniele Conca - jami';
 $modversion['contact'] = 'conca.daniele@gmail.com';
-$modversion['securityschema'] = array ('crpCalendar::Event' => 'AuthorID:EventTitle:EventID',
+$modversion['securityschema'] = array ('crpCalendar::' => 'AuthorID:EventTitle:EventID',
                                       'crpCalendar::Category' => 'CategoryName::CategoryID');
 
 ?>

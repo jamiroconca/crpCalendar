@@ -11,6 +11,8 @@
 
 /**
  * crpCalendar table information
+ * 
+ * @return array table definitions
  */
 function crpCalendar_pntables()
 {

@@ -12,7 +12,9 @@
 Loader :: includeOnce('modules/crpCalendar/pnclass/crpCalendar.php');
 
 /**
- * Retrieve list of events, filtered if specified
+ * retrieve list of events, filtered as specified
+ * 
+ * @return array events
  */
 function crpCalendar_userapi_getall($navigationValues)
 {
@@ -33,7 +35,9 @@ function crpCalendar_userapi_getall($navigationValues)
 }
 
 /**
- * Retrieve list of events, filtered by uid
+ * retrieve list of partecipations, filtered by uid
+ * 
+ * @return array partecipations
  */
 function crpCalendar_userapi_getall_partecipations($navigationValues)
 {
@@ -51,7 +55,9 @@ function crpCalendar_userapi_getall_partecipations($navigationValues)
 }
 
 /**
- * Retrieve list of events, filtered as specified, for form use
+ * retrieve list of events, filtered as specified, for form use
+ * 
+ * @return array events
  */
 function crpCalendar_userapi_getall_formlist($navigationValues)
 {
@@ -71,9 +77,8 @@ function crpCalendar_userapi_getall_formlist($navigationValues)
 
 /**
  * get a specific item
- * @param int $args['eventid'] id item to get
- * 
- * @return mixed item array, or false on failure
+ *  
+ * @return array event, or false on failure
  */
 function crpCalendar_userapi_get($args)
 {
@@ -100,6 +105,7 @@ function crpCalendar_userapi_get($args)
 
 /**
  * utility function to count the number of items held by this module
+ * 
  * @return integer number of items held by this module
  */
 function crpCalendar_userapi_countitems($args)
@@ -116,7 +122,8 @@ function crpCalendar_userapi_countitems($args)
 }
 
 /**
- * utility function to count the number of items held by this module
+ * utility function to count the number of attendances
+ * 
  * @return integer number of items held by this module
  */
 function crpCalendar_userapi_countitems_attendance($args)
@@ -135,6 +142,7 @@ function crpCalendar_userapi_countitems_attendance($args)
 /**
  * get meta data for the module
  *
+ * @return array metadata
  */
 function crpCalendar_userapi_getmodulemeta()
 {

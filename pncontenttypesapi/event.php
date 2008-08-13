@@ -10,6 +10,10 @@
  * @package crpCalendar
  */
 
+
+/**
+ * class for interaction with Content module
+ */
 class crpCalendar_contenttypesapi_eventPlugin extends contentTypeBase
 {
   var $eventid;

@@ -10,11 +10,14 @@
  */
 
 /**
- * crpCalendarUI
+ * crpCalendarUI, User Interface class for crpCalendar
  */
 class crpCalendarUI
 {
 
+	/**
+	 * constructor, set values
+	 */
 	function crpCalendarUI()
 	{
 		// none
@@ -31,15 +34,15 @@ class crpCalendarUI
 																			_CRPCALENDAR_SAT,
 																			_CRPCALENDAR_SUN);
 	}
-	
-	
+		
 	/**
-	 * Draw events administration list
+	 * draw events administration list
 	 * 
 	 * @param array $rows of event's value
 	 * @param int $category current category if specified
 	 * @param int $mainCat module root category
 	 * @param array $modvars module's variables
+	 * @param int $active specified status
 	 * 
 	 * @return string html code
 	 */
@@ -73,7 +76,7 @@ class crpCalendarUI
 	
 	
 	/**
-	 * Draw user events list
+	 * draw user events list
 	 * 
 	 * @param array $rows of event's value
 	 * @param int $category current category if specified
@@ -113,7 +116,7 @@ class crpCalendarUI
 	}
 	
 	/**
-	 * Draw user events list
+	 * draw user events list
 	 * 
 	 * @param array $rows of event's value
 	 * @param int $category current category if specified
@@ -143,9 +146,10 @@ class crpCalendarUI
 	}
 	
 	/**
-	 * Draw user events list
+	 * draw user events list
 	 * 
 	 * @param array $rows of event's value
+	 * @param int $uid user identifier
 	 * @param int $category current category if specified
 	 * @param int $mainCat module root category
 	 * @param array $modvars module's variables
@@ -183,13 +187,12 @@ class crpCalendarUI
 	}
 	
 	/**
-	 * Draw user events list
+	 * draw user events list
 	 * 
 	 * @param array $rows of event's value
 	 * @param int $category current category if specified
 	 * @param int $mainCat module root category
 	 * @param array $modvars module's variables
-	 * @param array $arrayExport for ical export
 	 * 
 	 * @return string html code
 	 */
@@ -224,7 +227,7 @@ class crpCalendarUI
 	}
 	
 	/**
-	 * Draw user month events list
+	 * draw user month events list
 	 * 
 	 * @param array $items of event's value
 	 * @param array $days of week's month dates
@@ -271,7 +274,7 @@ class crpCalendarUI
 	}
 	
 	/**
-	 * Draw user week events list
+	 * draw user week events list
 	 * 
 	 * @param array $items of event's value
 	 * @param array $days of week's month dates
@@ -314,7 +317,7 @@ class crpCalendarUI
 	}
 	
 	/**
-	 * Draw user week events list
+	 * draw user day events list
 	 * 
 	 * @param array $items of event's value
 	 * @param array $day to display
@@ -355,7 +358,7 @@ class crpCalendarUI
 	
 	
 	/**
-	 * Draw single event page
+	 * draw single event page
 	 * 
 	 * @param int $eventid identifier
 	 * @param array $item of event's value
@@ -393,12 +396,10 @@ class crpCalendarUI
 	}
 	
 	/**
-	 * Draw single event page for Content module
+	 * draw single event page for Content module
 	 * 
 	 * @param int $eventid identifier
 	 * @param array $item of event's value
-	 * @param int $category current category if specified
-	 * @param int $mainCat module root category
 	 * @param array $modvars module's variables
 	 * 
 	 * @return string html code
@@ -432,7 +433,12 @@ class crpCalendarUI
 	
 	
 	/**
-	 * Draw creation form
+	 * draw creation form
+	 * 
+	 * @param array $item of event's value
+	 * @param int $mainCat module root category
+	 * @param array $modvars module's variables
+	 * @param array $avail available locations
 	 * 
 	 * @return string html
 	 */
@@ -452,7 +458,12 @@ class crpCalendarUI
 	
 	
 	/**
-	 * Draw user creation form
+	 * draw user creation form
+	 * 
+	 * @param array $item of event's value
+	 * @param int $mainCat module root category
+	 * @param array $modvars module's variables
+	 * @param array $avail available locations
 	 * 
 	 * @return string html
 	 */
@@ -472,11 +483,12 @@ class crpCalendarUI
 	
 	
 	/**
-	 * Draw modify form
+	 * draw modify form
 	 * 
-	 * @param array $item element values
-	 * @param int $mainCat module's root category
+	 * @param array $item of event's value
+	 * @param int $mainCat module root category
 	 * @param array $modvars module's variables
+	 * @param array $avail available locations
 	 * 
 	 * @return string html
 	 */
@@ -498,11 +510,12 @@ class crpCalendarUI
 	}
 	
 	/**
-	 * Draw modify form
+	 * draw modify form
 	 * 
-	 * @param array $item element values
-	 * @param int $mainCat module's root category
+	 * @param array $item of event's value
+	 * @param int $mainCat module root category
 	 * @param array $modvars module's variables
+	 * @param array $avail available locations
 	 * 
 	 * @return string html
 	 */
@@ -524,7 +537,7 @@ class crpCalendarUI
 	}
 	
 	/**
-	 * Draw delete form
+	 * draw delete form
 	 * 
 	 * @param int $eventid item identifier
 	 * 
@@ -544,10 +557,9 @@ class crpCalendarUI
 	
 	
 	/**
-	 * Draw modify configuration form
+	 * draw modify configuration form
 	 * 
-	 * @param array $item element values
-	 * @param int $mainCat module's root category
+	 * @param array $gdArray gd library info
 	 * @param array $modvars module's variables
 	 * 
 	 * @return string html
@@ -566,7 +578,7 @@ class crpCalendarUI
 	}
 	
 	/**
-	 * Draw rss feed
+	 * draw rss feed
 	 * 
 	 * @param array $data feed values
 	 * @param array $list elements
@@ -583,7 +595,7 @@ class crpCalendarUI
 	}
 	
 	/**
-	 * Draw ical event export
+	 * draw ical event export
 	 * 
 	 * @param array $data event values
 	 * 
@@ -598,7 +610,7 @@ class crpCalendarUI
 	}
 	
 	/**
-	 * Draw ical header export
+	 * draw ical header export
 	 * 
 	 * @param string $selfurl return url
 	 * 
@@ -613,7 +625,7 @@ class crpCalendarUI
 	}
 	
 	/**
-	 * Draw ical footer export
+	 * draw ical footer export
 	 * 
 	 * @return string html
 	 */
@@ -624,6 +636,12 @@ class crpCalendarUI
 		return $pnRender->fetch('ical/crpcalendar_user_ical_footer.htm');
 	}
 	
+	
+	/**
+	 * calculate gd library information
+	 * 
+	 * @return array gd library info
+	 */
 	function gd_version($fullstring=null) 
 	{
 		$cache_gd_version = array();
@@ -639,6 +657,11 @@ class crpCalendarUI
 		return $cache_gd_version;
 	}
 	
+	/**
+	 * draw import ical form
+	 * 
+	 * @return string html
+	 */	
 	function drawImportForm($mainCat)
 	{
 		$pnRender = pnRender::getInstance('crpCalendar', false);
@@ -649,9 +672,7 @@ class crpCalendarUI
 	}
 
 	/**
-	 * Draw purge form
-	 * 
-	 * @param int $eventid item identifier
+	 * draw purge form
 	 * 
 	 * @return string html
 	 */

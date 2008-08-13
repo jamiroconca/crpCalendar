@@ -33,7 +33,7 @@ function crpCalendar_admin_main()
 
 
 /**
- * view items
+ * view items list
  *
  * @return string HTML output
  */
@@ -69,7 +69,7 @@ function crpCalendar_admin_new()
 
 
 /**
- * modify item
+ * create item
  * 
  * @return string HTML output
  */
@@ -105,7 +105,7 @@ function crpCalendar_admin_modify()
 
 
 /**
- * modify item
+ * update item
  * 
  * @return string HTML output
  */
@@ -159,8 +159,6 @@ function crpCalendar_admin_change_status()
 
 /**
  * delete item
- *
- * @param int $eventid item identifier
  * 
  * @return mixed string HTML output if no confirmation otherwise true
  */
@@ -178,8 +176,6 @@ function crpCalendar_admin_delete($args)
 
 /**
  * delete item's file
- *
- * @param int $eventid item identifier
  * 
  * @return mixed string HTML output if no confirmation otherwise true
  */
@@ -197,8 +193,6 @@ function crpCalendar_admin_delete_file($args)
 
 /**
  * remove item
- *
- * @param int $eventid item identifier
  * 
  * @return mixed string HTML output if no confirmation otherwise true
  */
@@ -231,7 +225,7 @@ function crpCalendar_admin_modifyconfig()
 }
 
 /**
- * modify module configuration
+ * update module configuration
  *
  * @return string HTML output string
  */
@@ -249,7 +243,7 @@ function crpCalendar_admin_updateconfig()
 /**
  * import events from an ical file
  * 
- * @return string 
+ * @return string HTML output string 
  */
 function crpCalendar_admin_import_ical()
 {
@@ -262,9 +256,9 @@ function crpCalendar_admin_import_ical()
 }
 
 /**
- * import events from an ical file
+ * insert events from an ical file
  * 
- * @return string 
+ * @return string HTML output string 
  */
 function crpCalendar_admin_import_create()
 {
@@ -277,9 +271,9 @@ function crpCalendar_admin_import_create()
 }
 
 /**
- * import events from an ical file
+ * remove events older than a date
  * 
- * @return string 
+ * @return string HTML output string 
  */
 function crpCalendar_admin_purge_events()
 {
@@ -294,8 +288,6 @@ function crpCalendar_admin_purge_events()
 /**
  * remove items
  *
- * @param int $eventid item identifier
- * 
  * @return mixed string HTML output if no confirmation otherwise true
  */
 function crpCalendar_admin_purge_remove($args)
