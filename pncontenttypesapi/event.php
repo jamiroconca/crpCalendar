@@ -2,14 +2,12 @@
 /**
  * crpCalendar
  *
- * @copyright (c) 2007, Daniele Conca
- * @link http://noc.postnuke.com/projects/crpcalendar Support and documentation
- * @version $Id: $ 
- * @author Daniele Conca <jami at cremonapalloza dot org>
- * @license GNU/GPL - v.2
+ * @copyright (c) 2007-2008, Daniele Conca
+ * @link http://code.zikula.org/projects/crpcalendar Support and documentation
+ * @author Daniele Conca <conca.daniele@gmail.com>
+ * @license GNU/GPL - v.2.1
  * @package crpCalendar
  */
-
 
 /**
  * class for interaction with Content module
@@ -29,7 +27,7 @@ class crpCalendar_contenttypesapi_eventPlugin extends contentTypeBase
     $this->eventid = $data['eventid'];
   }
 
-  
+
   function display()
   {
     if (!empty($this->eventid))
@@ -37,9 +35,9 @@ class crpCalendar_contenttypesapi_eventPlugin extends contentTypeBase
     return '';
   }
 
-  
+
   function displayEditing()
-  {    
+  {
     if (!empty($this->eventid))
     {
       $event = pnModAPIFunc('crpCalendar', 'user', 'get', array('eventid' => $this->eventid));
@@ -48,13 +46,13 @@ class crpCalendar_contenttypesapi_eventPlugin extends contentTypeBase
     return _CRPCALENDAR_CONTENTENTTYPE_NOEVENT;
   }
 
-  
+
   function getDefaultData()
-  { 
+  {
     return array('eventid' => null);
   }
 
-  
+
   function startEditing(&$render)
   {
     array_push($render->plugins_dir, 'modules/crpCalendar/pntemplates/pnform');
