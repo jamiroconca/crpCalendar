@@ -25,20 +25,39 @@
 			<input id="crpcalendar_document_dimension" type="text" name="document_dimension" maxlength="6" size="7" value="<!--[$document_dimension|pnvarprepfordisplay]-->" />
 		</div>
 		<div class="pn-adminformrow">
-			<label for="crpcalendar_theme"><!--[pnml name="_CRPCALENDAR_THEME]--></label>
-	        <!--[html_options options=$theme_options id=crpcalendar_theme name=crpcalendar_theme selected=$crpcalendar_theme]-->
-		</div>
-		<div class="pn-adminformrow">
-			<label for="crpcalendar_start_year"><!--[pnml name="_CRPCALENDAR_START_YEAR" html=1]--></label>
-			<input id="crpcalendar_start_year" type="text" name="crpcalendar_start_year" maxlength="4" size="7" value="<!--[$crpcalendar_start_year|pnvarprepfordisplay]-->" />
-		</div>
-		<div class="pn-adminformrow">
 			<label for="crpcalendar_notification"><!--[pnml name="_CRPCALENDAR_NOTIFICATION_MAIL" html=1]--></label>
 			<input id="crpcalendar_notification" type="text" name="crpcalendar_notification" maxlength="64" size="32" value="<!--[$crpcalendar_notification|pnvarprepfordisplay]-->" />
 		</div>
 		<div class="pn-adminformrow">
 			<label for="crpcalendar_enable_partecipation"><!--[pnml name="_CRPCALENDAR_ENABLE_PARTECIPATION" html=1]--></label>
 			<input id="crpcalendar_enable_partecipation" type="checkbox" name="enable_partecipation"<!--[if $enable_partecipation]--> checked="checked"<!--[/if]--> />
+		</div>		
+		<div class="pn-adminformrow">
+			<label for="crpcalendar_mandatory_description"><!--[pnml name="_CRPCALENDAR_MANDATORY_DESCRIPTION"]--></label>
+			<input id="crpcalendar_mandatory_description" type="checkbox" name="mandatory_description"<!--[if $mandatory_description]--> checked="checked"<!--[/if]--> />
+		</div>
+		<div class="pn-adminformrow">
+			<label for="crpcalendar_submitted_status"><!--[pnml name="_CRPCALENDAR_SUBMITTED_STATUS" html=1]--></label>
+			<select id="crpcalendar_submitted_status" name="submitted_status">
+				<option value="A"<!--[if $submitted_status eq 'A']--> selected="selected"<!--[/if]-->><!--[pnml name="_ACTIVE" html=1]--></option>
+				<option value="P"<!--[if $submitted_status eq 'P']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_PENDING"]--></option>
+				<option value="R"<!--[if $submitted_status eq 'R']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_REJECTED" html=1]--></option>
+			</select>
+		</div>
+		<div class="pn-adminformrow">
+			<label for="crpcalendar_multiple_insert"><!--[pnml name="_CRPCALENDAR_MULTIPLE_INSERT"]--></label>
+			<input id="crpcalendar_multiple_insert" type="checkbox" name="multiple_insert"<!--[if $multiple_insert]--> checked="checked"<!--[/if]--> />
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend><!--[pnml name=_CRPCALENDAR_VISUALIZATION html=1]--></legend>
+		<div class="pn-adminformrow">
+			<label for="crpcalendar_theme"><!--[pnml name="_CRPCALENDAR_THEME]--></label>
+	        <!--[html_options options=$theme_options id=crpcalendar_theme name=crpcalendar_theme selected=$crpcalendar_theme]-->
+		</div>
+		<div class="pn-adminformrow">
+			<label for="crpcalendar_start_year"><!--[pnml name="_CRPCALENDAR_START_YEAR" html=1]--></label>
+			<input id="crpcalendar_start_year" type="text" name="crpcalendar_start_year" maxlength="4" size="7" value="<!--[$crpcalendar_start_year|pnvarprepfordisplay]-->" />
 		</div>
 		<div class="pn-adminformrow">
 			<label for="crpcalendar_daylist_categorized"><!--[pnml name="_CRPCALENDAR_DAYLIST_CATEGORIZED" html=1]--></label>
@@ -48,19 +67,7 @@
 			<label for="crpcalendar_yearlist_categorized"><!--[pnml name="_CRPCALENDAR_YEARLIST_CATEGORIZED" html=1]--></label>
 			<input id="crpcalendar_yearlist_categorized" type="checkbox" name="yearlist_categorized"<!--[if $yearlist_categorized]--> checked="checked"<!--[/if]--> />
 		</div>
-		<div class="pn-adminformrow">
-			<label for="crpcalendar_mandatory_description"><!--[pnml name="_CRPVIDEO_MANDATORY_DESCRIPTION"]--></label>
-			<input id="crpcalendar_mandatory_description" type="checkbox" name="mandatory_description"<!--[if $mandatory_description]--> checked="checked"<!--[/if]--> />
-		</div>
-		<div class="pn-adminformrow">
-				<label for="crpcalendar_submitted_status"><!--[pnml name="_CRPCALENDAR_SUBMITTED_STATUS" html=1]--></label>
-				<select id="crpcalendar_submitted_status" name="submitted_status">
-					<option value="A"<!--[if $submitted_status eq 'A']--> selected="selected"<!--[/if]-->><!--[pnml name="_ACTIVE" html=1]--></option>
-					<option value="P"<!--[if $submitted_status eq 'P']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_PENDING"]--></option>
-					<option value="R"<!--[if $submitted_status eq 'R']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_REJECTED" html=1]--></option>
-				</select>
-			</div>
-	</fieldset>
+	</fieldset>	
 	<fieldset>
 		<legend><!--[pnml name=_CRPCALENDAR_IMAGES html=1]--></legend>		
 		<div class="pn-adminformrow">
