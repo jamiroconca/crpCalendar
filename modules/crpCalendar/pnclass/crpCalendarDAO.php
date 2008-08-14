@@ -1307,6 +1307,29 @@ class crpCalendarDAO
 	}
 
 	/**
+	 * verify event existence
+	 *
+	 * @param string $title event title
+	 * @param string $location event location
+	 * @param string $start_date event start
+	 *
+	 * @return int count
+	 */
+	function existEvent($title= null, $location= null, $start_date= null)
+	{
+		$pntable= pnDBGetTables();
+		$crpcalendarcolumn= $pntable['crpcalendar_column'];
+
+		$where= "($crpcalendarcolumn[title] = '" . DataUtil :: formatForStore($title) . "' " .
+		"AND $crpcalendarcolumn[location] = '" . DataUtil :: formatForStore($location) . "' ".
+		"AND $crpcalendarcolumn[start_date] = '" . DataUtil :: formatForStore($start_date) . "')";
+
+		$count= DBUtil :: selectObjectCount('crpcalendar', $where);
+
+		return $count > 0;
+	}
+
+	/**
 	 * validate submitted data
 	 *
 	 * @param array $data submitted data
@@ -1356,6 +1379,10 @@ class crpCalendarDAO
 		elseif ($data['event']['url'] && !pnVarValidate($data['event']['url'], 'url'))
 		{
 			LogUtil :: registerError(_CRPCALENDAR_INVALID_URL);
+		}
+		elseif (empty ($data['event']['__CATEGORIES__']['Main']) && pnModGetVar('crpCalendar', 'enablecategorization'))
+		{
+			LogUtil :: registerError(_CRPCALENDAR_ERROR_EVENT_NO_CATEGORY);
 		}
 		/*
 		elseif($data['event']['contact'] && !pnVarValidate($data['event']['contact'],'email'))
