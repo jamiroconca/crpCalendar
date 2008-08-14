@@ -1,5 +1,7 @@
 crpCalendar
-v0.4.8 - ??? august 2008
+v0.4.9 - 14 august 2008
+- added event multiple start dates for admins, by module vars
+v0.4.8 - 14 august 2008
 - added module var for events submitted by users initial status
 v0.4.7 - 13 august 2008
 - added setting for mandatory/not mandatory event content
