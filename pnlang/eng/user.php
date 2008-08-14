@@ -66,7 +66,11 @@ define('_CRPCALENDAR_RSS','crpCalendar feed');
 define('_CRPCALENDAR_ERROR_DOCUMENT_FILE_SIZE_TOO_BIG','Document size not allowed');
 define('_CRPCALENDAR_ERROR_DOCUMENT_NO_FILE','Document file not uploaded');
 define('_CRPCALENDAR_ERROR_IMAGE_FILE_SIZE_TOO_BIG','Image File size not allowed');
-define('_CRPCALENDAR_ERROR_IMAGE_NO_FILE','File not uploaded');
+define('_CRPCALENDAR_ERROR_IMAGE_NO_FILE','Image file not uploaded');
+define('_CRPCALENDAR_ERROR_EVENT_EXISTENT','Event already existent');
+define('_CRPCALENDAR_ERROR_EVENT_NO_CATEGORY','Categorisation is enabled, choose a category');
+define('_CRPCALENDAR_INVALID_NOTIFICATION','Invalid notification e-mail address');
+define('_CRPCALENDAR_IMAGE_INVALID_TYPE','Image invalid type');
 define('_CRPCALENDAR_INVALID_URL','Invalid URL');
 
 // days label

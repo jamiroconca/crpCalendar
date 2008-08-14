@@ -47,6 +47,7 @@ define('_CRPCALENDAR_URL_HINT','URL (with http://)');
 // form define
 define('_CRPCALENDAR_CURRENT_FILE','Current file');
 define('_CRPCALENDAR_DELETE_FILE','Delete file');
+define('_CRPCALENDAR_EVENT_OTHER_DATE','Other start date for this event');
 define('_CRPCALENDAR_FROM_DATE','Including from date');
 define('_CRPCALENDAR_NONE', 'None');
 define('_CRPCALENDAR_NOT_REVERSIBLE','action not reversible, events will be deleted from database');
@@ -63,7 +64,8 @@ define('_CRPCALENDAR_FILE_DIMENSION','Max upload image size (bytes)');
 define('_CRPCALENDAR_GD_AVAILABLE','GD Library');
 define('_CRPCALENDAR_IMAGE_RESIZE','Image would be resized to');
 define('_CRPCALENDAR_IMAGES','Images');
-define('_CRPVIDEO_MANDATORY_DESCRIPTION','Mandatory event description');
+define('_CRPCALENDAR_MANDATORY_DESCRIPTION','Mandatory event description');
+define('_CRPCALENDAR_MULTIPLE_INSERT','Use multiple dates for admin\'s creation');
 define('_CRPCALENDAR_NOTIFICATION_MAIL','Notification for user\'s creation (none if empty)');
 define('_CRPCALENDAR_OTHER_MODULES','Other modules');
 define('_CRPCALENDAR_START_YEAR','Calendar start Year');
@@ -73,6 +75,7 @@ define('_CRPCALENDAR_USERLIST_IMAGE','Show thumbnails in user list');
 define('_CRPCALENDAR_USERLIST_WIDTH','User list thumbnail width');
 define('_CRPCALENDAR_SUBMITTED_STATUS','Initial status for events submitted by users');
 define('_CRPCALENDAR_THEME','crpCalendar theme');
+define('_CRPCALENDAR_VISUALIZATION','Visualization');
 define('_CRPCALENDAR_YEARLIST_CATEGORIZED','Categorized year-list view');
 
 // RSS define
@@ -89,6 +92,8 @@ define('_CRPCALENDAR_ERROR_DOCUMENT_FILE_SIZE_TOO_BIG','Document size not allowe
 define('_CRPCALENDAR_ERROR_DOCUMENT_NO_FILE','Document file not uploaded');
 define('_CRPCALENDAR_ERROR_IMAGE_FILE_SIZE_TOO_BIG','Image File size not allowed');
 define('_CRPCALENDAR_ERROR_IMAGE_NO_FILE','Image file not uploaded');
+define('_CRPCALENDAR_ERROR_EVENT_EXISTENT','Event already existent');
+define('_CRPCALENDAR_ERROR_EVENT_NO_CATEGORY','Categorisation is enabled, choose a category');
 define('_CRPCALENDAR_INVALID_NOTIFICATION','Invalid notification e-mail address');
 define('_CRPCALENDAR_IMAGE_INVALID_TYPE','Image invalid type');
 define('_CRPCALENDAR_INVALID_URL','Invalid URL');
