@@ -891,12 +891,44 @@ class crpCalendar
 			return pnRedirect(pnModUrl('crpCalendar', $returnType, 'new'));
 		}
 
-		$eventid = $this->dao->create($inputValues);
+		// create if non existent
+		if (!$this->dao->existEvent($inputValues['event']['title'], $inputValues['event']['location'], $inputValues['event']['start_date']))
+			$eventid = $this->dao->create($inputValues);
+		else
+			LogUtil :: registerError(_CRPCALENDAR_ERROR_EVENT_EXISTENT);
 
 		if (!$eventid)
 		{
 			// Error
 			return pnRedirect(pnModUrl('crpCalendar', $returnType, 'new'));
+		}
+
+		// if multiple creation is enabled
+		if ($inputValues['serial']['startDay'] && $inputValues['modvars']['multiple_insert'])
+		{
+			foreach ($inputValues['serial']['startDay'] as $kserial => $vserial)
+			{
+				$serialStartDate = $this->buildDate($vserial, $inputValues['serial']['startMonth'][$kserial], $inputValues['serial']['startYear'][$kserial]);
+				if (!$inputValues['event']['day_event'])
+				{
+					// calculate end translation
+					$serialDayDiff = $inputValues['event']['endDay'] - $inputValues['event']['startDay'];
+					$serialMonthDiff = $inputValues['event']['endMonth'] - $inputValues['event']['startMonth'];
+					$serialYearDiff = $inputValues['event']['endYear'] - $inputValues['event']['startYear'];
+					$serialEndDate = $this->buildDate($vserial + $serialDayDiff,
+																						$inputValues['serial']['startMonth'][$kserial]+$serialMonthDiff,
+																						$inputValues['serial']['startYear'][$kserial]+$serialYearDiff);
+				}
+				else
+					$serialEndDate = $serialStartDate;
+
+				$inputValues['event']['start_date'] = $serialStartDate . ' ' . $startTime;
+				$inputValues['event']['end_date'] = $serialEndDate . ' ' . $endTime;
+
+				// don't create in the same day
+				if (!$this->dao->existEvent($inputValues['event']['title'], $inputValues['event']['location'], $inputValues['event']['start_date']))
+					$serialid = $this->dao->create($inputValues);
+			}
 		}
 
 		// notify by mail if not an admin
@@ -1345,6 +1377,8 @@ class crpCalendar
 		pnModSetVar('crpCalendar', 'mandatory_description', $mandatory_description);
 		$submitted_status = FormUtil :: getPassedValue('submitted_status', 'P', 'POST');
 		pnModSetVar('crpCalendar', 'submitted_status', $submitted_status);
+		$multiple_insert = (bool) FormUtil :: getPassedValue('multiple_insert', false, 'POST');
+		pnModSetVar('crpCalendar', 'multiple_insert', $multiple_insert);
 
 		// Let any other modules know that the modules configuration has been updated
 		pnModCallHooks('module', 'updateconfig', 'crpCalendar', array (
@@ -1437,6 +1471,7 @@ class crpCalendar
 		$event = FormUtil :: getPassedValue('event', null, 'POST');
 		$event_image = FormUtil :: getPassedValue('event_image', null, 'FILES');
 		$event_document = FormUtil :: getPassedValue('event_document', null, 'FILES');
+		$serial = FormUtil :: getPassedValue('serial', null, 'POST');
 
 		(!empty ($event['objectid'])) ? $event['eventid'] = $event['objectid'] : '';
 		(!$event['day_event']) ? $event['day_event'] = 0 : '';
@@ -1451,7 +1486,7 @@ class crpCalendar
 		// get all module vars
 		$modvars = pnModGetVar('crpCalendar');
 
-		$data = compact('eventid', 'objectid', 'event', 'event_image', 'event_document', 'mainCat', 'modvars');
+		$data = compact('eventid', 'objectid', 'event', 'event_image', 'event_document', 'mainCat', 'modvars', 'serial');
 
 		return $data;
 	}
