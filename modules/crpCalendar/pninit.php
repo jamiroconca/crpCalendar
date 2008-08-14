@@ -63,6 +63,7 @@ function crpCalendar_init() {
 	pnModSetVar('crpCalendar', 'yearlist_categorized', false);
 	pnModSetVar('crpCalendar', 'mandatory_description', true);
 	pnModSetVar('crpCalendar', 'submitted_status', 'P');
+	pnModSetVar('crpCalendar', 'multiple_insert', false);
 
 	// Initialisation successful
 	return true;
@@ -155,6 +156,10 @@ function crpCalendar_upgrade($oldversion)
   		return crpCalendar_upgrade("0.4.8");
   		break;
   	case "0.4.8":
+  		pnModSetVar('crpCalendar', 'multiple_insert', false);
+  		return crpCalendar_upgrade("0.4.9");
+  		break;
+  	case "0.4.9":
   		break;
   }
 	return true;
