@@ -47,6 +47,7 @@ define('_CRPCALENDAR_URL_HINT','URL (iniziare con http://)');
 // form define
 define('_CRPCALENDAR_CURRENT_FILE','File corrente');
 define('_CRPCALENDAR_DELETE_FILE','Elimina file');
+define('_CRPCALENDAR_EVENT_OTHER_DATE','Evento da inserire anche per le date');
 define('_CRPCALENDAR_FROM_DATE','Inclusi dalla data');
 define('_CRPCALENDAR_NONE', 'Nessuno');
 define('_CRPCALENDAR_NOT_REVERSIBLE','azione non reversible, gli eventi verranno eliminati dal database');
@@ -63,7 +64,8 @@ define('_CRPCALENDAR_FILE_DIMENSION','Massima dimensione delle immagini per l\'u
 define('_CRPCALENDAR_GD_AVAILABLE','GD Library');
 define('_CRPCALENDAR_IMAGE_RESIZE','Le immagini saranno scalate (dal browser) a');
 define('_CRPCALENDAR_IMAGES','Immagini');
-define('_CRPVIDEO_MANDATORY_DESCRIPTION','Contenuto dell\'evento obbligatorio');
+define('_CRPCALENDAR_MANDATORY_DESCRIPTION','Contenuto dell\'evento obbligatorio');
+define('_CRPCALENDAR_MULTIPLE_INSERT','Date multiple per creazioni amministrative');
 define('_CRPCALENDAR_NOTIFICATION_MAIL','Indirizzo per notifiche di creazione eventi (nessuna se vuoto)');
 define('_CRPCALENDAR_OTHER_MODULES','Altri moduli');
 define('_CRPCALENDAR_START_YEAR','Anno d\'inizio del calendario');
@@ -73,6 +75,7 @@ define('_CRPCALENDAR_USERLIST_IMAGE','Thumbnail nell\'elenco utenti');
 define('_CRPCALENDAR_USERLIST_WIDTH','Larghezza delle thumbnail nell\'elenco utenti');
 define('_CRPCALENDAR_SUBMITTED_STATUS','Stato iniziale degli eventi inseriti dagli utenti');
 define('_CRPCALENDAR_THEME','crpCalendar theme');
+define('_CRPCALENDAR_VISUALIZATION','Visualizzazione');
 define('_CRPCALENDAR_YEARLIST_CATEGORIZED','Vista annuale categorizzata');
 
 // RSS define
@@ -89,6 +92,8 @@ define('_CRPCALENDAR_ERROR_DOCUMENT_FILE_SIZE_TOO_BIG','Dimiensioni del document
 define('_CRPCALENDAR_ERROR_DOCUMENT_NO_FILE','File del documento non caricato');
 define('_CRPCALENDAR_ERROR_IMAGE_FILE_SIZE_TOO_BIG','Dimensioni dell\'immagine non permesse');
 define('_CRPCALENDAR_ERROR_IMAGE_NO_FILE','Immagine non caricata');
+define('_CRPCALENDAR_ERROR_EVENT_EXISTENT','Evento pre-esistente');
+define('_CRPCALENDAR_ERROR_EVENT_NO_CATEGORY','Categorizzazione abilitata, scegliere una categoria');
 define('_CRPCALENDAR_INVALID_NOTIFICATION','E-mail per le notifiche in formato non valido');
 define('_CRPCALENDAR_IMAGE_INVALID_TYPE','Formato di immagine non valido');
 define('_CRPCALENDAR_INVALID_URL','URL non valido');
