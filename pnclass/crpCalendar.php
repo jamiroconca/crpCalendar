@@ -256,7 +256,7 @@ class crpCalendar
 		$navigationValues['endDate'] = DateUtil :: getDatetime(DateUtil :: parseUIDateTime($endYear));
 		$navigationValues['sortOrder'] = 'ASC';
 		// reset page limit for daylist
-		$navigationValues['modvars']['itemsperpage'] = '9999';
+		$navigationValues['modvars']['itemsperpage'] = '-1';
 		// Get all matching pages
 		$items = pnModAPIFunc('crpCalendar', 'user', 'getall', $navigationValues);
 
@@ -392,7 +392,7 @@ class crpCalendar
 		$navigationValues['endDate'] = DateUtil :: getDatetime($this->forwardToLastDOW(DateUtil :: parseUIDateTime($monthLastDay)));
 		$navigationValues['sortOrder'] = 'ASC';
 		// reset page limit for monthlist
-		$navigationValues['modvars']['itemsperpage'] = '9999';
+		$navigationValues['modvars']['itemsperpage'] = '-1';
 
 		// Get all matching events
 		$items = pnModAPIFunc('crpCalendar', 'user', 'getall', $navigationValues);
@@ -441,7 +441,7 @@ class crpCalendar
 		$navigationValues['endDate'] = DateUtil :: getDatetime($this->forwardToLastDOW(DateUtil :: parseUIDateTime($weekDay)));
 		$navigationValues['sortOrder'] = 'ASC';
 		// reset page limit for weeklist
-		$navigationValues['modvars']['itemsperpage'] = '9999';
+		$navigationValues['modvars']['itemsperpage'] = '-1';
 
 		// Get all matching events
 		$items = pnModAPIFunc('crpCalendar', 'user', 'getall', $navigationValues);
@@ -499,7 +499,7 @@ class crpCalendar
 		$navigationValues['endDate'] = DateUtil :: getDatetime(DateUtil :: parseUIDateTime($tomorrow));
 		$navigationValues['sortOrder'] = 'ASC';
 		// reset page limit for daylist
-		$navigationValues['modvars']['itemsperpage'] = '9999';
+		$navigationValues['modvars']['itemsperpage'] = '-1';
 		// Get all matching events
 		$items = pnModAPIFunc('crpCalendar', 'user', 'getall', $navigationValues);
 
@@ -649,8 +649,8 @@ class crpCalendar
 	function listAttendees()
 	{
 		$navigationValues = $this->collectNavigationFromInput();
-		// TODO : 9999 -> $navigationValues['modvars'] to be changed when Zikula ticket #49 is resolved
-		$items = $this->dao->getEventPartecipations(null, $navigationValues['startnum'], 9999, null, 'A', 'DESC', null, 'uid');
+		// TODO : -1 -> $navigationValues['modvars'] to be changed when Zikula ticket #49 is resolved
+		$items = $this->dao->getEventPartecipations(null, $navigationValues['startnum'], array('itemsperpage','-1'), null, 'A', 'DESC', null, 'uid');
 
 		$rows = array ();
 		$exports = array ();
@@ -906,6 +906,9 @@ class crpCalendar
 		// if multiple creation is enabled
 		if ($inputValues['serial']['startDay'] && $inputValues['modvars']['multiple_insert'])
 		{
+			$serialHourDiff = $inputValues['event']['endHour'] - $inputValues['event']['startHour'];
+			$serialMinuteDiff = $inputValues['event']['endMinute'] - $inputValues['event']['startMinute'];
+
 			foreach ($inputValues['serial']['startDay'] as $kserial => $vserial)
 			{
 				$serialStartDate = $this->buildDate($vserial, $inputValues['serial']['startMonth'][$kserial], $inputValues['serial']['startYear'][$kserial]);
@@ -922,8 +925,11 @@ class crpCalendar
 				else
 					$serialEndDate = $serialStartDate;
 
-				$inputValues['event']['start_date'] = $serialStartDate . ' ' . $startTime;
-				$inputValues['event']['end_date'] = $serialEndDate . ' ' . $endTime;
+				$serialStartTime = $this->buildTime($inputValues['serial']['startMinute'][$kserial], $inputValues['serial']['startHour'][$kserial]);
+				$serialEndTime = $this->buildTime($inputValues['serial']['startMinute'][$kserial]+$serialMinuteDiff, $inputValues['serial']['startHour'][$kserial]+$serialHourDiff);
+
+				$inputValues['event']['start_date'] = $serialStartDate . ' ' . $serialStartTime;
+				$inputValues['event']['end_date'] = $serialEndDate . ' ' . $serialEndTime;
 
 				// don't create in the same day
 				if (!$this->dao->existEvent($inputValues['event']['title'], $inputValues['event']['location'], $inputValues['event']['start_date']))
