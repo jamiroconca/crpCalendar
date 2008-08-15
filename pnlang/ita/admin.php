@@ -45,6 +45,7 @@ define('_CRPCALENDAR_URL','URL');
 define('_CRPCALENDAR_URL_HINT','URL (iniziare con http://)');
 
 // form define
+define('_CRPCALENDAR_CREATE_REENTER','Create and reenter');
 define('_CRPCALENDAR_CURRENT_FILE','File corrente');
 define('_CRPCALENDAR_DELETE_FILE','Elimina file');
 define('_CRPCALENDAR_EVENT_OTHER_DATE','Evento da inserire anche per le date');
