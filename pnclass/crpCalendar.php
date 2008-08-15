@@ -850,10 +850,14 @@ class crpCalendar
 	function createEvent()
 	{
 		$returnType = '';
+		$returnFunc = 'view';
 		$inputValues = array ();
 
 		if (!$this->authAction(ACCESS_EDIT))
+		{
 			$returnType = 'user';
+			$returnFunc = pnSessionGetVar('crpCalendar_choosed_view');
+		}
 		else
 			$returnType = 'admin';
 
@@ -947,7 +951,7 @@ class crpCalendar
 		else
 			pnSessionDelVar('crpCalendar_temp_values');
 
-		return pnRedirect(pnModURL('crpCalendar', $returnType, 'view'));
+		return pnRedirect(pnModURL('crpCalendar', $returnType, $returnFunc));
 	}
 
 	/**
@@ -1041,9 +1045,13 @@ class crpCalendar
 	function updateEvent()
 	{
 		$inputValues = array ();
+		$returnFunc = 'view';
 
 		if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_EDIT))
+		{
 			$returnType = 'user';
+			$returnFunc = pnSessionGetVar('crpCalendar_choosed_view');
+		}
 		else
 			$returnType = 'admin';
 
@@ -1099,7 +1107,7 @@ class crpCalendar
 		// all went fine
 		LogUtil :: registerStatus(_UPDATESUCCEDED);
 
-		return pnRedirect(pnModURL('crpCalendar', $returnType, 'view'));
+		return pnRedirect(pnModURL('crpCalendar', $returnType, $returnFunc));
 	}
 
 	/**
