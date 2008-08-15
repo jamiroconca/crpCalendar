@@ -153,9 +153,13 @@ function addDynamicTextRow(propId)
 		$('dynamic_datefield-dd').disabled = false;
 		$('dynamic_datefield-mm').disabled = false;
 		$('dynamic_datefield').disabled = false;
+		$('dynamic_timefield-hh').disabled = false;
+		$('dynamic_timefield-mm').disabled = false;
 		$('dynamic_datefield-dd').name = 'serial[startDay][]';
 		$('dynamic_datefield-mm').name = 'serial[startMonth][]';
-		$('dynamic_datefield').name = 'serial[startYear][]';		
+		$('dynamic_datefield').name = 'serial[startYear][]';
+		$('dynamic_timefield-hh').name = 'serial[startHour][]';
+		$('dynamic_timefield-mm').name = 'serial[startMinute][]';		
 	}
 	else
 	{
@@ -174,6 +178,8 @@ function removeDynamicTextRow(propId)
 		$('dynamic_datefield-dd').disabled = true;
 		$('dynamic_datefield-mm').disabled = true;
 		$('dynamic_datefield').disabled = true;
+		$('dynamic_timefield-hh').disabled = true;
+		$('dynamic_timefield-mm').disabled = true;
 		$(propId).addClassName('disabledfield');
 	}
 }
