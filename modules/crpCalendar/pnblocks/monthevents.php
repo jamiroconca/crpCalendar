@@ -23,7 +23,7 @@ function crpCalendar_montheventsblock_init()
 
 /**
  * get information on block
- * 
+ *
  */
 function crpCalendar_montheventsblock_info()
 {
@@ -47,18 +47,18 @@ function crpCalendar_montheventsblock_display($blockinfo)
   // security check
   if (!SecurityUtil::checkPermission( 'Montheventsblock::', "$blockinfo[title]::", ACCESS_READ))
     return;
-  		
+
 	if(!pnModAvailable('crpCalendar'))
 		return;
-	
+
 	$crpcalendar = new crpCalendar();
-  
+
   // get the current language
   $currentlang = pnUserGetLang();
 
   // Break out options from our content field
   $vars = pnBlockVarsFromContent($blockinfo['content']);
-    
+
   $date = $crpcalendar->timeToDMY(time());
 
 	$days = DateUtil :: getMonthDates($date['m'], $date['y']);
@@ -71,18 +71,18 @@ function crpCalendar_montheventsblock_display($blockinfo)
 	$apiargs['sortOrder'] = 'ASC';
 	$apiargs['active'] = 'A';
 	// reset page limit for daylist
-	$apiargs['modvars']['itemsperpage'] = '9999';
+	$apiargs['modvars']['itemsperpage'] = '-1';
 
   // call the api
   $items = pnModAPIFunc('crpCalendar', 'user', 'getall', $apiargs);
-  
+
   // expand days array
 	$crpcalendar->expandFirstDOW(DateUtil :: parseUIDateTime($monthFirstDay), $daysexpanded);
 	$crpcalendar->expandLastDOW(DateUtil :: parseUIDateTime($monthLastDay), $daysexpanded);
-  
+
   // create the output object
   $pnRender = pnRender::getInstance('crpCalendar',false);
-	
+
 	$pnRender->assign('displayweek', $vars['displayweek']);
 	$pnRender->assign('displayevents', $vars['displayevents']);
   $pnRender->assign('events', $items);
@@ -112,13 +112,13 @@ function crpCalendar_montheventsblock_modify($blockinfo)
   // Defaults
   if (empty($vars['displayweek']))
     $vars['displayweek'] = null;
-    
+
   if (!isset($vars['displayevents']))
       $vars['displayevents'] = null;
 
   // Create output object
   $pnRender = pnRender::getInstance('crpCalendar', false);
-			
+
   // assign the block vars
   $pnRender->assign($vars);
 
