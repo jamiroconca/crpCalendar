@@ -321,13 +321,11 @@ class crpCalendarDAO
 		);
 
 		if (isset ($eventid) && is_numeric($eventid))
-		{
 			$object= DBUtil :: selectObjectByID('crpcalendar', $eventid, 'eventid', '', $permFilter);
-		} elseif ($title) {
-        $item = DBUtil::selectObjectByID('crpcalendar', $title, 'urltitle', '', $permFilter);
-    }
+		elseif ($title)
+      $object = DBUtil::selectObjectByID('crpcalendar', $title, 'urltitle', '', $permFilter);
 
-		if ($extend)
+		if ($extend && $object)
 		{
 			$object['image']= $this->getFile($eventid, 'image');
 			$object['document']= $this->getFile($eventid, 'document');
