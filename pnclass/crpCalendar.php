@@ -704,8 +704,6 @@ class crpCalendar
 
 		// Get the event
 		$item = $this->dao->getAdminData($eventid);
-		$item['image'] = $this->dao->getFile($eventid, 'image');
-		$item['document'] = $this->dao->getFile($eventid, 'document');
 
 		// get all module vars
 		$modvars = pnModGetVar('crpCalendar');
@@ -790,7 +788,7 @@ class crpCalendar
 	{
 		// Get the event
 		$item = $this->dao->getAdminData($eventid);
-		$item['image'] = $this->dao->getFile($eventid, 'image');
+
 		// get all module vars
 		$modvars = pnModGetVar('crpCalendar');
 
@@ -943,7 +941,11 @@ class crpCalendar
 
 		// all went fine
 		LogUtil :: registerStatus(_CREATESUCCEDED . ' ' . (($returnType == 'user' && $inputValues['modvars']['submitted_status']!='A') ? _CRPCALENDAR_WAITING : ''));
-		pnSessionDelVar('crpCalendar_temp_values');
+
+		if ($inputValues['reenter'])
+			return pnRedirect(pnModUrl('crpCalendar', $returnType, 'new'));
+		else
+			pnSessionDelVar('crpCalendar_temp_values');
 
 		return pnRedirect(pnModURL('crpCalendar', $returnType, 'view'));
 	}
@@ -1467,7 +1469,6 @@ class crpCalendar
 	{
 		$eventid = FormUtil :: getPassedValue('eventid', null);
 		$objectid = FormUtil :: getPassedValue('objectid', null);
-		$type = FormUtil :: getPassedValue('type');
 
 		if (!empty ($objectid))
 		{
@@ -1478,6 +1479,7 @@ class crpCalendar
 		$event_image = FormUtil :: getPassedValue('event_image', null, 'FILES');
 		$event_document = FormUtil :: getPassedValue('event_document', null, 'FILES');
 		$serial = FormUtil :: getPassedValue('serial', null, 'POST');
+		$reenter = FormUtil :: getPassedValue('reenter', null, 'POST');
 
 		(!empty ($event['objectid'])) ? $event['eventid'] = $event['objectid'] : '';
 		(!$event['day_event']) ? $event['day_event'] = 0 : '';
@@ -1492,7 +1494,7 @@ class crpCalendar
 		// get all module vars
 		$modvars = pnModGetVar('crpCalendar');
 
-		$data = compact('eventid', 'objectid', 'event', 'event_image', 'event_document', 'mainCat', 'modvars', 'serial');
+		$data = compact('eventid', 'objectid', 'event', 'event_image', 'event_document', 'mainCat', 'modvars', 'serial', 'reenter');
 
 		return $data;
 	}
