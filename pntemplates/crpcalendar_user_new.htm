@@ -84,14 +84,14 @@
 		</div>
 	    <div class="pn-formrow" id="start_date_block">
 			<label><!--[pnml name="_CRPCALENDAR_START_DATE" html=1]--></label>
-			<!--[assign var="start_date" value=$startYear|cat:"-"|cat:$startMonth|cat:"-"|cat:$startDay|cat:" "|cat:$startHour|cat:":"|cat:$startMinute]-->
+			<!--[if $startYear]--><!--[assign var="start_date" value=$startYear|cat:"-"|cat:$startMonth|cat:"-"|cat:$startDay|cat:" "|cat:$startHour|cat:":"|cat:$startMinute]--><!--[/if]-->
 			<!--[html_select_date prefix="start" end_year="+4" time=$start_date field_array=event display_months=false display_years=false id="start_datefield-dd"]-->
 			<!--[html_select_date prefix="start" end_year="+4" time=$start_date field_array=event display_days=false display_years=false id="start_datefield-mm"]-->
 			<!--[html_select_date prefix="start" start_year="-4" end_year="+4" time=$start_date field_array=event display_days=false display_months=false id="start_datefield" class="highlight-days-67 no-transparency split-date"]-->&nbsp;&nbsp;<!--[html_select_time prefix="start" minute_interval="15" use_24_hours=true display_seconds=no time=$start_date field_array=event]-->
 		</div>
 		<div class="pn-formrow" id="end_date_block">
 			<label><!--[pnml name="_CRPCALENDAR_END_DATE" html=1]--></label>
-			<!--[assign var="end_date" value=$endYear|cat:"-"|cat:$endMonth|cat:"-"|cat:$endDay|cat:" "|cat:$endHour|cat:":"|cat:$endMinute]-->
+			<!--[if $endYear]--><!--[assign var="end_date" value=$endYear|cat:"-"|cat:$endMonth|cat:"-"|cat:$endDay|cat:" "|cat:$endHour|cat:":"|cat:$endMinute]--><!--[/if]-->
 			<!--[html_select_date prefix="end" end_year="+4" time=$end_date field_array=event display_months=false display_years=false id="end_datefield-dd"]-->
 			<!--[html_select_date prefix="end" end_year="+4" time=$end_date field_array=event display_days=false display_years=false id="end_datefield-mm"]-->
 			<!--[html_select_date prefix="end" start_year="-4" end_year="+4" time=$end_date field_array=event display_days=false display_months=false id="end_datefield" class="highlight-days-67 no-transparency split-date"]-->&nbsp;&nbsp;<!--[html_select_time prefix="end" minute_interval="15" use_24_hours=true display_seconds=no time=$end_date field_array=event]--> <br />
