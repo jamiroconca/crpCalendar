@@ -78,7 +78,9 @@ function crpCalendar_searchapi_search($args)
 
   $query = "SELECT $eventscolumn[title] as title,
                    $eventscolumn[event_text] as event_text,
+									 $eventscolumn[location] as location,
 									 $eventscolumn[cr_date] as cr_date,
+									 $eventscolumn[start_date] as start_date,
 									 $eventscolumn[eventid] as eventid FROM $eventstable WHERE ";
   foreach($w as $word) {
       if ($flag) {
@@ -124,14 +126,30 @@ function crpCalendar_searchapi_search($args)
   // Process the result set and insert into search result table
   for (; !$result->EOF; $result->MoveNext()) {
       $event = $result->GetRowAssoc(2);
-      if (SecurityUtil::checkPermission('crpCalendar::', "$item[cr_uid]:$item[title]:$item[eventid]", ACCESS_READ)) {
-          $sql = $insertSql . '('
-                 . '\'' . DataUtil::formatForStore($event['title']) . '\', '
-                 . '\'' . DataUtil::formatForStore($event['event_text']) . '\', '
-                 . '\'' . DataUtil::formatForStore($event['eventid']) . '\', '
-                 . '\'' . 'crpCalendar' . '\', '
-                 . '\'' . DataUtil::formatForStore($event['cr_date']) . '\', '
-                 . '\'' . DataUtil::formatForStore($sessionId) . '\')';
+
+			// add date to title
+      $event['title'] .= " / " . DataUtil::formatForStore(DateUtil :: formatDatetime($event['start_date'], '%d-%m-%Y'));
+
+      if (pnModAvailable('locations') && pnModGetVar('crpCalendar', 'enable_locations') && is_numeric($event['location']))
+			{
+				$location = pnModAPIFunc('locations', 'user', 'getLocationByID', array (
+					'locationid' => $event['location']
+				));
+				$event['location'] = $location['name'] . ", " . $location['street'] . " " . $location['city'];
+			}
+
+			// add location to title
+			if ($event['location'])
+				$event['title'] .= " - " . DataUtil::formatForStore($event['location']);
+
+      if (SecurityUtil::checkPermission('crpCalendar::', "$event[cr_uid]:$event[title]:$event[eventid]", ACCESS_READ)) {
+          $sql = $insertSql . "(
+                  '" . DataUtil::formatForStore($event['title']) . "',
+                  '" . DataUtil::formatForStore($event['event_text']) . "',
+                  '" . DataUtil::formatForStore($event['eventid']) . "',
+                  '" . 'crpCalendar' . "',
+                  '" . DataUtil::formatForStore($event['cr_date']) . "',
+                  '" . DataUtil::formatForStore($sessionId) . "')";
           $insertResult = DBUtil::executeSQL($sql);
           if (!$insertResult) {
               return LogUtil::registerError (_GETFAILED);
