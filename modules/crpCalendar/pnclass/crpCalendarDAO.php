@@ -58,7 +58,7 @@ class crpCalendarDAO
 											$bylocation=null)
 	{
 		(empty ($startnum)) ? $startnum= 1 : '';
-		(empty ($modvars['itemsperpage'])) ? $modvars['itemsperpage']= pnModGetVar('crpCalendar', 'itemsperpage') : '';
+		(empty ($modvars['itemsperpage'])) ? $modvars['itemsperpage']= '-1' : '';
 
 		if (!is_numeric($startnum) || !is_numeric($modvars['itemsperpage']))
 		{
@@ -305,7 +305,7 @@ class crpCalendarDAO
 	 *
 	 * @return array item value
 	 */
-	function getAdminData($eventid= null, $extend= true)
+	function getAdminData($eventid= null, $extend= true, $title=null)
 	{
 		// define the permission filter to apply
 		$permFilter= array (
@@ -323,7 +323,9 @@ class crpCalendarDAO
 		if (isset ($eventid) && is_numeric($eventid))
 		{
 			$object= DBUtil :: selectObjectByID('crpcalendar', $eventid, 'eventid', '', $permFilter);
-		}
+		} elseif ($title) {
+        $item = DBUtil::selectObjectByID('crpcalendar', $title, 'urltitle', '', $permFilter);
+    }
 
 		if ($extend)
 		{
