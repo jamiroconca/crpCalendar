@@ -2,6 +2,8 @@ crpCalendar
 v0.4.9 - 14 august 2008
 - added event multiple start dates for admins, by module vars
 - added re-enter admin creation button
+- added delete link in admin modify, near CANCEL and UPDATE
+- added date and location to title search result
 v0.4.8 - 14 august 2008
 - added module var for events submitted by users initial status
 - added check to prevent duplicate entries by "title,location,start_date"
