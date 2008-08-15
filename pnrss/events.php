@@ -20,7 +20,7 @@ function crpCalendar_events_rss_init()
 
 /**
  * get information on rss
- * 
+ *
  * @return array info
  */
 function crpCalendar_events_rss_info()
@@ -36,7 +36,7 @@ function crpCalendar_events_rss_info()
  * display rss
  *
  * @param array $rssinfo a rssinfo structure
- * 
+ *
  * @return array feed list
  */
 function crpCalendar_events_rss_feed($rssinfo)
@@ -61,7 +61,7 @@ function crpCalendar_events_rss_feed($rssinfo)
 	$apiargs['interval'] = $vars['limit'];
 	$apiargs['startnum'] = 1;
 	$apiargs['active'] = 1;
-	$apiargs['modvars']['itemsperpage'] = 9999;
+	$apiargs['modvars']['itemsperpage'] = '-1';
 	$apiargs['sortOrder'] = 'DESC';
 
 	if (pnModGetVar('crpCalendar','enablecategorization'))
@@ -71,7 +71,7 @@ function crpCalendar_events_rss_feed($rssinfo)
 			pn_exit('Unable to load class [CategoryRegistryUtil] ...');
 		if (!($class= Loader :: loadClass('CategoryUtil')))
 			pn_exit('Unable to load class [CategoryUtil] ...');
-		
+
 		$mainCat= CategoryRegistryUtil :: getRegisteredModuleCategory('crpCalendar', 'crpcalendar', 'Main', '/__SYSTEM__/Modules/crpCalendar');
 		$category= (int) FormUtil :: getPassedValue('events_category', null, 'GET');
 		if ($category)
@@ -80,7 +80,7 @@ function crpCalendar_events_rss_feed($rssinfo)
 			$apiargs['category'] = $category;
 		}
 	}
-	
+
 	// call the api
 	$items = pnModAPIFunc('crpCalendar', 'user', 'getall', $apiargs);
 
