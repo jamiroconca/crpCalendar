@@ -942,7 +942,7 @@ class crpCalendar
 			$this->notifyByMail($inputValues, $eventid);
 
 		// all went fine
-		LogUtil :: registerStatus(_CREATESUCCEDED . ' ' . (($returnType == 'user') ? _CRPCALENDAR_WAITING : ''));
+		LogUtil :: registerStatus(_CREATESUCCEDED . ' ' . (($returnType == 'user' && $inputValues['modvars']['submitted_status']!='A') ? _CRPCALENDAR_WAITING : ''));
 		pnSessionDelVar('crpCalendar_temp_values');
 
 		return pnRedirect(pnModURL('crpCalendar', $returnType, 'view'));
