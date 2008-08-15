@@ -13,7 +13,7 @@ Loader :: includeOnce('modules/crpCalendar/pnclass/crpCalendar.php');
 
 /**
  * retrieve list of events, filtered as specified
- * 
+ *
  * @return array events
  */
 function crpCalendar_userapi_getall($navigationValues)
@@ -23,20 +23,20 @@ function crpCalendar_userapi_getall($navigationValues)
 	{
 		return LogUtil::registerPermissionError();
 	}
-	
+
 	$calendar = new crpCalendar();
 
 	return $calendar->dao->adminList($navigationValues['startnum'], $navigationValues['category'],
 																		$navigationValues['clear'], $navigationValues['ignoreml'],
 																		$navigationValues['modvars'], $navigationValues['mainCat'], 'A',
 																		$navigationValues['interval'], $navigationValues['sortOrder'],
-																		$navigationValues['startDate'], $navigationValues['endDate'], 
+																		$navigationValues['startDate'], $navigationValues['endDate'],
 																		$navigationValues['typeList'], $navigationValues['bylocation']);
 }
 
 /**
  * retrieve list of partecipations, filtered by uid
- * 
+ *
  * @return array partecipations
  */
 function crpCalendar_userapi_getall_partecipations($navigationValues)
@@ -46,7 +46,7 @@ function crpCalendar_userapi_getall_partecipations($navigationValues)
 	{
 		return LogUtil::registerPermissionError();
 	}
-	
+
 	$calendar = new crpCalendar();
 
 	return $calendar->dao->getPartecipations($navigationValues['uid'], $navigationValues['startnum'],
@@ -56,7 +56,7 @@ function crpCalendar_userapi_getall_partecipations($navigationValues)
 
 /**
  * retrieve list of events, filtered as specified, for form use
- * 
+ *
  * @return array events
  */
 function crpCalendar_userapi_getall_formlist($navigationValues)
@@ -66,7 +66,7 @@ function crpCalendar_userapi_getall_formlist($navigationValues)
 	{
 		return LogUtil::registerPermissionError();
 	}
-	
+
 	$calendar = new crpCalendar();
 
 	return $calendar->dao->formList($navigationValues['startnum'], $navigationValues['category'],
@@ -77,7 +77,7 @@ function crpCalendar_userapi_getall_formlist($navigationValues)
 
 /**
  * get a specific item
- *  
+ *
  * @return array event, or false on failure
  */
 function crpCalendar_userapi_get($args)
@@ -87,25 +87,25 @@ function crpCalendar_userapi_get($args)
 	{
 		return LogUtil::registerPermissionError();
 	}
-	
+
 	// optional arguments
   if (isset($args['objectid'])) {
      $args['eventid'] = $args['objectid'];
   }
-		
+
 	// Argument check
   if ((!isset($args['eventid']) || !is_numeric($args['eventid'])) &&
        !isset($args['title'])) {
       return LogUtil::registerError (_MODARGSERROR);
   }
-  
-  $calendar = new crpCalendar(); 
-	return $calendar->dao->getAdminData($args['eventid']);
+
+  $calendar = new crpCalendar();
+	return $calendar->dao->getAdminData($args['eventid'], true, $args['title']);
 }
 
 /**
  * utility function to count the number of items held by this module
- * 
+ *
  * @return integer number of items held by this module
  */
 function crpCalendar_userapi_countitems($args)
@@ -115,15 +115,15 @@ function crpCalendar_userapi_countitems($args)
 	{
 		return LogUtil::registerPermissionError();
 	}
-	
+
 	$calendar = new crpCalendar();
-	
+
 	return $calendar->dao->countItems($args['category'], $args['active'], $args['uid'], $args['eventid'], $args['typeList']);
 }
 
 /**
  * utility function to count the number of attendances
- * 
+ *
  * @return integer number of items held by this module
  */
 function crpCalendar_userapi_countitems_attendance($args)
@@ -133,9 +133,9 @@ function crpCalendar_userapi_countitems_attendance($args)
 	{
 		return LogUtil::registerPermissionError();
 	}
-	
+
 	$calendar = new crpCalendar();
-	
+
 	return $calendar->dao->countAttendeeItems($args['category'], $args['active'], $args['uid'], $args['eventid']);
 }
 
