@@ -54,7 +54,6 @@ table.mini {
 	width: 90%;
 }
 
-
 table.crpcalendar-table caption {
 	background-color: #f3f3f3;
 	font-weight: bold;
@@ -141,44 +140,6 @@ table.crpcalendar-table div {
 .day-today {
 	border: 2px solid red;
 	padding: 1px;
-}
-
-/* style for event form */
-	/* styles to ensure that control elements inside the floated div directly above
-don't themselves float*/
-div.crpcalendar-formrow div input,div.crpcalendar-formrow div textarea,div.crpcalendar-formrow div select
-	{
-	float: none;
-}
-
-div.crpcalendar-formrow {
-	border-top: 0px solid #ccc;
-	padding: 5px 0px 10px 0px; /* top, right, bottom, left */
-	min-height: 2em;
-}
-
-div.crpcalendar-formrow>label {
-	float: left;
-	width: 23em;
-	margin-left: 5px;
-	padding: 0px 5px 0px 0px;
-	text-align: right;
-}
-
-form.crpcalendar-formrow div.formbuttons {
-	text-align: left;
-	margin-left: 15em;
-}
-
-form.crpcalendar-form div.formbuttons input,form.crpcalendar-form div.formbuttons img
-	{
-	margin: 5px;
-}
-
-form.crpcalendar-form button {
-	border: 0px;
-	padding: 0px;
-	background-color: transparent;
 }
 
 /* style for event visualization */
