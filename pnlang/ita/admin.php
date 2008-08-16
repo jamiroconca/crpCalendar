@@ -53,6 +53,7 @@ define('_CRPCALENDAR_FROM_DATE','Inclusi dalla data');
 define('_CRPCALENDAR_NONE', 'Nessuno');
 define('_CRPCALENDAR_NOT_REVERSIBLE','azione non reversible, gli eventi verranno eliminati dal database');
 define('_CRPCALENDAR_REQUIRED','*');
+define('_CRPCALENDAR_REQUIRED_TEXT','Campo obbligatorio');
 define('_CRPCALENDAR_INVALID_INTERVAL', 'Data di inizio posteriore alla data di termine');
 define('_CRPCALENDAR_SHOW_FILE','Visualizza file');
 
