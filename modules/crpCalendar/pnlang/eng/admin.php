@@ -53,6 +53,7 @@ define('_CRPCALENDAR_FROM_DATE','Including from date');
 define('_CRPCALENDAR_NONE', 'None');
 define('_CRPCALENDAR_NOT_REVERSIBLE','action not reversible, events will be deleted from database');
 define('_CRPCALENDAR_REQUIRED','*');
+define('_CRPCALENDAR_REQUIRED_TEXT','Mandatory fields');
 define('_CRPCALENDAR_INVALID_INTERVAL', 'Invalid date interval');
 define('_CRPCALENDAR_SHOW_FILE','Show file');
 
