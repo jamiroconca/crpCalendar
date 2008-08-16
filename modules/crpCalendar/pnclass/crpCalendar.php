@@ -54,7 +54,7 @@ class crpCalendar
 	 *
 	 * @return boolean true if authorized
 	 */
-	function authAction($level=0, $author_object='', $id_object='', $name_object='')
+	function authAction($level = 0, $author_object = '', $id_object = '', $name_object = '')
 	{
 		return $this->dao->getAuth($level, $author_object, $id_object, $name_object);
 	}
@@ -78,44 +78,16 @@ class crpCalendar
 		foreach ($items as $key => $item)
 		{
 			$options = array ();
-			$options[] = array (
-				'url' => pnModURL('crpCalendar',
-				'user',
-				'display',
-				array (
-					'eventid' => $item['eventid']
-				)
-			), 'image' => 'demo.gif', 'title' => _VIEW);
-			if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title'])
-					|| ($this->authAction(ACCESS_EDIT, $item['cr_uid'], $item['eventid'], $item['title'])	&& $this->isAuthor($item['eventid'])))
+
+			// display link
+			$options[] = crpCalendar::buildLinkArray("_VIEW", $item, 'user');
+			// edit, copy, delete
+			if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']) || ($this->authAction(ACCESS_EDIT, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid'])))
 			{
-				$options[] = array (
-					'url' => pnModURL('crpCalendar',
-					'admin',
-					'modify',
-					array (
-						'eventid' => $item['eventid']
-					)
-				), 'image' => 'xedit.gif', 'title' => _EDIT);
-				$options[] = array (
-					'url' => pnModURL('crpCalendar',
-					'admin',
-					'clone',
-					array (
-						'eventid' => $item['eventid']
-					)
-				), 'image' => 'editcopy.gif', 'title' => _COPY);
+				$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'admin');
+				$options[] = crpCalendar::buildLinkArray("_COPY", $item, 'admin');
 				if ($this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
-				{
-					$options[] = array (
-						'url' => pnModURL('crpCalendar',
-						'admin',
-						'delete',
-						array (
-							'eventid' => $item['eventid']
-						)
-					), 'image' => '14_layer_deletelayer.gif', 'title' => _DELETE);
-				}
+					$options[] = crpCalendar::buildLinkArray("_DELETE", $item, 'admin');
 			}
 
 			// Add the calculated menu options to the item array
@@ -148,80 +120,29 @@ class crpCalendar
 		foreach ($items as $key => $item)
 		{
 			$options = array ();
-			$options[] = array (
-				'url' => pnModURL('crpCalendar',
-				'user',
-				'display',
-				array (
-					'eventid' => $item['eventid']
-				)
-			), 'image' => 'demo.gif', 'title' => _VIEW);
+
+			// display link
+			$options[] = crpCalendar::buildLinkArray("_VIEW", $item, 'user');
 
 			// subscribe to event
-			if (pnUserLoggedIn() && pnModGetVar('crpCalendar', 'enable_partecipation') && !$this->dao->existPartecipation(pnUserGetVar('uid'), $item['eventid']))
+			if (pnUserLoggedIn() && pnModGetVar('crpCalendar', 'enable_partecipation'))
 			{
-				$options[] = array (
-					'url' => pnModURL('crpCalendar',
-					'user',
-					'add_partecipation',
-					array (
-						'eventid' => $item['eventid']
-					)
-				), 'image' => 'add_user.gif', 'title' => _CRPCALENDAR_ADD_PARTECIPATION);
-			}
-			elseif (pnUserLoggedIn() && pnModGetVar('crpCalendar', 'enable_partecipation') && $this->dao->existPartecipation(pnUserGetVar('uid'), $item['eventid']))
-			{
-				$options[] = array (
-					'url' => pnModURL('crpCalendar',
-					'user',
-					'delete_partecipation',
-					array (
-						'eventid' => $item['eventid']
-					)
-				), 'image' => 'delete_user.gif', 'title' => _CRPCALENDAR_DELETE_PARTECIPATION);
+				if (!$this->dao->existPartecipation(pnUserGetVar('uid'), $item['eventid']))
+					$options[] = crpCalendar::buildLinkArray("_CRPCALENDAR_ADD_PARTECIPATION", $item, 'user');
+				else
+					$options[] = crpCalendar::buildLinkArray("_CRPCALENDAR_DELETE_PARTECIPATION", $item, 'user');
 			}
 
+			// edit, copy, delete
 			if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']))
 			{
-				$options[] = array (
-					'url' => pnModURL('crpCalendar',
-					'admin',
-					'modify',
-					array (
-						'eventid' => $item['eventid']
-					)
-				), 'image' => 'xedit.gif', 'title' => _EDIT);
-				$options[] = array (
-					'url' => pnModURL('crpCalendar',
-					'admin',
-					'clone',
-					array (
-						'eventid' => $item['eventid']
-					)
-				), 'image' => 'editcopy.gif', 'title' => _COPY);
+				$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'admin');
+				$options[] = crpCalendar::buildLinkArray("_COPY", $item, 'admin');
 				if ($this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
-				{
-					$options[] = array (
-						'url' => pnModURL('crpCalendar',
-						'admin',
-						'delete',
-						array (
-							'eventid' => $item['eventid']
-						)
-					), 'image' => '14_layer_deletelayer.gif', 'title' => _DELETE);
-				}
+					$options[] = crpCalendar::buildLinkArray("_DELETE", $item, 'admin');
 			}
 			elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid']))
-			{
-				$options[] = array (
-					'url' => pnModURL('crpCalendar',
-					'user',
-					'modify',
-					array (
-						'eventid' => $item['eventid']
-					)
-				), 'image' => 'xedit.gif', 'title' => _EDIT);
-			}
+				$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'user');
 
 			// Add the calculated menu options to the item array
 			$item['options'] = $options;
@@ -268,80 +189,28 @@ class crpCalendar
 		foreach ($items as $key => $item)
 		{
 			$options = array ();
-			$options[] = array (
-				'url' => pnModURL('crpCalendar',
-				'user',
-				'display',
-				array (
-					'eventid' => $item['eventid']
-				)
-			), 'image' => 'demo.gif', 'title' => _VIEW);
+			// display link
+			$options[] = crpCalendar::buildLinkArray("_VIEW", $item, 'user');
 
 			// subscribe to event
-			if (pnUserLoggedIn() && pnModGetVar('crpCalendar', 'enable_partecipation') && !$this->dao->existPartecipation(pnUserGetVar('uid'), $item['eventid']))
+			if (pnUserLoggedIn() && pnModGetVar('crpCalendar', 'enable_partecipation'))
 			{
-				$options[] = array (
-					'url' => pnModURL('crpCalendar',
-					'user',
-					'add_partecipation',
-					array (
-						'eventid' => $item['eventid']
-					)
-				), 'image' => 'add_user.gif', 'title' => _CRPCALENDAR_ADD_PARTECIPATION);
-			}
-			elseif (pnUserLoggedIn() && pnModGetVar('crpCalendar', 'enable_partecipation') && $this->dao->existPartecipation(pnUserGetVar('uid'), $item['eventid']))
-			{
-				$options[] = array (
-					'url' => pnModURL('crpCalendar',
-					'user',
-					'delete_partecipation',
-					array (
-						'eventid' => $item['eventid']
-					)
-				), 'image' => 'delete_user.gif', 'title' => _CRPCALENDAR_DELETE_PARTECIPATION);
+				if (!$this->dao->existPartecipation(pnUserGetVar('uid'), $item['eventid']))
+					$options[] = crpCalendar::buildLinkArray("_CRPCALENDAR_ADD_PARTECIPATION", $item, 'user');
+				else
+					$options[] = crpCalendar::buildLinkArray("_CRPCALENDAR_DELETE_PARTECIPATION", $item, 'user');
 			}
 
+			// edit, copy, delete
 			if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']))
 			{
-				$options[] = array (
-					'url' => pnModURL('crpCalendar',
-					'admin',
-					'modify',
-					array (
-						'eventid' => $item['eventid']
-					)
-				), 'image' => 'xedit.gif', 'title' => _EDIT);
-				$options[] = array (
-					'url' => pnModURL('crpCalendar',
-					'admin',
-					'clone',
-					array (
-						'eventid' => $item['eventid']
-					)
-				), 'image' => 'editcopy.gif', 'title' => _COPY);
+				$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'admin');
+				$options[] = crpCalendar::buildLinkArray("_COPY", $item, 'admin');
 				if ($this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
-				{
-					$options[] = array (
-						'url' => pnModURL('crpCalendar',
-						'admin',
-						'delete',
-						array (
-							'eventid' => $item['eventid']
-						)
-					), 'image' => '14_layer_deletelayer.gif', 'title' => _DELETE);
-				}
+					$options[] = crpCalendar::buildLinkArray("_DELETE", $item, 'admin');
 			}
 			elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid']))
-			{
-				$options[] = array (
-					'url' => pnModURL('crpCalendar',
-					'user',
-					'modify',
-					array (
-						'eventid' => $item['eventid']
-					)
-				), 'image' => 'xedit.gif', 'title' => _EDIT);
-			}
+				$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'user');
 
 			// Add the calculated menu options to the item array
 			$item['options'] = $options;
@@ -401,10 +270,42 @@ class crpCalendar
 			$items = array ();
 
 		$exports = array ();
-		foreach ($items as $key => $item)
+		if ($navigationValues['viewForm'] == 'list')
 		{
-			$exports[] = $item['eventid'];
+			foreach ($items as $key => $item)
+			{
+				$options = array ();
+				// display link
+				$options[] = crpCalendar::buildLinkArray("_VIEW", $item, 'user');
+
+				// subscribe to event
+				if (pnUserLoggedIn() && pnModGetVar('crpCalendar', 'enable_partecipation'))
+				{
+					if (!$this->dao->existPartecipation(pnUserGetVar('uid'), $item['eventid']))
+						$options[] = crpCalendar::buildLinkArray("_CRPCALENDAR_ADD_PARTECIPATION", $item, 'user');
+					else
+						$options[] = crpCalendar::buildLinkArray("_CRPCALENDAR_DELETE_PARTECIPATION", $item, 'user');
+				}
+
+				// edit, copy, delete
+				if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']))
+				{
+					$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'admin');
+					$options[] = crpCalendar::buildLinkArray("_COPY", $item, 'admin');
+					if ($this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
+						$options[] = crpCalendar::buildLinkArray("_DELETE", $item, 'admin');
+				}
+				elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid']))
+					$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'user');
+
+				// Add the calculated menu options to the item array
+				$item['options'] = $options;
+				$rows[] = $item;
+				$exports[] = $item['eventid'];
+			}
 		}
+		else
+			$rows = $items;
 
 		pnSessionSetVar('crpCalendar_export_events', $exports);
 		pnSessionSetVar('crpCalendar_choosed_view', 'month_view');
@@ -417,7 +318,7 @@ class crpCalendar
 		$this->expandFirstDOW(DateUtil :: parseUIDateTime($monthFirstDay), $daysexpanded);
 		$this->expandLastDOW(DateUtil :: parseUIDateTime($monthLastDay), $daysexpanded);
 
-		return $this->ui->userMonthList($items, $days, $daysexpanded, $navigationValues['t'], $date, $navigationValues['startDate'], $navigationValues['endDate'], $today, $navigationValues['category'], $navigationValues['mainCat'], $navigationValues['modvars'], $navigationValues['viewForm']);
+		return $this->ui->userMonthList($rows, $days, $daysexpanded, $navigationValues['t'], $date, $navigationValues['startDate'], $navigationValues['endDate'], $today, $navigationValues['category'], $navigationValues['mainCat'], $navigationValues['modvars'], $navigationValues['viewForm']);
 	}
 
 	/**
@@ -433,8 +334,8 @@ class crpCalendar
 		$date = $this->timeToDMY($navigationValues['t']);
 
 		$days = array (
-			DateUtil :: getDatetime($navigationValues['t']
-		));
+			DateUtil :: getDatetime($navigationValues['t'])
+		);
 		$weekDay = DateUtil :: getDatetime($navigationValues['t']);
 
 		$navigationValues['startDate'] = DateUtil :: getDatetime($this->backToFirstDOW(DateUtil :: parseUIDateTime($weekDay)));
@@ -513,28 +414,24 @@ class crpCalendar
 			$options = array ();
 
 			// subscribe to event
-			if (pnUserLoggedIn() && pnModGetVar('crpCalendar', 'enable_partecipation') && !$this->dao->existPartecipation(pnUserGetVar('uid'), $item['eventid']))
+			if (pnUserLoggedIn() && pnModGetVar('crpCalendar', 'enable_partecipation'))
 			{
-				$options[] = array (
-					'url' => pnModURL('crpCalendar',
-					'user',
-					'add_partecipation',
-					array (
-						'eventid' => $item['eventid']
-					)
-				), 'image' => 'add_user.gif', 'title' => _CRPCALENDAR_ADD_PARTECIPATION);
+				if (!$this->dao->existPartecipation(pnUserGetVar('uid'), $item['eventid']))
+					$options[] = crpCalendar::buildLinkArray("_CRPCALENDAR_ADD_PARTECIPATION", $item, 'user');
+				else
+					$options[] = crpCalendar::buildLinkArray("_CRPCALENDAR_DELETE_PARTECIPATION", $item, 'user');
 			}
-			elseif (pnUserLoggedIn() && pnModGetVar('crpCalendar', 'enable_partecipation') && $this->dao->existPartecipation(pnUserGetVar('uid'), $item['eventid']))
+
+			// edit, copy, delete
+			if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']))
 			{
-				$options[] = array (
-					'url' => pnModURL('crpCalendar',
-					'user',
-					'delete_partecipation',
-					array (
-						'eventid' => $item['eventid']
-					)
-				), 'image' => 'delete_user.gif', 'title' => _CRPCALENDAR_DELETE_PARTECIPATION);
+				$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'admin');
+				$options[] = crpCalendar::buildLinkArray("_COPY", $item, 'admin');
+				if ($this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
+					$options[] = crpCalendar::buildLinkArray("_DELETE", $item, 'admin');
 			}
+			elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid']))
+				$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'user');
 
 			// Add the calculated menu options to the item array
 			$items[$key]['options'] = $options;
@@ -580,56 +477,19 @@ class crpCalendar
 		foreach ($items as $kevent => $item)
 		{
 			$options = array ();
-			$options[] = array (
-				'url' => pnModURL('crpCalendar',
-				'user',
-				'display',
-				array (
-					'eventid' => $item['eventid']
-				)
-			), 'image' => 'demo.gif', 'title' => _VIEW);
+			// display link
+			$options[] = crpCalendar::buildLinkArray("_VIEW", $item, 'user');
 
+			// edit, copy, delete
 			if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']))
 			{
-				$options[] = array (
-					'url' => pnModURL('crpCalendar',
-					'admin',
-					'modify',
-					array (
-						'eventid' => $item['eventid']
-					)
-				), 'image' => 'xedit.gif', 'title' => _EDIT);
-				$options[] = array (
-					'url' => pnModURL('crpCalendar',
-					'admin',
-					'clone',
-					array (
-						'eventid' => $item['eventid']
-					)
-				), 'image' => 'editcopy.gif', 'title' => _COPY);
+				$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'admin');
+				$options[] = crpCalendar::buildLinkArray("_COPY", $item, 'admin');
 				if ($this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
-				{
-					$options[] = array (
-						'url' => pnModURL('crpCalendar',
-						'admin',
-						'delete',
-						array (
-							'eventid' => $item['eventid']
-						)
-					), 'image' => '14_layer_deletelayer.gif', 'title' => _DELETE);
-				}
+					$options[] = crpCalendar::buildLinkArray("_DELETE", $item, 'admin');
 			}
 			elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid']))
-			{
-				$options[] = array (
-					'url' => pnModURL('crpCalendar',
-					'user',
-					'modify',
-					array (
-						'eventid' => $item['eventid']
-					)
-				), 'image' => 'xedit.gif', 'title' => _EDIT);
-			}
+				$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'user');
 
 			// Add the calculated menu options to the item array
 			$item['options'] = $options;
@@ -650,30 +510,25 @@ class crpCalendar
 	{
 		$navigationValues = $this->collectNavigationFromInput();
 		// TODO : -1 -> $navigationValues['modvars'] to be changed when Zikula ticket #49 is resolved
-		$items = $this->dao->getEventPartecipations(null, $navigationValues['startnum'], array('itemsperpage','-1'), null, 'A', 'DESC', null, 'uid');
+		$items = $this->dao->getEventPartecipations(null, $navigationValues['startnum'], array (
+			'itemsperpage',
+			'-1'
+		), null, 'A', 'DESC', null, 'uid');
 
 		$rows = array ();
 		$exports = array ();
 		foreach ($items as $kevent => $item)
 		{
 			$options = array ();
-			$options[] = array (
-				'url' => pnModURL('crpCalendar',
-				'user',
-				'get_partecipations',
-				array (
-					'uid' => $item['uid']
-				)
-			), 'image' => 'vcalendar.gif', 'title' => _CRPCALENDAR_EVENTS_MYLIST);
+			$options[] = crpCalendar::buildLinkArray("_CRPCALENDAR_EVENTS_MYLIST", $item, 'user');
 
 			$options[] = array (
-				'url' => pnModURL('Profile',
-				'user',
-				'view',
-				array (
+				'url' => pnModURL('Profile', 'user', 'view', array (
 					'uid' => $item['uid']
-				)
-			), 'image' => 'personal.gif', 'title' => _VIEW);
+				)),
+				'image' => 'personal.gif',
+				'title' => _VIEW
+			);
 
 			// Add the calculated menu options to the item array
 			$item['options'] = $options;
@@ -717,40 +572,28 @@ class crpCalendar
 		$this->dao->updateCounter($eventid);
 
 		$exports = array ();
-		$exports = array (
-			'url' => pnModURL('crpCalendar',
-			'user',
-			'getICal',
-			array (
-				'eventid' => $item['eventid']
-			)
-		), 'image' => 'ical.gif', 'title' => _CRPCALENDAR_ICAL);
+		$exports = crpCalendar::buildLinkArray("_CRPCALENDAR_ICAL", $item, 'user');
 
 		$item['exports'] = $exports;
 
-		// subscribe to event
-		$options = array ();
-		if (pnUserLoggedIn() && pnModGetVar('crpCalendar', 'enable_partecipation') && !$this->dao->existPartecipation(pnUserGetVar('uid'), $eventid))
+		// edit, copy, delete
+		if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']))
 		{
-			$options[] = array (
-				'url' => pnModURL('crpCalendar',
-				'user',
-				'add_partecipation',
-				array (
-					'eventid' => $item['eventid']
-				)
-			), 'image' => 'add_user.gif', 'title' => _CRPCALENDAR_ADD_PARTECIPATION);
+			$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'admin');
+			$options[] = crpCalendar::buildLinkArray("_COPY", $item, 'admin');
+			if ($this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
+				$options[] = crpCalendar::buildLinkArray("_DELETE", $item, 'admin');
 		}
-		elseif (pnUserLoggedIn() && pnModGetVar('crpCalendar', 'enable_partecipation') && $this->dao->existPartecipation(pnUserGetVar('uid'), $eventid))
+		elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid']))
+			$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'user');
+
+		// subscribe to event
+		if (pnUserLoggedIn() && pnModGetVar('crpCalendar', 'enable_partecipation'))
 		{
-			$options[] = array (
-				'url' => pnModURL('crpCalendar',
-				'user',
-				'delete_partecipation',
-				array (
-					'eventid' => $item['eventid']
-				)
-			), 'image' => 'delete_user.gif', 'title' => _CRPCALENDAR_DELETE_PARTECIPATION);
+			if (!$this->dao->existPartecipation(pnUserGetVar('uid'), $item['eventid']))
+				$options[] = crpCalendar::buildLinkArray("_CRPCALENDAR_ADD_PARTECIPATION", $item, 'user');
+			else
+				$options[] = crpCalendar::buildLinkArray("_CRPCALENDAR_DELETE_PARTECIPATION", $item, 'user');
 		}
 
 		$item['options'] = $options;
@@ -920,15 +763,13 @@ class crpCalendar
 					$serialDayDiff = $inputValues['event']['endDay'] - $inputValues['event']['startDay'];
 					$serialMonthDiff = $inputValues['event']['endMonth'] - $inputValues['event']['startMonth'];
 					$serialYearDiff = $inputValues['event']['endYear'] - $inputValues['event']['startYear'];
-					$serialEndDate = $this->buildDate($vserial + $serialDayDiff,
-																						$inputValues['serial']['startMonth'][$kserial]+$serialMonthDiff,
-																						$inputValues['serial']['startYear'][$kserial]+$serialYearDiff);
+					$serialEndDate = $this->buildDate($vserial + $serialDayDiff, $inputValues['serial']['startMonth'][$kserial] + $serialMonthDiff, $inputValues['serial']['startYear'][$kserial] + $serialYearDiff);
 				}
 				else
 					$serialEndDate = $serialStartDate;
 
 				$serialStartTime = $this->buildTime($inputValues['serial']['startMinute'][$kserial], $inputValues['serial']['startHour'][$kserial]);
-				$serialEndTime = $this->buildTime($inputValues['serial']['startMinute'][$kserial]+$serialMinuteDiff, $inputValues['serial']['startHour'][$kserial]+$serialHourDiff);
+				$serialEndTime = $this->buildTime($inputValues['serial']['startMinute'][$kserial] + $serialMinuteDiff, $inputValues['serial']['startHour'][$kserial] + $serialHourDiff);
 
 				$inputValues['event']['start_date'] = $serialStartDate . ' ' . $serialStartTime;
 				$inputValues['event']['end_date'] = $serialEndDate . ' ' . $serialEndTime;
@@ -944,7 +785,7 @@ class crpCalendar
 			$this->notifyByMail($inputValues, $eventid);
 
 		// all went fine
-		LogUtil :: registerStatus(_CREATESUCCEDED . ' ' . (($returnType == 'user' && $inputValues['modvars']['submitted_status']!='A') ? _CRPCALENDAR_WAITING : ''));
+		LogUtil :: registerStatus(_CREATESUCCEDED . ' ' . (($returnType == 'user' && $inputValues['modvars']['submitted_status'] != 'A') ? _CRPCALENDAR_WAITING : ''));
 
 		if ($inputValues['reenter'])
 			return pnRedirect(pnModUrl('crpCalendar', $returnType, 'new'));
@@ -2079,8 +1920,11 @@ class crpCalendar
 			'subject' => $subject,
 			'body' => $body,
 			'html' => true,
-			'fromname' => pnConfigGetVar('sitename'
-		), 'fromaddress' => pnConfigGetVar('adminmail'), 'replytoname' => pnConfigGetVar('sitename'), 'replytoaddress' => pnConfigGetVar('adminmail')));
+			'fromname' => pnConfigGetVar('sitename'),
+			'fromaddress' => pnConfigGetVar('adminmail'),
+			'replytoname' => pnConfigGetVar('sitename'),
+			'replytoaddress' => pnConfigGetVar('adminmail')
+		));
 	}
 
 	/**
@@ -2279,16 +2123,16 @@ class crpCalendar
 							$cal[0]['prodid'] = stripslashes($data);
 							break;
 
-						/********** END CALENDER INFO ***********/
+							/********** END CALENDER INFO ***********/
 
-						/********** EVENT INFO ***********/
+							/********** EVENT INFO ***********/
 
-						// Unique ID of event
+							// Unique ID of event
 						case 'UID' :
 							$cal[$event]['uid'] = $data;
 							break;
 
-						// Start time of event
+							// Start time of event
 						case 'DTSTART' :
 							$date = '';
 							$data = str_replace('T', '', $data);
@@ -2322,12 +2166,12 @@ class crpCalendar
 
 								$cal[$event]['day_event'] = 0;
 								$cal[$event]['start_date'] = $date[1] . '-' . $date[2] . '-' . $date[3];
-								$cal[$event]['start_time'] = $date[4] .':'. $date[5];
+								$cal[$event]['start_time'] = $date[4] . ':' . $date[5];
 								$cal[$event]['start_unix'] = mktime($date[4], $date[5], $date[6], $date[2], $date[3], $date[1]);
 							}
 							break;
 
-						// Start time of event
+							// Start time of event
 						case 'CREATED' :
 							$date = '';
 							$data = str_replace('T', '', $data);
@@ -2336,10 +2180,10 @@ class crpCalendar
 							// TIME LIMITED EVENT
 							ereg('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})([0-9]{0,2})', $data, $date);
 
-							$cal[$event]['cr_date'] = $date[1] . '-' . $date[2] . '-' . $date[3].' '.$date[4] .':'. $date[5];
+							$cal[$event]['cr_date'] = $date[1] . '-' . $date[2] . '-' . $date[3] . ' ' . $date[4] . ':' . $date[5];
 							break;
 
-						// Start time of event
+							// Start time of event
 						case 'LAST-MODIFIED' :
 							$date = '';
 							$data = str_replace('T', '', $data);
@@ -2348,10 +2192,10 @@ class crpCalendar
 							// TIME LIMITED EVENT
 							ereg('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})([0-9]{0,2})', $data, $date);
 
-							$cal[$event]['lu_date'] = $date[1] . '-' . $date[2] . '-' . $date[3].' '.$date[4] .':'. $date[5];
+							$cal[$event]['lu_date'] = $date[1] . '-' . $date[2] . '-' . $date[3] . ' ' . $date[4] . ':' . $date[5];
 							break;
 
-						// End time of event
+							// End time of event
 						case 'DTEND' :
 
 							$data = str_replace('T', '', $data);
@@ -2366,7 +2210,7 @@ class crpCalendar
 							}
 
 							$cal[$event]['end_date'] = $date[1] . '-' . $date[2] . '-' . $date[3];
-							$cal[$event]['end_time'] = $date[4] .':'. $date[5];
+							$cal[$event]['end_time'] = $date[4] . ':' . $date[5];
 							$cal[$event]['end_unix'] = mktime($date[4], $date[5], $date[6], $date[2], $date[3], $date[1]);
 							break;
 
@@ -2415,10 +2259,10 @@ class crpCalendar
 							}
 							break;
 
-						//NOT REMOTELY COMPLIANT WITH
-						//ICALENDAR RFC. READ AND DO IT AGAIN!
+							//NOT REMOTELY COMPLIANT WITH
+							//ICALENDAR RFC. READ AND DO IT AGAIN!
 
-						// List of attendees
+							// List of attendees
 						case 'ATTENDEE' :
 
 							$att = explode(';', $buffer);
@@ -2485,7 +2329,7 @@ class crpCalendar
 							unset ($temp, $att, $value);
 							break;
 
-						// List of organiser
+							// List of organiser
 						case 'ORGANIZER' :
 
 							$org = explode(';', $buffer);
@@ -2495,7 +2339,7 @@ class crpCalendar
 
 								switch ($org_content[0])
 								{
-										// Common Name
+									// Common Name
 									case 'CN' :
 										$cal[$event]['organiser'] = $org_content[1];
 										break;
@@ -2511,36 +2355,36 @@ class crpCalendar
 							unset ($temp, $org, $value);
 							break;
 
-						// URL of event
+							// URL of event
 						case 'URL' :
 							$cal[$event]['url'] = $data;
 							break;
 
-						// Location of event
+							// Location of event
 						case 'LOCATION' :
 							$cal[$event]['location'] = $data;
 							break;
 
-						// Status of event
+							// Status of event
 						case 'STATUS' :
 							// TODO: check this out
 							//$cal[$event]['obj_status'] = $data;
 							$cal[$event]['obj_status'] = 'A';
 							break;
 
-						/********** ALARM INFO ***********/
+							/********** ALARM INFO ***********/
 
 							// Alarm Action
 						case 'ACTION' :
 							$cal[$event]['alarm']['action'] = $data;
 							break;
 
-						// When should the alarm go off?
+							// When should the alarm go off?
 						case 'TRIGGER' :
 							$cal[$event]['alarm']['trigger'] = $data;
 							break;
 
-						// Alarm attachment
+							// Alarm attachment
 						case 'ATTACH' :
 							$cal[$event]['alarm']['attach'] = $data;
 
@@ -2550,146 +2394,146 @@ class crpCalendar
 							unset ($temp);
 							break;
 
-						// Alarm description handler is joined
-						// with event description handler
+							// Alarm description handler is joined
+							// with event description handler
 
-						/********** END ALARM INFO ***********/
+							/********** END ALARM INFO ***********/
 
-						/********** RECURRENCE RULE INFO ***********/
-						/* TODO: implement with recursion
-						case 'RRULE' :
-							$cal[$event]['rrule'] = array ();
-							$rrule = explode(';', $data);
+							/********** RECURRENCE RULE INFO ***********/
+							/* TODO: implement with recursion
+							case 'RRULE' :
+								$cal[$event]['rrule'] = array ();
+								$rrule = explode(';', $data);
 
-							foreach ($rrule as $value)
-							{
-								$rrule_content = explode('=', $value);
-
-								switch ($rrule_content[0])
+								foreach ($rrule as $value)
 								{
-									// Frequency of repeating event
-									case 'FREQ' :
-										$cal[$event]['rrule']['freq'] = $rrule_content[1];
-										break;
+									$rrule_content = explode('=', $value);
 
-										// Interval to repeat the frequency
-										// eg. FREQ=WEEKLY;INTERVAL=2 ==> repeat every 2 weeks
-									case 'INTERVAL' :
-										$cal[$event]['rrule']['interval'] = $rrule_content[1];
-										break;
+									switch ($rrule_content[0])
+									{
+										// Frequency of repeating event
+										case 'FREQ' :
+											$cal[$event]['rrule']['freq'] = $rrule_content[1];
+											break;
 
-										// Number of times to repeat event
-									case 'COUNT' :
-										$cal[$event]['rrule']['count'] = $rrule_content[1];
-										break;
+											// Interval to repeat the frequency
+											// eg. FREQ=WEEKLY;INTERVAL=2 ==> repeat every 2 weeks
+										case 'INTERVAL' :
+											$cal[$event]['rrule']['interval'] = $rrule_content[1];
+											break;
 
-										// Repeat event until date/time
-									case 'UNTIL' :
-										$data = str_replace('T', '', $data);
-										$data = str_replace('Z', '', $data);
+											// Number of times to repeat event
+										case 'COUNT' :
+											$cal[$event]['rrule']['count'] = $rrule_content[1];
+											break;
 
-										// TIME LIMITED EVENT
-										ereg('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})([0-9]{0,2})', $data, $date);
+											// Repeat event until date/time
+										case 'UNTIL' :
+											$data = str_replace('T', '', $data);
+											$data = str_replace('Z', '', $data);
 
-										// UNIX timestamps can't deal with pre 1970 dates
-										if ($date[1] <= 1970)
-										{
-											$date[1] = 1971;
-										}
+											// TIME LIMITED EVENT
+											ereg('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})([0-9]{0,2})', $data, $date);
 
-										$cal[$event]['rrule']['until_date'] = $date[1] . '-' . $date[2] . '-' . $date[3];
-										$cal[$event]['rrule']['until_time'] = $date[4] . $date[5];
-										$cal[$event]['rrule']['until_unix'] = mktime($date[4], $date[5], $date[6], $date[2], $date[3], $date[1]);
-										break;
+											// UNIX timestamps can't deal with pre 1970 dates
+											if ($date[1] <= 1970)
+											{
+												$date[1] = 1971;
+											}
 
-									case 'BYSECOND' :
-										$cal[$event]['rrule']['bysecond'] = $rrule_content[1];
-										break;
+											$cal[$event]['rrule']['until_date'] = $date[1] . '-' . $date[2] . '-' . $date[3];
+											$cal[$event]['rrule']['until_time'] = $date[4] . $date[5];
+											$cal[$event]['rrule']['until_unix'] = mktime($date[4], $date[5], $date[6], $date[2], $date[3], $date[1]);
+											break;
 
-									case 'BYMINUTE' :
-										$cal[$event]['rrule']['byminute'] = $rrule_content[1];
-										break;
+										case 'BYSECOND' :
+											$cal[$event]['rrule']['bysecond'] = $rrule_content[1];
+											break;
 
-									case 'BYHOUR' :
-										$cal[$event]['rrule']['byhour'] = $rrule_content[1];
-										break;
+										case 'BYMINUTE' :
+											$cal[$event]['rrule']['byminute'] = $rrule_content[1];
+											break;
 
-									case 'BYDAY' :
-										$cal[$event]['rrule']['byday'] = $rrule_content[1];
-										break;
+										case 'BYHOUR' :
+											$cal[$event]['rrule']['byhour'] = $rrule_content[1];
+											break;
 
-									case 'BYMONTH' :
-										$cal[$event]['rrule']['bymonth'] = $rrule_content[1];
-										break;
+										case 'BYDAY' :
+											$cal[$event]['rrule']['byday'] = $rrule_content[1];
+											break;
 
-									case 'BYYEAR' :
-										$cal[$event]['rrule']['byyear'] = $rrule_content[1];
-										break;
+										case 'BYMONTH' :
+											$cal[$event]['rrule']['bymonth'] = $rrule_content[1];
+											break;
 
-									case 'BYMONTHDAY' :
-										$cal[$event]['rrule']['bymonthday'] = $rrule_content[1];
-										break;
+										case 'BYYEAR' :
+											$cal[$event]['rrule']['byyear'] = $rrule_content[1];
+											break;
 
-									case 'BYYEARDAY' :
-										$cal[$event]['rrule']['byyearday'] = $rrule_content[1];
-										break;
+										case 'BYMONTHDAY' :
+											$cal[$event]['rrule']['bymonthday'] = $rrule_content[1];
+											break;
 
-									case 'BYWEEKNO' :
-										$cal[$event]['rrule']['byweekno'] = $rrule_content[1];
-										break;
+										case 'BYYEARDAY' :
+											$cal[$event]['rrule']['byyearday'] = $rrule_content[1];
+											break;
 
-										// Day that work week start
-									case 'WKST' :
-										$cal[$event]['rrule']['wkst'] = $rrule_content[1];
-										break;
+										case 'BYWEEKNO' :
+											$cal[$event]['rrule']['byweekno'] = $rrule_content[1];
+											break;
 
-										//
-									case 'BYSETPOS' :
-										$cal[$event]['rrule']['bysetpos'] = $rrule_content[1];
-										break;
+											// Day that work week start
+										case 'WKST' :
+											$cal[$event]['rrule']['wkst'] = $rrule_content[1];
+											break;
 
+											//
+										case 'BYSETPOS' :
+											$cal[$event]['rrule']['bysetpos'] = $rrule_content[1];
+											break;
+
+									}
 								}
-							}
-							unset ($rrule, $rrule_content, $value);
-							break;
+								unset ($rrule, $rrule_content, $value);
+								break;
+								*/
+
+							/********** RECURRENCE RULE INFO ***********/
+
+							/* TODO: implement with recursion
+							case 'EXDATE' :
+								$data = str_replace('T', '', $data);
+
+								if (ereg('EXDATE;VALUE=DATE', $field))
+								{
+									// ALL-DAY EVENT
+									ereg('([0-9]{4})([0-9]{2})([0-9]{2})', $data, $date);
+
+									// UNIX timestamps can't deal with pre 1970 dates
+									if ($date[1] <= 1970)
+									{
+										$date[1] = 1971;
+									}
+
+									$cal[$event]['exdate'][] = $date[1] . '-' . $date[2] . '-' . $date[3];
+									$cal[$event]['exdate_unix'][] = mktime(0, 0, 0, $date[2], $date[3], $date[1]);
+								}
+								else
+								{
+									// TIME LIMITED EVENT
+									ereg('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})([0-9]{0,2})', $data, $date);
+
+									// UNIX timestamps can't deal with pre 1970 dates
+									if ($date[1] <= 1970)
+									{
+										$date[1] = 1971;
+									}
+
+									$cal[$event]['exdate'][] = $date[1] . '-' . $date[2] . '-' . $date[3];
+									$cal[$event]['exdate_unix'][] = mktime($date[4], $date[5], $date[6], $date[2], $date[3], $date[1]);
+								}
+								break;
 							*/
-
-						/********** RECURRENCE RULE INFO ***********/
-
-						/* TODO: implement with recursion
-						case 'EXDATE' :
-							$data = str_replace('T', '', $data);
-
-							if (ereg('EXDATE;VALUE=DATE', $field))
-							{
-								// ALL-DAY EVENT
-								ereg('([0-9]{4})([0-9]{2})([0-9]{2})', $data, $date);
-
-								// UNIX timestamps can't deal with pre 1970 dates
-								if ($date[1] <= 1970)
-								{
-									$date[1] = 1971;
-								}
-
-								$cal[$event]['exdate'][] = $date[1] . '-' . $date[2] . '-' . $date[3];
-								$cal[$event]['exdate_unix'][] = mktime(0, 0, 0, $date[2], $date[3], $date[1]);
-							}
-							else
-							{
-								// TIME LIMITED EVENT
-								ereg('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})([0-9]{0,2})', $data, $date);
-
-								// UNIX timestamps can't deal with pre 1970 dates
-								if ($date[1] <= 1970)
-								{
-									$date[1] = 1971;
-								}
-
-								$cal[$event]['exdate'][] = $date[1] . '-' . $date[2] . '-' . $date[3];
-								$cal[$event]['exdate_unix'][] = mktime($date[4], $date[5], $date[6], $date[2], $date[3], $date[1]);
-							}
-							break;
-						*/
 					}
 					/********** END EVENT INFO ***********/
 					break;
@@ -2748,10 +2592,104 @@ class crpCalendar
 		}
 
 		// Delete the page
-		if ($this->dao->removePurge($event['endDay'],$event['endMonth'],$event['endYear']))
+		if ($this->dao->removePurge($event['endDay'], $event['endMonth'], $event['endYear']))
 			LogUtil :: registerStatus(_DELETESUCCEDED);
 
 		return pnRedirect(pnModURL('crpCalendar', 'admin', 'view'));
+	}
+
+	/**
+	 * build an array link by define
+	 *
+	 * @param string $mlname link define
+	 * @param array $item values
+	 * @param string $actiontype user level action
+	 *
+	 * @return array link
+	 */
+	function buildLinkArray($mlname = null, $item = array (), $actiontype = null)
+	{
+
+		switch ($mlname)
+		{
+			case "_VIEW" :
+				$linkArray = array (
+					'url' => pnModURL('crpCalendar', $actiontype, 'display', array (
+						'eventid' => $item['eventid']
+					)),
+					'image' => 'demo.gif',
+					'title' => _VIEW
+				);
+				break;
+			case "_CRPCALENDAR_ADD_PARTECIPATION" :
+				$linkArray = array (
+					'url' => pnModURL('crpCalendar', $actiontype, 'add_partecipation', array (
+						'eventid' => $item['eventid']
+					)),
+					'image' => 'add_user.gif',
+					'title' => _CRPCALENDAR_ADD_PARTECIPATION
+				);
+				break;
+			case "_CRPCALENDAR_DELETE_PARTECIPATION" :
+				$linkArray = array (
+					'url' => pnModURL('crpCalendar', $actiontype, 'delete_partecipation', array (
+						'eventid' => $item['eventid']
+					)),
+					'image' => 'delete_user.gif',
+					'title' => _CRPCALENDAR_DELETE_PARTECIPATION
+				);
+				break;
+			case "_EDIT" :
+				$linkArray = array (
+					'url' => pnModURL('crpCalendar', $actiontype, 'modify', array (
+						'eventid' => $item['eventid']
+					)),
+					'image' => 'xedit.gif',
+					'title' => _EDIT
+				);
+				break;
+			case "_COPY" :
+				$linkArray = array (
+					'url' => pnModURL('crpCalendar', $actiontype, 'clone', array (
+						'eventid' => $item['eventid']
+					)),
+					'image' => 'editcopy.gif',
+					'title' => _COPY
+				);
+				break;
+			case "_DELETE" :
+				$linkArray = array (
+						'url' => pnModURL('crpCalendar', $actiontype, 'delete', array (
+							'eventid' => $item['eventid']
+						)),
+						'image' => '14_layer_deletelayer.gif',
+						'title' => _DELETE
+					);
+				break;
+			case "_CRPCALENDAR_EVENTS_MYLIST" :
+				$linkArray =	array (
+					'url' => pnModURL('crpCalendar', 'user', 'get_partecipations', array (
+						'uid' => $item['uid']
+					)),
+					'image' => 'vcalendar.gif',
+					'title' => _CRPCALENDAR_EVENTS_MYLIST
+				);
+				break;
+			case "_CRPCALENDAR_ICAL" :
+					$linkArray =	array (
+					'url' => pnModURL('crpCalendar', 'user', 'getICal', array (
+						'eventid' => $item['eventid']
+					)),
+					'image' => 'ical.gif',
+					'title' => _CRPCALENDAR_ICAL
+				);
+				break;
+			default :
+				$linkArray = "";
+				break;
+		}
+
+		return $linkArray;
 	}
 
 }
