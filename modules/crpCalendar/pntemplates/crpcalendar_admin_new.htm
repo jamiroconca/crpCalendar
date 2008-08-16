@@ -8,44 +8,44 @@
 <div class="pn-admincontainer">
 <div class="pn-adminpageicon"><!--[pnimg modname=core src=filenew.gif set=icons/large alt=$templatetitle]--></div>
 <h2><!--[$templatetitle]--></h2>
-<br />
+<span class="crpcalendar-required"><!--[pnml name="_CRPCALENDAR_REQUIRED" html=1]--></span> <!--[pnml name="_CRPCALENDAR_REQUIRED_TEXT"]-->
 <form class="pn-form" action="<!--[pnmodurl modname="crpCalendar" type="admin" func="create"]-->" method="post" enctype="multipart/form-data">
 <div>
 	<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="crpCalendar"]-->" />
 	<fieldset class="pn-form-fieldset">
-      	<legend><!--[pnml name=_CONTENT]--></legend>
-	    <div class="pn-formrow">
-    		<label for="event_title"><!--[pnml name="_CRPCALENDAR_TITLE" html=1]--> <span class="crpcalendar-required"><!--[pnml name="_CRPCALENDAR_REQUIRED" html=1]--></span></label>
-    		<input id="event_title" class="pn-form-text" name="event[title]" type="text" size="32" maxlength="255" value="<!--[$title|pnvarprephtmldisplay]-->" />
-	    </div>
+  <legend><!--[pnml name=_CONTENT]--></legend>
+	  <div class="pn-formrow">
+    	<label for="event_title"><!--[pnml name="_CRPCALENDAR_TITLE" html=1]--> <span class="crpcalendar-required"><!--[pnml name="_CRPCALENDAR_REQUIRED" html=1]--></span></label>
+    	<input id="event_title" class="pn-form-text" name="event[title]" type="text" size="32" maxlength="255" value="<!--[$title|pnvarprephtmldisplay]-->" />
+	  </div>
 		<div class="pn-formrow">
 			<label for="event_urltitle"><!--[pnml name="_PERMALINKTITLE" html=1]--></label>
 			<input id="event_urltitle" class="pn-form-text" name="event[urltitle]" type="text" size="32" maxlength="255" value="<!--[$urltitle|pnvarprepfordisplay]-->" />
 			<span class="pn-sub"><!--[pnml name=_PERMALINKTITLEBLANK]--></span>
 		</div>
 		<div class="pn-formrow">
-    		<label for="event_location"><!--[pnml name="_CRPCALENDAR_LOCATION" html=1]--></label>
-    		<input id="event_location" class="pn-form-text" name="event[location]" type="text" size="32" maxlength="255" value="<!--[$location|pnvarprephtmldisplay]-->" />
-	    </div>
-	    <!--[if $enable_locations && pnModAvailable('locations')]-->
+    	<label for="event_location"><!--[pnml name="_CRPCALENDAR_LOCATION" html=1]--></label>
+    	<input id="event_location" class="pn-form-text" name="event[location]" type="text" size="32" maxlength="255" value="<!--[$location|pnvarprephtmldisplay]-->" />
+	  </div>
+	  <!--[if $enable_locations && pnModAvailable('locations')]-->
 		<div class="pn-formrow">
 			<label for="event_locations"><!--[pnml name="_CRPCALENDAR_LOCATIONS" html=1]--></label>
 			<!--[ pnml assign="lblDef" name="_CRPCALENDAR_LOCATIONS" ]-->
 			<!--[ html_options values=$avail.values output=$avail.output name="event[locations]" selected=$locations ]-->
 		</div>
 		<!--[/if]-->
-	    <div class="pn-formrow">
-    		<label for="event_url"><!--[pnml name="_CRPCALENDAR_URL_HINT" html=1]--></label>
-    		<input id="event_url" class="pn-form-text" name="event[url]" type="text" size="32" maxlength="255" value="<!--[$url|pnvarprephtmldisplay]-->" />
-	    </div>
-	    <div class="pn-formrow">
-    		<label for="event_contact"><!--[pnml name="_CRPCALENDAR_CONTACT" html=1]--></label>
-    		<input id="event_contact" class="pn-form-text" name="event[contact]" type="text" size="32" maxlength="255" value="<!--[$contact|pnvarprephtmldisplay]-->" />
-	    </div>
-	    <div class="pn-formrow">
-    		<label for="event_organiser"><!--[pnml name="_CRPCALENDAR_ORGANISER" html=1]--></label>
-    		<input id="event_organiser" class="pn-form-text" name="event[organiser]" type="text" size="32" maxlength="255" value="<!--[$organiser|pnvarprephtmldisplay]-->" />
-	    </div>
+    <div class="pn-formrow">
+   		<label for="event_url"><!--[pnml name="_CRPCALENDAR_URL_HINT" html=1]--></label>
+   		<input id="event_url" class="pn-form-text" name="event[url]" type="text" size="32" maxlength="255" value="<!--[$url|pnvarprephtmldisplay]-->" />
+    </div>
+    <div class="pn-formrow">
+   		<label for="event_contact"><!--[pnml name="_CRPCALENDAR_CONTACT" html=1]--></label>
+   		<input id="event_contact" class="pn-form-text" name="event[contact]" type="text" size="32" maxlength="255" value="<!--[$contact|pnvarprephtmldisplay]-->" />
+    </div>
+    <div class="pn-formrow">
+   		<label for="event_organiser"><!--[pnml name="_CRPCALENDAR_ORGANISER" html=1]--></label>
+   		<input id="event_organiser" class="pn-form-text" name="event[organiser]" type="text" size="32" maxlength="255" value="<!--[$organiser|pnvarprephtmldisplay]-->" />
+    </div>
 		<!--[if $enablecategorization]-->
 		<div class="pn-formrow">
 			<label for="event_category_cat_val"><!--[pnml name="_CATEGORY" html=1]--> <span class="crpcalendar-required"><!--[pnml name="_CRPCALENDAR_REQUIRED" html=1]--></span></label>
@@ -54,26 +54,26 @@
 		</div>
 		<!--[/if]-->
 		<!--[if pnConfigGetVar('multilingual') eq 1]-->
-    	<div class="pn-formrow">
-		    <label for="event_language"><!--[pnml name="_LANGUAGE" html=1]--></label>
-    		<!--[html_select_languages id=event_language name=event[language] all=true installed=true selected=$language]-->
-	    </div>
-	    <!--[/if]-->
+   	<div class="pn-formrow">
+	    <label for="event_language"><!--[pnml name="_LANGUAGE" html=1]--></label>
+   		<!--[html_select_languages id=event_language name=event[language] all=true installed=true selected=$language]-->
+    </div>
+    <!--[/if]-->
 		<div class="pn-formrow">
-		    <label for="crpcalendar_event_image"><!--[pnml name="_CRPCALENDAR_EVENT_IMAGE" html=1]--> <!--[pnmodgetvar module=crpCalendar name=file_dimension]--> bytes</label>
-    		<input type="hidden" name="MAX_FILE_SIZE" value="<!--[pnmodgetvar module=crpCalendar name=file_dimension]-->"/>
-    		<input id="crpcalendar_event_image" name="event_image" type="file" size="32"/>
-    		<span class="pn-sub"><!--[pnml name="_CRPCALENDAR_IMAGE_RESIZE"]--> <!--[pnmodgetvar module=crpCalendar name=image_width]--> px</span>
-	    </div>
-	    <div class="pn-formrow">
-		    <label for="crpcalendar_event_document"><!--[pnml name="_CRPCALENDAR_EVENT_DOCUMENT" html=1]--> <!--[pnmodgetvar module=crpCalendar name=document_dimension]--> bytes</label>
-    		<input type="hidden" name="MAX_FILE_SIZE" value="<!--[pnmodgetvar module=crpCalendar name=document_dimension]-->"/>
-    		<input id="crpcalendar_event_document" name="event_document" type="file" size="32"/>
-    	</div>
-    	<div class="pn-formrow">
-		    <label for="crpcalendar_event_text"><!--[pnml name="_CONTENT" html=1]--> <span class="crpcalendar-required"><!--[if $mandatory_description]--><!--[pnml name="_CRPCALENDAR_REQUIRED"]--><!--[/if]--></span></label>
-    		<textarea id="crpcalendar_event_text" class="pn-form-text" name="event[event_text]" rows="12" cols="64"><!--[$event_text|pnvarprepfordisplay]--></textarea>
-	    </div>
+	    <label for="crpcalendar_event_image"><!--[pnml name="_CRPCALENDAR_EVENT_IMAGE" html=1]--> <!--[pnmodgetvar module=crpCalendar name=file_dimension]--> bytes</label>
+   		<input type="hidden" name="MAX_FILE_SIZE" value="<!--[pnmodgetvar module=crpCalendar name=file_dimension]-->"/>
+   		<input id="crpcalendar_event_image" name="event_image" type="file" size="32"/>
+   		<span class="pn-sub"><!--[pnml name="_CRPCALENDAR_IMAGE_RESIZE"]--> <!--[pnmodgetvar module=crpCalendar name=image_width]--> px</span>
+    </div>
+    <div class="pn-formrow">
+	    <label for="crpcalendar_event_document"><!--[pnml name="_CRPCALENDAR_EVENT_DOCUMENT" html=1]--> <!--[pnmodgetvar module=crpCalendar name=document_dimension]--> bytes</label>
+   		<input type="hidden" name="MAX_FILE_SIZE" value="<!--[pnmodgetvar module=crpCalendar name=document_dimension]-->"/>
+   		<input id="crpcalendar_event_document" name="event_document" type="file" size="32"/>
+   	</div>
+   	<div class="pn-formrow">
+	    <label for="crpcalendar_event_text"><!--[pnml name="_CONTENT" html=1]--> <span class="crpcalendar-required"><!--[if $mandatory_description]--><!--[pnml name="_CRPCALENDAR_REQUIRED"]--><!--[/if]--></span></label>
+   		<textarea id="crpcalendar_event_text" class="pn-form-text" name="event[event_text]" rows="12" cols="64"><!--[$event_text|pnvarprepfordisplay]--></textarea>
+    </div>
 		<div class="pn-formrow">
 			<label for="crpcalendar_day_event"><!--[pnml name="_CRPCALENDAR_DAY_EVENT" html=1]--></label>
 			<!--[if $day_event eq 1]-->
@@ -82,7 +82,7 @@
 				<input id="crpcalendar_day_event" name="event[day_event]" type="checkbox" value="1" />
 			<!--[/if]-->
 		</div>
-	    <div class="pn-formrow" id="start_date_block">
+	  <div class="pn-formrow" id="start_date_block">
 			<label><!--[pnml name="_CRPCALENDAR_START_DATE" html=1]--></label>
 			<!--[if $startYear]--><!--[assign var="start_date" value=$startYear|cat:"-"|cat:$startMonth|cat:"-"|cat:$startDay|cat:" "|cat:$startHour|cat:":"|cat:$startMinute]--><!--[/if]-->
 			<!--[html_select_date prefix="start" end_year="+4" time=$start_date field_array=event display_months=false display_years=false id="start_datefield-dd"]-->
@@ -128,9 +128,9 @@
 		<!--[pnmodcallhooks hookobject=item hookaction=new module=crpCalendar]-->
     </fieldset>		
     <div class="pn-formrow pn-formbuttons">
-    <a href="<!--[pnmodurl modname=crpCalendar type=admin func=view]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt="_CANCEL" title="_CANCEL"]--></a>
-    <!--[pnbutton src=button_ok.gif set=icons/small alt="_CREATE" title="_CREATE"]-->
-    <!--[pnbutton src=agt_reload.gif set=icons/small name="reenter" value="reenter" alt="_CRPCALENDAR_CREATE_REENTER" title="_CRPCALENDAR_CREATE_REENTER"]-->
+    	<a href="<!--[pnmodurl modname=crpCalendar type=admin func=view]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt="_CANCEL" title="_CANCEL"]--></a>
+    	<!--[pnbutton src=button_ok.gif set=icons/small alt="_CREATE" title="_CREATE"]-->
+    	<!--[pnbutton src=agt_reload.gif set=icons/small name="reenter" value="reenter" alt="_CRPCALENDAR_CREATE_REENTER" title="_CRPCALENDAR_CREATE_REENTER"]-->
     </div>
 </div>
 </form>
