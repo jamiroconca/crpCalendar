@@ -275,7 +275,7 @@ class crpCalendarDAO
 		);
 
 		// get the objects from the db
-		$objArray= DBUtil :: selectObjectArray('crpcalendar', $where, $orderby, $startnum -1, '9999', '', $permFilter,
+		$objArray= DBUtil :: selectObjectArray('crpcalendar', $where, $orderby, $startnum -1, -1, '', $permFilter,
 																						$catFilter, $columnArray);
 
 		// Check for an error with the database code, and if so set an appropriate
