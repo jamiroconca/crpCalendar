@@ -632,6 +632,14 @@ class crpCalendar
 		// Get the event
 		$item = $this->dao->getAdminData($eventid);
 
+		if (pnModAvailable('locations') && pnModGetVar('crpCalendar', 'enable_locations') && is_numeric($item['location']))
+		{
+			pnModLangLoad('locations');
+			$item['location'] = pnModAPIFunc('locations', 'user', 'getLocationByID', array (
+				'locationid' => $item['location']
+			));
+		}
+
 		// get all module vars
 		$modvars = pnModGetVar('crpCalendar');
 
