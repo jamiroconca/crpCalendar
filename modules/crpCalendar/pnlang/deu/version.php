@@ -3,18 +3,17 @@
  * crpCalendar
  *
  * @copyright (c) 2007, Daniele Conca
- * @link http://code.zikula.org/projects/crpcalendar Support and documentation
- * @version $Id: $
+ * @link http://code.zikula.org/crpCalendar Support and documentation
+ * @version 0.2.0
  * @author Daniele Conca <jami at cremonapalloza dot org>
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  * @package crpCalendar
  *
- * Translation by sven schomacker aka hilope
+ * @version $Id$
+ * translation by sven schomacker (hilope)
  */
 
 define('_CRPCALENDAR_NAME', 'crpCalendar');
-define('_CRPCALENDAR_CATEGORY_DESCRIPTION', 'crpCalendar-Hauptkategorie');
+define('_CRPCALENDAR_CATEGORY_DESCRIPTION', 'Hauptkategorie von crpCalendar');
 define('_CRPCALENDAR_DISPLAYNAME', 'crpCalendar');
-define('_CRPCALENDAR_DESCRIPTION', 'Terminkalender');
-
-?>
+define('_CRPCALENDAR_DESCRIPTION', 'Einfacher Terminkalender');
