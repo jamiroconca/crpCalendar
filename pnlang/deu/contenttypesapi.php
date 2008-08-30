@@ -3,19 +3,20 @@
  * crpCalendar
  *
  * @copyright (c) 2007, Daniele Conca
- * @link http://code.zikula.org/projects/crpcalendar Support and documentation
+ * @link http://code.zikula.org/crpcalendar Support and documentation
  * @version $Id: $
  * @author Daniele Conca <jami at cremonapalloza dot org>
  * @license GNU/GPL - v.2
  * @package crpCalendar
  *
- * Translation by sven schomacker aka hilope
+ * @version $Id$
+ * translation by sven schomacker (hilope)
  */
 
-define('_CRPCALENDAR_CONTENTENTTYPE_EVENTTITLE','Termin von crpCalendar');
-define('_CRPCALENDAR_CONTENTENTTYPE_EVENTDESCR','Einen Termin zur Anzeige wählen von crpCalendar');
+define('_CRPCALENDAR_CONTENTENTTYPE_EVENTTITLE','crpCalendar-Termin');
+define('_CRPCALENDAR_CONTENTENTTYPE_EVENTDESCR','Bitte einen Termin aus crpCalendar zur Anzeige wählen');
 
-define('_CRPCALENDAR_CONTENTENTTYPE_EVENTLABEL','Einen Termin zur Anzeige wählen');
+define('_CRPCALENDAR_CONTENTENTTYPE_EVENTLABEL','Bitte einen Termin zur Anzeige wählen');
 define('_CRPCALENDAR_CONTENTENTTYPE_NOEVENT','Kein Termin');
 
 ?>
