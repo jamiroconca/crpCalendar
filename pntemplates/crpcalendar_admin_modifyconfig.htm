@@ -107,6 +107,11 @@
 			<label for="crpcalendar_enable_locations"><!--[pnml name="_CRPCALENDAR_ENABLE_LOCATIONS" html=1]--></label>
 			<input id="crpcalendar_enable_locations" type="checkbox" name="enable_locations"<!--[if $enable_locations]--> checked="checked"<!--[/if]--> />
 		</div>
+		<div class="pn-adminformrow">
+			<!--[if pnModAvailable('formicula')]--><!--[assign var="formicula_avail" value="1"]--><!--[/if]-->
+			<label for="crpcalendar_enable_formicula"><!--[pnml name="_CRPCALENDAR_ENABLE_FORMICULA" html=1]--></label>
+			<input id="crpcalendar_enable_formicula" type="checkbox" name="enable_formicula"<!--[if $enable_formicula]--> checked="checked"<!--[/if]--> />
+		</div>
 	</fieldset>
 	<fieldset>
 		<legend><!--[pnml name=_PERMALINKS html=1]--></legend>
@@ -142,7 +147,7 @@
 </form>
 
 <script type="text/javascript">
-	Event.observe(window, 'load', function(){crpCalendarConfigInit('<!--[$gd_version.value]-->','<!--[$locations_avail]-->');}, false);
+	Event.observe(window, 'load', function(){crpCalendarConfigInit('<!--[$gd_version.value]-->','<!--[$locations_avail]-->','<!--[$formicula_avail]-->');}, false);
 </script>
 
 </div>

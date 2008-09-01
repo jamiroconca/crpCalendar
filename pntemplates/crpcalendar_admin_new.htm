@@ -117,6 +117,12 @@
 			</div>
 		</div>
 		<!--[/if]-->
+		<!--[if $enable_formicula && pnModAvailable('formicula')]-->
+		<div class="pn-formrow">
+			<label for="event_id_formicula"><!--[pnml name="_CRPCALENDAR_ID_FORMICULA" html=1]--></label>
+			<input id="event_id_formicula" class="pn-form-text" name="event[id_formicula]" type="text" size="32" maxlength="255" value="<!--[$id_formicula|pnvarprephtmldisplay]-->" />
+    </div>
+		<!--[/if]-->
 		<div class="pn-formrow">
 			<label for="crpcalendar_event_status"><!--[pnml name="_CRPCALENDAR_STATUS" html=1]--></label>
 			<select id="crpcalendar_event_status" name="event[obj_status]">
