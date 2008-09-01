@@ -64,6 +64,7 @@ function crpCalendar_init() {
 	pnModSetVar('crpCalendar', 'mandatory_description', true);
 	pnModSetVar('crpCalendar', 'submitted_status', 'P');
 	pnModSetVar('crpCalendar', 'multiple_insert', false);
+	pnModSetVar('crpCalendar', 'enable_formicula', false);
 
 	// Initialisation successful
 	return true;
@@ -160,6 +161,51 @@ function crpCalendar_upgrade($oldversion)
   		return crpCalendar_upgrade("0.4.9");
   		break;
   	case "0.4.9":
+  		pnModSetVar('crpCalendar', 'enable_formicula', false);
+
+			$sql = "ALTER TABLE $tables[crpcalendar] ADD id_formicula VARCHAR( 255 ) NOT NULL DEFAULT '' AFTER pn_counter" ;
+  		if (!DBUtil::executeSQL($sql))
+      	return LogUtil::registerError (_UPDATETABLEFAILED);
+
+			$sql = "ALTER TABLE $tables[crpcalendar] CHANGE `pn_eventid` `eventid` INT( 11 ) NOT NULL AUTO_INCREMENT ,
+							CHANGE `pn_title` `title` TEXT NOT NULL DEFAULT '' ,
+							CHANGE `pn_urltitle` `urltitle` TEXT NOT NULL DEFAULT '' ,
+							CHANGE `pn_location` `location` VARCHAR(255) NOT NULL DEFAULT '' ,
+							CHANGE `pn_url` `url` VARCHAR(255) NOT NULL DEFAULT '' ,
+							CHANGE `pn_contact` `contact` VARCHAR(255) NOT NULL DEFAULT '' ,
+							CHANGE `pn_organiser` `organiser` VARCHAR(255) NOT NULL DEFAULT '' ,
+							CHANGE `pn_event_text` `event_text` TEXT NOT NULL DEFAULT '' ,
+							CHANGE `pn_start_date` `start_date` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' ,
+							CHANGE `pn_end_date` `end_date` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' ,
+							CHANGE `pn_day_event` `day_event` INT( 1 ) NOT NULL DEFAULT '1' ,
+							CHANGE `pn_language` `language` VARCHAR(30) NOT NULL DEFAULT '' ,
+							CHANGE `pn_counter` `counter` INT( 1 ) NOT NULL DEFAULT '0' ,
+							CHANGE `pn_obj_status` `obj_status` VARCHAR( 1 ) NOT NULL DEFAULT 'A' ,
+							CHANGE `pn_cr_date` `cr_date` DATETIME NOT NULL DEFAULT '1970-01-01 00:00:00' ,
+							CHANGE `pn_cr_uid` `cr_uid` INT( 11 ) NOT NULL DEFAULT '0' ,
+							CHANGE `pn_lu_date` `lu_date` DATETIME NOT NULL DEFAULT '1970-01-01 00:00:00' ,
+							CHANGE `pn_lu_uid` `lu_uid` INT( 11 ) NOT NULL DEFAULT '0' ";//die($sql);
+			if (!DBUtil::executeSQL($sql))
+      	return LogUtil::registerError (_UPDATETABLEFAILED);
+
+      $sql = "ALTER TABLE $tables[crpcalendar_files] CHANGE `pn_id` `id` INT( 11 ) NOT NULL AUTO_INCREMENT ,
+							CHANGE `pn_eventid` `eventid` INT( 11 ) NOT NULL DEFAULT '0' ,
+							CHANGE `pn_document_type` `document_type` VARCHAR(255) NOT NULL DEFAULT '' ,
+							CHANGE `pn_name` `name` VARCHAR(255) NOT NULL DEFAULT '' ,
+							CHANGE `pn_content_type` `content_type` VARCHAR(255) NOT NULL DEFAULT '' ,
+							CHANGE `pn_size` `size` INT NOT NULL DEFAULT '0' ,
+							CHANGE `pn_binary_data` `binary_data` LONGBLOB NOT NULL DEFAULT '' ";//die($sql);
+			if (!DBUtil::executeSQL($sql))
+      	return LogUtil::registerError (_UPDATETABLEFAILED);
+
+			$sql = "ALTER TABLE $tables[crpcalendar_attendee] CHANGE `pn_uid` `uid` INT( 11 ) NOT NULL DEFAULT '0' ,
+							CHANGE `pn_eventid` `eventid` INT( 11 ) NOT NULL DEFAULT '0' ";
+			if (!DBUtil::executeSQL($sql))
+      	return LogUtil::registerError (_UPDATETABLEFAILED);
+
+  		return crpCalendar_upgrade("0.5.0");
+  		break;
+  	case "0.5.0":
   		break;
   }
 	return true;
