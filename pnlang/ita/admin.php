@@ -2,10 +2,9 @@
 /**
  * crpCalendar
  *
- * @copyright (c) 2007, Daniele Conca
- * @link http://noc.postnuke.com/projects/crpcalendar Support and documentation
- * @version $Id: $
- * @author Daniele Conca <jami at cremonapalloza dot org>
+ * @copyright (c) 2007,2008 Daniele Conca
+ * @link http://code.zikula.org/crpcalendar Support and documentation
+ * @author Daniele Conca <conca dot daniele at gmail dot com>
  * @license GNU/GPL - v.2.1
  * @package crpCalendar
  */
@@ -34,6 +33,7 @@ define('_CRPCALENDAR_DAY_EVENT', 'Evento giornaliero');
 define('_CRPCALENDAR_END_DATE','Data termine');
 define('_CRPCALENDAR_EVENT_DOCUMENT','Documento allegato');
 define('_CRPCALENDAR_EVENT_IMAGE','Immagine evento (.gif, .jpg, .png) - Max');
+define('_CRPCALENDAR_ID_FORMICULA','ID modulo Formicula');
 define('_CRPCALENDAR_LOCATION','Luogo');
 define('_CRPCALENDAR_LOCATIONS','dal modulo Locations');
 define('_CRPCALENDAR_IMAGE_WIDTH','Larghezza delle immagini per gli eventi');
@@ -60,6 +60,7 @@ define('_CRPCALENDAR_SHOW_FILE','Visualizza file');
 // config
 define('_CRPCALENDAR_DAYLIST_CATEGORIZED','Vista giornaliera categorizzata');
 define('_CRPCALENDAR_DOCUMENT_DIMENSION','Massima dimensione dei documenti per l\'upload (bytes)');
+define('_CRPCALENDAR_ENABLE_FORMICULA','Abilita formicula');
 define('_CRPCALENDAR_ENABLE_LOCATIONS','Abilita Locations');
 define('_CRPCALENDAR_ENABLE_PARTECIPATION','Abilita partecipazione degli utenti agli eventi');
 define('_CRPCALENDAR_FILE_DIMENSION','Massima dimensione delle immagini per l\'upload (bytes)');
