@@ -109,7 +109,7 @@
 <!--[pnmodcallhooks hookobject=item hookaction=display hookid=$event.eventid module=crpCalendar returnurl=$returnurl]-->
 </div>
 
-<!--[if $enable_formicula && pnModAvailable('formicula')]-->
+<!--[if $enable_formicula && pnModAvailable('formicula') && $event.id_formicula neq '']-->
 <!--[pnpageaddvar name="stylesheet" value="modules/formicula/pnstyle/style.css"]-->
 <div>
 	<!--[pnmodfunc modname=formicula form=$event.id_formicula]-->
