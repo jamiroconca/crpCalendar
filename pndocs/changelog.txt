@@ -1,5 +1,8 @@
 crpCalendar
-v0.4.9 - 14 august 2008
+v0.5.0 - 1 september 2008
+- removed pn_ prefix from table definitions
+- added support for formicula's inclusions (only from admin new and modify funcs)
+v0.4.9 - 18 august 2008
 - added event multiple start dates for admins, by module vars
 - added re-enter admin creation button
 - added delete link in admin modify, near CANCEL and UPDATE
