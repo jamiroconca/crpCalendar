@@ -124,7 +124,13 @@
 			<!--[html_select_date prefix="end" end_year="+4" time=$end_date field_array=event display_months=false display_years=false id="end_datefield-dd"]-->
 			<!--[html_select_date prefix="end" end_year="+4" time=$end_date field_array=event display_days=false display_years=false id="end_datefield-mm"]-->
 			<!--[html_select_date prefix="end" start_year="-4" end_year="+4" time=$end_date field_array=event display_days=false display_months=false id="end_datefield" class="highlight-days-67 no-transparency split-date"]-->&nbsp;&nbsp;<!--[html_select_time prefix="end" minute_interval="15" use_24_hours=true display_seconds=no time=$end_date field_array=event]--> <br />
-		</div>			
+		</div>
+		<!--[if $enable_formicula && pnModAvailable('formicula')]-->
+		<div class="pn-formrow">
+			<label for="event_id_formicula"><!--[pnml name="_CRPCALENDAR_ID_FORMICULA" html=1]--></label>
+			<input id="event_id_formicula" class="pn-form-text" name="event[id_formicula]" type="text" size="32" maxlength="255" value="<!--[$id_formicula|pnvarprephtmldisplay]-->" />
+    </div>
+		<!--[/if]-->
 		<div class="pn-formrow">
 			<label for="crpcalendar_event_status"><!--[pnml name="_CRPCALENDAR_STATUS" html=1]--></label>
 			<select id="crpcalendar_event_status" name="event[obj_status]">
