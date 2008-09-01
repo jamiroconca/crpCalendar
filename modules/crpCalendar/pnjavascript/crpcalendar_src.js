@@ -1,9 +1,9 @@
 /**
  * crpCalendar
  *
- * @copyright (c) 2007-2008, Daniele Conca
- * @link http://noc.postnuke.com/projects/crpcalendar Support and documentation
- * @author Daniele Conca <jami at cremonapalloza dot org>
+ * @copyright (c) 2007,2008 Daniele Conca
+ * @link http://code.zikula.org/crpcalendar Support and documentation
+ * @author Daniele Conca <conca dot daniele at gmail dot com>
  * @license GNU/GPL - v.2.1
  * @package crpCalendar
  */
@@ -63,7 +63,7 @@ function togglestatus_response(req){
 	$('eventstatus_fake_P_' + jsonArray.eventid).toggle();
 }
 
-function crpCalendarConfigInit(gd_version, locations_avail){
+function crpCalendarConfigInit(gd_version, locations_avail, formicula_avail){
 	if (gd_version < 2) {
 		$('crpcalendar_use_gd').parentNode.remove();
 		$('crpcalendar_use_browser').removeClassName('pn-hide');
@@ -71,6 +71,10 @@ function crpCalendarConfigInit(gd_version, locations_avail){
 	if (!locations_avail) {
 		$('crpcalendar_enable_locations').checked = false;
 		$('crpcalendar_enable_locations').disabled = true;
+	}
+	if (!formicula_avail) {
+		$('crpcalendar_enable_formicula').checked = false;
+		$('crpcalendar_enable_formicula').disabled = true;
 	}
 }
 
