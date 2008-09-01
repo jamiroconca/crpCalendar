@@ -2,9 +2,9 @@
 /**
  * crpCalendar
  *
- * @copyright (c) 2007-2008, Daniele Conca
- * @link http://code.zikula.org/projects/crpcalendar Support and documentation
- * @author Daniele Conca <conca.daniele@gmail.com>
+ * @copyright (c) 2007,2008 Daniele Conca
+ * @link http://code.zikula.org/crpcalendar Support and documentation
+ * @author Daniele Conca <conca dot daniele at gmail dot com>
  * @license GNU/GPL - v.2.1
  * @package crpCalendar
  */
@@ -1244,6 +1244,8 @@ class crpCalendar
 		pnModSetVar('crpCalendar', 'submitted_status', $submitted_status);
 		$multiple_insert = (bool) FormUtil :: getPassedValue('multiple_insert', false, 'POST');
 		pnModSetVar('crpCalendar', 'multiple_insert', $multiple_insert);
+		$enable_formicula = (bool) FormUtil :: getPassedValue('enable_formicula', false, 'POST');
+		pnModSetVar('crpCalendar', 'enable_formicula', $enable_formicula);
 
 		// Let any other modules know that the modules configuration has been updated
 		pnModCallHooks('module', 'updateconfig', 'crpCalendar', array (
