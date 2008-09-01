@@ -2,9 +2,9 @@
 /**
  * crpCalendar
  *
- * @copyright (c) 2007, Daniele Conca
- * @link http://noc.postnuke.com/projects/crpcalendar Support and documentation
- * @author Daniele Conca <jami at cremonapalloza dot org>
+ * @copyright (c) 2007,2008 Daniele Conca
+ * @link http://code.zikula.org/crpcalendar Support and documentation
+ * @author Daniele Conca <conca dot daniele at gmail dot com>
  * @license GNU/GPL - v.2.1
  * @package crpCalendar
  */
