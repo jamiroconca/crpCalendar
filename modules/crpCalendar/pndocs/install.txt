@@ -11,6 +11,7 @@ INSTALL:
 - take advantage from Categories creating a property named "Color", this (#FC0, #080 and so on) will be use in event's presentation
 - e-mail notification are active for user submission (level <= ACCESS_EDIT) if a valid e-mail is inserted
 - if locations module is availble, event's geographic location can be taken from the locations DB
+- if formicula module is availble, formicula's form can be used in event display page to collect informations
 
 Permissions Summary:
 ACCESS_READ : can view user list and details, can get rss feed
