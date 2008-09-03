@@ -11,7 +11,7 @@
 
 /**
  * get form list of categorized events
- * 
+ *
  * @return array events
  */
 function crpCalendar_ajax_getCategorizedEvent()
@@ -22,10 +22,10 @@ function crpCalendar_ajax_getCategorizedEvent()
 	}
 
 	pnModLangLoad('crpCalendar', 'admin');
-	
+
 	// get all module vars
 	$modvars = pnModGetVar('crpCalendar');
-	
+
 	// load the category registry util
 	if (!($class = Loader :: loadClass('CategoryRegistryUtil')))
 		pn_exit('Unable to load class [CategoryRegistryUtil] ...');
@@ -38,16 +38,16 @@ function crpCalendar_ajax_getCategorizedEvent()
 	$ignoreml = true;
 	$sortOrder = 'DESC';
 	$data = compact('startnum', 'category', 'clear', 'ignoreml', 'mainCat', 'cats', 'modvars', 'sortOrder');
-	
+
 	$events = pnModAPIFunc('crpCalendar', 'user', 'getall_formlist', $data);
-	
+
 	$resultlist = DataUtil::convertFromUTF8($events);
 	return $resultlist;
 }
 
 /**
  * swap obj_status	value
- * 
+ *
  * @return array event status
  */
 function crpCalendar_ajax_toggleStatus()
@@ -58,11 +58,11 @@ function crpCalendar_ajax_toggleStatus()
 	}
 
 	$eventid = FormUtil::getPassedValue('eventid', null, 'GET');
-	$status = FormUtil::getPassedValue('status', -null, 'GET');
-	
+	$status = FormUtil::getPassedValue('status', null, 'GET');
+
 	pnModAPIFunc('crpCalendar', 'admin', 'change_status', array('eventid' => $eventid, 'status' => $status));
 	//($status=='A')?$status='P':$status='A';
-	
+
 	return array('eventid' => $eventid, 'status' => $status);
 }
 
