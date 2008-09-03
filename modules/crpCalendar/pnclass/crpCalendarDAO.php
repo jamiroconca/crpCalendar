@@ -1212,6 +1212,7 @@ class crpCalendarDAO
 		$file= DBUtil :: selectObject('crpcalendar_files', $where, $columnArray);
 		$modifiedDate= $this->getEventDate($eventid, 'lu_date');
 
+		while (@ob_end_clean());
 		// credits to Mediashare by Jorn Lind-Nielsen
 		if (pnConfigGetVar('UseCompression') == 1)
 			header("Content-Encoding: identity");
