@@ -1602,7 +1602,7 @@ class crpCalendar
 		$params['width'] = $width; //	$params['append_ghosted']=1;
 		$params['modifiedDate'] = $modifiedDate;
 
-		crpCalendar :: imageGetThumbnail($file['binary_data'], $file['filename'], $file['content_type'], $params);
+		crpCalendar :: imageGetThumbnail($file['binary_data'], $file['name'], $file['content_type'], $params);
 	}
 
 	function imageGetThumbnail(& $pSrcImage, $filename, $content_type, $params = array ())
@@ -1675,6 +1675,7 @@ class crpCalendar
 
 			}
 
+			while (@ob_end_clean());
 			//save output to a buffer
 			ob_start();
 
