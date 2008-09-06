@@ -106,8 +106,8 @@ class crpCalendar
 	function listEvents()
 	{
 		$navigationValues = $this->collectNavigationFromInput();
-		pnSessionDelVar('crpCalendar_export_events');
-		pnSessionDelVar('crpCalendar_choosed_time');
+		SessionUtil::delVar('crpCalendar_export_events');
+		SessionUtil::delVar('crpCalendar_choosed_time');
 
 		// Get all matching pages
 		$items = pnModAPIFunc('crpCalendar', 'user', 'getall', $navigationValues);
@@ -150,9 +150,9 @@ class crpCalendar
 			$exports[] = $item['eventid'];
 		}
 
-		pnSessionSetVar('crpCalendar_export_events', $exports);
-		pnSessionSetVar('crpCalendar_choosed_view', 'view');
-		pnSessionSetVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'view'));
+		SessionUtil::setVar('crpCalendar_export_events', $exports);
+		SessionUtil::setVar('crpCalendar_choosed_view', 'view');
+		SessionUtil::setVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'view'));
 
 		return $this->ui->userList($rows, $navigationValues['category'], $navigationValues['mainCat'], $navigationValues['modvars'], $navigationValues['typeList']);
 	}
@@ -165,8 +165,8 @@ class crpCalendar
 	function listYearEvents()
 	{
 		$navigationValues = $this->collectNavigationFromInput();
-		pnSessionDelVar('crpCalendar_export_events');
-		pnSessionDelVar('crpCalendar_choosed_time');
+		SessionUtil::delVar('crpCalendar_export_events');
+		SessionUtil::delVar('crpCalendar_choosed_time');
 
 		$date = $this->timeToDMY($navigationValues['t']);
 
@@ -233,9 +233,9 @@ class crpCalendar
 			$rows = $categorizedEvents;
 		}
 
-		pnSessionSetVar('crpCalendar_export_events', $exports);
-		pnSessionSetVar('crpCalendar_choosed_view', 'year_view');
-		pnSessionSetVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'year_view'));
+		SessionUtil::setVar('crpCalendar_export_events', $exports);
+		SessionUtil::setVar('crpCalendar_choosed_view', 'year_view');
+		SessionUtil::setVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'year_view'));
 
 		return $this->ui->userYearList($rows, $navigationValues['category'], $navigationValues['mainCat'], $navigationValues['modvars'], $navigationValues['t'], $date);
 	}
@@ -248,7 +248,7 @@ class crpCalendar
 	function listMonthEvents()
 	{
 		$navigationValues = $this->collectNavigationFromInput();
-		pnSessionDelVar('crpCalendar_export_events');
+		SessionUtil::delVar('crpCalendar_export_events');
 
 		$date = $this->timeToDMY($navigationValues['t']);
 
@@ -307,10 +307,10 @@ class crpCalendar
 		else
 			$rows = $items;
 
-		pnSessionSetVar('crpCalendar_export_events', $exports);
-		pnSessionSetVar('crpCalendar_choosed_view', 'month_view');
-		pnSessionSetVar('crpCalendar_choosed_time', $navigationValues['t']);
-		pnSessionSetVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'month_view'));
+		SessionUtil::setVar('crpCalendar_export_events', $exports);
+		SessionUtil::setVar('crpCalendar_choosed_view', 'month_view');
+		SessionUtil::setVar('crpCalendar_choosed_time', $navigationValues['t']);
+		SessionUtil::setVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'month_view'));
 
 		$today = DateUtil :: getDatetime(time());
 
@@ -329,7 +329,7 @@ class crpCalendar
 	function listWeekEvents()
 	{
 		$navigationValues = $this->collectNavigationFromInput();
-		pnSessionDelVar('crpCalendar_export_events');
+		SessionUtil::delVar('crpCalendar_export_events');
 
 		$date = $this->timeToDMY($navigationValues['t']);
 
@@ -356,10 +356,10 @@ class crpCalendar
 			$exports[] = $item['eventid'];
 		}
 
-		pnSessionSetVar('crpCalendar_export_events', $exports);
-		pnSessionSetVar('crpCalendar_choosed_view', 'week_view');
-		pnSessionSetVar('crpCalendar_choosed_time', $navigationValues['t']);
-		pnSessionSetVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'week_view'));
+		SessionUtil::setVar('crpCalendar_export_events', $exports);
+		SessionUtil::setVar('crpCalendar_choosed_view', 'week_view');
+		SessionUtil::setVar('crpCalendar_choosed_time', $navigationValues['t']);
+		SessionUtil::setVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'week_view'));
 
 		// expand days array
 		$this->expandFirstDOW(DateUtil :: parseUIDateTime($weekDay), $days);
@@ -389,7 +389,7 @@ class crpCalendar
 	function listDayEvents()
 	{
 		$navigationValues = $this->collectNavigationFromInput();
-		pnSessionDelVar('crpCalendar_export_events');
+		SessionUtil::delVar('crpCalendar_export_events');
 
 		$date = $this->timeToDMY($navigationValues['t']);
 
@@ -437,10 +437,10 @@ class crpCalendar
 			$items[$key]['options'] = $options;
 		}
 
-		pnSessionSetVar('crpCalendar_export_events', $exports);
-		pnSessionSetVar('crpCalendar_choosed_view', 'day_view');
-		pnSessionSetVar('crpCalendar_choosed_time', $navigationValues['t']);
-		pnSessionSetVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'day_view'));
+		SessionUtil::setVar('crpCalendar_export_events', $exports);
+		SessionUtil::setVar('crpCalendar_choosed_view', 'day_view');
+		SessionUtil::setVar('crpCalendar_choosed_time', $navigationValues['t']);
+		SessionUtil::setVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'day_view'));
 
 		$today = DateUtil :: getDatetime(time());
 
@@ -497,8 +497,8 @@ class crpCalendar
 			$exports[] = $item['eventid'];
 		}
 
-		pnSessionSetVar('crpCalendar_export_events', $exports);
-		pnSessionSetVar('crpCalendar_choosed_view', 'get_attendees');
+		SessionUtil::setVar('crpCalendar_export_events', $exports);
+		SessionUtil::setVar('crpCalendar_choosed_view', 'get_attendees');
 
 		return $this->ui->userPartecipations($rows, $navigationValues['uid'], $navigationValues['category'], $navigationValues['mainCat'], $navigationValues['modvars']);
 	}
@@ -535,7 +535,7 @@ class crpCalendar
 			$rows[] = $item;
 		}
 
-		pnSessionSetVar('crpCalendar_choosed_view', 'get_attendees');
+		SessionUtil::setVar('crpCalendar_choosed_view', 'get_attendees');
 
 		return $this->ui->attendeesList($rows, $navigationValues['category'], $navigationValues['mainCat'], $navigationValues['modvars']);
 	}
@@ -555,7 +555,7 @@ class crpCalendar
 			$eventid = $objectid;
 		}
 
-		pnSessionDelVar('crpCalendar_export_events');
+		SessionUtil::delVar('crpCalendar_export_events');
 
 		// Get the event
 		$item = $this->dao->getAdminData($eventid);
@@ -604,8 +604,8 @@ class crpCalendar
 
 		$dayDate = DateUtil :: formatDatetime($item['start_date'], '%Y-%m-%d');
 
-		pnSessionSetVar('crpCalendar_choosed_time', DateUtil :: makeTimestamp($dayDate));
-		pnSessionSetVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'display', array (
+		SessionUtil::setVar('crpCalendar_choosed_time', DateUtil :: makeTimestamp($dayDate));
+		SessionUtil::setVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'display', array (
 			'eventid' => $item['eventid']
 		)));
 
@@ -616,8 +616,8 @@ class crpCalendar
 				'locationid' => $item['location']
 			));
 		}
-		//pnSessionSetVar('crpCalendar_choosed_view', 'display');
-		//pnSessionSetVar('crpCalendar_choosed_event', $item['eventid']);
+		//SessionUtil::setVar('crpCalendar_choosed_view', 'display');
+		//SessionUtil::setVar('crpCalendar_choosed_event', $item['eventid']);
 
 		return $this->ui->userDisplay($eventid, $item, $modvars);
 	}
@@ -663,7 +663,7 @@ class crpCalendar
 	{
 		$inputValues = $this->collectDataFromInput();
 		$temp_values = array ();
-		$temp_values = pnSessionGetVar('crpCalendar_temp_values');
+		$temp_values = SessionUtil::getVar('crpCalendar_temp_values');
 		$avail = array ();
 
 		if (pnModAvailable('locations') && pnModGetVar('crpCalendar', 'enable_locations'))
@@ -681,7 +681,7 @@ class crpCalendar
 	{
 		$inputValues = $this->collectDataFromInput();
 		$temp_values = array ();
-		$temp_values = pnSessionGetVar('crpCalendar_temp_values');
+		$temp_values = SessionUtil::getVar('crpCalendar_temp_values');
 		$avail = array ();
 
 		if (pnModAvailable('locations') && pnModGetVar('crpCalendar', 'enable_locations'))
@@ -707,7 +707,7 @@ class crpCalendar
 		if (!$this->authAction(ACCESS_EDIT))
 		{
 			$returnType = 'user';
-			$returnFunc = pnSessionGetVar('crpCalendar_choosed_view');
+			$returnFunc = SessionUtil::getVar('crpCalendar_choosed_view');
 		}
 		else
 			$returnType = 'admin';
@@ -717,7 +717,7 @@ class crpCalendar
 			return LogUtil :: registerAuthidError(pnModURL('crpCalendar', $returnType, 'view'));
 
 		$inputValues = $this->collectDataFromInput();
-		pnSessionSetVar('crpCalendar_temp_values', $inputValues['event']);
+		SessionUtil::setVar('crpCalendar_temp_values', $inputValues['event']);
 
 		$startDate = $this->buildDate($inputValues['event']['startDay'], $inputValues['event']['startMonth'], $inputValues['event']['startYear']);
 
@@ -798,7 +798,7 @@ class crpCalendar
 		if ($inputValues['reenter'])
 			return pnRedirect(pnModUrl('crpCalendar', $returnType, 'new'));
 		else
-			pnSessionDelVar('crpCalendar_temp_values');
+			SessionUtil::delVar('crpCalendar_temp_values');
 
 		return pnRedirect(pnModURL('crpCalendar', $returnType, $returnFunc));
 	}
@@ -899,7 +899,7 @@ class crpCalendar
 		if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_EDIT))
 		{
 			$returnType = 'user';
-			$returnFunc = pnSessionGetVar('crpCalendar_choosed_view');
+			$returnFunc = SessionUtil::getVar('crpCalendar_choosed_view');
 		}
 		else
 			$returnType = 'admin';
@@ -1017,7 +1017,7 @@ class crpCalendar
 
 		// all went fine
 		LogUtil :: registerStatus(_CREATESUCCEDED);
-		pnSessionDelVar('crpCalendar_temp_values');
+		SessionUtil::delVar('crpCalendar_temp_values');
 
 		return pnRedirect(pnModURL('crpCalendar', 'admin', 'view'));
 	}
@@ -1145,7 +1145,7 @@ class crpCalendar
 		else
 			LogUtil :: registerStatus(_UPDATESUCCEDED);
 
-		return pnRedirect(pnSessionGetVar('crpCalendar_return_url'));
+		return pnRedirect(SessionUtil::getVar('crpCalendar_return_url'));
 	}
 
 	/**
@@ -1164,7 +1164,7 @@ class crpCalendar
 		else
 			LogUtil :: registerStatus(_UPDATESUCCEDED);
 
-		return pnRedirect(pnSessionGetVar('crpCalendar_return_url'));
+		return pnRedirect(SessionUtil::getVar('crpCalendar_return_url'));
 	}
 
 	/**
@@ -1282,9 +1282,9 @@ class crpCalendar
 		$viewForm = FormUtil :: getPassedValue('viewForm', 'table');
 
 		if ($day && $month && $year)
-			pnSessionSetVar('crpCalendar_choosed_time', DateUtil :: makeTimestamp($year . '-' . $month . '-' . $day));
+			SessionUtil::setVar('crpCalendar_choosed_time', DateUtil :: makeTimestamp($year . '-' . $month . '-' . $day));
 
-		$t = FormUtil :: getPassedValue('t', (pnSessionGetVar('crpCalendar_choosed_time')) ? pnSessionGetVar('crpCalendar_choosed_time') : time());
+		$t = FormUtil :: getPassedValue('t', (SessionUtil::getVar('crpCalendar_choosed_time')) ? SessionUtil::getVar('crpCalendar_choosed_time') : time());
 
 		if ($clear)
 		{
@@ -1296,7 +1296,7 @@ class crpCalendar
 		}
 
 		$ignoreml = FormUtil :: getPassedValue('ignoreml', true);
-		$sortOrder = FormUtil :: getPassedValue('sortOrder', (pnSessionGetVar('crpCalendar_choosed_view') == 'mont_view') ? 'ASC' : 'DESC');
+		$sortOrder = FormUtil :: getPassedValue('sortOrder', (SessionUtil::getVar('crpCalendar_choosed_view') == 'mont_view') ? 'ASC' : 'DESC');
 
 		// load the category registry util
 		if (!($class = Loader :: loadClass('CategoryRegistryUtil')))
@@ -1545,7 +1545,7 @@ class crpCalendar
 	 * */
 	function listICal()
 	{
-		$exports = pnSessionGetVar('crpCalendar_export_events');
+		$exports = SessionUtil::getVar('crpCalendar_export_events');
 
 		$result = '';
 
