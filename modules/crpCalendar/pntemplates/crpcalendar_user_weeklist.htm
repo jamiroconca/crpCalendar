@@ -12,7 +12,6 @@
 	<h3><!--[$t|pndate_format:"%Y"]--> / <!--[$daysexpanded.0|pndate_format:"%d %B"]--> - <!--[$daysexpanded.6|pndate_format:"%d %B"]--></h3>
 </div>
 
-
 <table class="crpcalendar-table" style="table-layout: fixed;">
 	
 	<caption>
@@ -20,14 +19,12 @@
 	</caption>
 	
 	<tr>
-	<th style="width: 24px;">&nbsp;</th>
 	<!--[section name=dayHeader loop=$day_of_week_short]-->
 	<th><!--[$day_of_week_short[dayHeader]]--></th>
 	<!--[/section]-->
 	</tr>
 	
 	<tr>
-		<td>&nbsp;</td>
 		<!--[foreach from=$daysexpanded item=day name=cell]-->
 		
 		<td class="month-cell<!--[if in_array($day,$days)]--> day-on<!--[else]--> day-off<!--[/if]-->">
