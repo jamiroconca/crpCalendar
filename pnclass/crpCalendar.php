@@ -154,7 +154,7 @@ class crpCalendar
 		SessionUtil::setVar('crpCalendar_choosed_view', 'view');
 		SessionUtil::setVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'view'));
 
-		return $this->ui->userList($rows, $navigationValues['category'], $navigationValues['mainCat'], $navigationValues['modvars'], $navigationValues['typeList']);
+		return $this->ui->userList($rows, $navigationValues['startnum'], $navigationValues['category'], $navigationValues['mainCat'], $navigationValues['modvars'], $navigationValues['typeList']);
 	}
 
 	/**
@@ -301,11 +301,16 @@ class crpCalendar
 				// Add the calculated menu options to the item array
 				$item['options'] = $options;
 				$rows[] = $item;
-				$exports[] = $item['eventid'];
 			}
 		}
 		else
 			$rows = $items;
+
+		$exports = array ();
+		foreach ($items as $key => $item)
+		{
+			$exports[] = $item['eventid'];
+		}
 
 		SessionUtil::setVar('crpCalendar_export_events', $exports);
 		SessionUtil::setVar('crpCalendar_choosed_view', 'month_view');
