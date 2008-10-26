@@ -1537,7 +1537,7 @@ class crpCalendar
 		$result .= $this->ui->drawICalFooter();
 
 		Header("Content-Disposition: attachment; filename={$eventid}.ics");
-		Header("Content-Type: text/calendar\n\n");
+		Header("Content-Type: text/calendar; charset={_CHARSET}\n\n");
 		//header("Content-Type: text/plain\n\n");
 
 		echo $result;
@@ -1578,7 +1578,7 @@ class crpCalendar
 		$result .= $this->ui->drawICalFooter();
 
 		Header("Content-Disposition: attachment; filename=crpCalendar.ics");
-		Header("Content-Type: text/calendar\n\n");
+		Header("Content-Type: text/calendar; charset={_CHARSET}\n\n");
 		//header("Content-Type: text/plain\n\n");
 
 		echo $result;
