@@ -11,10 +11,10 @@
 
 //
 define('_CRPCALENDAR_MAXDAY', 'Intervallo di giorni da visualizzare');
-define('_CRPCALENDAR_MAXEVENTS','Maximum number of events');
+define('_CRPCALENDAR_MAXEVENTS','Numero massimo di eventi');
 define('_CRPCALENDAR_LOCATION','Luogo');
 define('_CRPCALENDAR_NONE', 'None');
-// 
+//
 define('_CRPCALENDAR_BLOCK_NO_EVENTS','Non ci sono eventi per i prossimi');
 //
 define('_CRPCALENDAR_SUBMIT','Inserisci evento');
