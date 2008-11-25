@@ -44,7 +44,12 @@
       	</span>
       </td>
       <td><!--[$event.eventid|pnvarprephtmldisplay]--></td>
-      <td><!--[pnusergetvar name="uname" uid=$event.cr_uid|pnvarprephtmldisplay]--></td>
+      <!--[if $event.cr_uid]-->
+				<!--[pnusergetvar name=uname uid=$event.cr_uid assign=cr_profilename]-->
+			<!--[else]-->
+				<!--[pnmodgetvar module="Users" name="anonymous" assign=cr_profilename]-->
+			<!--[/if]-->
+      <td><!--[$cr_profilename]--></td>
 	  <!--[if $enablecategorization]-->
       <td>
           <!--[ $event.__CATEGORIES__.Main.display_name.$lang ]-->
