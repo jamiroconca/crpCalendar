@@ -75,6 +75,7 @@ function crpCalendar_searchapi_search($args)
   $eventscolumn = $pntable['crpcalendar_column'];
   $searchTable = &$pntable['search_result'];
   $searchColumn = &$pntable['search_result_column'];
+  $nowDate = DateUtil::getDatetime();
 
   $query = "SELECT $eventscolumn[title] as title,
                    $eventscolumn[event_text] as event_text,
@@ -102,7 +103,7 @@ function crpCalendar_searchapi_search($args)
       $query .= ')';
       $flag = true;
   }
-  (!$archive)?$query .= " AND $eventscolumn[start_date] > NOW() ":'';
+  (!$archive)?$query .= " AND $eventscolumn[start_date] > '" . DataUtil :: formatForStore($nowDate) . "' ":'';
   $query .= " AND $eventscolumn[obj_status]='A' ";
   $query .= " ORDER BY $eventscolumn[start_date] DESC";
 

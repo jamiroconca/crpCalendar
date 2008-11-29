@@ -75,6 +75,7 @@ class crpCalendarDAO
 		}
 
 		$items= array ();
+		$nowDate = DateUtil::getDatetime();
 
 		// Security check
 		if (!$this->getAuth(ACCESS_READ))
@@ -103,10 +104,12 @@ class crpCalendarDAO
 
 		if ($interval)
 		{
-			$queryargs[]= "(($crpcalendarcolumn[start_date] > NOW() " .
-			"AND $crpcalendarcolumn[start_date] < DATE_ADD(NOW(), INTERVAL " . DataUtil :: formatForStore($interval) . " DAY)) " .
-			"OR ($crpcalendarcolumn[end_date] > NOW() " .
-			"AND $crpcalendarcolumn[end_date] < DATE_ADD(NOW(), INTERVAL " . DataUtil :: formatForStore($interval) . " DAY)))";
+			$intervaltime = time() + $interval * 86400;
+			$intervalDate = DateUtil :: getDatetime($intervaltime);
+			$queryargs[]= "(($crpcalendarcolumn[start_date] > '" . DataUtil :: formatForStore($nowDate) . "' " .
+			"AND $crpcalendarcolumn[start_date] < '" . DataUtil :: formatForStore($intervalDate) . "') " .
+			"OR ($crpcalendarcolumn[end_date] > '" . DataUtil :: formatForStore($nowDate) . "' " .
+			"AND $crpcalendarcolumn[end_date] < '" . DataUtil :: formatForStore($intervalDate) . "'))";
 		}
 
 		if ($startDate && $endDate)
@@ -120,10 +123,10 @@ class crpCalendarDAO
 		switch ($typeList)
 		{
 			case "upcoming":
-				$queryargs[]= "($crpcalendarcolumn[start_date] > NOW())";
+				$queryargs[]= "($crpcalendarcolumn[start_date] > '" . DataUtil :: formatForStore($nowDate) . "')";
 				break;
 			case "archive":
-				$queryargs[]= "($crpcalendarcolumn[start_date] <= NOW())";
+				$queryargs[]= "($crpcalendarcolumn[start_date] <= '" . DataUtil :: formatForStore($nowDate) . "')";
 				break;
 			default: break;
 		}
@@ -219,6 +222,7 @@ class crpCalendarDAO
 			}
 
 		$items= array ();
+		$nowDate = DateUtil::getDatetime();
 
 		// Security check
 		if (!$this->getAuth(ACCESS_READ))
@@ -242,10 +246,12 @@ class crpCalendarDAO
 
 		if ($interval)
 		{
-			$queryargs[]= "(($crpcalendarcolumn[start_date] > NOW() " .
-			"AND $crpcalendarcolumn[start_date] < DATE_ADD(NOW(), INTERVAL " . DataUtil :: formatForStore($interval) . " DAY)) " .
-			"OR ($crpcalendarcolumn[end_date] > NOW() " .
-			"AND $crpcalendarcolumn[end_date] < DATE_ADD(NOW(), INTERVAL " . DataUtil :: formatForStore($interval) . " DAY)))";
+			$intervaltime = time() + $interval * 86400;
+			$intervalDate = DateUtil :: getDatetime($intervaltime);
+			$queryargs[]= "(($crpcalendarcolumn[start_date] > '" . DataUtil :: formatForStore($nowDate) . "' " .
+			"AND $crpcalendarcolumn[start_date] < '" . DataUtil :: formatForStore($intervalDate) . "') " .
+			"OR ($crpcalendarcolumn[end_date] > '" . DataUtil :: formatForStore($nowDate) . "' " .
+			"AND $crpcalendarcolumn[end_date] < '" . DataUtil :: formatForStore($intervalDate) . "'))";
 		}
 
 		$where= null;
@@ -1003,6 +1009,7 @@ class crpCalendarDAO
 		$crpcalendarcolumn= $pntable['crpcalendar_column'];
 
 		$where= '';
+		$nowDate = DateUtil::getDatetime();
 
 		$catFilter= array ();
 		if (is_array($category))
@@ -1017,10 +1024,10 @@ class crpCalendarDAO
 		switch ($typeList)
 		{
 			case "upcoming":
-				$queryargs[]= "($crpcalendarcolumn[start_date] > NOW())";
+				$queryargs[]= "($crpcalendarcolumn[start_date] > '" . DataUtil :: formatForStore($nowDate) . "')";
 				break;
 			case "archive":
-				$queryargs[]= "($crpcalendarcolumn[start_date] <= NOW())";
+				$queryargs[]= "($crpcalendarcolumn[start_date] <= '" . DataUtil :: formatForStore($nowDate) . "')";
 				break;
 			default: break;
 		}
