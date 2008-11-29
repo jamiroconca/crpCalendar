@@ -175,8 +175,8 @@ function crpCalendar_upgrade($oldversion)
 							CHANGE `pn_contact` `contact` VARCHAR(255) NOT NULL DEFAULT '' ,
 							CHANGE `pn_organiser` `organiser` VARCHAR(255) NOT NULL DEFAULT '' ,
 							CHANGE `pn_event_text` `event_text` TEXT NOT NULL DEFAULT '' ,
-							CHANGE `pn_start_date` `start_date` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' ,
-							CHANGE `pn_end_date` `end_date` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' ,
+							CHANGE `pn_start_date` `start_date` DATETIME NOT NULL DEFAULT '1970-01-01 00:00:00' ,
+							CHANGE `pn_end_date` `end_date` DATETIME NOT NULL DEFAULT '1970-01-01 00:00:00' ,
 							CHANGE `pn_day_event` `day_event` INT( 1 ) NOT NULL DEFAULT '1' ,
 							CHANGE `pn_language` `language` VARCHAR(30) NOT NULL DEFAULT '' ,
 							CHANGE `pn_counter` `counter` INT( 1 ) NOT NULL DEFAULT '0' ,
@@ -184,7 +184,7 @@ function crpCalendar_upgrade($oldversion)
 							CHANGE `pn_cr_date` `cr_date` DATETIME NOT NULL DEFAULT '1970-01-01 00:00:00' ,
 							CHANGE `pn_cr_uid` `cr_uid` INT( 11 ) NOT NULL DEFAULT '0' ,
 							CHANGE `pn_lu_date` `lu_date` DATETIME NOT NULL DEFAULT '1970-01-01 00:00:00' ,
-							CHANGE `pn_lu_uid` `lu_uid` INT( 11 ) NOT NULL DEFAULT '0' ";//die($sql);
+							CHANGE `pn_lu_uid` `lu_uid` INT( 11 ) NOT NULL DEFAULT '0' ";
 			if (!DBUtil::executeSQL($sql))
       	return LogUtil::registerError (_UPDATETABLEFAILED);
 
@@ -194,7 +194,7 @@ function crpCalendar_upgrade($oldversion)
 							CHANGE `pn_name` `name` VARCHAR(255) NOT NULL DEFAULT '' ,
 							CHANGE `pn_content_type` `content_type` VARCHAR(255) NOT NULL DEFAULT '' ,
 							CHANGE `pn_size` `size` INT NOT NULL DEFAULT '0' ,
-							CHANGE `pn_binary_data` `binary_data` LONGBLOB NOT NULL DEFAULT '' ";//die($sql);
+							CHANGE `pn_binary_data` `binary_data` LONGBLOB NOT NULL DEFAULT '' ";
 			if (!DBUtil::executeSQL($sql))
       	return LogUtil::registerError (_UPDATETABLEFAILED);
 

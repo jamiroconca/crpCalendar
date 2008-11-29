@@ -46,11 +46,11 @@ function crpCalendar_pntables()
 		'contact' 		=> "C(255) NOTNULL DEFAULT ''",
 		'organiser' 	=> "C(255) NOTNULL DEFAULT ''",
 		'event_text' 	=> "X NOTNULL DEFAULT ''",
-		'start_date' 	=> "T NOTNULL DEFAULT '0000-00-00 00:00:00'",
-		'end_date' 		=> "T NOTNULL DEFAULT '0000-00-00 00:00:00'",
-		'day_event' 	=> "I(1) NOTNULL DEFAULT '1'",
+		'start_date' 	=> "T NOTNULL DEFAULT '1970-01-01 00:00:00'",
+		'end_date' 		=> "T NOTNULL DEFAULT '1970-01-01 00:00:00'",
+		'day_event' 	=> "I(1) NOTNULL DEFAULT 1",
 		'language' 		=> "C(30) NOTNULL DEFAULT ''",
-		'counter' 		=> "I(11) NOTNULL DEFAULT '0'",
+		'counter' 		=> "I(11) NOTNULL DEFAULT 0",
 		'id_formicula'=> "C(255) NOTNULL DEFAULT ''"
 	);
 
@@ -66,11 +66,11 @@ function crpCalendar_pntables()
 
 	$pntable['crpcalendar_files_column_def'] = array (
 		'id' 						=> 'I(11) AUTOINCREMENT PRIMARY',
-		'eventid' 			=> "I(11) NOTNULL DEFAULT '0'",
+		'eventid' 			=> "I(11) NOTNULL DEFAULT 0",
 		'document_type' => "C(255) NOTNULL DEFAULT ''",
 		'name' 					=> "C(255) NOTNULL DEFAULT ''",
 		'content_type'	=> "C(255) NOTNULL DEFAULT ''",
-		'size' 					=> "I NOTNULL DEFAULT '0'",
+		'size' 					=> "I NOTNULL DEFAULT 0",
 		'binary_data' 	=> "B NOTNULL DEFAULT ''"
 	);
 
@@ -79,8 +79,8 @@ function crpCalendar_pntables()
 			'uid'						=> 'uid',
 			'eventid'				=> 'eventid',);
 	$pntable['crpcalendar_attendee_column_def'] = array (
-		'uid' 					=> "I(11) NOTNULL DEFAULT '0'",
-		'eventid' 			=> "I(11) NOTNULL DEFAULT '0'"
+		'uid' 					=> "I(11) NOTNULL DEFAULT 0",
+		'eventid' 			=> "I(11) NOTNULL DEFAULT 0"
 	);
 
 	// Enable categorization services
