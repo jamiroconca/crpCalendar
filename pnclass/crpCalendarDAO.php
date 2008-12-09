@@ -1514,5 +1514,37 @@ class crpCalendarDAO
 
 		return true;
 	}
+
+	/**
+	 * Retrieve array of places from locations
+	 */
+	function getLocations()
+	{
+		$locations = array ();
+
+		// this function is called only when locations module is enabled
+		if (pnModAvailable('locations') && pnModGetVar('crpCalendar', 'enable_locations'))
+		{
+			pnModDBInfoLoad('locations');
+
+			$orderby= "ORDER BY name ASC";
+
+			$objArray= DBUtil :: selectObjectArray('locations_location', null, 'name', -1, -1,
+																							'', array(), array(), $columnArray= array (
+				'locationid',
+				'name'
+			));
+
+			$locations['values'][] = null;
+			$locations['output'][] = _CRPCALENDAR_NONE;
+			foreach ($objArray as $klocation => $vlocation)
+			{
+				$locations['values'][] = $vlocation['locationid'];
+				$locations['output'][] = $vlocation['name'];
+			}
+		}
+
+		return $locations;
+	}
 }
 ?>
