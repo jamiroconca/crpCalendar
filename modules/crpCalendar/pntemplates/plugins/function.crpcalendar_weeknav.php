@@ -65,7 +65,7 @@ function smarty_function_crpcalendar_weeknav($params, &$smarty)
 	$navbar .= $prev_week_char."\n";
 	$navbar .= '</a>'."\n";
 
-	($dateview)?$navbar .= $space._WEEK.$space.DateUtil::getDatetime($t+86400, $dateformat).$space."\n":$navbar.= $separator."\n";
+	($dateview)?$navbar .= $space._WEEK.$space.(DateUtil::getDatetime($t, $dateformat)+1).$space."\n":$navbar.= $separator."\n";
 
 	$navbar .= '<a href="'.pnModUrl('crpCalendar','user','week_view', array('t' => $nav['next_week_time'])).'" title="'._CRPCALENDAR_NEXT_WEEK.'">'."\n";
 	$navbar .= $next_week_char."\n";
