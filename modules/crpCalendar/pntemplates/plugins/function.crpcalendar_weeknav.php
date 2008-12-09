@@ -8,16 +8,16 @@
  * @license GNU/GPL - v.2.1
  * @package crpCalendar
  */
- 
+
 /**
  * Smarty function to display status of an event
  *
  * Example
  * <!--[crpcalendar_weeknav month="$month" ]-->
- * 
+ *
  * @param array $params All attributes passed to this function from the template
  * @param object &$smarty Reference to the Smarty object
- * 
+ *
  * @return string the results of the module function
  */
 function smarty_function_crpcalendar_weeknav($params, &$smarty)
@@ -27,7 +27,7 @@ function smarty_function_crpcalendar_weeknav($params, &$smarty)
 	{
 		return LogUtil::registerPermissionError();
 	}
-	
+
 	if (!$params['date'] || !$params['t'])
 		return LogUtil::registerError (_MODARGSERROR);
 	else
@@ -46,38 +46,38 @@ function smarty_function_crpcalendar_weeknav($params, &$smarty)
   ($params['next_week_char'])?$next_week_char = $params['next_week_char']:$next_week_char = '&gt;';
   ($params['next_month_char'])?$next_month_char = $params['next_month_char']:$next_month_char = '&gt;&gt;';
   ($params['dateformat'])?$dateformat = $params['dateformat']:$dateformat = '%W';
-  
+
   $nav['next_week_time'] = mktime(0,0,0,$date['m'], $date['d']+7, $date['y']);
 	$nav['prev_week_time'] = mktime(0,0,0,$date['m'], $date['d']-7, $date['y']);
 	$nav['next_month_time'] = mktime(0,0,0,$date['m']+1, $date['d'], $date['y']);
 	$nav['prev_month_time'] = mktime(0,0,0,$date['m']-1, $date['d'], $date['y']);
 	$nav['year_time'] = mktime(0,0,0,$date['m'], 1, $date['y']);
 	$nav['t'] = $t;
-	
+
 	$navbar .= '<'.$container.'>';
 	$navbar .= '<a href="'.pnModUrl('crpCalendar','user','week_view', array('t' => $nav['prev_month_time'])).'" title="'._CRPCALENDAR_PREV_MONTH.'">'."\n";
 	$navbar .= $prev_month_char."\n";
 	$navbar .= '</a>'."\n";
-	
+
 	$navbar .= $separator;
-	
+
 	$navbar .= '<a href="'.pnModUrl('crpCalendar','user','week_view', array('t' => $nav['prev_week_time'])).'" title="'._CRPCALENDAR_PREV_WEEK.'">'."\n";
 	$navbar .= $prev_week_char."\n";
 	$navbar .= '</a>'."\n";
-	
-	($dateview)?$navbar .= $space._WEEK.$space.DateUtil::getDatetime($t, $dateformat).$space."\n":$navbar.= $separator."\n";
-	
+
+	($dateview)?$navbar .= $space._WEEK.$space.DateUtil::getDatetime($t+86400, $dateformat).$space."\n":$navbar.= $separator."\n";
+
 	$navbar .= '<a href="'.pnModUrl('crpCalendar','user','week_view', array('t' => $nav['next_week_time'])).'" title="'._CRPCALENDAR_NEXT_WEEK.'">'."\n";
 	$navbar .= $next_week_char."\n";
 	$navbar .= '</a>'."\n";
-	
+
 	$navbar .= $separator."\n";
-	
+
 	$navbar .= '<a href="'.pnModUrl('crpCalendar','user','week_view', array('t' => $nav['next_month_time'])).'" title="'._CRPCALENDAR_NEXT_MONTH.'">'."\n";
 	$navbar .= $next_month_char."\n";
 	$navbar .= '</a>'."\n";
 	$navbar .= '</'.$container.'>';
-	
+
   return $navbar;
 }
 ?>
