@@ -1899,19 +1899,12 @@ class crpCalendar
 		return $result;
 	}
 
+	/**
+	 * Retrieve array of places from locations
+	 */
 	function getAvailableLocations()
 	{
-		$locations_avail = array ();
-		$locations = array ();
-
-		$locations_avail = pnModAPIFunc('locations', 'user', 'getLocationsForDropdown');
-		$locations['values'][] = null;
-		$locations['output'][] = _CRPCALENDAR_NONE;
-		foreach ($locations_avail as $klocation => $vlocation)
-		{
-			$locations['values'][] = $vlocation['value'];
-			$locations['output'][] = $vlocation['text'];
-		}
+		$locations = $this->dao->getLocations();
 
 		return $locations;
 	}
