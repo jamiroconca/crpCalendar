@@ -309,7 +309,6 @@ class crpCalendarUI
 		$pnRender->assign('mainCategory', $mainCat);
 		$pnRender->assign('lang', pnUserGetLang());
 		$pnRender->assign($modvars);
-		$pnRender->assign('lastOfWeek', DateUtil::makeTimestamp($daysexpanded[6]));
 
 		$pnRender->assign('day_of_week_short', $this->day_of_week_short);
 
