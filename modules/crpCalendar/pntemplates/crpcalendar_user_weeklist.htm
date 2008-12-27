@@ -2,12 +2,6 @@
 
 <!--[include file="crpcalendar_user_filtermenu.htm"]-->
 
-<div class="crpcalendar-right">
-	<a href="<!--[pnmodurl modname=crpCalendar func=ical_exports]-->">
-	<!--[pnimg modname=crpCalendar altml=true src="ical.gif" alt=_CRPCALENDAR_ICAL]-->
-	</a>
-</div>
-
 <div class="crpcalendar-box">
 	<h3><!--[$t|pndate_format:"%Y"]--> / <!--[$daysexpanded.0|pndate_format:"%d %B"]--> - <!--[$daysexpanded.6|pndate_format:"%d %B"]--></h3>
 </div>
@@ -15,7 +9,8 @@
 <table class="crpcalendar-table" style="table-layout: fixed;">
 	
 	<caption>
-	<!--[crpcalendar_weeknav date=$date t=$t]-->
+	<!--[crpcalendar_datetime_stamp datetime=$daysexpanded.6 assign=weektime]-->
+	<!--[crpcalendar_weeknav date=$date t=$weektime]-->
 	</caption>
 	
 	<tr>
