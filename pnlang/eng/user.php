@@ -100,6 +100,9 @@ define('_CRPCALENDAR_VIEW_WEEK','Weekly view');
 define('_CRPCALENDAR_VIEW_FORM','View as');
 define('_CRPCALENDAR_VIEW_LIST','List');
 define('_CRPCALENDAR_VIEW_TABLE','Table');
+define('_CRPCALENDAR_VIEW_THIS_MONTH','This month');
+define('_CRPCALENDAR_VIEW_THIS_WEEK','This week');
+define('_CRPCALENDAR_VIEW_TODAY','Today');
 
 // mail text
 define('_CRPCALENDAR_EVENT_NOTIFICATION','Notification of Event Creation');
