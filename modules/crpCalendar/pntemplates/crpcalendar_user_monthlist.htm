@@ -2,12 +2,6 @@
 
 <!--[include file="crpcalendar_user_filtermenu.htm"]-->
 
-<div class="crpcalendar-right">
-	<a href="<!--[pnmodurl modname=crpCalendar func=ical_exports]-->">
-	<!--[pnimg modname=crpCalendar altml=true src="ical.gif" alt=_CRPCALENDAR_ICAL]-->
-	</a>
-</div>
-
 <div class="crpcalendar-box">
 	<h3><!--[$t|pndate_format:"%B %Y"]--></h3>
 </div>
@@ -20,16 +14,18 @@
 	</caption>
 
 	<tr>
-	<th style="width: 24px;">&nbsp;</th>
+	<th>&nbsp;</th>
 	<!--[section name=dayHeader loop=$day_of_week_short]-->
 	<th><!--[$day_of_week_short[dayHeader]]--></th>
 	<!--[/section]-->
 	</tr>
 
 	<tr>
-		<td>
+		<td style="border-bottom:1px solid #CCC;">
 		<!--[crpcalendar_datetime_stamp datetime=$days.1 assign=weektime]-->
-		<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="week_view" t=$weektime]-->">
+		<!--[pnml name="_WEEK" html=1]--> <!--[$weektime+8*86400|pndate_format:"%W"]-->
+		<br />
+		<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="week_view" t=$weektime+86400]-->">
 			<!--[pnimg modname=crpCalendar titleml=true src=$crpcalendar_theme|cat:"/right_arrows.gif" title=_CRPCALENDAR_VIEW_WEEK]-->
 		</a>
 		</td>
@@ -76,9 +72,11 @@
 		</tr>
 		<tr>
 		<!--[if !$smarty.foreach.cell.last]-->
-			<td>
+			<td style="border-bottom:1px solid #CCC;">
 				<!--[crpcalendar_datetime_stamp datetime=$daysexpanded.$point assign=weektime]-->
-				<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="week_view" t=$weektime]-->">
+				<!--[pnml name="_WEEK" html=1]--> <!--[$weektime+8*86400|pndate_format:"%W"]-->
+				<br />
+				<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="week_view" t=$weektime+86400]-->">
 					<!--[pnimg modname=crpCalendar titleml=true src=$crpcalendar_theme|cat:"/right_arrows.gif" title=_CRPCALENDAR_VIEW_WEEK]-->
 				</a>
 			</td>
