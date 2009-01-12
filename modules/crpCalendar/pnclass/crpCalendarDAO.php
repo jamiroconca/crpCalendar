@@ -109,7 +109,9 @@ class crpCalendarDAO
 			$queryargs[]= "(($crpcalendarcolumn[start_date] > '" . DataUtil :: formatForStore($nowDate) . "' " .
 			"AND $crpcalendarcolumn[start_date] < '" . DataUtil :: formatForStore($intervalDate) . "') " .
 			"OR ($crpcalendarcolumn[end_date] > '" . DataUtil :: formatForStore($nowDate) . "' " .
-			"AND $crpcalendarcolumn[end_date] < '" . DataUtil :: formatForStore($intervalDate) . "'))";
+			"AND $crpcalendarcolumn[end_date] < '" . DataUtil :: formatForStore($intervalDate) . "')" .
+			"OR ($crpcalendarcolumn[start_date] < '" . DataUtil :: formatForStore($nowDate) . "' " .
+			"AND $crpcalendarcolumn[end_date] > '" . DataUtil :: formatForStore($intervalDate) . "'))";
 		}
 
 		if ($startDate && $endDate)
