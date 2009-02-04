@@ -3,7 +3,7 @@
 
 <div class="pn-menu">
 <!--[securityutil_checkpermission component="crpCalendar::" instance="::" level="ACCESS_COMMENT" assign="can_submit"]-->
-[&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func=$choosed_view]-->"><!--[pnml name="_CRPCALENDAR_VIEW" html=1]--></a>&nbsp;<!--[if $can_submit]-->|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="new"]-->"><!--[pnml name="_CRPCALENDAR_SUBMIT" html=1]--></a>&nbsp;<!--[/if]-->]
+[&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func=$choosed_view|pnvarprepfordisplay]-->"><!--[pnml name="_CRPCALENDAR_VIEW" html=1]--></a>&nbsp;<!--[if $can_submit]-->|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="new"|pnvarprepfordisplay]-->"><!--[pnml name="_CRPCALENDAR_SUBMIT" html=1]--></a>&nbsp;<!--[/if]-->]
 </div>
 
 <!--[foreach from=$events item=event]-->
@@ -16,7 +16,7 @@
 		<!--[$event.start_date|pndate_format:'%d']-->
 	</span>
 </span>
-<a href="<!--[pnmodurl modname=crpCalendar func=display eventid=$event.eventid]-->">
+<a href="<!--[pnmodurl modname=crpCalendar func=display eventid=$event.eventid|pnvarprepfordisplay]-->">
 	<span class="summary"><!--[$event.title|pnvarprephtmldisplay]--></span>
 </a> (<abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%M%sZ"]-->"><!--[$event.start_date|pndate_format:"%d/%m/%Y"]--></abbr><span class="<!--[if $event.day_event]-->pn-hide<!--[/if]-->">-<abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%M%sZ"]-->"><!--[$event.end_date|pndate_format:"%d/%m/%Y"]--></abbr></span>)
 <div class="description"><!--[$event.event_text|truncate:"50"|pnvarprephtmldisplay]--></div>
