@@ -3,7 +3,7 @@
 
 <div class="pn-menu">
 <!--[securityutil_checkpermission component="crpCalendar::" instance="::" level="ACCESS_COMMENT" assign="can_submit"]-->
-[&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func=$choosed_view]-->"><!--[pnml name="_CRPCALENDAR_VIEW" html=1]--></a>&nbsp;<!--[if $can_submit]-->|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="new"]-->"><!--[pnml name="_CRPCALENDAR_SUBMIT" html=1]--></a>&nbsp;<!--[/if]-->]
+[&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func=$choosed_view|pnvarprepfordisplay]-->"><!--[pnml name="_CRPCALENDAR_VIEW" html=1]--></a>&nbsp;<!--[if $can_submit]-->|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="new"|pnvarprepfordisplay]-->"><!--[pnml name="_CRPCALENDAR_SUBMIT" html=1]--></a>&nbsp;<!--[/if]-->]
 </div>
 
 <h4><!--[$t|pndate_format:"%B %Y"]--></h4>
@@ -15,7 +15,7 @@
 			<!--[$t|pndate_format:'%b']-->
 		</span>
 		<span class="event-day">
-			<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="day_view" t=$t]-->"><!--[$t|pndate_format:'%d']--></a>
+			<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="day_view" t=$t|pnvarprepfordisplay]-->"><!--[$t|pndate_format:'%d']--></a>
 		</span>
 	</span>
 </div>
@@ -41,7 +41,7 @@
 		<!--[if $displayweek]-->
 		<td>
 		<!--[crpcalendar_datetime_stamp datetime=$days.1 assign=weektime]-->
-		<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="week_view" t=$weektime]-->">
+		<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="week_view" t=$weektime|pnvarprepfordisplay]-->">
 			<!--[pnimg modname=crpCalendar titleml=true src=$crpcalendar_theme|cat:"/right_arrows.gif" title=_CRPCALENDAR_VIEW_WEEK]-->
 		</a>
 		</td>
@@ -52,13 +52,13 @@
 		<td class="month-cell<!--[if in_array($day,$days)]--> day-on<!--[else]--> day-off-<!--[$crpcalendar_theme]--> <!--[/if]-->" style="vertical-align:top;">
 			<div class="crpcalendar-reduced<!--[if $todayEv|pndate_format:"%Y%m%d" eq $day|pndate_format:"%Y%m%d"]--> day-today<!--[/if]-->">
 				<!--[crpcalendar_datetime_stamp datetime=$day assign=daytime]-->
-				<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="day_view" t=$daytime]-->"><!--[$day|pndate_format:"%d"]--></a>
+				<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="day_view" t=$daytime|pnvarprepfordisplay]-->"><!--[$day|pndate_format:"%d"]--></a>
 			</div>
 
 			<!--[foreach from=$events item=event name=single]-->
 			<!--[if $displayevents]-->
 			<div>
-			<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="display" eventid=$event.eventid]-->" title="<!--[$event.title]-->">
+			<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="display" eventid=$event.eventid|pnvarprepfordisplay]-->" title="<!--[$event.title]-->">
 			<!--[if $event.start_date|pndate_format:"%Y%m%d" eq $day|pndate_format:"%Y%m%d" && $event.day_event]-->
 			<!--[pnimg modname=crpCalendar src=$crpcalendar_theme|cat:"/allday_dot.gif" alt=$event.title]-->
 			<!--[elseif $event.start_date|pndate_format:"%Y%m%d" eq $day|pndate_format:"%Y%m%d" && ($event.start_date|pndate_format:"%Y%m%d" eq $event.end_date|pndate_format:"%Y%m%d")]-->
@@ -80,7 +80,7 @@
 		<!--[if !$smarty.foreach.cell.last && $displayweek]-->
 			<td>
 				<!--[crpcalendar_datetime_stamp datetime=$daysexpanded.$point assign=weektime]-->
-				<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="week_view" t=$weektime]-->">
+				<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="week_view" t=$weektime|pnvarprepfordisplay]-->">
 					<!--[pnimg modname=crpCalendar titleml=true src=$crpcalendar_theme|cat:"/right_arrows.gif" title=_CRPCALENDAR_VIEW_WEEK]-->
 				</a>
 			</td>
