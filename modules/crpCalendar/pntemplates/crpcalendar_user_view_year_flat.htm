@@ -19,7 +19,7 @@
 		<!--[if $crpcalendar_userlist_image]-->
 		<td>
 			<!--[if $event.image]-->
-			<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="get_image" eventid=$event.eventid]-->" title="<!--[$event.title]-->" rel="lightbox">
+			<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="display" eventid=$event.eventid]-->" title="<!--[$event.title]-->">
 			<!--[if $crpcalendar_use_gd eq '1']-->
 			<img src="<!--[pnmodurl modname="crpCalendar" type="user" func="get_thumbnail" eventid=$event.eventid width=$userlist_width]-->" alt="<!--[$event.title]-->" title="<!--[$event.title]-->"/>
 			<!--[else]-->

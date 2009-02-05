@@ -1,4 +1,4 @@
-<!--[pnajaxheader modname="crpCalendar" nobehaviour=true lightbox=true]-->
+<!--[pnajaxheader modname="crpCalendar" nobehaviour=true noscriptaculous=true]-->
 <!--[include file="crpcalendar_user_menu.htm"]-->
 
 <div class="crpcalendar_container">
@@ -35,7 +35,7 @@
 		
 		<!--[if $event.image]-->
 		<div>
-			<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="get_image" eventid=$event.eventid]-->" title="<!--[$event.title]-->" rel="lightbox">
+			<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="get_image" eventid=$event.eventid]-->" title="<!--[$event.title]-->" target="_blank">
 			<!--[if $crpcalendar_use_gd eq '1']-->
 			<img src="<!--[pnmodurl modname="crpCalendar" type="user" func="get_thumbnail" eventid=$event.eventid]-->" alt="<!--[$event.title]-->" title="<!--[$event.title]-->"/>
 			<!--[else]-->
