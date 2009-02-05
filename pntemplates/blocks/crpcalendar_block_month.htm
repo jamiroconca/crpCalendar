@@ -31,7 +31,7 @@
 <table class="crpcalendar-table mini">
 
 	<tr>
-	<!--[if $displayweek]--><th>&nbsp;</th><!--[/if]-->
+	<th></th>
 	<!--[section name=dayHeader loop=$day_of_week_short]-->
 	<th class="crpcalendar-reduced"><!--[$day_of_week_short[dayHeader]]--></th>
 	<!--[/section]-->
@@ -45,8 +45,10 @@
 			<!--[pnimg modname=crpCalendar titleml=true src=$crpcalendar_theme|cat:"/right_arrows.gif" title=_CRPCALENDAR_VIEW_WEEK]-->
 		</a>
 		</td>
+		<!--[else]-->
+		<td></td>
 		<!--[/if]-->
-		
+
 		<!--[foreach from=$daysexpanded item=day name=cell]-->
 
 		<td class="month-cell<!--[if in_array($day,$days)]--> day-on<!--[else]--> day-off-<!--[$crpcalendar_theme]--> <!--[/if]-->" style="vertical-align:top;">
@@ -85,7 +87,7 @@
 				</a>
 			</td>
 		<!--[else]-->
-			<td>&nbsp;</td>
+			<td></td>
 		<!--[/if]-->
 		<!--[/if]-->
 
