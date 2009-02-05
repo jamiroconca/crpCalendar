@@ -1639,8 +1639,7 @@ class crpCalendar
 
 		/***************************************************************************/
 
-		$alphaThreshold = isset ($params['alpha_threshold']) ? $params['alpha_threshold'] : 64;
-		$newWidth = isset ($params['width']) ? $params['width'] : 100;
+		$alphaThreshold = isset($params['alpha_threshold']) ? $params['alpha_threshold'] : 64;
 		$appendGhosted = $params['append_ghosted'];
 		//
 		$srcImage = imagecreatefromstring($pSrcImage);
@@ -1651,24 +1650,27 @@ class crpCalendar
 			$srcWidth = imagesx($srcImage);
 			$srcHeight = imagesy($srcImage);
 
+			$newWidth = isset($params['width']) ? $params['width'] : $srcWidth;
+
 			$destWidth = round($newWidth, '0');
 			$destHeight = round(($srcHeight / $srcWidth) * $newWidth, '0');
 
 			// creating the destination image with the new Width and Height
-			if (!$appendGhosted)
+			if(!$appendGhosted)
 				$destImage = imagecreatetruecolor($destWidth, $destHeight);
 			else
-				$destImage = imagecreatetruecolor($destWidth, 2 * $destHeight);
+				$destImage = imagecreatetruecolor($destWidth, 2*$destHeight);
 
 			//png transparency
 			switch ($content_type)
 			{
 				case 'image/png' :
+				case 'image/x-png' :
 					imageantialias($destImage, true);
 					imagealphablending($destImage, false);
 					imagesavealpha($destImage, true);
 					$transparent = imagecolorallocatealpha($destImage, 255, 255, 255, 80);
-					imagefill($destImage, 0, 0, $transparent);
+					imagefill($destImage, 0,0,$transparent);
 					break;
 
 				case 'image/gif' :
@@ -1681,7 +1683,7 @@ class crpCalendar
 			imagecopyresampled($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
 
 			//
-			if ($appendGhosted)
+			if($appendGhosted)
 			{
 				imagecopyresampled($destImage, $srcImage, 0, $destHeight, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
 
@@ -1690,16 +1692,17 @@ class crpCalendar
 				imagealphablending($ghostImage, false);
 				imagesavealpha($ghostImage, true);
 				$whitetrasp = imagecolorallocatealpha($ghostImage, 255, 255, 255, 0);
-				imagefill($ghostImage, 0, 0, $whitetrasp);
-				imagecopymerge($destImage, $ghostImage, 0, $destHeight, 0, 0, $destWidth, $destHeight, 50);
-				if ($content_type == 'image/png')
-				{ //	problems mergins transparent png.. need to restore original pixel transparency
-					for ($x = 0; $x < $destWidth; $x++)
-						for ($y = 0; $y < $destHeight; $y++)
+				imagefill($ghostImage, 0,0,$whitetrasp);
+				imagecopymerge($destImage, $ghostImage, 0,$destHeight,0,0,$destWidth, $destHeight, 50);
+				if($content_type == 'image/png')
+				{	//	problems mergins transparent png.. need to restore original pixel transparency
+					for ($x = 0; $x < $destWidth; $x ++)
+						for ($y = 0; $y < $destHeight; $y ++)
 						{
 							$srcPixel = imagecolorsforindex($destImage, imagecolorat($destImage, $x, $y));
-							$destPixel = imagecolorsforindex($destImage, imagecolorat($destImage, $x, $y + $destHeight));
-							imagesetpixel($destImage, $x, $y + $destHeight, imagecolorallocatealpha($destImage, $destPixel['red'], $destPixel['green'], $destPixel['blue'], $srcPixel['alpha']));
+							$destPixel = imagecolorsforindex($destImage, imagecolorat($destImage, $x, $y+$destHeight));
+							imagesetpixel($destImage, $x, $y+$destHeight, imagecolorallocatealpha($destImage,
+								$destPixel['red'], $destPixel['green'], $destPixel['blue'], $srcPixel['alpha']));
 						}
 
 				}
@@ -1707,7 +1710,6 @@ class crpCalendar
 
 			}
 
-			while (@ob_end_clean());
 			//save output to a buffer
 			ob_start();
 
@@ -1717,25 +1719,25 @@ class crpCalendar
 				case 'image/gif' :
 					imagetruecolortopalette($destImage, true, 255);
 					//
-					if (imagecolortransparent($srcImage) >= 0)
+					if(imagecolortransparent($srcImage)>=0)
 					{
-						$maskImage = imagecreatetruecolor($destWidth, $destHeight);
+						$maskImage = imagecreatetruecolor( $destWidth, $destHeight);
 						imageantialias($maskImage, true);
 						imagealphablending($maskImage, false);
-						imagecopyresampled($maskImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
+						imagecopyresampled( $maskImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight );
 						//
-						$transp = imagecolorallocatealpha($destImage, 0, 0, 0, 127);
+						$transp = imagecolorallocatealpha($destImage, 0,0,0,127);
 						imagecolortransparent($destImage, $transp);
 						//
-						for ($x = 0; $x < $destWidth; $x++)
-							for ($y = 0; $y < $destHeight; $y++)
+						for ($x = 0; $x < $destWidth; $x ++)
+							for ($y = 0; $y < $destHeight; $y ++)
 							{
 								$c = imagecolorsforindex($maskImage, imagecolorat($maskImage, $x, $y));
-								if ($c['alpha'] >= $alphaThreshold)
+								if($c['alpha'] >= $alphaThreshold)
 								{
 									imagesetpixel($destImage, $x, $y, $transp);
-									if ($appendGhosted)
-										imagesetpixel($destImage, $x, $y + $destHeight, $transp);
+									if($appendGhosted)
+										imagesetpixel($destImage, $x, $y+$destHeight, $transp);
 								}
 							}
 						imagedestroy($maskImage);
@@ -1750,6 +1752,7 @@ class crpCalendar
 					break;
 
 				case 'image/png' :
+				case 'image/x-png' :
 					imagepng($destImage);
 					break;
 			}
