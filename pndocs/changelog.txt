@@ -1,5 +1,5 @@
 crpCalendar
-v0.5.0 - 1 september 2008
+v0.5.0 - 17 february 2009
 - removed pn_ prefix from table definitions
 - added support for formicula's inclusions (only from admin new and modify funcs)
 v0.4.9 - 18 august 2008
