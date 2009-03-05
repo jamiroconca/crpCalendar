@@ -1221,38 +1221,30 @@ class crpCalendarDAO
 		$file= DBUtil :: selectObject('crpcalendar_files', $where, $columnArray);
 		$modifiedDate= $this->getEventDate($eventid, 'lu_date');
 
-		while (@ob_end_clean());
-		// credits to Mediashare by Jorn Lind-Nielsen
-		if (pnConfigGetVar('UseCompression') == 1)
-			header("Content-Encoding: identity");
+		// we need a timestamp
+		$server_etag = DateUtil :: makeTimestamp($modifiedDate);
+		$server_date = gmdate('D, d M Y H:i:s', $server_etag). " GMT";
 
 		// Check cached versus modified date
-		$lastModifiedDate= date('D, d M Y H:i:s T', $modifiedDate);
-		$currentETag= $modifiedDate;
+		$client_etag = $_SERVER['HTTP_IF_NONE_MATCH'];
+		$client_date = $_SERVER['HTTP_IF_MODIFIED_SINCE'];
 
-		global $HTTP_SERVER_VARS;
-		$cachedDate= (isset ($HTTP_SERVER_VARS['HTTP_IF_MODIFIED_SINCE']) ? $HTTP_SERVER_VARS['HTTP_IF_MODIFIED_SINCE'] : null);
-		$cachedETag= (isset ($HTTP_SERVER_VARS['HTTP_IF_NONE_MATCH']) ? $HTTP_SERVER_VARS['HTTP_IF_NONE_MATCH'] : null);
-
-		// If magic quotes are on then all query/post variables are escaped - so strip slashes to make a compare possible
-		// - only cachedETag is expected to contain quotes
-		if (get_magic_quotes_gpc())
-			$cachedETag= stripslashes($cachedETag);
-
-		if ((empty ($cachedDate) || $lastModifiedDate == $cachedDate) && '"' . $currentETag . '"' == $cachedETag)
+		if(($client_etag == $server_etag) && (!$client_date || ($client_date==$server_date)))
 		{
 			header("HTTP/1.1 304 Not Modified");
-			header("Status: 304 Not Modified");
-			header("Expires: " . date('D, d M Y H:i:s T', time() + 180 * 24 * 3600)); // My PHP insists on Expires in 1981 as default!
-			header('Pragma: cache'); // My PHP insists on putting a pragma "no-cache", so this is an attempt to avoid that
-			header('Cache-Control: public');
-			header("ETag: \"$modifiedDate\"");
-			return true;
+			header("ETag: $server_etag");
+			pnShutDown();
 		}
-
-		Header("Content-type: {$file['content_type']}");
-		Header("Content-Disposition: inline; filename={$file['name']}");
-		//Header("Content-Length: " . strlen($file['binary_data']));
+		else
+		{
+			header("Expires: ". gmdate('D, d M Y H:i:s', time() + 24 * 3600). " GMT");
+			header('Pragma: cache');
+			header('Cache-Control: public, must-revalidate');
+			header("ETag: $server_etag");
+			header("Last-Modified: ". gmdate('D, d M Y H:i:s', $server_etag). " GMT");
+			header("Content-Type: {$file['content_type']}");
+			header("Content-Disposition: inline; filename={$file['name']}");
+		}
 
 		echo $file['binary_data'];
 
