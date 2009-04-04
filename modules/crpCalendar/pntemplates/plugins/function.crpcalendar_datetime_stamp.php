@@ -8,17 +8,17 @@
  * @license GNU/GPL - v.2
  * @package crpCalendar
  */
- 
+
 /**
  * Smarty function to display status of an event
  *
  * Example
  * <!--[crpcalendar_datetime_stamp datetime=$datetime ]-->
- * 
+ *
  * @param array $params All attributes passed to this function from the template
  * @param object &$smarty Reference to the Smarty object
- * @param datetime $datetime 
- * 
+ * @param datetime $datetime
+ *
  * @return string the results of the module function
  */
 function smarty_function_crpcalendar_datetime_stamp($params, &$smarty)
@@ -28,20 +28,20 @@ function smarty_function_crpcalendar_datetime_stamp($params, &$smarty)
 	{
 		return LogUtil::registerPermissionError();
 	}
-	
+
 	if (!$params['datetime'])
-		return LogUtil::registerError (_MODARGSERROR);
+		return DateUtil :: getDatetime();
 	else
 		$datetime = $params['datetime'];
 
-	
+
 	$res = DateUtil::makeTimestamp($datetime);
 
   if (isset($params['assign']) && $params['assign'])
 		  	$smarty->assign ($params['assign'], $res);
 	else
 		return $res;
- 
+
 }
 
 ?>
