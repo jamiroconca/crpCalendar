@@ -30,7 +30,7 @@ function smarty_function_crpcalendar_datetime_stamp($params, &$smarty)
 	}
 
 	if (!$params['datetime'])
-		return DateUtil :: getDatetime();
+		return true;
 	else
 		$datetime = $params['datetime'];
 
