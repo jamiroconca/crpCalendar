@@ -65,6 +65,7 @@ function crpCalendar_init() {
 	pnModSetVar('crpCalendar', 'submitted_status', 'P');
 	pnModSetVar('crpCalendar', 'multiple_insert', false);
 	pnModSetVar('crpCalendar', 'enable_formicula', false);
+	pnModSetVar('crpCalendar', 'crpcalendar_weekday_start', '1');
 
 	// Initialisation successful
 	return true;
@@ -206,6 +207,9 @@ function crpCalendar_upgrade($oldversion)
   		return crpCalendar_upgrade("0.5.0");
   		break;
   	case "0.5.0":
+  		pnModSetVar('crpCalendar', 'crpcalendar_weekday_start', '1');
+  		break;
+  	case "0.5.1":
   		break;
   }
 	return true;
