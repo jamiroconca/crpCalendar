@@ -9,6 +9,7 @@
  * @package crpCalendar
  */
 
+Loader :: includeOnce('modules/crpCalendar/pnlang/ita/global.php');
 //
 define('_CRPCALENDAR', 'Calendario');
 
@@ -72,15 +73,6 @@ define('_CRPCALENDAR_ERROR_EVENT_NO_CATEGORY','Categorizzazione abilitata, scegl
 define('_CRPCALENDAR_INVALID_NOTIFICATION','E-mail per le notifiche in formato non valido');
 define('_CRPCALENDAR_IMAGE_INVALID_TYPE','Formato di immagine non valido');
 define('_CRPCALENDAR_INVALID_URL','URL non valido');
-
-// days label
-define('_CRPCALENDAR_MON','Lun');
-define('_CRPCALENDAR_TUE','Mar');
-define('_CRPCALENDAR_WED','Mer');
-define('_CRPCALENDAR_THU','Gio');
-define('_CRPCALENDAR_FRI','Ven');
-define('_CRPCALENDAR_SAT','Sab');
-define('_CRPCALENDAR_SUN','Dom');
 
 // view navigation
 define('_CRPCALENDAR_NEXT_DAY','Giorno seguente');

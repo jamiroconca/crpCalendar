@@ -9,6 +9,7 @@
  * @package crpCalendar
  */
 
+Loader :: includeOnce('modules/crpCalendar/pnlang/ita/global.php');
 //
 define('_CRPCALENDAR', 'Calendario');
 define('_CRPCALENDAR_GENERAL','Impostazioni modulo');
@@ -79,6 +80,7 @@ define('_CRPCALENDAR_USERLIST_WIDTH','Larghezza delle thumbnail nell\'elenco ute
 define('_CRPCALENDAR_SUBMITTED_STATUS','Stato iniziale degli eventi inseriti dagli utenti');
 define('_CRPCALENDAR_THEME','crpCalendar theme');
 define('_CRPCALENDAR_VISUALIZATION','Visualizzazione');
+define('_CRPCALENDAR_WEEKDAY_START','La settimana inizia di');
 define('_CRPCALENDAR_YEARLIST_CATEGORIZED','Vista annuale categorizzata');
 
 // RSS define
