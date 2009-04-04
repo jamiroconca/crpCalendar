@@ -48,6 +48,13 @@
 			<label for="crpcalendar_multiple_insert"><!--[pnml name="_CRPCALENDAR_MULTIPLE_INSERT"]--></label>
 			<input id="crpcalendar_multiple_insert" type="checkbox" name="multiple_insert"<!--[if $multiple_insert]--> checked="checked"<!--[/if]--> />
 		</div>
+		<div class="pn-adminformrow">
+			<label for="crpcalendar_weekday_start"><!--[pnml name="_CRPCALENDAR_WEEKDAY_START" html=1]--></label>
+			<select id="crpcalendar_weekday_start" name="crpcalendar_weekday_start">
+				<option value="1"<!--[if $crpcalendar_weekday_start eq '1']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_MONDAY" html=1]--></option>
+				<option value="0"<!--[if $crpcalendar_weekday_start eq '0']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_SUNDAY"]--></option>
+			</select>
+		</div>
 	</fieldset>
 	<fieldset>
 		<legend><!--[pnml name=_CRPCALENDAR_VISUALIZATION html=1]--></legend>
