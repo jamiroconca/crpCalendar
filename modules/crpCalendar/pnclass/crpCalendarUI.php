@@ -26,13 +26,27 @@ class crpCalendarUI
 																	'grey' => 'grey',
 																	'green' => 'green');
 
-		$this->day_of_week_short = array (_CRPCALENDAR_MON,
-																			_CRPCALENDAR_TUE,
-																			_CRPCALENDAR_WED,
-																			_CRPCALENDAR_THU,
-																			_CRPCALENDAR_FRI,
-																			_CRPCALENDAR_SAT,
-																			_CRPCALENDAR_SUN);
+		switch (pnModgetVar('crpCalendar', 'crpcalendar_weekday_start'))
+		{
+			case "1":
+				$this->day_of_week_short = array (_CRPCALENDAR_MON,
+																					_CRPCALENDAR_TUE,
+																					_CRPCALENDAR_WED,
+																					_CRPCALENDAR_THU,
+																					_CRPCALENDAR_FRI,
+																					_CRPCALENDAR_SAT,
+																					_CRPCALENDAR_SUN);
+				break;
+			default:
+				$this->day_of_week_short = array (_CRPCALENDAR_SUN,
+																					_CRPCALENDAR_MON,
+																					_CRPCALENDAR_TUE,
+																					_CRPCALENDAR_WED,
+																					_CRPCALENDAR_THU,
+																					_CRPCALENDAR_FRI,
+																					_CRPCALENDAR_SAT);
+				break;
+		}
 	}
 
 	/**

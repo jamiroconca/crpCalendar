@@ -1251,6 +1251,8 @@ class crpCalendar
 		pnModSetVar('crpCalendar', 'multiple_insert', $multiple_insert);
 		$enable_formicula = (bool) FormUtil :: getPassedValue('enable_formicula', false, 'POST');
 		pnModSetVar('crpCalendar', 'enable_formicula', $enable_formicula);
+		$crpcalendar_weekday_start = (int) FormUtil :: getPassedValue('crpcalendar_weekday_start', false, 'POST');
+		pnModSetVar('crpCalendar', 'crpcalendar_weekday_start', $crpcalendar_weekday_start);
 
 		// Let any other modules know that the modules configuration has been updated
 		pnModCallHooks('module', 'updateconfig', 'crpCalendar', array (
@@ -1276,7 +1278,7 @@ class crpCalendar
 	function collectNavigationFromInput()
 	{
 		// Get parameters from whatever input we need.
-		$startnum = (int) FormUtil :: getPassedValue('startnum', null, 'GET');
+		$startnum = (int) FormUtil :: getPassedValue('startnum', null);
 		$category = FormUtil :: getPassedValue('events_category', null);
 		$active = FormUtil :: getPassedValue('events_status', null);
 		$clear = FormUtil :: getPassedValue('clear');
@@ -1289,7 +1291,8 @@ class crpCalendar
 		if ($day && $month && $year)
 			SessionUtil::setVar('crpCalendar_choosed_time', DateUtil :: makeTimestamp($year . '-' . $month . '-' . $day));
 
-		$t = FormUtil :: getPassedValue('t', (SessionUtil::getVar('crpCalendar_choosed_time')) ? SessionUtil::getVar('crpCalendar_choosed_time') : time());
+		$t = FormUtil :: getPassedValue('t', time());
+		(!$t && SessionUtil::getVar('crpCalendar_choosed_time')) ? $t = SessionUtil::getVar('crpCalendar_choosed_time') :'' ;
 
 		if ($clear)
 		{
@@ -1783,7 +1786,7 @@ class crpCalendar
 		$dow = date('w', $time);
 		$counter = 0;
 
-		while ($dow != 1)
+		while ($dow != pnModGetVar('crpCalendar', 'crpcalendar_weekday_start'))
 		{
 			$date = $this->timeToDMY($time);
 			$time = mktime(0, 0, 0, $date['m'], $date['d'] - 1, $date['y']);
@@ -1808,7 +1811,17 @@ class crpCalendar
 		$dow = date('w', $time);
 		$counter = 0;
 
-		while ($dow != 0)
+		switch (pnModGetVar('crpCalendar', 'crpcalendar_weekday_start'))
+		{
+			case "1";
+				$limit = 0;
+				break;
+			default:
+				$limit = 6;
+				break;
+		}
+
+		while ($dow != $limit)
 		{
 			$date = $this->timeToDMY($time);
 			$time = mktime(23, 59, 59, $date['m'], $date['d'] + 1, $date['y']);
@@ -1833,7 +1846,7 @@ class crpCalendar
 		$dow = date('w', $time);
 		$counter = 0;
 
-		while ($dow != 1)
+		while ($dow != pnModGetVar('crpCalendar', 'crpcalendar_weekday_start'))
 		{
 			$date = $this->timeToDMY($time);
 			$time = mktime(0, 0, 0, $date['m'], $date['d'] - 1, $date['y']);
@@ -1859,7 +1872,17 @@ class crpCalendar
 		$dow = date('w', $time);
 		$counter = 0;
 
-		while ($dow != 0)
+		switch (pnModGetVar('crpCalendar', 'crpcalendar_weekday_start'))
+		{
+			case "1";
+				$limit = 0;
+				break;
+			default:
+				$limit = 6;
+				break;
+		}
+
+		while ($dow != $limit)
 		{
 			$date = $this->timeToDMY($time);
 			$time = mktime(0, 0, 0, $date['m'], $date['d'] + 1, $date['y']);
