@@ -1,4 +1,5 @@
 <?php
+
 /**
  * crpCalendar
  *
@@ -80,14 +81,14 @@ class crpCalendar
 			$options = array ();
 
 			// display link
-			$options[] = crpCalendar::buildLinkArray("_VIEW", $item, 'user');
+			$options[] = crpCalendar :: buildLinkArray("_VIEW", $item, 'user');
 			// edit, copy, delete
 			if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']) || ($this->authAction(ACCESS_EDIT, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid'])))
 			{
-				$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'admin');
-				$options[] = crpCalendar::buildLinkArray("_COPY", $item, 'admin');
+				$options[] = crpCalendar :: buildLinkArray("_EDIT", $item, 'admin');
+				$options[] = crpCalendar :: buildLinkArray("_COPY", $item, 'admin');
 				if ($this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
-					$options[] = crpCalendar::buildLinkArray("_DELETE", $item, 'admin');
+					$options[] = crpCalendar :: buildLinkArray("_DELETE", $item, 'admin');
 			}
 
 			// Add the calculated menu options to the item array
@@ -106,8 +107,8 @@ class crpCalendar
 	function listEvents()
 	{
 		$navigationValues = $this->collectNavigationFromInput();
-		SessionUtil::delVar('crpCalendar_export_events');
-		SessionUtil::delVar('crpCalendar_choosed_time');
+		SessionUtil :: delVar('crpCalendar_export_events');
+		SessionUtil :: delVar('crpCalendar_choosed_time');
 
 		// Get all matching pages
 		$items = pnModAPIFunc('crpCalendar', 'user', 'getall', $navigationValues);
@@ -122,27 +123,26 @@ class crpCalendar
 			$options = array ();
 
 			// display link
-			$options[] = crpCalendar::buildLinkArray("_VIEW", $item, 'user');
+			$options[] = crpCalendar :: buildLinkArray("_VIEW", $item, 'user');
 
 			// subscribe to event
 			if (pnUserLoggedIn() && pnModGetVar('crpCalendar', 'enable_partecipation'))
 			{
 				if (!$this->dao->existPartecipation(pnUserGetVar('uid'), $item['eventid']))
-					$options[] = crpCalendar::buildLinkArray("_CRPCALENDAR_ADD_PARTECIPATION", $item, 'user');
+					$options[] = crpCalendar :: buildLinkArray("_CRPCALENDAR_ADD_PARTECIPATION", $item, 'user');
 				else
-					$options[] = crpCalendar::buildLinkArray("_CRPCALENDAR_DELETE_PARTECIPATION", $item, 'user');
+					$options[] = crpCalendar :: buildLinkArray("_CRPCALENDAR_DELETE_PARTECIPATION", $item, 'user');
 			}
 
 			// edit, copy, delete
 			if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']))
 			{
-				$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'admin');
-				$options[] = crpCalendar::buildLinkArray("_COPY", $item, 'admin');
+				$options[] = crpCalendar :: buildLinkArray("_EDIT", $item, 'admin');
+				$options[] = crpCalendar :: buildLinkArray("_COPY", $item, 'admin');
 				if ($this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
-					$options[] = crpCalendar::buildLinkArray("_DELETE", $item, 'admin');
+					$options[] = crpCalendar :: buildLinkArray("_DELETE", $item, 'admin');
 			}
-			elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid']))
-				$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'user');
+			elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid'])) $options[] = crpCalendar :: buildLinkArray("_EDIT", $item, 'user');
 
 			// Add the calculated menu options to the item array
 			$item['options'] = $options;
@@ -150,9 +150,9 @@ class crpCalendar
 			$exports[] = $item['eventid'];
 		}
 
-		SessionUtil::setVar('crpCalendar_export_events', $exports);
-		SessionUtil::setVar('crpCalendar_choosed_view', 'view');
-		SessionUtil::setVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'view'));
+		SessionUtil :: setVar('crpCalendar_export_events', $exports);
+		SessionUtil :: setVar('crpCalendar_choosed_view', 'view');
+		SessionUtil :: setVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'view'));
 
 		return $this->ui->userList($rows, $navigationValues['startnum'], $navigationValues['category'], $navigationValues['mainCat'], $navigationValues['modvars'], $navigationValues['typeList']);
 	}
@@ -165,8 +165,8 @@ class crpCalendar
 	function listYearEvents()
 	{
 		$navigationValues = $this->collectNavigationFromInput();
-		SessionUtil::delVar('crpCalendar_export_events');
-		SessionUtil::delVar('crpCalendar_choosed_time');
+		SessionUtil :: delVar('crpCalendar_export_events');
+		SessionUtil :: delVar('crpCalendar_choosed_time');
 
 		$date = $this->timeToDMY($navigationValues['t']);
 
@@ -190,27 +190,26 @@ class crpCalendar
 		{
 			$options = array ();
 			// display link
-			$options[] = crpCalendar::buildLinkArray("_VIEW", $item, 'user');
+			$options[] = crpCalendar :: buildLinkArray("_VIEW", $item, 'user');
 
 			// subscribe to event
 			if (pnUserLoggedIn() && pnModGetVar('crpCalendar', 'enable_partecipation'))
 			{
 				if (!$this->dao->existPartecipation(pnUserGetVar('uid'), $item['eventid']))
-					$options[] = crpCalendar::buildLinkArray("_CRPCALENDAR_ADD_PARTECIPATION", $item, 'user');
+					$options[] = crpCalendar :: buildLinkArray("_CRPCALENDAR_ADD_PARTECIPATION", $item, 'user');
 				else
-					$options[] = crpCalendar::buildLinkArray("_CRPCALENDAR_DELETE_PARTECIPATION", $item, 'user');
+					$options[] = crpCalendar :: buildLinkArray("_CRPCALENDAR_DELETE_PARTECIPATION", $item, 'user');
 			}
 
 			// edit, copy, delete
 			if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']))
 			{
-				$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'admin');
-				$options[] = crpCalendar::buildLinkArray("_COPY", $item, 'admin');
+				$options[] = crpCalendar :: buildLinkArray("_EDIT", $item, 'admin');
+				$options[] = crpCalendar :: buildLinkArray("_COPY", $item, 'admin');
 				if ($this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
-					$options[] = crpCalendar::buildLinkArray("_DELETE", $item, 'admin');
+					$options[] = crpCalendar :: buildLinkArray("_DELETE", $item, 'admin');
 			}
-			elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid']))
-				$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'user');
+			elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid'])) $options[] = crpCalendar :: buildLinkArray("_EDIT", $item, 'user');
 
 			// Add the calculated menu options to the item array
 			$item['options'] = $options;
@@ -233,9 +232,9 @@ class crpCalendar
 			$rows = $categorizedEvents;
 		}
 
-		SessionUtil::setVar('crpCalendar_export_events', $exports);
-		SessionUtil::setVar('crpCalendar_choosed_view', 'year_view');
-		SessionUtil::setVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'year_view'));
+		SessionUtil :: setVar('crpCalendar_export_events', $exports);
+		SessionUtil :: setVar('crpCalendar_choosed_view', 'year_view');
+		SessionUtil :: setVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'year_view'));
 
 		return $this->ui->userYearList($rows, $navigationValues['category'], $navigationValues['mainCat'], $navigationValues['modvars'], $navigationValues['t'], $date);
 	}
@@ -248,7 +247,7 @@ class crpCalendar
 	function listMonthEvents()
 	{
 		$navigationValues = $this->collectNavigationFromInput();
-		SessionUtil::delVar('crpCalendar_export_events');
+		SessionUtil :: delVar('crpCalendar_export_events');
 
 		$date = $this->timeToDMY($navigationValues['t']);
 
@@ -276,27 +275,26 @@ class crpCalendar
 			{
 				$options = array ();
 				// display link
-				$options[] = crpCalendar::buildLinkArray("_VIEW", $item, 'user');
+				$options[] = crpCalendar :: buildLinkArray("_VIEW", $item, 'user');
 
 				// subscribe to event
 				if (pnUserLoggedIn() && pnModGetVar('crpCalendar', 'enable_partecipation'))
 				{
 					if (!$this->dao->existPartecipation(pnUserGetVar('uid'), $item['eventid']))
-						$options[] = crpCalendar::buildLinkArray("_CRPCALENDAR_ADD_PARTECIPATION", $item, 'user');
+						$options[] = crpCalendar :: buildLinkArray("_CRPCALENDAR_ADD_PARTECIPATION", $item, 'user');
 					else
-						$options[] = crpCalendar::buildLinkArray("_CRPCALENDAR_DELETE_PARTECIPATION", $item, 'user');
+						$options[] = crpCalendar :: buildLinkArray("_CRPCALENDAR_DELETE_PARTECIPATION", $item, 'user');
 				}
 
 				// edit, copy, delete
 				if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']))
 				{
-					$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'admin');
-					$options[] = crpCalendar::buildLinkArray("_COPY", $item, 'admin');
+					$options[] = crpCalendar :: buildLinkArray("_EDIT", $item, 'admin');
+					$options[] = crpCalendar :: buildLinkArray("_COPY", $item, 'admin');
 					if ($this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
-						$options[] = crpCalendar::buildLinkArray("_DELETE", $item, 'admin');
+						$options[] = crpCalendar :: buildLinkArray("_DELETE", $item, 'admin');
 				}
-				elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid']))
-					$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'user');
+				elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid'])) $options[] = crpCalendar :: buildLinkArray("_EDIT", $item, 'user');
 
 				// Add the calculated menu options to the item array
 				$item['options'] = $options;
@@ -312,10 +310,10 @@ class crpCalendar
 			$exports[] = $item['eventid'];
 		}
 
-		SessionUtil::setVar('crpCalendar_export_events', $exports);
-		SessionUtil::setVar('crpCalendar_choosed_view', 'month_view');
-		SessionUtil::setVar('crpCalendar_choosed_time', $navigationValues['t']);
-		SessionUtil::setVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'month_view'));
+		SessionUtil :: setVar('crpCalendar_export_events', $exports);
+		SessionUtil :: setVar('crpCalendar_choosed_view', 'month_view');
+		SessionUtil :: setVar('crpCalendar_choosed_time', $navigationValues['t']);
+		SessionUtil :: setVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'month_view'));
 
 		$today = DateUtil :: getDatetime(time());
 
@@ -334,7 +332,7 @@ class crpCalendar
 	function listWeekEvents()
 	{
 		$navigationValues = $this->collectNavigationFromInput();
-		SessionUtil::delVar('crpCalendar_export_events');
+		SessionUtil :: delVar('crpCalendar_export_events');
 
 		$date = $this->timeToDMY($navigationValues['t']);
 
@@ -361,10 +359,10 @@ class crpCalendar
 			$exports[] = $item['eventid'];
 		}
 
-		SessionUtil::setVar('crpCalendar_export_events', $exports);
-		SessionUtil::setVar('crpCalendar_choosed_view', 'week_view');
-		SessionUtil::setVar('crpCalendar_choosed_time', $navigationValues['t']);
-		SessionUtil::setVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'week_view'));
+		SessionUtil :: setVar('crpCalendar_export_events', $exports);
+		SessionUtil :: setVar('crpCalendar_choosed_view', 'week_view');
+		SessionUtil :: setVar('crpCalendar_choosed_time', $navigationValues['t']);
+		SessionUtil :: setVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'week_view'));
 
 		// expand days array
 		$this->expandFirstDOW(DateUtil :: parseUIDateTime($weekDay), $days);
@@ -394,7 +392,7 @@ class crpCalendar
 	function listDayEvents()
 	{
 		$navigationValues = $this->collectNavigationFromInput();
-		SessionUtil::delVar('crpCalendar_export_events');
+		SessionUtil :: delVar('crpCalendar_export_events');
 
 		$date = $this->timeToDMY($navigationValues['t']);
 
@@ -422,30 +420,29 @@ class crpCalendar
 			if (pnUserLoggedIn() && pnModGetVar('crpCalendar', 'enable_partecipation'))
 			{
 				if (!$this->dao->existPartecipation(pnUserGetVar('uid'), $item['eventid']))
-					$options[] = crpCalendar::buildLinkArray("_CRPCALENDAR_ADD_PARTECIPATION", $item, 'user');
+					$options[] = crpCalendar :: buildLinkArray("_CRPCALENDAR_ADD_PARTECIPATION", $item, 'user');
 				else
-					$options[] = crpCalendar::buildLinkArray("_CRPCALENDAR_DELETE_PARTECIPATION", $item, 'user');
+					$options[] = crpCalendar :: buildLinkArray("_CRPCALENDAR_DELETE_PARTECIPATION", $item, 'user');
 			}
 
 			// edit, copy, delete
 			if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']))
 			{
-				$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'admin');
-				$options[] = crpCalendar::buildLinkArray("_COPY", $item, 'admin');
+				$options[] = crpCalendar :: buildLinkArray("_EDIT", $item, 'admin');
+				$options[] = crpCalendar :: buildLinkArray("_COPY", $item, 'admin');
 				if ($this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
-					$options[] = crpCalendar::buildLinkArray("_DELETE", $item, 'admin');
+					$options[] = crpCalendar :: buildLinkArray("_DELETE", $item, 'admin');
 			}
-			elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid']))
-				$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'user');
+			elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid'])) $options[] = crpCalendar :: buildLinkArray("_EDIT", $item, 'user');
 
 			// Add the calculated menu options to the item array
 			$items[$key]['options'] = $options;
 		}
 
-		SessionUtil::setVar('crpCalendar_export_events', $exports);
-		SessionUtil::setVar('crpCalendar_choosed_view', 'day_view');
-		SessionUtil::setVar('crpCalendar_choosed_time', $navigationValues['t']);
-		SessionUtil::setVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'day_view'));
+		SessionUtil :: setVar('crpCalendar_export_events', $exports);
+		SessionUtil :: setVar('crpCalendar_choosed_view', 'day_view');
+		SessionUtil :: setVar('crpCalendar_choosed_time', $navigationValues['t']);
+		SessionUtil :: setVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'day_view'));
 
 		$today = DateUtil :: getDatetime(time());
 
@@ -483,18 +480,17 @@ class crpCalendar
 		{
 			$options = array ();
 			// display link
-			$options[] = crpCalendar::buildLinkArray("_VIEW", $item, 'user');
+			$options[] = crpCalendar :: buildLinkArray("_VIEW", $item, 'user');
 
 			// edit, copy, delete
 			if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']))
 			{
-				$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'admin');
-				$options[] = crpCalendar::buildLinkArray("_COPY", $item, 'admin');
+				$options[] = crpCalendar :: buildLinkArray("_EDIT", $item, 'admin');
+				$options[] = crpCalendar :: buildLinkArray("_COPY", $item, 'admin');
 				if ($this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
-					$options[] = crpCalendar::buildLinkArray("_DELETE", $item, 'admin');
+					$options[] = crpCalendar :: buildLinkArray("_DELETE", $item, 'admin');
 			}
-			elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid']))
-				$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'user');
+			elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid'])) $options[] = crpCalendar :: buildLinkArray("_EDIT", $item, 'user');
 
 			// Add the calculated menu options to the item array
 			$item['options'] = $options;
@@ -502,8 +498,8 @@ class crpCalendar
 			$exports[] = $item['eventid'];
 		}
 
-		SessionUtil::setVar('crpCalendar_export_events', $exports);
-		SessionUtil::setVar('crpCalendar_choosed_view', 'get_attendees');
+		SessionUtil :: setVar('crpCalendar_export_events', $exports);
+		SessionUtil :: setVar('crpCalendar_choosed_view', 'get_attendees');
 
 		return $this->ui->userPartecipations($rows, $navigationValues['uid'], $navigationValues['category'], $navigationValues['mainCat'], $navigationValues['modvars']);
 	}
@@ -525,7 +521,7 @@ class crpCalendar
 		foreach ($items as $kevent => $item)
 		{
 			$options = array ();
-			$options[] = crpCalendar::buildLinkArray("_CRPCALENDAR_EVENTS_MYLIST", $item, 'user');
+			$options[] = crpCalendar :: buildLinkArray("_CRPCALENDAR_EVENTS_MYLIST", $item, 'user');
 
 			$options[] = array (
 				'url' => pnModURL('Profile', 'user', 'view', array (
@@ -540,7 +536,7 @@ class crpCalendar
 			$rows[] = $item;
 		}
 
-		SessionUtil::setVar('crpCalendar_choosed_view', 'get_attendees');
+		SessionUtil :: setVar('crpCalendar_choosed_view', 'get_attendees');
 
 		return $this->ui->attendeesList($rows, $navigationValues['category'], $navigationValues['mainCat'], $navigationValues['modvars']);
 	}
@@ -560,7 +556,7 @@ class crpCalendar
 			$eventid = $objectid;
 		}
 
-		SessionUtil::delVar('crpCalendar_export_events');
+		SessionUtil :: delVar('crpCalendar_export_events');
 
 		// Get the event
 		$item = $this->dao->getAdminData($eventid);
@@ -577,28 +573,27 @@ class crpCalendar
 		$this->dao->updateCounter($eventid);
 
 		$exports = array ();
-		$exports = crpCalendar::buildLinkArray("_CRPCALENDAR_ICAL", $item, 'user');
+		$exports = crpCalendar :: buildLinkArray("_CRPCALENDAR_ICAL", $item, 'user');
 
 		$item['exports'] = $exports;
 
 		// edit, copy, delete
 		if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']))
 		{
-			$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'admin');
-			$options[] = crpCalendar::buildLinkArray("_COPY", $item, 'admin');
+			$options[] = crpCalendar :: buildLinkArray("_EDIT", $item, 'admin');
+			$options[] = crpCalendar :: buildLinkArray("_COPY", $item, 'admin');
 			if ($this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
-				$options[] = crpCalendar::buildLinkArray("_DELETE", $item, 'admin');
+				$options[] = crpCalendar :: buildLinkArray("_DELETE", $item, 'admin');
 		}
-		elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid']))
-			$options[] = crpCalendar::buildLinkArray("_EDIT", $item, 'user');
+		elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid'])) $options[] = crpCalendar :: buildLinkArray("_EDIT", $item, 'user');
 
 		// subscribe to event
 		if (pnUserLoggedIn() && pnModGetVar('crpCalendar', 'enable_partecipation'))
 		{
 			if (!$this->dao->existPartecipation(pnUserGetVar('uid'), $item['eventid']))
-				$options[] = crpCalendar::buildLinkArray("_CRPCALENDAR_ADD_PARTECIPATION", $item, 'user');
+				$options[] = crpCalendar :: buildLinkArray("_CRPCALENDAR_ADD_PARTECIPATION", $item, 'user');
 			else
-				$options[] = crpCalendar::buildLinkArray("_CRPCALENDAR_DELETE_PARTECIPATION", $item, 'user');
+				$options[] = crpCalendar :: buildLinkArray("_CRPCALENDAR_DELETE_PARTECIPATION", $item, 'user');
 		}
 
 		$item['options'] = $options;
@@ -609,8 +604,8 @@ class crpCalendar
 
 		$dayDate = DateUtil :: formatDatetime($item['start_date'], '%Y-%m-%d');
 
-		SessionUtil::setVar('crpCalendar_choosed_time', DateUtil :: makeTimestamp($dayDate));
-		SessionUtil::setVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'display', array (
+		SessionUtil :: setVar('crpCalendar_choosed_time', DateUtil :: makeTimestamp($dayDate));
+		SessionUtil :: setVar('crpCalendar_return_url', pnModURL('crpCalendar', 'user', 'display', array (
 			'eventid' => $item['eventid']
 		)));
 
@@ -668,7 +663,7 @@ class crpCalendar
 	{
 		$inputValues = $this->collectDataFromInput();
 		$temp_values = array ();
-		$temp_values = SessionUtil::getVar('crpCalendar_temp_values');
+		$temp_values = SessionUtil :: getVar('crpCalendar_temp_values');
 		$avail = array ();
 
 		if (pnModAvailable('locations') && pnModGetVar('crpCalendar', 'enable_locations'))
@@ -686,7 +681,7 @@ class crpCalendar
 	{
 		$inputValues = $this->collectDataFromInput();
 		$temp_values = array ();
-		$temp_values = SessionUtil::getVar('crpCalendar_temp_values');
+		$temp_values = SessionUtil :: getVar('crpCalendar_temp_values');
 		$avail = array ();
 
 		if (pnModAvailable('locations') && pnModGetVar('crpCalendar', 'enable_locations'))
@@ -712,7 +707,7 @@ class crpCalendar
 		if (!$this->authAction(ACCESS_EDIT))
 		{
 			$returnType = 'user';
-			$returnFunc = SessionUtil::getVar('crpCalendar_choosed_view');
+			$returnFunc = SessionUtil :: getVar('crpCalendar_choosed_view');
 		}
 		else
 			$returnType = 'admin';
@@ -722,7 +717,7 @@ class crpCalendar
 			return LogUtil :: registerAuthidError(pnModURL('crpCalendar', $returnType, 'view'));
 
 		$inputValues = $this->collectDataFromInput();
-		SessionUtil::setVar('crpCalendar_temp_values', $inputValues['event']);
+		SessionUtil :: setVar('crpCalendar_temp_values', $inputValues['event']);
 
 		$startDate = $this->buildDate($inputValues['event']['startDay'], $inputValues['event']['startMonth'], $inputValues['event']['startYear']);
 
@@ -803,7 +798,7 @@ class crpCalendar
 		if ($inputValues['reenter'])
 			return pnRedirect(pnModUrl('crpCalendar', $returnType, 'new'));
 		else
-			SessionUtil::delVar('crpCalendar_temp_values');
+			SessionUtil :: delVar('crpCalendar_temp_values');
 
 		return pnRedirect(pnModURL('crpCalendar', $returnType, $returnFunc));
 	}
@@ -904,7 +899,7 @@ class crpCalendar
 		if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_EDIT))
 		{
 			$returnType = 'user';
-			$returnFunc = SessionUtil::getVar('crpCalendar_choosed_view');
+			$returnFunc = SessionUtil :: getVar('crpCalendar_choosed_view');
 		}
 		else
 			$returnType = 'admin';
@@ -1022,7 +1017,7 @@ class crpCalendar
 
 		// all went fine
 		LogUtil :: registerStatus(_CREATESUCCEDED);
-		SessionUtil::delVar('crpCalendar_temp_values');
+		SessionUtil :: delVar('crpCalendar_temp_values');
 
 		return pnRedirect(pnModURL('crpCalendar', 'admin', 'view'));
 	}
@@ -1150,7 +1145,7 @@ class crpCalendar
 		else
 			LogUtil :: registerStatus(_UPDATESUCCEDED);
 
-		return pnRedirect(SessionUtil::getVar('crpCalendar_return_url'));
+		return pnRedirect(SessionUtil :: getVar('crpCalendar_return_url'));
 	}
 
 	/**
@@ -1169,7 +1164,7 @@ class crpCalendar
 		else
 			LogUtil :: registerStatus(_UPDATESUCCEDED);
 
-		return pnRedirect(SessionUtil::getVar('crpCalendar_return_url'));
+		return pnRedirect(SessionUtil :: getVar('crpCalendar_return_url'));
 	}
 
 	/**
@@ -1289,10 +1284,12 @@ class crpCalendar
 		$viewForm = FormUtil :: getPassedValue('viewForm', 'table');
 
 		if ($day && $month && $year)
-			SessionUtil::setVar('crpCalendar_choosed_time', DateUtil :: makeTimestamp($year . '-' . $month . '-' . $day));
+			SessionUtil :: setVar('crpCalendar_choosed_time', DateUtil :: makeTimestamp($year . '-' . $month . '-' . $day));
 
-		$t = FormUtil :: getPassedValue('t', time());
-		(!$t && SessionUtil::getVar('crpCalendar_choosed_time')) ? $t = SessionUtil::getVar('crpCalendar_choosed_time') :'' ;
+		$t = FormUtil :: getPassedValue('t', null);
+		if (!$t && SessionUtil :: getVar('crpCalendar_choosed_time'))
+			$t = SessionUtil :: getVar('crpCalendar_choosed_time');
+		elseif (!$t) $t = time();
 
 		if ($clear)
 		{
@@ -1304,7 +1301,7 @@ class crpCalendar
 		}
 
 		$ignoreml = FormUtil :: getPassedValue('ignoreml', true);
-		$sortOrder = FormUtil :: getPassedValue('sortOrder', (SessionUtil::getVar('crpCalendar_choosed_view') == 'mont_view') ? 'ASC' : 'DESC');
+		$sortOrder = FormUtil :: getPassedValue('sortOrder', (SessionUtil :: getVar('crpCalendar_choosed_view') == 'mont_view') ? 'ASC' : 'DESC');
 
 		// load the category registry util
 		if (!($class = Loader :: loadClass('CategoryRegistryUtil')))
@@ -1553,7 +1550,7 @@ class crpCalendar
 	 * */
 	function listICal()
 	{
-		$exports = SessionUtil::getVar('crpCalendar_export_events');
+		$exports = SessionUtil :: getVar('crpCalendar_export_events');
 
 		$result = '';
 
@@ -1617,13 +1614,13 @@ class crpCalendar
 	{
 		// we need a timestamp
 		$server_etag = DateUtil :: makeTimestamp($params['modifiedDate']);
-		$server_date = gmdate('D, d M Y H:i:s', $server_etag). " GMT";
+		$server_date = gmdate('D, d M Y H:i:s', $server_etag) . " GMT";
 
 		// Check cached versus modified date
 		$client_etag = $_SERVER['HTTP_IF_NONE_MATCH'];
 		$client_date = $_SERVER['HTTP_IF_MODIFIED_SINCE'];
 
-		if(($client_etag == $server_etag) && (!$client_date || ($client_date==$server_date)))
+		if (($client_etag == $server_etag) && (!$client_date || ($client_date == $server_date)))
 		{
 			header("HTTP/1.1 304 Not Modified");
 			header("ETag: $server_etag");
@@ -1631,18 +1628,18 @@ class crpCalendar
 		}
 		else
 		{
-			header("Expires: ". gmdate('D, d M Y H:i:s', time() + 24 * 3600). " GMT");
+			header("Expires: " . gmdate('D, d M Y H:i:s', time() + 24 * 3600) . " GMT");
 			header('Pragma: cache');
 			header('Cache-Control: public, must-revalidate');
 			header("ETag: $server_etag");
-			header("Last-Modified: ". gmdate('D, d M Y H:i:s', $server_etag). " GMT");
+			header("Last-Modified: " . gmdate('D, d M Y H:i:s', $server_etag) . " GMT");
 			header("Content-Type: $content_type");
 			header("Content-Disposition: inline; filename=thumb_{$filename}");
 		}
 
 		/***************************************************************************/
 
-		$alphaThreshold = isset($params['alpha_threshold']) ? $params['alpha_threshold'] : 64;
+		$alphaThreshold = isset ($params['alpha_threshold']) ? $params['alpha_threshold'] : 64;
 		$appendGhosted = $params['append_ghosted'];
 		//
 		$srcImage = imagecreatefromstring($pSrcImage);
@@ -1653,16 +1650,16 @@ class crpCalendar
 			$srcWidth = imagesx($srcImage);
 			$srcHeight = imagesy($srcImage);
 
-			$newWidth = isset($params['width']) ? $params['width'] : $srcWidth;
+			$newWidth = isset ($params['width']) ? $params['width'] : $srcWidth;
 
 			$destWidth = round($newWidth, '0');
 			$destHeight = round(($srcHeight / $srcWidth) * $newWidth, '0');
 
 			// creating the destination image with the new Width and Height
-			if(!$appendGhosted)
+			if (!$appendGhosted)
 				$destImage = imagecreatetruecolor($destWidth, $destHeight);
 			else
-				$destImage = imagecreatetruecolor($destWidth, 2*$destHeight);
+				$destImage = imagecreatetruecolor($destWidth, 2 * $destHeight);
 
 			//png transparency
 			switch ($content_type)
@@ -1673,7 +1670,7 @@ class crpCalendar
 					imagealphablending($destImage, false);
 					imagesavealpha($destImage, true);
 					$transparent = imagecolorallocatealpha($destImage, 255, 255, 255, 80);
-					imagefill($destImage, 0,0,$transparent);
+					imagefill($destImage, 0, 0, $transparent);
 					break;
 
 				case 'image/gif' :
@@ -1686,7 +1683,7 @@ class crpCalendar
 			imagecopyresampled($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
 
 			//
-			if($appendGhosted)
+			if ($appendGhosted)
 			{
 				imagecopyresampled($destImage, $srcImage, 0, $destHeight, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
 
@@ -1695,17 +1692,16 @@ class crpCalendar
 				imagealphablending($ghostImage, false);
 				imagesavealpha($ghostImage, true);
 				$whitetrasp = imagecolorallocatealpha($ghostImage, 255, 255, 255, 0);
-				imagefill($ghostImage, 0,0,$whitetrasp);
-				imagecopymerge($destImage, $ghostImage, 0,$destHeight,0,0,$destWidth, $destHeight, 50);
-				if($content_type == 'image/png')
-				{	//	problems mergins transparent png.. need to restore original pixel transparency
-					for ($x = 0; $x < $destWidth; $x ++)
-						for ($y = 0; $y < $destHeight; $y ++)
+				imagefill($ghostImage, 0, 0, $whitetrasp);
+				imagecopymerge($destImage, $ghostImage, 0, $destHeight, 0, 0, $destWidth, $destHeight, 50);
+				if ($content_type == 'image/png')
+				{ //	problems mergins transparent png.. need to restore original pixel transparency
+					for ($x = 0; $x < $destWidth; $x++)
+						for ($y = 0; $y < $destHeight; $y++)
 						{
 							$srcPixel = imagecolorsforindex($destImage, imagecolorat($destImage, $x, $y));
-							$destPixel = imagecolorsforindex($destImage, imagecolorat($destImage, $x, $y+$destHeight));
-							imagesetpixel($destImage, $x, $y+$destHeight, imagecolorallocatealpha($destImage,
-								$destPixel['red'], $destPixel['green'], $destPixel['blue'], $srcPixel['alpha']));
+							$destPixel = imagecolorsforindex($destImage, imagecolorat($destImage, $x, $y + $destHeight));
+							imagesetpixel($destImage, $x, $y + $destHeight, imagecolorallocatealpha($destImage, $destPixel['red'], $destPixel['green'], $destPixel['blue'], $srcPixel['alpha']));
 						}
 
 				}
@@ -1722,25 +1718,25 @@ class crpCalendar
 				case 'image/gif' :
 					imagetruecolortopalette($destImage, true, 255);
 					//
-					if(imagecolortransparent($srcImage)>=0)
+					if (imagecolortransparent($srcImage) >= 0)
 					{
-						$maskImage = imagecreatetruecolor( $destWidth, $destHeight);
+						$maskImage = imagecreatetruecolor($destWidth, $destHeight);
 						imageantialias($maskImage, true);
 						imagealphablending($maskImage, false);
-						imagecopyresampled( $maskImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight );
+						imagecopyresampled($maskImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
 						//
-						$transp = imagecolorallocatealpha($destImage, 0,0,0,127);
+						$transp = imagecolorallocatealpha($destImage, 0, 0, 0, 127);
 						imagecolortransparent($destImage, $transp);
 						//
-						for ($x = 0; $x < $destWidth; $x ++)
-							for ($y = 0; $y < $destHeight; $y ++)
+						for ($x = 0; $x < $destWidth; $x++)
+							for ($y = 0; $y < $destHeight; $y++)
 							{
 								$c = imagecolorsforindex($maskImage, imagecolorat($maskImage, $x, $y));
-								if($c['alpha'] >= $alphaThreshold)
+								if ($c['alpha'] >= $alphaThreshold)
 								{
 									imagesetpixel($destImage, $x, $y, $transp);
-									if($appendGhosted)
-										imagesetpixel($destImage, $x, $y+$destHeight, $transp);
+									if ($appendGhosted)
+										imagesetpixel($destImage, $x, $y + $destHeight, $transp);
 								}
 							}
 						imagedestroy($maskImage);
@@ -1816,7 +1812,7 @@ class crpCalendar
 			case "1";
 				$limit = 0;
 				break;
-			default:
+			default :
 				$limit = 6;
 				break;
 		}
@@ -1877,7 +1873,7 @@ class crpCalendar
 			case "1";
 				$limit = 0;
 				break;
-			default:
+			default :
 				$limit = 6;
 				break;
 		}
@@ -2681,15 +2677,15 @@ class crpCalendar
 				break;
 			case "_DELETE" :
 				$linkArray = array (
-						'url' => pnModURL('crpCalendar', $actiontype, 'delete', array (
-							'eventid' => $item['eventid']
-						)),
-						'image' => '14_layer_deletelayer.gif',
-						'title' => _DELETE
-					);
+					'url' => pnModURL('crpCalendar', $actiontype, 'delete', array (
+						'eventid' => $item['eventid']
+					)),
+					'image' => '14_layer_deletelayer.gif',
+					'title' => _DELETE
+				);
 				break;
 			case "_CRPCALENDAR_EVENTS_MYLIST" :
-				$linkArray =	array (
+				$linkArray = array (
 					'url' => pnModURL('crpCalendar', 'user', 'get_partecipations', array (
 						'uid' => $item['uid']
 					)),
@@ -2698,7 +2694,7 @@ class crpCalendar
 				);
 				break;
 			case "_CRPCALENDAR_ICAL" :
-					$linkArray =	array (
+				$linkArray = array (
 					'url' => pnModURL('crpCalendar', 'user', 'getICal', array (
 						'eventid' => $item['eventid']
 					)),
