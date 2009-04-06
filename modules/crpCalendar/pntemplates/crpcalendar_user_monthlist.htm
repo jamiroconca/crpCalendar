@@ -69,8 +69,8 @@
 
 		<!--[assign var=point value=$smarty.foreach.cell.index+1]-->
 		<!--[if $point % 7 == 0]-->
-		</tr>
-		<tr>
+	</tr>
+	<tr>
 		<!--[if !$smarty.foreach.cell.last]-->
 			<td style="border-bottom:1px solid #CCC;">
 				<!--[crpcalendar_datetime_stamp datetime=$daysexpanded.$point assign=weektime]-->
@@ -80,6 +80,8 @@
 					<!--[pnimg modname=crpCalendar titleml=true src=$crpcalendar_theme|cat:"/right_arrows.gif" title=_CRPCALENDAR_VIEW_WEEK]-->
 				</a>
 			</td>
+		<!--[else]-->
+		<td colspan="8"></td>
 		<!--[/if]-->
 		<!--[/if]-->
 

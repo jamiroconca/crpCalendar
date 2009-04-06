@@ -24,7 +24,7 @@
 			<!--[pnmodgetvar module="Users" name="anonymous" assign=cr_profilename]-->
 		<!--[/if]-->
 		<!--[pnml name=_CRPCALENDAR_CREATEDON html=1]--> <abbr class="dtstamp" title="<!--[$event.cr_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.cr_date|pndate_format]--></abbr>
-		<!--[pnml name=_BY]--> <span class="uid"><a href="<!--[$cr_profilelink]-->"><!--[$cr_profilename]--></a></span>
+		<!--[pnml name=_BY]--> <span class="uid"><a href="<!--[$cr_profilelink|pnvarprepfordisplay]-->"><!--[$cr_profilename]--></a></span>
 	</div>
 	
 	<div class="crpcalendar_body">

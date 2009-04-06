@@ -54,7 +54,7 @@
 			<!--[/if]-->
 			<div>
 				<!--[pnml name=_CRPCALENDAR_CREATEDON html=1]--> <abbr class="dtstamp" title="<!--[$event.cr_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.cr_date|pndate_format]--></abbr>
-				<!--[pnml name=_BY]--> <span class="uid"><a href="<!--[$cr_profilelink]-->"><!--[$cr_profilename]--></a></span>
+				<!--[pnml name=_BY]--> <span class="uid"><a href="<!--[$cr_profilelink|pnvarprepfordisplay]-->"><!--[$cr_profilename]--></a></span>
 			</div>
 			<div>
 				<!--[pnml name="_CRPCALENDAR_START_DATE" html=1]-->: <strong><abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.start_date|pndate_format:"%d/%m/%Y - %H:%M"]--></abbr></strong>

@@ -60,9 +60,13 @@
 		
 		<!--[assign var=point value=$smarty.foreach.cell.index+1]--> 
 		<!--[if $point % 7 == 0]-->
-		</tr>
-		<tr>
-		<!--[if !$smarty.foreach.cell.last]--><td>&nbsp;</td><!--[/if]-->
+	</tr>
+	<tr>
+		<!--[if !$smarty.foreach.cell.last]-->
+		<td>&nbsp;</td>
+		<!--[else]-->
+		<td colspan="7"></td>
+		<!--[/if]-->
 		<!--[/if]-->
 		
 		<!--[/foreach]-->
