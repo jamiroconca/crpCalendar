@@ -4,6 +4,7 @@ v0.5.1 - 4 march 2009
 v0.5.0 - 17 february 2009
 - removed pn_ prefix from table definitions
 - added support for formicula's inclusions (only from admin new and modify funcs)
+- added more compatibility with PostGRE backend
 v0.4.9 - 18 august 2008
 - added event multiple start dates for admins, by module vars
 - added re-enter admin creation button
