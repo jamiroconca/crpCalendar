@@ -1,12 +1,12 @@
 <?php
+
 /**
  * crpCalendar
  *
- * @copyright (c) 2007, Daniele Conca
- * @link http://noc.postnuke.com/projects/crpcalendar Support and documentation
- * @version 0.2.0
- * @author Daniele Conca <jami at cremonapalloza dot org>
- * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+ * @copyright (c) 2007,2009 Daniele Conca
+ * @link http://code.zikula.org/crpcalendar Support and documentation
+ * @author Daniele Conca <conca.daniele@gmail.com>
+ * @license GNU/GPL - v.2.1
  * @package crpCalendar
  */
 
@@ -15,5 +15,3 @@ define('_CRPCALENDAR_EVENTS', 'Calendar events');
 define('_CRPCALENDAR_SEARCH', 'Calendar events Search');
 define('_CRPCALENDAR_SEARCHRESULTS', 'events found');
 define('_CRPCALENDAR_SEACHNONEFOUND', 'No events found');
-
-?>
