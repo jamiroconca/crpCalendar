@@ -1,9 +1,10 @@
 <?php
+
 /**
  * crpCalendar
  *
- * @copyright (c) 2007-2008, Daniele Conca
- * @link http://code.zikula.org/projects/crpcalendar Support and documentation
+ * @copyright (c) 2007,2009 Daniele Conca
+ * @link http://code.zikula.org/crpcalendar Support and documentation
  * @author Daniele Conca <conca.daniele@gmail.com>
  * @license GNU/GPL - v.2.1
  * @package crpCalendar
@@ -19,19 +20,14 @@ Loader :: includeOnce('modules/crpCalendar/pnclass/crpCalendar.php');
 function crpCalendar_userapi_getall($navigationValues)
 {
 	// Security check
-	if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_READ))
+	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
 	{
-		return LogUtil::registerPermissionError();
+		return LogUtil :: registerPermissionError();
 	}
 
 	$calendar = new crpCalendar();
 
-	return $calendar->dao->adminList($navigationValues['startnum'], $navigationValues['category'],
-																		$navigationValues['clear'], $navigationValues['ignoreml'],
-																		$navigationValues['modvars'], $navigationValues['mainCat'], 'A',
-																		$navigationValues['interval'], $navigationValues['sortOrder'],
-																		$navigationValues['startDate'], $navigationValues['endDate'],
-																		$navigationValues['typeList'], $navigationValues['bylocation']);
+	return $calendar->dao->adminList($navigationValues['startnum'], $navigationValues['category'], $navigationValues['clear'], $navigationValues['ignoreml'], $navigationValues['modvars'], $navigationValues['mainCat'], 'A', $navigationValues['interval'], $navigationValues['sortOrder'], $navigationValues['startDate'], $navigationValues['endDate'], $navigationValues['typeList'], $navigationValues['bylocation']);
 }
 
 /**
@@ -42,16 +38,14 @@ function crpCalendar_userapi_getall($navigationValues)
 function crpCalendar_userapi_getall_partecipations($navigationValues)
 {
 	// Security check
-	if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_READ))
+	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
 	{
-		return LogUtil::registerPermissionError();
+		return LogUtil :: registerPermissionError();
 	}
 
 	$calendar = new crpCalendar();
 
-	return $calendar->dao->getPartecipations($navigationValues['uid'], $navigationValues['startnum'],
-																		$navigationValues['modvars'], $navigationValues['mainCat'], 'A',
-																		$navigationValues['sortOrder'], null, null);
+	return $calendar->dao->getPartecipations($navigationValues['uid'], $navigationValues['startnum'], $navigationValues['modvars'], $navigationValues['mainCat'], 'A', $navigationValues['sortOrder'], null, null);
 }
 
 /**
@@ -62,17 +56,14 @@ function crpCalendar_userapi_getall_partecipations($navigationValues)
 function crpCalendar_userapi_getall_formlist($navigationValues)
 {
 	// Security check
-	if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_READ))
+	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
 	{
-		return LogUtil::registerPermissionError();
+		return LogUtil :: registerPermissionError();
 	}
 
 	$calendar = new crpCalendar();
 
-	return $calendar->dao->formList($navigationValues['startnum'], $navigationValues['category'],
-																		$navigationValues['clear'], $navigationValues['ignoreml'],
-																		$navigationValues['modvars'], $navigationValues['mainCat'], 'A',
-																		$navigationValues['interval'], $navigationValues['sortOrder']);
+	return $calendar->dao->formList($navigationValues['startnum'], $navigationValues['category'], $navigationValues['clear'], $navigationValues['ignoreml'], $navigationValues['modvars'], $navigationValues['mainCat'], 'A', $navigationValues['interval'], $navigationValues['sortOrder']);
 }
 
 /**
@@ -83,23 +74,24 @@ function crpCalendar_userapi_getall_formlist($navigationValues)
 function crpCalendar_userapi_get($args)
 {
 	// Security check
-	if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_READ))
+	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
 	{
-		return LogUtil::registerPermissionError();
+		return LogUtil :: registerPermissionError();
 	}
 
 	// optional arguments
-  if (isset($args['objectid'])) {
-     $args['eventid'] = $args['objectid'];
-  }
+	if (isset ($args['objectid']))
+	{
+		$args['eventid'] = $args['objectid'];
+	}
 
 	// Argument check
-  if ((!isset($args['eventid']) || !is_numeric($args['eventid'])) &&
-       !isset($args['title'])) {
-      return LogUtil::registerError (_MODARGSERROR);
-  }
+	if ((!isset ($args['eventid']) || !is_numeric($args['eventid'])) && !isset ($args['title']))
+	{
+		return LogUtil :: registerError(_MODARGSERROR);
+	}
 
-  $calendar = new crpCalendar();
+	$calendar = new crpCalendar();
 	return $calendar->dao->getAdminData($args['eventid'], true, $args['title']);
 }
 
@@ -111,9 +103,9 @@ function crpCalendar_userapi_get($args)
 function crpCalendar_userapi_countitems($args)
 {
 	// Security check
-	if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_READ))
+	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
 	{
-		return LogUtil::registerPermissionError();
+		return LogUtil :: registerPermissionError();
 	}
 
 	$calendar = new crpCalendar();
@@ -129,9 +121,9 @@ function crpCalendar_userapi_countitems($args)
 function crpCalendar_userapi_countitems_attendance($args)
 {
 	// Security check
-	if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_READ))
+	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
 	{
-		return LogUtil::registerPermissionError();
+		return LogUtil :: registerPermissionError();
 	}
 
 	$calendar = new crpCalendar();
@@ -146,15 +138,15 @@ function crpCalendar_userapi_countitems_attendance($args)
  */
 function crpCalendar_userapi_getmodulemeta()
 {
-   return array('viewfunc'    => 'view',
-                'displayfunc' => 'display',
-                'newfunc'     => 'new',
-                'createfunc'  => 'create',
-                'modifyfunc'  => 'modify',
-                'updatefunc'  => 'update',
-                'deletefunc'  => 'delete',
-                'titlefield'  => 'title',
-                'itemid'      => 'eventid');
+	return array (
+		'viewfunc' => 'view',
+		'displayfunc' => 'display',
+		'newfunc' => 'new',
+		'createfunc' => 'create',
+		'modifyfunc' => 'modify',
+		'updatefunc' => 'update',
+		'deletefunc' => 'delete',
+		'titlefield' => 'title',
+		'itemid' => 'eventid'
+	);
 }
-
-?>

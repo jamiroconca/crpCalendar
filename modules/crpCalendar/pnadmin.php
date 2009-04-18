@@ -1,15 +1,16 @@
 <?php
+
 /**
  * crpCalendar
  *
- * @copyright (c) 2007, Daniele Conca
- * @link http://noc.postnuke.com/projects/crpcalendar Support and documentation
- * @author Daniele Conca <conca dot daniele at gmail dot com>
+ * @copyright (c) 2007,2009 Daniele Conca
+ * @link http://code.zikula.org/crpcalendar Support and documentation
+ * @author Daniele Conca <conca.daniele@gmail.com>
  * @license GNU/GPL - v.2.1
  * @package crpCalendar
  */
 
-Loader::includeOnce('modules/crpCalendar/pnclass/crpCalendar.php');
+Loader :: includeOnce('modules/crpCalendar/pnclass/crpCalendar.php');
 
 /**
  * the main administration function
@@ -19,9 +20,9 @@ Loader::includeOnce('modules/crpCalendar/pnclass/crpCalendar.php');
 function crpCalendar_admin_main()
 {
 	// Security check
-	if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_EDIT))
+	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_EDIT))
 	{
-		return LogUtil::registerPermissionError();
+		return LogUtil :: registerPermissionError();
 	}
 
 	// Create output object
@@ -31,7 +32,6 @@ function crpCalendar_admin_main()
 	return $pnRender->fetch('crpcalendar_admin_main.htm');
 }
 
-
 /**
  * view items list
  *
@@ -40,81 +40,77 @@ function crpCalendar_admin_main()
 function crpCalendar_admin_view()
 {
 	// Security check
-	if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_EDIT))
+	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_EDIT))
 	{
-		return LogUtil::registerPermissionError();
+		return LogUtil :: registerPermissionError();
 	}
 
 	$calendar = new crpCalendar();
 	return $calendar->manageEvents();
 }
 
-
 /**
  * new item
- * 
+ *
  * @return string HTML output
  */
 function crpCalendar_admin_new()
 {
 	// Security check
-	if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_EDIT))
+	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_EDIT))
 	{
-		return LogUtil::registerPermissionError();
+		return LogUtil :: registerPermissionError();
 	}
 
 	$calendar = new crpCalendar();
 	return $calendar->newEvent();
 }
 
-
 /**
  * create item
- * 
+ *
  * @return string HTML output
  */
 function crpCalendar_admin_create()
 {
 	// Security check
-	if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_EDIT))
+	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_EDIT))
 	{
-		return LogUtil::registerPermissionError();
+		return LogUtil :: registerPermissionError();
 	}
 
 	$calendar = new crpCalendar();
 	return $calendar->createEvent();
 }
 
-
 /**
  * modify item
- * 
+ *
  * @return string HTML output
  */
 function crpCalendar_admin_modify()
 {
 	// Security check
-	if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_EDIT))
+	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_EDIT))
 	{
-		return LogUtil::registerPermissionError();
+		return LogUtil :: registerPermissionError();
 	}
 
 	$calendar = new crpCalendar();
 	return $calendar->modifyEvent();
 }
 
-
 /**
  * update item
- * 
+ *
  * @return string HTML output
  */
 function crpCalendar_admin_update()
 {
 	// Security check
-	if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_EDIT))
+	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_EDIT))
 	{
-		return LogUtil::registerPermissionError();
+		return LogUtil :: registerPermissionError();
 	}
 
 	$calendar = new crpCalendar();
@@ -123,90 +119,88 @@ function crpCalendar_admin_update()
 
 /**
  * clone item
- * 
+ *
  * @return string HTML output
  */
 function crpCalendar_admin_clone()
 {
 	// Security check
-	if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_EDIT))
+	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_EDIT))
 	{
-		return LogUtil::registerPermissionError();
+		return LogUtil :: registerPermissionError();
 	}
 
 	$calendar = new crpCalendar();
 	return $calendar->cloneEvent();
 }
 
-
 /**
  * modify item status
- * 
+ *
  * @return string HTML output
  */
 function crpCalendar_admin_change_status()
 {
 	// Security check
-	if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_ADD))
+	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_ADD))
 	{
-		return LogUtil::registerPermissionError();
+		return LogUtil :: registerPermissionError();
 	}
 
 	$calendar = new crpCalendar();
 	return $calendar->changeStatus();
 }
 
-
 /**
  * delete item
- * 
+ *
  * @return mixed string HTML output if no confirmation otherwise true
  */
 function crpCalendar_admin_delete($args)
 {
 	// Security check
-  if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_DELETE)) {
-      return LogUtil::registerPermissionError();
-  }
+	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_DELETE))
+	{
+		return LogUtil :: registerPermissionError();
+	}
 
-  $calendar = new crpCalendar();
+	$calendar = new crpCalendar();
 	return $calendar->deleteEvent();
 }
 
-
 /**
  * delete item's file
- * 
+ *
  * @return mixed string HTML output if no confirmation otherwise true
  */
 function crpCalendar_admin_delete_file($args)
 {
 	// Security check
-  if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_EDIT)) {
-      return LogUtil::registerPermissionError();
-  }
+	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_EDIT))
+	{
+		return LogUtil :: registerPermissionError();
+	}
 
-  $calendar = new crpCalendar();
+	$calendar = new crpCalendar();
 	return $calendar->deleteFile();
 }
 
-
 /**
  * remove item
- * 
+ *
  * @return mixed string HTML output if no confirmation otherwise true
  */
 function crpCalendar_admin_remove($args)
 {
 	// Security check
-  if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_DELETE)) {
-      return LogUtil::registerPermissionError();
-  }
+	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_DELETE))
+	{
+		return LogUtil :: registerPermissionError();
+	}
 
-  $calendar = new crpCalendar();
+	$calendar = new crpCalendar();
 	return $calendar->removeEvent();
 }
-
 
 /**
  * modify module configuration
@@ -215,12 +209,13 @@ function crpCalendar_admin_remove($args)
  */
 function crpCalendar_admin_modifyconfig()
 {
-  // Security check
-  if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_ADMIN)) {
-      return LogUtil::registerPermissionError();
-  }
+	// Security check
+	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_ADMIN))
+	{
+		return LogUtil :: registerPermissionError();
+	}
 
-  $calendar = new crpCalendar();
+	$calendar = new crpCalendar();
 	return $calendar->modifyConfig();
 }
 
@@ -231,56 +226,60 @@ function crpCalendar_admin_modifyconfig()
  */
 function crpCalendar_admin_updateconfig()
 {
-  // Security check
-  if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_ADMIN)) {
-      return LogUtil::registerPermissionError();
-  }
+	// Security check
+	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_ADMIN))
+	{
+		return LogUtil :: registerPermissionError();
+	}
 
-  $calendar = new crpCalendar();
+	$calendar = new crpCalendar();
 	return $calendar->updateConfig();
 }
 
 /**
  * import events from an ical file
- * 
- * @return string HTML output string 
+ *
+ * @return string HTML output string
  */
 function crpCalendar_admin_import_ical()
 {
 	// Security check
-  if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_EDIT)) {
-      return LogUtil::registerPermissionError();
-  }
+	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_EDIT))
+	{
+		return LogUtil :: registerPermissionError();
+	}
 	$calendar = new crpCalendar();
 	return $calendar->importIcs();
 }
 
 /**
  * insert events from an ical file
- * 
- * @return string HTML output string 
+ *
+ * @return string HTML output string
  */
 function crpCalendar_admin_import_create()
 {
 	// Security check
-  if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_EDIT)) {
-      return LogUtil::registerPermissionError();
-  }
+	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_EDIT))
+	{
+		return LogUtil :: registerPermissionError();
+	}
 	$calendar = new crpCalendar();
 	return $calendar->createIcs();
 }
 
 /**
  * remove events older than a date
- * 
- * @return string HTML output string 
+ *
+ * @return string HTML output string
  */
 function crpCalendar_admin_purge_events()
 {
 	// Security check
-  if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_EDIT)) {
-      return LogUtil::registerPermissionError();
-  }
+	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_EDIT))
+	{
+		return LogUtil :: registerPermissionError();
+	}
 	$calendar = new crpCalendar();
 	return $calendar->purgeEvents();
 }
@@ -293,12 +292,11 @@ function crpCalendar_admin_purge_events()
 function crpCalendar_admin_purge_remove($args)
 {
 	// Security check
-  if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_DELETE)) {
-      return LogUtil::registerPermissionError();
-  }
+	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_DELETE))
+	{
+		return LogUtil :: registerPermissionError();
+	}
 
-  $calendar = new crpCalendar();
+	$calendar = new crpCalendar();
 	return $calendar->removePurge();
 }
-
-?>
