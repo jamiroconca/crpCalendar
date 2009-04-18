@@ -3,8 +3,8 @@
 /**
  * crpCalendar
  *
- * @copyright (c) 2007-2008, Daniele Conca
- * @link http://code.zikula.org/projects/crpcalendar Support and documentation
+ * @copyright (c) 2007,2009 Daniele Conca
+ * @link http://code.zikula.org/crpcalendar Support and documentation
  * @author Daniele Conca <conca.daniele@gmail.com>
  * @license GNU/GPL - v.2.1
  * @package crpCalendar
@@ -22,15 +22,15 @@ class crpCalendarDAO
 	function crpCalendarDAO()
 	{
 		// images allowed
-		$this->ImageTypes[]= 'image/gif';
-		$this->ImageTypes[]= 'image/jpeg';
-		$this->ImageTypes[]= 'image/pjpeg';
-		$this->ImageTypes[]= 'image/png';
+		$this->ImageTypes[] = 'image/gif';
+		$this->ImageTypes[] = 'image/jpeg';
+		$this->ImageTypes[] = 'image/pjpeg';
+		$this->ImageTypes[] = 'image/png';
 	}
 
-	function getAuth($level=0, $author_object='', $id_object='', $name_object='')
+	function getAuth($level = 0, $author_object = '', $id_object = '', $name_object = '')
 	{
-		$result = SecurityUtil::checkPermission("crpCalendar::", "$author_object:$name_object:$id_object", $level);
+		$result = SecurityUtil :: checkPermission("crpCalendar::", "$author_object:$name_object:$id_object", $level);
 		return $result;
 	}
 
@@ -52,30 +52,27 @@ class crpCalendarDAO
 	 *
 	 * @return array events list
 	 */
-	function adminList($startnum= 1, $category= null, $clear= false, $ignoreml= true,
-											$modvars= array (), $mainCat= null, $active= null, $interval= null,
-											$sortOrder= 'DESC', $startDate= null, $endDate= null, $typeList= null,
-											$bylocation=null)
+	function adminList($startnum = 1, $category = null, $clear = false, $ignoreml = true, $modvars = array (), $mainCat = null, $active = null, $interval = null, $sortOrder = 'DESC', $startDate = null, $endDate = null, $typeList = null, $bylocation = null)
 	{
-		(empty ($startnum)) ? $startnum= 1 : '';
-		(empty ($modvars['itemsperpage'])) ? $modvars['itemsperpage']= '-1' : '';
+		(empty ($startnum)) ? $startnum = 1 : '';
+		(empty ($modvars['itemsperpage'])) ? $modvars['itemsperpage'] = '-1' : '';
 
 		if (!is_numeric($startnum) || !is_numeric($modvars['itemsperpage']))
 		{
 			return LogUtil :: registerError(_MODARGSERROR);
 		}
 
-		$catFilter= array ();
+		$catFilter = array ();
 		if (is_array($category))
-			$catFilter= $category;
+			$catFilter = $category;
 		elseif ($category)
 		{
-			$catFilter['Main']= $category;
-			$catFilter['__META__']['module']= 'crpCalendar';
+			$catFilter['Main'] = $category;
+			$catFilter['__META__']['module'] = 'crpCalendar';
 		}
 
-		$items= array ();
-		$nowDate = DateUtil::getDatetime();
+		$items = array ();
+		$nowDate = DateUtil :: getDatetime();
 
 		// Security check
 		if (!$this->getAuth(ACCESS_READ))
@@ -84,29 +81,29 @@ class crpCalendarDAO
 		}
 		if (!$this->getAuth(ACCESS_ADD) && $active)
 		{ // userapi should not query pending or rejected events
-			$active='A';
+			$active = 'A';
 		}
 
-		$pntable= pnDBGetTables();
-		$crpcalendarcolumn= $pntable['crpcalendar_column'];
-		$queryargs= array ();
+		$pntable = pnDBGetTables();
+		$crpcalendarcolumn = $pntable['crpcalendar_column'];
+		$queryargs = array ();
 
 		if (pnConfigGetVar('multilingual') == 1 && !$ignoreml)
 		{
-			$queryargs[]= "($crpcalendarcolumn[language]='" . DataUtil :: formatForStore(pnUserGetLang()) . "' " .
+			$queryargs[] = "($crpcalendarcolumn[language]='" . DataUtil :: formatForStore(pnUserGetLang()) . "' " .
 			"OR $crpcalendarcolumn[language]='')";
 		}
 
 		if ($active)
 		{
-			$queryargs[]= "($crpcalendarcolumn[obj_status]='" . DataUtil :: formatForStore($active) . "')";
+			$queryargs[] = "($crpcalendarcolumn[obj_status]='" . DataUtil :: formatForStore($active) . "')";
 		}
 
 		if ($interval)
 		{
 			$intervaltime = time() + $interval * 86400;
 			$intervalDate = DateUtil :: getDatetime($intervaltime);
-			$queryargs[]= "(($crpcalendarcolumn[start_date] > '" . DataUtil :: formatForStore($nowDate) . "' " .
+			$queryargs[] = "(($crpcalendarcolumn[start_date] > '" . DataUtil :: formatForStore($nowDate) . "' " .
 			"AND $crpcalendarcolumn[start_date] < '" . DataUtil :: formatForStore($intervalDate) . "') " .
 			"OR ($crpcalendarcolumn[end_date] > '" . DataUtil :: formatForStore($nowDate) . "' " .
 			"AND $crpcalendarcolumn[end_date] < '" . DataUtil :: formatForStore($intervalDate) . "')" .
@@ -116,7 +113,7 @@ class crpCalendarDAO
 
 		if ($startDate && $endDate)
 		{
-			$queryargs[]= "( (($crpcalendarcolumn[start_date] BETWEEN '" . DataUtil :: formatForStore($startDate) . "' AND '" . DataUtil :: formatForStore($endDate) . "') " .
+			$queryargs[] = "( (($crpcalendarcolumn[start_date] BETWEEN '" . DataUtil :: formatForStore($startDate) . "' AND '" . DataUtil :: formatForStore($endDate) . "') " .
 			"OR ($crpcalendarcolumn[end_date] BETWEEN '" . DataUtil :: formatForStore($startDate) . "' AND '" . DataUtil :: formatForStore($endDate) . "')) " .
 			"OR (('" . DataUtil :: formatForStore($startDate) . "' BETWEEN $crpcalendarcolumn[start_date] AND $crpcalendarcolumn[end_date]) " .
 			"AND ('" . DataUtil :: formatForStore($endDate) . "' BETWEEN $crpcalendarcolumn[start_date] AND $crpcalendarcolumn[end_date])) )";
@@ -124,28 +121,29 @@ class crpCalendarDAO
 
 		switch ($typeList)
 		{
-			case "upcoming":
-				$queryargs[]= "($crpcalendarcolumn[start_date] > '" . DataUtil :: formatForStore($nowDate) . "')";
+			case "upcoming" :
+				$queryargs[] = "($crpcalendarcolumn[start_date] > '" . DataUtil :: formatForStore($nowDate) . "')";
 				break;
-			case "archive":
-				$queryargs[]= "($crpcalendarcolumn[start_date] <= '" . DataUtil :: formatForStore($nowDate) . "')";
+			case "archive" :
+				$queryargs[] = "($crpcalendarcolumn[start_date] <= '" . DataUtil :: formatForStore($nowDate) . "')";
 				break;
-			default: break;
+			default :
+				break;
 		}
 
 		if ($bylocation)
 		{
-			$queryargs[]= "($crpcalendarcolumn[location] LIKE '" . DataUtil :: formatForStore($bylocation) . "')";
+			$queryargs[] = "($crpcalendarcolumn[location] LIKE '" . DataUtil :: formatForStore($bylocation) . "')";
 		}
 
-		$where= null;
+		$where = null;
 		if (count($queryargs) > 0)
 		{
-			$where= ' WHERE ' . implode(' AND ', $queryargs);
+			$where = ' WHERE ' . implode(' AND ', $queryargs);
 		}
 
 		// define the permission filter to apply
-		$permFilter= array (
+		$permFilter = array (
 			array (
 				'realm' => 0,
 				'component_left' => 'crpCalendar',
@@ -157,11 +155,10 @@ class crpCalendarDAO
 			)
 		);
 
-		$orderby= "ORDER BY $crpcalendarcolumn[start_date] $sortOrder";
+		$orderby = "ORDER BY $crpcalendarcolumn[start_date] $sortOrder";
 
 		// get the objects from the db
-		$objArray= DBUtil :: selectObjectArray('crpcalendar', $where, $orderby, $startnum -1, $modvars['itemsperpage'],
-																						'', $permFilter, $catFilter);
+		$objArray = DBUtil :: selectObjectArray('crpcalendar', $where, $orderby, $startnum -1, $modvars['itemsperpage'], '', $permFilter, $catFilter);
 
 		// Check for an error with the database code, and if so set an appropriate
 		// error message and return
@@ -184,7 +181,7 @@ class crpCalendarDAO
 		if ($modvars['crpcalendar_userlist_image'])
 		{
 			foreach ($objArray as $kObj => $vObj)
-				$objArray[$kObj]['image']= $this->getFile($vObj['eventid'], 'image');
+				$objArray[$kObj]['image'] = $this->getFile($vObj['eventid'], 'image');
 		}
 
 		// Return the items
@@ -205,26 +202,25 @@ class crpCalendarDAO
 	 *
 	 * @return array element list
 	 */
-	function formList($startnum= 1, $category= null, $clear= false, $ignoreml= true, $modvars= array (), $mainCat,
-										$active= null, $interval= null, $sortOrder= 'DESC')
+	function formList($startnum = 1, $category = null, $clear = false, $ignoreml = true, $modvars = array (), $mainCat, $active = null, $interval = null, $sortOrder = 'DESC')
 	{
 		if (!is_numeric($startnum) || !is_numeric($modvars['itemsperpage']))
 		{
 			return LogUtil :: registerError(_MODARGSERROR);
 		}
 
-		$catFilter= array ();
+		$catFilter = array ();
 		if (is_array($category))
-			$catFilter= $category;
+			$catFilter = $category;
 		else
 			if ($category)
 			{
-				$catFilter['Main']= $category;
-				$catFilter['__META__']['module']= 'crpCalendar';
+				$catFilter['Main'] = $category;
+				$catFilter['__META__']['module'] = 'crpCalendar';
 			}
 
-		$items= array ();
-		$nowDate = DateUtil::getDatetime();
+		$items = array ();
+		$nowDate = DateUtil :: getDatetime();
 
 		// Security check
 		if (!$this->getAuth(ACCESS_READ))
@@ -232,38 +228,38 @@ class crpCalendarDAO
 			return $items;
 		}
 
-		$pntable= pnDBGetTables();
-		$crpcalendarcolumn= $pntable['crpcalendar_column'];
-		$queryargs= array ();
+		$pntable = pnDBGetTables();
+		$crpcalendarcolumn = $pntable['crpcalendar_column'];
+		$queryargs = array ();
 		if (pnConfigGetVar('multilingual') == 1 && !$ignoreml)
 		{
-			$queryargs[]= "($crpcalendarcolumn[language]='" . DataUtil :: formatForStore(pnUserGetLang()) . "' " .
+			$queryargs[] = "($crpcalendarcolumn[language]='" . DataUtil :: formatForStore(pnUserGetLang()) . "' " .
 			"OR $crpcalendarcolumn[language]='')";
 		}
 
 		if ($active)
 		{
-			$queryargs[]= "($crpcalendarcolumn[obj_status]='" . DataUtil :: formatForStore($active) . "')";
+			$queryargs[] = "($crpcalendarcolumn[obj_status]='" . DataUtil :: formatForStore($active) . "')";
 		}
 
 		if ($interval)
 		{
 			$intervaltime = time() + $interval * 86400;
 			$intervalDate = DateUtil :: getDatetime($intervaltime);
-			$queryargs[]= "(($crpcalendarcolumn[start_date] > '" . DataUtil :: formatForStore($nowDate) . "' " .
+			$queryargs[] = "(($crpcalendarcolumn[start_date] > '" . DataUtil :: formatForStore($nowDate) . "' " .
 			"AND $crpcalendarcolumn[start_date] < '" . DataUtil :: formatForStore($intervalDate) . "') " .
 			"OR ($crpcalendarcolumn[end_date] > '" . DataUtil :: formatForStore($nowDate) . "' " .
 			"AND $crpcalendarcolumn[end_date] < '" . DataUtil :: formatForStore($intervalDate) . "'))";
 		}
 
-		$where= null;
+		$where = null;
 		if (count($queryargs) > 0)
 		{
-			$where= ' WHERE ' . implode(' AND ', $queryargs);
+			$where = ' WHERE ' . implode(' AND ', $queryargs);
 		}
 
 		// define the permission filter to apply
-		$permFilter= array (
+		$permFilter = array (
 			array (
 				'realm' => 0,
 				'component_left' => 'crpCalendar',
@@ -275,16 +271,15 @@ class crpCalendarDAO
 			)
 		);
 
-		$orderby= "ORDER BY $crpcalendarcolumn[start_date] $sortOrder";
+		$orderby = "ORDER BY $crpcalendarcolumn[start_date] $sortOrder";
 
-		$columnArray= array (
+		$columnArray = array (
 			'eventid',
 			'title'
 		);
 
 		// get the objects from the db
-		$objArray= DBUtil :: selectObjectArray('crpcalendar', $where, $orderby, $startnum -1, -1, '', $permFilter,
-																						$catFilter, $columnArray);
+		$objArray = DBUtil :: selectObjectArray('crpcalendar', $where, $orderby, $startnum -1, -1, '', $permFilter, $catFilter, $columnArray);
 
 		// Check for an error with the database code, and if so set an appropriate
 		// error message and return
@@ -295,7 +290,7 @@ class crpCalendarDAO
 
 		foreach ($objArray as $kObj => $vObj)
 		{
-			$formArray[]= array (
+			$formArray[] = array (
 				'id' => $vObj['eventid'],
 				'name' => $vObj['title']
 			);
@@ -313,10 +308,10 @@ class crpCalendarDAO
 	 *
 	 * @return array item value
 	 */
-	function getAdminData($eventid= null, $extend= true, $title=null)
+	function getAdminData($eventid = null, $extend = true, $title = null)
 	{
 		// define the permission filter to apply
-		$permFilter= array (
+		$permFilter = array (
 			array (
 				'realm' => 0,
 				'component_left' => 'crpCalendar',
@@ -329,20 +324,19 @@ class crpCalendarDAO
 		);
 
 		if (isset ($eventid) && is_numeric($eventid))
-			$object= DBUtil :: selectObjectByID('crpcalendar', $eventid, 'eventid', '', $permFilter);
-		elseif ($title)
-      $object = DBUtil::selectObjectByID('crpcalendar', $title, 'urltitle', '', $permFilter);
+			$object = DBUtil :: selectObjectByID('crpcalendar', $eventid, 'eventid', '', $permFilter);
+		elseif ($title) $object = DBUtil :: selectObjectByID('crpcalendar', $title, 'urltitle', '', $permFilter);
 
 		if ($extend && $object)
 		{
-			$object['image']= $this->getFile($eventid, 'image');
-			$object['document']= $this->getFile($eventid, 'document');
+			$object['image'] = $this->getFile($eventid, 'image');
+			$object['document'] = $this->getFile($eventid, 'document');
 		}
 		// load the category registry util
-		if (!($class= Loader :: loadClass('CategoryRegistryUtil')))
+		if (!($class = Loader :: loadClass('CategoryRegistryUtil')))
 			pn_exit('Unable to load class [CategoryRegistryUtil] ...');
 
-		$mainCat= CategoryRegistryUtil :: getRegisteredModuleCategory('crpCalendar', 'crpcalendar', 'Main');
+		$mainCat = CategoryRegistryUtil :: getRegisteredModuleCategory('crpCalendar', 'crpcalendar', 'Main');
 
 		if (pnModGetVar('crpCalendar', 'enablecategorization') && !empty ($object['__CATEGORIES__']))
 		{
@@ -359,29 +353,29 @@ class crpCalendarDAO
 	 *
 	 * @return string item value
 	 */
-	function isAuthor($eventid= null)
+	function isAuthor($eventid = null)
 	{
-		$pntable= pnDBGetTables();
-		$crpcalendarcolumn= $pntable['crpcalendar_column'];
+		$pntable = pnDBGetTables();
+		$crpcalendarcolumn = $pntable['crpcalendar_column'];
 
-		$queryargs[]= "($crpcalendarcolumn[eventid] = '" . DataUtil :: formatForStore($eventid) . "' " .
+		$queryargs[] = "($crpcalendarcolumn[eventid] = '" . DataUtil :: formatForStore($eventid) . "' " .
 		"AND $crpcalendarcolumn[cr_uid] = '" . DataUtil :: formatForStore(pnUserGetVar('uid')) . "')";
 
-		$columnArray= array (
+		$columnArray = array (
 			'eventid',
 			'cr_uid'
 		);
 
-		$where= null;
+		$where = null;
 		if (count($queryargs) > 0)
 		{
-			$where= ' WHERE ' . implode(' AND ', $queryargs);
+			$where = ' WHERE ' . implode(' AND ', $queryargs);
 		}
 
-		$item= DBUtil :: selectObject('crpcalendar', $where, $columnArray);
+		$item = DBUtil :: selectObject('crpcalendar', $where, $columnArray);
 
-		$author= false;
-		($item['cr_uid']) ? $author= true : $author= false;
+		$author = false;
+		($item['cr_uid']) ? $author = true : $author = false;
 
 		return $author;
 	}
@@ -394,28 +388,28 @@ class crpCalendarDAO
 	 *
 	 * @return string item value
 	 */
-	function getEventDate($eventid= null, $dateType= null)
+	function getEventDate($eventid = null, $dateType = null)
 	{
-		$pntable= pnDBGetTables();
-		$crpcalendarcolumn= $pntable['crpcalendar_column'];
+		$pntable = pnDBGetTables();
+		$crpcalendarcolumn = $pntable['crpcalendar_column'];
 
-		$queryargs[]= "($crpcalendarcolumn[eventid] = '" . DataUtil :: formatForStore($eventid) . "')";
+		$queryargs[] = "($crpcalendarcolumn[eventid] = '" . DataUtil :: formatForStore($eventid) . "')";
 
-		$columnArray= array (
+		$columnArray = array (
 			'eventid',
 			'' . $dateType . ''
 		);
 
-		$where= null;
+		$where = null;
 		if (count($queryargs) > 0)
 		{
-			$where= ' WHERE ' . implode(' AND ', $queryargs);
+			$where = ' WHERE ' . implode(' AND ', $queryargs);
 		}
 
-		$item= DBUtil :: selectObject('crpcalendar', $where, $columnArray);
+		$item = DBUtil :: selectObject('crpcalendar', $where, $columnArray);
 
-		$dateValue= false;
-		($item[$dateType]) ? $dateValue= $item[$dateType] : $author= false;
+		$dateValue = false;
+		($item[$dateType]) ? $dateValue = $item[$dateType] : $author = false;
 
 		return $dateValue;
 	}
@@ -427,7 +421,7 @@ class crpCalendarDAO
 	 *
 	 * @return bool true if success
 	 */
-	function create($inputValues= array ())
+	function create($inputValues = array ())
 	{
 		// Argument check
 		if (!$this->validateData($inputValues))
@@ -435,22 +429,22 @@ class crpCalendarDAO
 
 		// define the permalink title if not present
 		if (!isset ($inputValues['event']['urltitle']) || empty ($inputValues['event']['urltitle']))
-			$inputValues['event']['urltitle']= DataUtil :: formatPermalink($inputValues['event']['title']);
+			$inputValues['event']['urltitle'] = DataUtil :: formatPermalink($inputValues['event']['title']);
 
 		// set some defaults
 		if (!isset ($inputValues['event']['language']))
 		{
-			$inputValues['event']['language']= '';
+			$inputValues['event']['language'] = '';
 		}
 		if (!$this->getAuth(ACCESS_EDIT))
-			$inputValues['event']['obj_status']= $inputValues['modvars']['submitted_status'];
+			$inputValues['event']['obj_status'] = $inputValues['modvars']['submitted_status'];
 
 		if (pnModAvailable('locations') && pnModGetVar('crpCalendar', 'enable_locations') && $inputValues['event']['locations'])
-			$inputValues['event']['location']= $inputValues['event']['locations'];
+			$inputValues['event']['location'] = $inputValues['event']['locations'];
 		// no more needed
 		unset ($inputValues['event']['locations']);
 
-		$object= DBUtil :: insertObject($inputValues['event'], 'crpcalendar', 'eventid');
+		$object = DBUtil :: insertObject($inputValues['event'], 'crpcalendar', 'eventid');
 		if (!$object)
 		{
 			LogUtil :: registerError(_CREATEFAILED);
@@ -459,18 +453,18 @@ class crpCalendarDAO
 
 		if (isset ($inputValues['event_image']) && ($inputValues['event_image']['error'] == UPLOAD_ERR_OK))
 		{
-			$inputValues['event_image']['eventid']= $object['eventid'];
-			$inputValues['event_image']['document_type']= 'image';
-			$id_image= $this->setFile($inputValues['event_image']);
+			$inputValues['event_image']['eventid'] = $object['eventid'];
+			$inputValues['event_image']['document_type'] = 'image';
+			$id_image = $this->setFile($inputValues['event_image']);
 			if ($id_image == '-1')
 				return false;
 		}
 
 		if (isset ($inputValues['event_document']) && ($inputValues['event_document']['error'] == UPLOAD_ERR_OK))
 		{
-			$inputValues['event_document']['eventid']= $object['eventid'];
-			$inputValues['event_document']['document_type']= 'document';
-			$id_document= $this->setFile($inputValues['event_document']);
+			$inputValues['event_document']['eventid'] = $object['eventid'];
+			$inputValues['event_document']['document_type'] = 'document';
+			$id_document = $this->setFile($inputValues['event_document']);
 			if ($id_document == '-1')
 				return false;
 		}
@@ -490,7 +484,7 @@ class crpCalendarDAO
 	 *
 	 * @return bool true if success
 	 */
-	function update($inputValues= array ())
+	function update($inputValues = array ())
 	{
 		// Argument check
 		if (!$this->validateData($inputValues))
@@ -498,16 +492,16 @@ class crpCalendarDAO
 
 		// define the permalink title if not present
 		if (!isset ($inputValues['event']['urltitle']) || empty ($inputValues['event']['urltitle']))
-			$inputValues['event']['urltitle']= DataUtil :: formatPermalink($inputValues['event']['title']);
+			$inputValues['event']['urltitle'] = DataUtil :: formatPermalink($inputValues['event']['title']);
 
 		if (pnModAvailable('locations') && pnModGetVar('crpCalendar', 'enable_locations') && $inputValues['event']['locations'])
-			$inputValues['event']['location']= $inputValues['event']['locations'];
+			$inputValues['event']['location'] = $inputValues['event']['locations'];
 		// no more needed
 		unset ($inputValues['event']['locations']);
 
 		// Check page to update exists, and get information for
 		// security check
-		$item= $this->getAdminData($inputValues['eventid']);
+		$item = $this->getAdminData($inputValues['eventid']);
 
 		if ($item == false)
 		{
@@ -518,7 +512,7 @@ class crpCalendarDAO
 		// set some defaults
 		if (!isset ($inputValues['event']['language']))
 		{
-			$inputValues['event']['language']= '';
+			$inputValues['event']['language'] = '';
 		}
 
 		if (!DBUtil :: updateObject($inputValues['event'], 'crpcalendar', '', 'eventid'))
@@ -529,18 +523,18 @@ class crpCalendarDAO
 
 		if (isset ($inputValues['event_image']) && ($inputValues['event_image']['error'] == UPLOAD_ERR_OK))
 		{
-			$inputValues['event_image']['eventid']= $inputValues['event']['eventid'];
-			$inputValues['event_image']['document_type']= 'image';
-			$id_image= $this->setFile($inputValues['event_image']);
+			$inputValues['event_image']['eventid'] = $inputValues['event']['eventid'];
+			$inputValues['event_image']['document_type'] = 'image';
+			$id_image = $this->setFile($inputValues['event_image']);
 			if ($id_image == '-1')
 				return false;
 		}
 
 		if (isset ($inputValues['event_document']) && ($inputValues['event_document']['error'] == UPLOAD_ERR_OK))
 		{
-			$inputValues['event_document']['eventid']= $inputValues['eventid'];
-			$inputValues['event_document']['document_type']= 'document';
-			$id_document= $this->setFile($inputValues['event_document']);
+			$inputValues['event_document']['eventid'] = $inputValues['eventid'];
+			$inputValues['event_document']['document_type'] = 'document';
+			$id_document = $this->setFile($inputValues['event_document']);
 			if ($id_document == '-1')
 				return false;
 		}
@@ -551,7 +545,7 @@ class crpCalendarDAO
 		));
 
 		// The item has been modified, so we clear all cached pages of this item.
-		$pnRender= new pnRender('crpCalendar');
+		$pnRender = new pnRender('crpCalendar');
 		$pnRender->clear_cache(null, $inputValues['eventid']);
 
 		return true;
@@ -564,16 +558,16 @@ class crpCalendarDAO
 	 *
 	 * @return bool true if success
 	 */
-	function cloneEvent($inputValues= array ())
+	function cloneEvent($inputValues = array ())
 	{
 		// define the permalink title if not present
 		if (!isset ($inputValues['event']['urltitle']) || empty ($inputValues['event']['urltitle']))
-			$inputValues['event']['urltitle']= DataUtil :: formatPermalink($inputValues['event']['title']);
+			$inputValues['event']['urltitle'] = DataUtil :: formatPermalink($inputValues['event']['title']);
 
 		// set some defaults
-		$inputValues['event']['obj_status']= 'P';
+		$inputValues['event']['obj_status'] = 'P';
 
-		$object= DBUtil :: insertObject($inputValues['event'], 'crpcalendar', 'eventid');
+		$object = DBUtil :: insertObject($inputValues['event'], 'crpcalendar', 'eventid');
 		if (!$object)
 		{
 			LogUtil :: registerError(_CREATEFAILED);
@@ -583,8 +577,8 @@ class crpCalendarDAO
 		// get original files, and clone them
 		if (isset ($inputValues['image']) && $inputValues['image']['id'])
 		{
-			$object['image']= $this->getFile($inputValues['eventid'], 'image', true);
-			$inputValues['event_image']= array (
+			$object['image'] = $this->getFile($inputValues['eventid'], 'image', true);
+			$inputValues['event_image'] = array (
 				'eventid' => $object['eventid'],
 				'document_type' => $object['image']['document_type'],
 				'name' => $object['image']['name'],
@@ -592,15 +586,15 @@ class crpCalendarDAO
 				'size' => $object['image']['size'],
 				'binary_data' => $object['image']['binary_data']
 			);
-			$id_image= $this->setFile($inputValues['event_image'], true);
+			$id_image = $this->setFile($inputValues['event_image'], true);
 			if ($id_image == '-1')
 				return false;
 		}
 
 		if (isset ($inputValues['document']) && $inputValues['document']['id'])
 		{
-			$object['document']= $this->getFile($inputValues['eventid'], 'document', true);
-			$inputValues['event_document']= array (
+			$object['document'] = $this->getFile($inputValues['eventid'], 'document', true);
+			$inputValues['event_document'] = array (
 				'eventid' => $object['eventid'],
 				'document_type' => $object['document']['document_type'],
 				'name' => $object['document']['name'],
@@ -608,7 +602,7 @@ class crpCalendarDAO
 				'size' => $object['document']['size'],
 				'binary_data' => $object['document']['binary_data']
 			);
-			$id_document= $this->setFile($inputValues['event_document'], true);
+			$id_document = $this->setFile($inputValues['event_document'], true);
 			if ($id_document == '-1')
 				return false;
 		}
@@ -619,7 +613,7 @@ class crpCalendarDAO
 		));
 
 		// The item has been modified, so we clear all cached pages of this item.
-		$pnRender= new pnRender('crpCalendar');
+		$pnRender = new pnRender('crpCalendar');
 		$pnRender->clear_cache(null, $inputValues['eventid']);
 
 		return true;
@@ -635,7 +629,7 @@ class crpCalendarDAO
 	 */
 	function updateStatus($eventid, $obj_status)
 	{
-		$obj= array (
+		$obj = array (
 			'eventid' => $eventid,
 			'obj_status' => $obj_status
 		);
@@ -681,51 +675,50 @@ class crpCalendarDAO
 	 *
 	 * @return array on success
 	 */
-	function getPartecipations($uid= null, $startnum= 1, $modvars= array (), $mainCat= null, $active= null, $sortOrder= 'DESC',
-															$orderby= null, $groupby= null)
+	function getPartecipations($uid = null, $startnum = 1, $modvars = array (), $mainCat = null, $active = null, $sortOrder = 'DESC', $orderby = null, $groupby = null)
 	{
-		(empty ($startnum)) ? $startnum= 1 : '';
-		(empty ($modvars['itemsperpage'])) ? $modvars['itemsperpage']= pnModGetVar('crpCalendar', 'itemsperpage') : '';
+		(empty ($startnum)) ? $startnum = 1 : '';
+		(empty ($modvars['itemsperpage'])) ? $modvars['itemsperpage'] = pnModGetVar('crpCalendar', 'itemsperpage') : '';
 
 		if (!is_numeric($startnum) || !is_numeric($modvars['itemsperpage']))
 		{
 			return LogUtil :: registerError(_MODARGSERROR);
 		}
 
-		$pntable= pnDBGetTables();
-		$crpcalendarcolumn= $pntable['crpcalendar_column'];
-		$crpcalendarAttendeeColumn= $pntable['crpcalendar_attendee_column'];
+		$pntable = pnDBGetTables();
+		$crpcalendarcolumn = $pntable['crpcalendar_column'];
+		$crpcalendarAttendeeColumn = $pntable['crpcalendar_attendee_column'];
 
 		if (!$orderby)
-			$orderby= "$pntable[crpcalendar].$crpcalendarcolumn[start_date]";
+			$orderby = "$pntable[crpcalendar].$crpcalendarcolumn[start_date]";
 		else
-			$orderby= "$pntable[crpcalendar].$crpcalendarcolumn[$orderby]";
+			$orderby = "$pntable[crpcalendar].$crpcalendarcolumn[$orderby]";
 
 		if ($groupby)
-			$groupby= " GROUP BY $pntable[crpcalendar].$crpcalendarcolumn[$groupby] ";
+			$groupby = " GROUP BY $pntable[crpcalendar].$crpcalendarcolumn[$groupby] ";
 
-		$queryargs= array ();
+		$queryargs = array ();
 
 		if ($active)
 		{
-			$queryargs[]= "($pntable[crpcalendar].$crpcalendarcolumn[obj_status]='" . DataUtil :: formatForStore($active) . "')";
+			$queryargs[] = "($pntable[crpcalendar].$crpcalendarcolumn[obj_status]='" . DataUtil :: formatForStore($active) . "')";
 		}
 
 		if (pnModGetVar('crpCalendar', 'enable_partecipation') && $uid)
 		{
-			$queryargs[]= "($pntable[crpcalendar_attendee].$crpcalendarAttendeeColumn[uid]='" . DataUtil :: formatForStore($uid) . "')";
+			$queryargs[] = "($pntable[crpcalendar_attendee].$crpcalendarAttendeeColumn[uid]='" . DataUtil :: formatForStore($uid) . "')";
 		}
 
-		$where= null;
+		$where = null;
 		if (count($queryargs) > 0)
 		{
-			$where= ' WHERE ' . implode(' AND ', $queryargs);
+			$where = ' WHERE ' . implode(' AND ', $queryargs);
 		}
 
-		$orderby= "$groupby ORDER BY $orderby $sortOrder";
+		$orderby = "$groupby ORDER BY $orderby $sortOrder";
 
 		// get the objects from the db
-		$sqlStatement= "SELECT $pntable[crpcalendar].$crpcalendarcolumn[eventid] as eventid, " .
+		$sqlStatement = "SELECT $pntable[crpcalendar].$crpcalendarcolumn[eventid] as eventid, " .
 		"$pntable[crpcalendar].$crpcalendarcolumn[title] as title, " .
 		"$pntable[crpcalendar].$crpcalendarcolumn[urltitle] as urltitle, " .
 		"$pntable[crpcalendar].$crpcalendarcolumn[location] as location, " .
@@ -743,9 +736,9 @@ class crpCalendarDAO
 		"$where $orderby";
 
 		// get the objects from the db
-		$res= DBUtil :: executeSQL($sqlStatement, $startnum -1, $modvars['itemsperpage'], true, true);
+		$res = DBUtil :: executeSQL($sqlStatement, $startnum -1, $modvars['itemsperpage'], true, true);
 
-		$objArray= DBUtil :: marshallObjects($res, array (
+		$objArray = DBUtil :: marshallObjects($res, array (
 			'eventid',
 			'title',
 			'urltitle',
@@ -782,7 +775,7 @@ class crpCalendarDAO
 		if ($modvars['crpcalendar_userlist_image'])
 		{
 			foreach ($objArray as $kObj => $vObj)
-				$objArray[$kObj]['image']= $this->getFile($vObj['eventid'], 'image');
+				$objArray[$kObj]['image'] = $this->getFile($vObj['eventid'], 'image');
 		}
 
 		// Return the items
@@ -803,50 +796,49 @@ class crpCalendarDAO
 	 *
 	 * @return array on success
 	 */
-	function getEventPartecipations($eventid= null, $startnum= 1, $modvars= array (), $mainCat= null, $active= null,
-																	$sortOrder= 'DESC', $orderby= null, $groupby= null)
+	function getEventPartecipations($eventid = null, $startnum = 1, $modvars = array (), $mainCat = null, $active = null, $sortOrder = 'DESC', $orderby = null, $groupby = null)
 	{
 
-		$pntable= pnDBGetTables();
-		$crpcalendarcolumn= $pntable['crpcalendar_column'];
-		$crpcalendarAttendeeColumn= $pntable['crpcalendar_attendee_column'];
+		$pntable = pnDBGetTables();
+		$crpcalendarcolumn = $pntable['crpcalendar_column'];
+		$crpcalendarAttendeeColumn = $pntable['crpcalendar_attendee_column'];
 
 		if (!$orderby)
-			$orderby= "counter";
+			$orderby = "counter";
 		else
-			$orderby= "$pntable[crpcalendar].$crpcalendarcolumn[$orderby]";
+			$orderby = "$pntable[crpcalendar].$crpcalendarcolumn[$orderby]";
 
 		if ($groupby)
-			$groupby= " GROUP BY $pntable[crpcalendar_attendee].$crpcalendarAttendeeColumn[$groupby] ";
+			$groupby = " GROUP BY $pntable[crpcalendar_attendee].$crpcalendarAttendeeColumn[$groupby] ";
 
 		if ($active)
 		{
-			$queryargs[]= "($pntable[crpcalendar].$crpcalendarcolumn[obj_status]='" . DataUtil :: formatForStore($active) . "')";
+			$queryargs[] = "($pntable[crpcalendar].$crpcalendarcolumn[obj_status]='" . DataUtil :: formatForStore($active) . "')";
 		}
 
 		if (pnModGetVar('crpCalendar', 'enable_partecipation') && $eventid)
 		{
-			$queryargs[]= "($pntable[crpcalendar].$crpcalendarcolumn[eventid]='" . DataUtil :: formatForStore($eventid) . "')";
+			$queryargs[] = "($pntable[crpcalendar].$crpcalendarcolumn[eventid]='" . DataUtil :: formatForStore($eventid) . "')";
 		}
 
-		$where= null;
+		$where = null;
 		if (count($queryargs) > 0)
 		{
-			$where= ' WHERE ' . implode(' AND ', $queryargs);
+			$where = ' WHERE ' . implode(' AND ', $queryargs);
 		}
 
-		$orderby= "$groupby ORDER BY $orderby $sortOrder";
+		$orderby = "$groupby ORDER BY $orderby $sortOrder";
 
-		$sqlStatement= "SELECT $pntable[crpcalendar_attendee].$crpcalendarAttendeeColumn[uid] as uid, " .
+		$sqlStatement = "SELECT $pntable[crpcalendar_attendee].$crpcalendarAttendeeColumn[uid] as uid, " .
 		"COUNT($pntable[crpcalendar_attendee].$crpcalendarAttendeeColumn[uid]) as counter " .
 		"FROM $pntable[crpcalendar_attendee] " .
 		"LEFT JOIN $pntable[crpcalendar] ON ($pntable[crpcalendar].$crpcalendarcolumn[eventid]=$pntable[crpcalendar_attendee].$crpcalendarAttendeeColumn[eventid]) " .
 		"$where $orderby";
 
 		// get the objects from the db
-		$res= DBUtil :: executeSQL($sqlStatement, $startnum -1, $modvars['itemsperpage'], true, true);
+		$res = DBUtil :: executeSQL($sqlStatement, $startnum -1, $modvars['itemsperpage'], true, true);
 
-		$objArray= DBUtil :: marshallObjects($res, array (
+		$objArray = DBUtil :: marshallObjects($res, array (
 			'uid'
 		), true);
 
@@ -880,11 +872,11 @@ class crpCalendarDAO
 	 *
 	 * @return bool true on success
 	 */
-	function addPartecipation($uid= null, $eventid= null)
+	function addPartecipation($uid = null, $eventid = null)
 	{
 		if (isset ($eventid) && isset ($uid))
 		{
-			$partecipation= array (
+			$partecipation = array (
 				'uid' => $uid,
 				'eventid' => $eventid
 			);
@@ -903,27 +895,27 @@ class crpCalendarDAO
 	 *
 	 * @return bool true on success
 	 */
-	function deletePartecipation($uid= null, $eventid= null, $clean= null)
+	function deletePartecipation($uid = null, $eventid = null, $clean = null)
 	{
-		$pntable= pnDBGetTables();
-		$crpcalendarcolumn= $pntable['crpcalendar_attendee_column'];
+		$pntable = pnDBGetTables();
+		$crpcalendarcolumn = $pntable['crpcalendar_attendee_column'];
 
 		if (isset ($eventid) && isset ($uid))
 		{
-			$where= " WHERE $crpcalendarcolumn[uid]='" . DataUtil :: formatForStore($uid) . "' " .
+			$where = " WHERE $crpcalendarcolumn[uid]='" . DataUtil :: formatForStore($uid) . "' " .
 			"AND $crpcalendarcolumn[eventid]='" . DataUtil :: formatForStore($eventid) . "' ";
 
 			return DBUtil :: deleteObject(null, 'crpcalendar_attendee', $where);
 		}
 		elseif (isset ($clean) && isset ($eventid))
 		{
-			$where= " WHERE $crpcalendarcolumn[eventid]='" . DataUtil :: formatForStore($eventid) . "' ";
+			$where = " WHERE $crpcalendarcolumn[eventid]='" . DataUtil :: formatForStore($eventid) . "' ";
 
 			return DBUtil :: deleteObject(null, 'crpcalendar_attendee', $where);
 		}
 		elseif (isset ($clean) && isset ($uid))
 		{
-			$where= " WHERE $crpcalendarcolumn[uid]='" . DataUtil :: formatForStore($uid) . "' ";
+			$where = " WHERE $crpcalendarcolumn[uid]='" . DataUtil :: formatForStore($uid) . "' ";
 
 			return DBUtil :: deleteObject(null, 'crpcalendar_attendee', $where);
 		}
@@ -941,29 +933,29 @@ class crpCalendarDAO
 	 *
 	 * @return int on success
 	 */
-	function countAttendeeItems($category= null, $active= null, $uid= null, $eventid= null)
+	function countAttendeeItems($category = null, $active = null, $uid = null, $eventid = null)
 	{
-		$pntable= pnDBGetTables();
-		$crpcalendarcolumn= $pntable['crpcalendar_column'];
-		$crpcalendarAttendeeColumn= $pntable['crpcalendar_attendee_column'];
+		$pntable = pnDBGetTables();
+		$crpcalendarcolumn = $pntable['crpcalendar_column'];
+		$crpcalendarAttendeeColumn = $pntable['crpcalendar_attendee_column'];
 
-		$where= '';
+		$where = '';
 
-		$catFilter= array ();
+		$catFilter = array ();
 		if (is_array($category))
-			$catFilter= $category;
+			$catFilter = $category;
 		else
 			if ($category)
 			{
-				$catFilter['Main']= $category;
-				$catFilter['__META__']['module']= 'crpCalendar';
+				$catFilter['Main'] = $category;
+				$catFilter['__META__']['module'] = 'crpCalendar';
 			}
 
 		if ($active)
-			$where= " WHERE $crpcalendarcolumn[obj_status]='" . DataUtil :: formatForStore($active) . "'";
+			$where = " WHERE $crpcalendarcolumn[obj_status]='" . DataUtil :: formatForStore($active) . "'";
 
 		// define the permission filter to apply
-		$permFilter= array (
+		$permFilter = array (
 			array (
 				'realm' => 0,
 				'component_left' => 'crpCalendar',
@@ -975,7 +967,7 @@ class crpCalendarDAO
 			)
 		);
 
-		$joinInfo[]= array (
+		$joinInfo[] = array (
 			'join_table' => 'crpcalendar',
 			'join_field' => 'obj_status',
 			'object_field_name' => 'obj_status',
@@ -983,7 +975,7 @@ class crpCalendarDAO
 			'compare_field_join' => 'eventid'
 		);
 
-		$columnArray= array (
+		$columnArray = array (
 			'uid'
 		);
 
@@ -1005,44 +997,45 @@ class crpCalendarDAO
 	 *
 	 * @return int on success
 	 */
-	function countItems($category= null, $active= null, $uid= null, $eventid= false, $typeList=null)
+	function countItems($category = null, $active = null, $uid = null, $eventid = false, $typeList = null)
 	{
-		$pntable= pnDBGetTables();
-		$crpcalendarcolumn= $pntable['crpcalendar_column'];
+		$pntable = pnDBGetTables();
+		$crpcalendarcolumn = $pntable['crpcalendar_column'];
 
-		$where= '';
-		$nowDate = DateUtil::getDatetime();
+		$where = '';
+		$nowDate = DateUtil :: getDatetime();
 
-		$catFilter= array ();
+		$catFilter = array ();
 		if (is_array($category))
-			$catFilter= $category;
+			$catFilter = $category;
 		else
 			if ($category)
 			{
-				$catFilter['Main']= $category;
-				$catFilter['__META__']['module']= 'crpCalendar';
+				$catFilter['Main'] = $category;
+				$catFilter['__META__']['module'] = 'crpCalendar';
 			}
 
 		switch ($typeList)
 		{
-			case "upcoming":
-				$queryargs[]= "($crpcalendarcolumn[start_date] > '" . DataUtil :: formatForStore($nowDate) . "')";
+			case "upcoming" :
+				$queryargs[] = "($crpcalendarcolumn[start_date] > '" . DataUtil :: formatForStore($nowDate) . "')";
 				break;
-			case "archive":
-				$queryargs[]= "($crpcalendarcolumn[start_date] <= '" . DataUtil :: formatForStore($nowDate) . "')";
+			case "archive" :
+				$queryargs[] = "($crpcalendarcolumn[start_date] <= '" . DataUtil :: formatForStore($nowDate) . "')";
 				break;
-			default: break;
+			default :
+				break;
 		}
 
 		if ($active)
 		{
-			$queryargs[]= "($crpcalendarcolumn[obj_status]='" . DataUtil :: formatForStore($active) . "')";
+			$queryargs[] = "($crpcalendarcolumn[obj_status]='" . DataUtil :: formatForStore($active) . "')";
 		}
 
-		$where= null;
+		$where = null;
 		if (count($queryargs) > 0)
 		{
-			$where= ' WHERE ' . implode(' AND ', $queryargs);
+			$where = ' WHERE ' . implode(' AND ', $queryargs);
 		}
 
 		if ($uid)
@@ -1059,14 +1052,14 @@ class crpCalendarDAO
 	 *
 	 * @return bool true on succes
 	 */
-	function removeEvent($eventid= null)
+	function removeEvent($eventid = null)
 	{
 		// Argument check
 		if (!$eventid)
 			return LogUtil :: registerError(_MODARGSERROR);
 
 		// Check item exists before attempting deletion
-		$item= $this->getAdminData($eventid);
+		$item = $this->getAdminData($eventid);
 
 		if ($item == false)
 			return LogUtil :: registerError(_NOSUCHITEM);
@@ -1094,41 +1087,41 @@ class crpCalendarDAO
 	 *
 	 * @return int file identifier
 	 */
-	function setFile($data= array (), $fromDB= false)
+	function setFile($data = array (), $fromDB = false)
 	{
-		$result= -1;
+		$result = -1;
 
 		if (!$data['error'])
 		{
 			if (!$fromDB)
 			{
-				$fd= fopen($data['tmp_name'], "r");
-				$file_content= fread($fd, filesize($data['tmp_name']));
+				$fd = fopen($data['tmp_name'], "r");
+				$file_content = fread($fd, filesize($data['tmp_name']));
 				fclose($fd);
 			}
 			else
-				$file_content= $data['binary_data'];
+				$file_content = $data['binary_data'];
 
-			$item= $this->getFile($data['eventid'], $data['document_type']);
+			$item = $this->getFile($data['eventid'], $data['document_type']);
 
 			// no empty spaces in filename
-			$document['name']= str_replace(" ", "_", $data['name']);
-			$document['content_type']= $data['type'];
-			$document['size']= $data['size'];
-			$document['document_type']= $data['document_type'];
-			$document['eventid']= $data['eventid'];
+			$document['name'] = str_replace(" ", "_", $data['name']);
+			$document['content_type'] = $data['type'];
+			$document['size'] = $data['size'];
+			$document['document_type'] = $data['document_type'];
+			$document['eventid'] = $data['eventid'];
 			// load binary
-			$document['binary_data']= $file_content;
+			$document['binary_data'] = $file_content;
 
 			if ($item)
 			{
-				$document['id']= $item['id'];
+				$document['id'] = $item['id'];
 				if (!DBUtil :: updateObject($document, 'crpcalendar_files', '', 'id'))
 				{
 					LogUtil :: registerError(_UPDATEFAILED);
 					return false;
 				}
-				$result= 0;
+				$result = 0;
 			}
 			elseif (empty ($item))
 			{
@@ -1137,7 +1130,7 @@ class crpCalendarDAO
 					LogUtil :: registerError(_CREATEFAILED);
 					return false;
 				}
-				$result= DBUtil :: getInsertID('crpcalendar_files', 'id');
+				$result = DBUtil :: getInsertID('crpcalendar_files', 'id');
 			}
 			else
 				return $result;
@@ -1155,21 +1148,21 @@ class crpCalendarDAO
 	 *
 	 * @return array file values
 	 */
-	function getFile($eventid, $file_type, $load_binary= false)
+	function getFile($eventid, $file_type, $load_binary = false)
 	{
-		$pntable= pnDBGetTables();
-		$crpcalendarcolumn= $pntable['crpcalendar_files_column'];
+		$pntable = pnDBGetTables();
+		$crpcalendarcolumn = $pntable['crpcalendar_files_column'];
 
-		$queryargs[]= "($crpcalendarcolumn[eventid] = '" . DataUtil :: formatForStore($eventid) . "' " .
+		$queryargs[] = "($crpcalendarcolumn[eventid] = '" . DataUtil :: formatForStore($eventid) . "' " .
 		"AND $crpcalendarcolumn[document_type] = '" . DataUtil :: formatForStore($file_type) . "')";
 
-		$where= null;
+		$where = null;
 		if (count($queryargs) > 0)
 		{
-			$where= ' WHERE ' . implode(' AND ', $queryargs);
+			$where = ' WHERE ' . implode(' AND ', $queryargs);
 		}
 
-		$columnArray= array (
+		$columnArray = array (
 			'id',
 			'eventid',
 			'document_type',
@@ -1180,7 +1173,7 @@ class crpCalendarDAO
 		if ($load_binary)
 			array_push($columnArray, "binary_data");
 
-		$file= DBUtil :: selectObject('crpcalendar_files', $where, $columnArray);
+		$file = DBUtil :: selectObject('crpcalendar_files', $where, $columnArray);
 
 		return $file;
 	}
@@ -1194,21 +1187,21 @@ class crpCalendarDAO
 	 */
 	function getImage()
 	{
-		$eventid= pnVarCleanFromInput('eventid');
+		$eventid = pnVarCleanFromInput('eventid');
 
-		$pntable= pnDBGetTables();
-		$crpcalendarcolumn= $pntable['crpcalendar_files_column'];
+		$pntable = pnDBGetTables();
+		$crpcalendarcolumn = $pntable['crpcalendar_files_column'];
 
-		$queryargs[]= "($crpcalendarcolumn[eventid] = '" . DataUtil :: formatForStore($eventid) . "' " .
+		$queryargs[] = "($crpcalendarcolumn[eventid] = '" . DataUtil :: formatForStore($eventid) . "' " .
 		"AND $crpcalendarcolumn[document_type] = 'image')";
 
-		$where= null;
+		$where = null;
 		if (count($queryargs) > 0)
 		{
-			$where= ' WHERE ' . implode(' AND ', $queryargs);
+			$where = ' WHERE ' . implode(' AND ', $queryargs);
 		}
 
-		$columnArray= array (
+		$columnArray = array (
 			'id',
 			'eventid',
 			'document_type',
@@ -1218,18 +1211,18 @@ class crpCalendarDAO
 			'binary_data'
 		);
 
-		$file= DBUtil :: selectObject('crpcalendar_files', $where, $columnArray);
-		$modifiedDate= $this->getEventDate($eventid, 'lu_date');
+		$file = DBUtil :: selectObject('crpcalendar_files', $where, $columnArray);
+		$modifiedDate = $this->getEventDate($eventid, 'lu_date');
 
 		// we need a timestamp
 		$server_etag = DateUtil :: makeTimestamp($modifiedDate);
-		$server_date = gmdate('D, d M Y H:i:s', $server_etag). " GMT";
+		$server_date = gmdate('D, d M Y H:i:s', $server_etag) . " GMT";
 
 		// Check cached versus modified date
 		$client_etag = $_SERVER['HTTP_IF_NONE_MATCH'];
 		$client_date = $_SERVER['HTTP_IF_MODIFIED_SINCE'];
 
-		if(($client_etag == $server_etag) && (!$client_date || ($client_date==$server_date)))
+		if (($client_etag == $server_etag) && (!$client_date || ($client_date == $server_date)))
 		{
 			header("HTTP/1.1 304 Not Modified");
 			header("ETag: $server_etag");
@@ -1237,11 +1230,11 @@ class crpCalendarDAO
 		}
 		else
 		{
-			header("Expires: ". gmdate('D, d M Y H:i:s', time() + 24 * 3600). " GMT");
+			header("Expires: " . gmdate('D, d M Y H:i:s', time() + 24 * 3600) . " GMT");
 			header('Pragma: cache');
 			header('Cache-Control: public, must-revalidate');
 			header("ETag: $server_etag");
-			header("Last-Modified: ". gmdate('D, d M Y H:i:s', $server_etag). " GMT");
+			header("Last-Modified: " . gmdate('D, d M Y H:i:s', $server_etag) . " GMT");
 			header("Content-Type: {$file['content_type']}");
 			header("Content-Disposition: inline; filename={$file['name']}");
 		}
@@ -1259,13 +1252,13 @@ class crpCalendarDAO
 	 *
 	 * @return bool true on success
 	 */
-	function deleteFile($file_type= null, $eventid= null)
+	function deleteFile($file_type = null, $eventid = null)
 	{
 		// Argument check
 		if (!$eventid)
 			return LogUtil :: registerError(_MODARGSERROR);
 
-		$item= $this->getFile($eventid, $file_type);
+		$item = $this->getFile($eventid, $file_type);
 
 		if ($item && !DBUtil :: deleteObjectByID('crpcalendar_files', $item['id'], 'id'))
 			return LogUtil :: registerError(_DELETEFAILED);
@@ -1280,9 +1273,9 @@ class crpCalendarDAO
 	 *
 	 * @return int count
 	 */
-	function existFile($eventid= null)
+	function existFile($eventid = null)
 	{
-		$count= DBUtil :: selectObjectCountByID('crpcalendar_files', $eventid, 'id', false);
+		$count = DBUtil :: selectObjectCountByID('crpcalendar_files', $eventid, 'id', false);
 
 		return $count > 0;
 	}
@@ -1295,15 +1288,15 @@ class crpCalendarDAO
 	 *
 	 * @return int count
 	 */
-	function existPartecipation($uid= null, $eventid= null)
+	function existPartecipation($uid = null, $eventid = null)
 	{
-		$pntable= pnDBGetTables();
-		$crpcalendarcolumn= $pntable['crpcalendar_attendee_column'];
+		$pntable = pnDBGetTables();
+		$crpcalendarcolumn = $pntable['crpcalendar_attendee_column'];
 
-		$where= "($crpcalendarcolumn[eventid] = '" . DataUtil :: formatForStore($eventid) . "' " .
+		$where = "($crpcalendarcolumn[eventid] = '" . DataUtil :: formatForStore($eventid) . "' " .
 		"AND $crpcalendarcolumn[uid] = '" . DataUtil :: formatForStore($uid) . "')";
 
-		$count= DBUtil :: selectObjectCount('crpcalendar_attendee', $where);
+		$count = DBUtil :: selectObjectCount('crpcalendar_attendee', $where);
 
 		return $count > 0;
 	}
@@ -1317,16 +1310,16 @@ class crpCalendarDAO
 	 *
 	 * @return int count
 	 */
-	function existEvent($title= null, $location= null, $start_date= null)
+	function existEvent($title = null, $location = null, $start_date = null)
 	{
-		$pntable= pnDBGetTables();
-		$crpcalendarcolumn= $pntable['crpcalendar_column'];
+		$pntable = pnDBGetTables();
+		$crpcalendarcolumn = $pntable['crpcalendar_column'];
 
-		$where= "($crpcalendarcolumn[title] = '" . DataUtil :: formatForStore($title) . "' " .
-		"AND $crpcalendarcolumn[location] = '" . DataUtil :: formatForStore($location) . "' ".
+		$where = "($crpcalendarcolumn[title] = '" . DataUtil :: formatForStore($title) . "' " .
+		"AND $crpcalendarcolumn[location] = '" . DataUtil :: formatForStore($location) . "' " .
 		"AND $crpcalendarcolumn[start_date] = '" . DataUtil :: formatForStore($start_date) . "')";
 
-		$count= DBUtil :: selectObjectCount('crpcalendar', $where);
+		$count = DBUtil :: selectObjectCount('crpcalendar', $where);
 
 		return $count > 0;
 	}
@@ -1340,7 +1333,7 @@ class crpCalendarDAO
 	 */
 	function validateData(& $data)
 	{
-		$validateOK= false;
+		$validateOK = false;
 
 		if (!$data['event']['title'] || (!$data['event']['event_text'] && pnModGetVar('crpCalendar', 'mandatory_description')))
 		{
@@ -1394,7 +1387,7 @@ class crpCalendarDAO
 		*/
 		else
 		{
-			$validateOK= true;
+			$validateOK = true;
 		}
 
 		return $validateOK;
@@ -1409,16 +1402,16 @@ class crpCalendarDAO
 	 *
 	 * @return int id of created object
 	 * */
-	function createFromIcs($data=array(),$key=null, $id_category=null)
+	function createFromIcs($data = array (), $key = null, $id_category = null)
 	{
 
-		$data['start_date'] = $data['start_date']." ".$data['start_time'];
-		$data['end_date'] = $data['end_date']." ".$data['end_time'];
-		($data['day_event'])?$data['end_date']=$data['start_date']:'';
-		($data['start_date']!=$data['end_date'])?$data['day_event']='0':$data['day_event']='1';
+		$data['start_date'] = $data['start_date'] . " " . $data['start_time'];
+		$data['end_date'] = $data['end_date'] . " " . $data['end_time'];
+		($data['day_event']) ? $data['end_date'] = $data['start_date'] : '';
+		($data['start_date'] != $data['end_date']) ? $data['day_event'] = '0' : $data['day_event'] = '1';
 		$data['__CATEGORIES__']['Main'] = $id_category;
 
-		$object= DBUtil :: insertObject($data, 'crpcalendar', 'eventid');
+		$object = DBUtil :: insertObject($data, 'crpcalendar', 'eventid');
 		if (!$object)
 		{
 			LogUtil :: registerError(_CREATEFAILED);
@@ -1441,26 +1434,26 @@ class crpCalendarDAO
 	 *
 	 * @return bool true on succes
 	 */
-	function removePurge($endDay=null,$endMonth=null,$endYear=null)
+	function removePurge($endDay = null, $endMonth = null, $endYear = null)
 	{
 		// Argument check
 		if (!$endDay || !$endMonth || !$endYear)
 			return LogUtil :: registerError(_MODARGSERROR);
 
-		$pntable= pnDBGetTables();
-		$crpcalendarcolumn= $pntable['crpcalendar_column'];
-		$queryargs= array ();
+		$pntable = pnDBGetTables();
+		$crpcalendarcolumn = $pntable['crpcalendar_column'];
+		$queryargs = array ();
 
-		$queryargs[]= "($crpcalendarcolumn[start_date] <= '$endYear-$endMonth-$endDay')";
+		$queryargs[] = "($crpcalendarcolumn[start_date] <= '$endYear-$endMonth-$endDay')";
 
-		$where= null;
+		$where = null;
 		if (count($queryargs) > 0)
 		{
-			$where= ' WHERE ' . implode(' AND ', $queryargs);
+			$where = ' WHERE ' . implode(' AND ', $queryargs);
 		}
 
 		// define the permission filter to apply
-		$permFilter= array (
+		$permFilter = array (
 			array (
 				'realm' => 0,
 				'component_left' => 'crpCalendar',
@@ -1472,14 +1465,15 @@ class crpCalendarDAO
 			)
 		);
 
-		$orderby= "ORDER BY $crpcalendarcolumn[start_date] $sortOrder";
+		$orderby = "ORDER BY $crpcalendarcolumn[start_date] $sortOrder";
 
-		$columnArray= array (
+		$columnArray = array (
 			'eventid',
+
 		);
 
 		// get the objects from the db
-		$objArray= DBUtil :: selectObjectArray('crpcalendar', $where, $orderby, -1, -1, '', $permFilter, null, $columnArray);
+		$objArray = DBUtil :: selectObjectArray('crpcalendar', $where, $orderby, -1, -1, '', $permFilter, null, $columnArray);
 
 		// Check for an error with the database code, and if so set an appropriate
 		// error message and return
@@ -1521,10 +1515,9 @@ class crpCalendarDAO
 		{
 			pnModDBInfoLoad('locations');
 
-			$orderby= "ORDER BY name ASC";
+			$orderby = "ORDER BY name ASC";
 
-			$objArray= DBUtil :: selectObjectArray('locations_location', null, 'name', -1, -1,
-																							'', array(), array(), $columnArray= array (
+			$objArray = DBUtil :: selectObjectArray('locations_location', null, 'name', -1, -1, '', array (), array (), $columnArray = array (
 				'locationid',
 				'name'
 			));
@@ -1541,4 +1534,3 @@ class crpCalendarDAO
 		return $locations;
 	}
 }
-?>
