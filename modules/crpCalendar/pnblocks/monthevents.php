@@ -1,9 +1,10 @@
 <?php
+
 /**
  * crpCalendar
  *
- * @copyright (c) 2007, Daniele Conca
- * @link http://code.zikula.org/projects/crpcalendar Support and documentation
+ * @copyright (c) 2007,2009 Daniele Conca
+ * @link http://code.zikula.org/crpcalendar Support and documentation
  * @author Daniele Conca <conca.daniele@gmail.com>
  * @license GNU/GPL - v.2.1
  * @package crpCalendar
@@ -17,8 +18,8 @@ Loader :: includeOnce('modules/crpCalendar/pnclass/crpCalendar.php');
  */
 function crpCalendar_montheventsblock_init()
 {
-    // Security
-    pnSecAddSchema('Montheventsblock::', 'Block title::');
+	// Security
+	pnSecAddSchema('Montheventsblock::', 'Block title::');
 }
 
 /**
@@ -27,13 +28,15 @@ function crpCalendar_montheventsblock_init()
  */
 function crpCalendar_montheventsblock_info()
 {
-  return array('text_type'       => 'crpEvents',
-               'module'          => 'crpCalendar',
-               'text_type_long'  => 'Month block',
-               'allow_multiple'  => true,
-               'form_content'    => false,
-               'form_refresh'    => false,
-               'show_preview'    => true);
+	return array (
+		'text_type' => 'crpEvents',
+		'module' => 'crpCalendar',
+		'text_type_long' => 'Month block',
+		'allow_multiple' => true,
+		'form_content' => false,
+		'form_refresh' => false,
+		'show_preview' => true
+	);
 }
 
 /**
@@ -44,22 +47,22 @@ function crpCalendar_montheventsblock_info()
  */
 function crpCalendar_montheventsblock_display($blockinfo)
 {
-  // security check
-  if (!SecurityUtil::checkPermission( 'Montheventsblock::', "$blockinfo[title]::", ACCESS_READ))
-    return;
+	// security check
+	if (!SecurityUtil :: checkPermission('Montheventsblock::', "$blockinfo[title]::", ACCESS_READ))
+		return;
 
-	if(!pnModAvailable('crpCalendar'))
+	if (!pnModAvailable('crpCalendar'))
 		return;
 
 	$crpcalendar = new crpCalendar();
 
-  // get the current language
-  $currentlang = pnUserGetLang();
+	// get the current language
+	$currentlang = pnUserGetLang();
 
-  // Break out options from our content field
-  $vars = pnBlockVarsFromContent($blockinfo['content']);
+	// Break out options from our content field
+	$vars = pnBlockVarsFromContent($blockinfo['content']);
 
-  $date = $crpcalendar->timeToDMY(time());
+	$date = $crpcalendar->timeToDMY(time());
 
 	$days = DateUtil :: getMonthDates($date['m'], $date['y']);
 	$daysexpanded = $days;
@@ -73,29 +76,29 @@ function crpCalendar_montheventsblock_display($blockinfo)
 	// reset page limit for daylist
 	$apiargs['modvars']['itemsperpage'] = '-1';
 
-  // call the api
-  $items = pnModAPIFunc('crpCalendar', 'user', 'getall', $apiargs);
+	// call the api
+	$items = pnModAPIFunc('crpCalendar', 'user', 'getall', $apiargs);
 
-  // expand days array
+	// expand days array
 	$crpcalendar->expandFirstDOW(DateUtil :: parseUIDateTime($monthFirstDay), $daysexpanded);
 	$crpcalendar->expandLastDOW(DateUtil :: parseUIDateTime($monthLastDay), $daysexpanded);
 
-  // create the output object
-  $pnRender = pnRender::getInstance('crpCalendar',false);
+	// create the output object
+	$pnRender = pnRender :: getInstance('crpCalendar', false);
 
 	$pnRender->assign('displayweek', $vars['displayweek']);
 	$pnRender->assign('displayevents', $vars['displayevents']);
-  $pnRender->assign('events', $items);
-  $pnRender->assign('days', $days);
-  $pnRender->assign('daysexpanded', $daysexpanded);
-  $pnRender->assign('date', $date);
-  $pnRender->assign('t', time());
-  $pnRender->assign('todayEv', DateUtil :: getDatetime(time()));
-  $pnRender->assign(pnModGetVar('crpCalendar'));
-  $pnRender->assign('day_of_week_short', $crpcalendar->ui->day_of_week_short);
+	$pnRender->assign('events', $items);
+	$pnRender->assign('days', $days);
+	$pnRender->assign('daysexpanded', $daysexpanded);
+	$pnRender->assign('date', $date);
+	$pnRender->assign('t', time());
+	$pnRender->assign('todayEv', DateUtil :: getDatetime(time()));
+	$pnRender->assign(pnModGetVar('crpCalendar'));
+	$pnRender->assign('day_of_week_short', $crpcalendar->ui->day_of_week_short);
 
-  $blockinfo['content'] = $pnRender->fetch('blocks/crpcalendar_block_month.htm');
-  return pnBlockThemeBlock($blockinfo);
+	$blockinfo['content'] = $pnRender->fetch('blocks/crpcalendar_block_month.htm');
+	return pnBlockThemeBlock($blockinfo);
 }
 
 /**
@@ -106,24 +109,24 @@ function crpCalendar_montheventsblock_display($blockinfo)
  */
 function crpCalendar_montheventsblock_modify($blockinfo)
 {
-  // Break out options from our content field
-  $vars = pnBlockVarsFromContent($blockinfo['content']);
+	// Break out options from our content field
+	$vars = pnBlockVarsFromContent($blockinfo['content']);
 
-  // Defaults
-  if (empty($vars['displayweek']))
-    $vars['displayweek'] = null;
+	// Defaults
+	if (empty ($vars['displayweek']))
+		$vars['displayweek'] = null;
 
-  if (!isset($vars['displayevents']))
-      $vars['displayevents'] = null;
+	if (!isset ($vars['displayevents']))
+		$vars['displayevents'] = null;
 
-  // Create output object
-  $pnRender = pnRender::getInstance('crpCalendar', false);
+	// Create output object
+	$pnRender = pnRender :: getInstance('crpCalendar', false);
 
-  // assign the block vars
-  $pnRender->assign($vars);
+	// assign the block vars
+	$pnRender->assign($vars);
 
-  // Return the output that has been generated by this function
-  return $pnRender->fetch('blocks/crpcalendar_block_month_modify.htm');
+	// Return the output that has been generated by this function
+	return $pnRender->fetch('blocks/crpcalendar_block_month_modify.htm');
 }
 
 /**
@@ -134,21 +137,19 @@ function crpCalendar_montheventsblock_modify($blockinfo)
  */
 function crpCalendar_montheventsblock_update($blockinfo)
 {
-  // Get current content
-  $vars = pnBlockVarsFromContent($blockinfo['content']);
+	// Get current content
+	$vars = pnBlockVarsFromContent($blockinfo['content']);
 
-  // alter the corresponding variable
-  $vars['displayweek']       = (bool)FormUtil::getPassedValue('displayweek', null, 'POST');
-  $vars['displayevents']    = (bool)FormUtil::getPassedValue('displayevents', null, 'POST');
+	// alter the corresponding variable
+	$vars['displayweek'] = (bool) FormUtil :: getPassedValue('displayweek', null, 'POST');
+	$vars['displayevents'] = (bool) FormUtil :: getPassedValue('displayevents', null, 'POST');
 
-  // write back the new contents
-  $blockinfo['content'] = pnBlockVarsToContent($vars);
+	// write back the new contents
+	$blockinfo['content'] = pnBlockVarsToContent($vars);
 
-  // clear the block cache
-  $pnRender = pnRender::getInstance('crpCalendar');
-  $pnRender->clear_cache('blocks/crpcalendar_block_month.htm');
+	// clear the block cache
+	$pnRender = pnRender :: getInstance('crpCalendar');
+	$pnRender->clear_cache('blocks/crpcalendar_block_month.htm');
 
-  return $blockinfo;
+	return $blockinfo;
 }
-
-?>
