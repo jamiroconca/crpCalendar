@@ -3,9 +3,9 @@
 /**
  * crpCalendar
  *
- * @copyright (c) 2007,2008 Daniele Conca
+ * @copyright (c) 2007,2009 Daniele Conca
  * @link http://code.zikula.org/crpcalendar Support and documentation
- * @author Daniele Conca <conca dot daniele at gmail dot com>
+ * @author Daniele Conca <conca.daniele@gmail.com>
  * @license GNU/GPL - v.2.1
  * @package crpCalendar
  */
@@ -28,6 +28,8 @@ class crpCalendar
 		$this->dao = new crpCalendarDAO();
 
 		(function_exists('gd_info')) ? $this->gd = gd_info() : $this->gd = array ();
+
+		$this->modvars = pnModGetVar('crpCalendar');
 	}
 
 	/**
@@ -562,7 +564,7 @@ class crpCalendar
 		$item = $this->dao->getAdminData($eventid);
 
 		// get all module vars
-		$modvars = pnModGetVar('crpCalendar');
+		$modvars = $this->modvars;
 
 		// The return value of the function is checked here
 		if ($item == false || ($item['obj_status'] == 'P' && !$this->authAction(ACCESS_EDIT, $item['cr_uid'], $item['eventid'], $item['title'])))
@@ -641,7 +643,7 @@ class crpCalendar
 		}
 
 		// get all module vars
-		$modvars = pnModGetVar('crpCalendar');
+		$modvars = $this->modvars;
 
 		// The return value of the function is checked here
 		if ($item == false || ($item['obj_status'] == 'P' && !$this->authAction(ACCESS_EDIT, $item['cr_uid'], $item['eventid'], $item['title'])))
@@ -1173,7 +1175,7 @@ class crpCalendar
 	function modifyConfig()
 	{
 		// get all module vars
-		$modvars = pnModGetVar('crpCalendar');
+		$modvars = $this->modvars;
 
 		return $this->ui->modifyConfig($modvars, $this->gd);
 	}
@@ -1248,6 +1250,10 @@ class crpCalendar
 		pnModSetVar('crpCalendar', 'enable_formicula', $enable_formicula);
 		$crpcalendar_weekday_start = (int) FormUtil :: getPassedValue('crpcalendar_weekday_start', false, 'POST');
 		pnModSetVar('crpCalendar', 'crpcalendar_weekday_start', $crpcalendar_weekday_start);
+		$complete_date_format = FormUtil :: getPassedValue('complete_date_format', '%d/%m/%Y - %H:%M', 'POST');
+		pnModSetVar('crpCalendar', 'complete_date_format', $complete_date_format);
+		$only_date_format = FormUtil :: getPassedValue('only_date_format', '%d/%m/%Y', 'POST');
+		pnModSetVar('crpCalendar', 'only_date_format', $only_date_format);
 
 		// Let any other modules know that the modules configuration has been updated
 		pnModCallHooks('module', 'updateconfig', 'crpCalendar', array (
@@ -1313,7 +1319,7 @@ class crpCalendar
 		$cats = CategoryUtil :: getCategoriesByParentID($mainCat);
 
 		// get all module vars
-		$modvars = pnModGetVar('crpCalendar');
+		$modvars = $this->modvars;
 
 		$data = compact('startnum', 'category', 'active', 'clear', 'ignoreml', 'mainCat', 'cats', 'modvars', 'sortOrder', 't', 'typeList', 'viewForm');
 
@@ -1356,7 +1362,7 @@ class crpCalendar
 		$mainCat = CategoryRegistryUtil :: getRegisteredModuleCategory('crpCalendar', 'crpcalendar', 'Main', '/__SYSTEM__/Modules/crpCalendar');
 
 		// get all module vars
-		$modvars = pnModGetVar('crpCalendar');
+		$modvars = $this->modvars;
 
 		$data = compact('eventid', 'objectid', 'event', 'event_image', 'event_document', 'mainCat', 'modvars', 'serial', 'reenter');
 
@@ -1499,7 +1505,10 @@ class crpCalendar
 			header("Content-Type: application/rss+xml\n\n");
 		//	header("Content-Type: text/xml\n\n");
 
-		$result = $this->ui->drawFeed($data, $list);
+		// get all module vars
+		$modvars = $this->modvars;
+
+		$result = $this->ui->drawFeed($data, $list, $modvars);
 		echo $result;
 		pnShutDown();
 	}
@@ -2711,4 +2720,3 @@ class crpCalendar
 	}
 
 }
-?>
