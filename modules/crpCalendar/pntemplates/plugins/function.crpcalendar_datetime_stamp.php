@@ -1,11 +1,12 @@
 <?php
+
 /**
  * crpCalendar
  *
- * @copyright (c) 2007, Daniele Conca
- * @link http://noc.postnuke.com/projects/crpcalendar Support and documentation
- * @author Daniele Conca <jami at cremonapalloza dot org>
- * @license GNU/GPL - v.2
+ * @copyright (c) 2007,2009 Daniele Conca
+ * @link http://code.zikula.org/crpcalendar Support and documentation
+ * @author Daniele Conca <conca.daniele@gmail.com>
+ * @license GNU/GPL - v.2.1
  * @package crpCalendar
  */
 
@@ -21,12 +22,12 @@
  *
  * @return string the results of the module function
  */
-function smarty_function_crpcalendar_datetime_stamp($params, &$smarty)
+function smarty_function_crpcalendar_datetime_stamp($params, & $smarty)
 {
 	// Security check
-	if (!SecurityUtil::checkPermission('crpCalendar::', '::', ACCESS_READ))
+	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
 	{
-		return LogUtil::registerPermissionError();
+		return LogUtil :: registerPermissionError();
 	}
 
 	if (!$params['datetime'])
@@ -34,14 +35,11 @@ function smarty_function_crpcalendar_datetime_stamp($params, &$smarty)
 	else
 		$datetime = $params['datetime'];
 
+	$res = DateUtil :: makeTimestamp($datetime);
 
-	$res = DateUtil::makeTimestamp($datetime);
-
-  if (isset($params['assign']) && $params['assign'])
-		  	$smarty->assign ($params['assign'], $res);
+	if (isset ($params['assign']) && $params['assign'])
+		$smarty->assign($params['assign'], $res);
 	else
 		return $res;
 
 }
-
-?>
