@@ -27,10 +27,10 @@
 			</link>
 		</image>
 		<pubDate>
-			<!--[$data.publ_date|pndate_format:"%d/%m/%Y - %H:%M"]-->
+			<!--[$data.publ_date|pndate_format:$complete_date_format]-->
 		</pubDate>
 		<lastBuildDate>
-			<!--[$data.publ_date|pndate_format:"%d/%m/%Y - %H:%M"]-->
+			<!--[$data.publ_date|pndate_format:$complete_date_format]-->
 		</lastBuildDate>
 		<webMaster>
 			<!--[pnconfiggetvar name="adminmail"]-->
@@ -38,7 +38,7 @@
 		<!--[section name=k loop=$list]-->
 		<item>
 			<title>
-				<!--[$list[k].title|pnvarprepfordisplay]-->(<!--[$list[k].start_date|pndate_format:"%d/%m/%Y, %H:%M"|pnvarprephtmldisplay]--><!--[if !$list[k].day_event]-->-<!--[$list[k].end_date|pndate_format:"%d/%m/%Y, %H:%M"|pnvarprephtmldisplay]--><!--[/if]-->)
+				<!--[$list[k].title|pnvarprepfordisplay]-->(<!--[$list[k].start_date|pndate_format:$complete_date_format|pnvarprephtmldisplay]--><!--[if !$list[k].day_event]-->-<!--[$list[k].end_date|pndate_format:$complete_date_format|pnvarprephtmldisplay]--><!--[/if]-->)
 			</title>
 			<link>
 				<!--[$list[k].link|pnvarprepfordisplay]-->
@@ -47,7 +47,7 @@
 				<!--[$list[k].descr|pnvarprepfordisplay]-->
 			</description>
 			<pubDate>
-				<!--[$list[k].publ_date|pndate_format:"%d/%m/%Y - %H:%M"]-->
+				<!--[$list[k].publ_date|pndate_format:$complete_date_format]-->
 			</pubDate>
 			<guid>
 				<!--[$list[k].link|pnvarprepfordisplay]-->

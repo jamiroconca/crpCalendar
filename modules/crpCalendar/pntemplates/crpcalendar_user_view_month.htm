@@ -70,13 +70,13 @@
 				</div>
 				<!--[if !$event.day_event]-->
 				<div>
-					<!--[pnml name="_CRPCALENDAR_START_DATE" html=1]-->: <strong><abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.start_date|pndate_format:"%d/%m/%Y - %H:%M"]--></abbr></strong>
-	 				<strong>&middot;</strong> <!--[pnml name="_CRPCALENDAR_END_DATE" html=1]-->: <strong><abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.end_date|pndate_format:"%d/%m/%Y - %H:%M"]--></abbr></strong>
+					<!--[pnml name="_CRPCALENDAR_START_DATE" html=1]-->: <strong><abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.start_date|pndate_format:$complete_date_format]--></abbr></strong>
+	 				<strong>&middot;</strong> <!--[pnml name="_CRPCALENDAR_END_DATE" html=1]-->: <strong><abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.end_date|pndate_format:$complete_date_format]--></abbr></strong>
 	   		</div>
 				<!--[else]-->
 				<div>
-					<!--[pnml name="_CRPCALENDAR_START_DATE" html=1]-->: <strong><abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%d"]-->"><!--[$event.start_date|pndate_format:"%d/%m/%Y"]--></abbr></strong>
-	   			<span class="pn-hide"><strong>&middot;</strong> <!--[pnml name="_CRPCALENDAR_END_DATE" html=1]-->: <strong><abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%d"]-->"><!--[$event.end_date|pndate_format:"%d/%m/%Y"]--></abbr></strong></span>
+					<!--[pnml name="_CRPCALENDAR_START_DATE" html=1]-->: <strong><abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%d"]-->"><!--[$event.start_date|pndate_format:$only_date_format]--></abbr></strong>
+	   			<span class="pn-hide"><strong>&middot;</strong> <!--[pnml name="_CRPCALENDAR_END_DATE" html=1]-->: <strong><abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%d"]-->"><!--[$event.end_date|pndate_format:$only_date_format]--></abbr></strong></span>
 	   		</div>
 				<!--[/if]-->
 			</div>

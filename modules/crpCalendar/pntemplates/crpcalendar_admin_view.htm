@@ -55,8 +55,8 @@
           <!--[ $event.__CATEGORIES__.Main.display_name.$lang ]-->
       </td>
 	  <!--[/if]-->
-	  	<td><!--[$event.start_date|pndate_format:"%d/%m/%Y - %H:%M"]--></td>
-			<td><!--[$event.end_date|pndate_format:"%d/%m/%Y - %H:%M"]--></td>
+	  	<td><!--[$event.start_date|pndate_format:$complete_date_format]--></td>
+			<td><!--[$event.end_date|pndate_format:$complete_date_format]--></td>
 			<td>
 				<span class="crp-status-real"><!--[crpcalendarstatus status=$event.obj_status eventid=$event.eventid]--></span>
 				<span class="crp-status-fake pn-hide"><!--[crpcalendarstatus status=$event.obj_status eventid=$event.eventid fake=true]--></span>

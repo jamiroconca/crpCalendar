@@ -27,7 +27,7 @@
 	<!--[section name=k loop=$list]-->
 	<entry>
 		<title>
-			<!--[$list[k].title|pnvarprepfordisplay]-->(<!--[$list[k].start_date|pndate_format:"%d/%m/%Y, %H:%M"|pnvarprephtmldisplay]--><!--[if !$list[k].day_event]-->-<!--[$list[k].end_date|pndate_format:"%d/%m/%Y, %H:%M"|pnvarprephtmldisplay]--><!--[/if]-->)
+			<!--[$list[k].title|pnvarprepfordisplay]-->(<!--[$list[k].start_date|pndate_format:$complete_date_format|pnvarprephtmldisplay]--><!--[if !$list[k].day_event]-->-<!--[$list[k].end_date|pndate_format:$complete_date_format|pnvarprephtmldisplay]--><!--[/if]-->)
 		</title>
 		<link rel="alternate" type="text/html" href="<!--[pngetbaseurl|pnvarprepfordisplay]--><!--[$list[k].link|pnvarprepfordisplay]-->"/>
 		<author>
@@ -39,7 +39,7 @@
 			<!--[$list[k].link|pnvarprepfordisplay]-->
 		</id>
 		<updated>
-			<!--[$list[k].publ_date|pndate_format:"%d/%m/%Y - %H:%M"]-->
+			<!--[$list[k].publ_date|pndate_format:$complete_date_format]-->
 		</updated>
 		<summary type="html">
 			<!--[$list[k].descr|pnvarprephtmldisplay|htmlentities]-->
