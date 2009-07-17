@@ -16,10 +16,10 @@
   	</select>
   	<!--[/if]-->
   	<!--[pnpageaddvar name="javascript" value="modules/crpCalendar/pnjavascript/datepicker/datepicker.js"]-->
-	<!--[pnpageaddvar name="stylesheet" value="modules/crpCalendar/pnjavascript/datepicker/css/datepicker.css"]-->
+		<!--[pnpageaddvar name="stylesheet" value="modules/crpCalendar/pnjavascript/datepicker/css/datepicker.css"]-->
   	<!--[html_select_date time=$t end_year="+4" display_months=false display_years=false id="start_datefield-dd"]-->
-	<!--[html_select_date time=$t end_year="+4" display_days=false display_years=false id="start_datefield-mm"]-->
-	<!--[html_select_date time=$t start_year=$crpcalendar_start_year end_year="+4" display_days=false display_months=false id="start_datefield" class="highlight-days-67 no-transparency split-date"]-->
+		<!--[html_select_date time=$t end_year="+4" display_days=false display_years=false id="start_datefield-mm"]-->
+		<!--[html_select_date time=$t start_year=$crpcalendar_start_year end_year="+4" display_days=false display_months=false id="start_datefield" class="highlight-days-67 no-transparency split-date"]-->
   	<!--[elseif $choosed_view neq "get_partecipations"  && $choosed_view neq "year_view"]-->
   	<label for="crpcalendar_typeList"><!--[pnml name=_CRPCALENDAR_STATUS html=1]--></label>
   	<select id="crpcalendar_typeList" name="typeList">
@@ -28,6 +28,7 @@
   		<option value="archive"<!--[if $typeList eq 'archive']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_ARCHIVED" html=1]--></option>
   	</select>
   	<!--[/if]-->
+  	<input name="t" type="hidden" value="<!--[$t]-->" />
   	<input name="submit" type="submit" value="<!--[pnml name="_SUBMIT" html=1]-->" />
   	<input name="clear" type="submit" value="<!--[pnml name="_CLEAR" html=1]-->" />
 </div>
