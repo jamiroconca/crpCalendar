@@ -1,5 +1,6 @@
 crpCalendar
 v0.5.2 - 18 april 2009
+- fixed tons of cached and compiled templates generation
 - added config param for complete or date only format
 v0.5.1 - 4 march 2009
 - added config param week starts on (monday or sunday)
