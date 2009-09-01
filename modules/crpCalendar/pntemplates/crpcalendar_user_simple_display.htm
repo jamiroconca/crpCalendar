@@ -18,8 +18,8 @@
 
 <div class="crpcalendar_header">
 	<!--[if $event.cr_uid]-->
-		<!--[pnmodurl modname=Profile func=view uname=$event.cr_uid assign=cr_profilelink]-->
 		<!--[pnusergetvar name=uname uid=$event.cr_uid assign=cr_profilename]-->
+    <!--[pnmodurl modname=Profile func=view uname=$cr_profilename assign=cr_profilelink]-->
 	<!--[else]-->
 		<!--[assign var="cr_profilelink" value="#"]-->
 		<!--[pnmodgetvar module="Users" name="anonymous" assign=cr_profilename]-->
