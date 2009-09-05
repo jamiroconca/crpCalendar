@@ -55,38 +55,38 @@ function crpCalendar_locationeventsblock_display($blockinfo)
 		return;
 
 	// get the current language
-	$currentlang = pnUserGetLang();
+	$currentlang= pnUserGetLang();
 
 	// Break out options from our content field
-	$vars = pnBlockVarsFromContent($blockinfo['content']);
+	$vars= pnBlockVarsFromContent($blockinfo['content']);
 
 	if (!isset ($vars['limit']))
-		$vars['limit'] = 10;
+		$vars['limit']= 10;
 
 	if (!isset ($vars['numitems']))
-		$vars['numitems'] = 10;
+		$vars['numitems']= 10;
 
 	if (!isset ($vars['bylocation']))
-		$vars['bylocation'] = null;
+		$vars['bylocation']= null;
 
-	$apiargs['interval'] = $vars['limit'];
-	$apiargs['startnum'] = 1;
-	$apiargs['active'] = 'A';
-	$apiargs['modvars']['itemsperpage'] = $vars['numitems'];
-	$apiargs['sortOrder'] = 'ASC';
-	$apiargs['bylocation'] = $vars['bylocation'];
+	$apiargs['interval']= $vars['limit'];
+	$apiargs['startnum']= 1;
+	$apiargs['active']= 'A';
+	$apiargs['modvars']['itemsperpage']= $vars['numitems'];
+	$apiargs['sortOrder']= 'ASC';
+	$apiargs['bylocation']= $vars['bylocation'];
 
 	// call the api
-	$items = pnModAPIFunc('crpCalendar', 'user', 'getall', $apiargs);
+	$items= pnModAPIFunc('crpCalendar', 'user', 'getall', $apiargs);
 
 	// create the output object
-	$pnRender = pnRender :: getInstance('crpCalendar', false);
+	$pnRender= pnRender :: getInstance('crpCalendar', false);
 
 	$pnRender->assign('events', $items);
 	$pnRender->assign('interval', $vars['limit']);
 	$pnRender->assign(pnModGetVar('crpCalendar'));
 
-	$blockinfo['content'] = $pnRender->fetch('blocks/crpcalendar_block_events.htm');
+	$blockinfo['content']= $pnRender->fetch('blocks/crpcalendar_block_events.htm');
 	return pnBlockThemeBlock($blockinfo);
 }
 
@@ -99,23 +99,27 @@ function crpCalendar_locationeventsblock_display($blockinfo)
 function crpCalendar_locationeventsblock_modify($blockinfo)
 {
 	// Break out options from our content field
-	$vars = pnBlockVarsFromContent($blockinfo['content']);
+	$vars= pnBlockVarsFromContent($blockinfo['content']);
 
 	// Defaults
 	if (empty ($vars['limit']))
-		$vars['limit'] = 10;
+		$vars['limit']= 10;
 
 	if (!isset ($vars['numitems']))
-		$vars['numitems'] = 10;
+		$vars['numitems']= 10;
 
 	if (!isset ($vars['bylocation']))
-		$vars['bylocation'] = null;
+		$vars['bylocation']= null;
 
 	// Create output object
-	$pnRender = pnRender :: getInstance('crpCalendar', false);
+	$pnRender= pnRender :: getInstance('crpCalendar', false);
+	$avail= array ();
 
 	if (pnModAvailable('locations') && pnModGetVar('crpCalendar', 'enable_locations'))
-		$avail = crpCalendar :: getAvailableLocations();
+	{
+		$crplocations= new crpCalendar();
+		$avail= $crplocations->getAvailableLocations();
+	}
 
 	// assign the block vars
 	$pnRender->assign($vars);
@@ -135,18 +139,18 @@ function crpCalendar_locationeventsblock_modify($blockinfo)
 function crpCalendar_locationeventsblock_update($blockinfo)
 {
 	// Get current content
-	$vars = pnBlockVarsFromContent($blockinfo['content']);
+	$vars= pnBlockVarsFromContent($blockinfo['content']);
 
 	// alter the corresponding variable
-	$vars['limit'] = (int) FormUtil :: getPassedValue('limit', null, 'POST');
-	$vars['numitems'] = (int) FormUtil :: getPassedValue('numitems', null, 'POST');
-	$vars['bylocation'] = FormUtil :: getPassedValue('bylocation', null);
+	$vars['limit']= (int) FormUtil :: getPassedValue('limit', null, 'POST');
+	$vars['numitems']= (int) FormUtil :: getPassedValue('numitems', null, 'POST');
+	$vars['bylocation']= FormUtil :: getPassedValue('bylocation', null);
 
 	// write back the new contents
-	$blockinfo['content'] = pnBlockVarsToContent($vars);
+	$blockinfo['content']= pnBlockVarsToContent($vars);
 
 	// clear the block cache
-	$pnRender = pnRender :: getInstance('crpCalendar');
+	$pnRender= pnRender :: getInstance('crpCalendar');
 	$pnRender->clear_cache('blocks/crpcalendar_block_events.htm');
 
 	return $blockinfo;
