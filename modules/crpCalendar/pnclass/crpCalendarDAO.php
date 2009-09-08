@@ -67,8 +67,21 @@ class crpCalendarDAO
 			$catFilter = $category;
 		elseif ($category)
 		{
-			$catFilter['Main'] = $category;
-			$catFilter['__META__']['module'] = 'crpCalendar';
+			if ($modvars['subcategory_listing'])
+			{
+				$catstofilter[] = $category;
+				$childs = CategoryUtil::getSubCategories($category);
+				// TODO : attributes param is commented ?
+				foreach ($childs as $child) 
+					$catstofilter[] = $child['id'];
+	       
+	      $catFilter['Main'] = $catstofilter;
+			}
+			else
+			{
+				$catFilter['Main'] = $category;
+				$catFilter['__META__']['module'] = 'crpCalendar';
+			}
 		}
 
 		$items = array ();

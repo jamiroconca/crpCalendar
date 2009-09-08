@@ -84,6 +84,7 @@ function crpCalendar_init()
 	pnModSetVar('crpCalendar', 'crpcalendar_weekday_start', '1');
 	pnModSetVar('crpCalendar', 'complete_date_format', '%d/%m/%Y - %H:%M');
 	pnModSetVar('crpCalendar', 'only_date_format', '%d/%m/%Y');
+	pnModSetVar('crpCalendar', 'subcategory_listing', false);
 
 	// Initialisation successful
 	return true;
@@ -247,6 +248,10 @@ function crpCalendar_upgrade($oldversion)
 			return crpCalendar_upgrade("0.5.2");
 			break;
 		case "0.5.2" :
+			pnModSetVar('crpCalendar', 'subcategory_listing', false);
+			return crpCalendar_upgrade("0.5.3");
+			break;
+		case "0.5.3" :
 			break;
 	}
 	return true;

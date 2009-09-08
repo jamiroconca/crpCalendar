@@ -82,6 +82,7 @@ define('_CRPCALENDAR_USE_BROWSER', 'Le GD Library richieste non sono state trova
 define('_CRPCALENDAR_USE_GD', 'crpCalendar usa le GD Library');
 define('_CRPCALENDAR_USERLIST_IMAGE', 'Thumbnail nell\'elenco utenti');
 define('_CRPCALENDAR_USERLIST_WIDTH', 'Larghezza delle thumbnail nell\'elenco utenti');
+define('_CRPCALENDAR_SUBCATEGORY_LISTING','Mostra anche gli eventi delle sottocategorie quando si visualizza una categoria');
 define('_CRPCALENDAR_SUBMITTED_STATUS', 'Stato iniziale degli eventi inseriti dagli utenti');
 define('_CRPCALENDAR_THEME', 'crpCalendar theme');
 define('_CRPCALENDAR_VISUALIZATION', 'Visualizzazione');

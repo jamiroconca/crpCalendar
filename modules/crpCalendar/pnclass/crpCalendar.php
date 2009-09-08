@@ -1254,6 +1254,8 @@ class crpCalendar
 		pnModSetVar('crpCalendar', 'complete_date_format', $complete_date_format);
 		$only_date_format = FormUtil :: getPassedValue('only_date_format', '%d/%m/%Y', 'POST');
 		pnModSetVar('crpCalendar', 'only_date_format', $only_date_format);
+		$subcategory_listing = (bool) FormUtil :: getPassedValue('subcategory_listing', false, 'POST');
+		pnModSetVar('crpCalendar', 'subcategory_listing', $subcategory_listing);
 
 		// Let any other modules know that the modules configuration has been updated
 		pnModCallHooks('module', 'updateconfig', 'crpCalendar', array (
