@@ -57,6 +57,7 @@ function crpCalendar_categoryeventsblock_display($blockinfo)
 
 	// Break out options from our content field
 	$vars = pnBlockVarsFromContent($blockinfo['content']);
+	$modvars = pnModGetVar('crpCalendar');
 
 	if (!isset ($vars['limit']))
 		$vars['limit'] = 10;
@@ -68,6 +69,7 @@ function crpCalendar_categoryeventsblock_display($blockinfo)
 	$apiargs['startnum'] = 1;
 	$apiargs['category'] = $vars['events_category'];
 	$apiargs['active'] = 'A';
+	$apiargs['modvars'] = $modvars;
 	$apiargs['modvars']['itemsperpage'] = $vars['numitems'];
 	$apiargs['sortOrder'] = 'ASC';
 
@@ -79,7 +81,7 @@ function crpCalendar_categoryeventsblock_display($blockinfo)
 
 	$pnRender->assign('events', $items);
 	$pnRender->assign('interval', $vars['limit']);
-	$pnRender->assign(pnModGetVar('crpCalendar'));
+	$pnRender->assign($modvars);
 
 	$blockinfo['content'] = $pnRender->fetch('blocks/crpcalendar_block_events.htm');
 	return pnBlockThemeBlock($blockinfo);

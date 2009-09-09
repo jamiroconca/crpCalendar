@@ -78,10 +78,9 @@ class crpCalendarDAO
 	      $catFilter['Main'] = $catstofilter;
 			}
 			else
-			{
 				$catFilter['Main'] = $category;
-				$catFilter['__META__']['module'] = 'crpCalendar';
-			}
+			
+			$catFilter['__META__']['module'] = 'crpCalendar';
 		}
 
 		$items = array ();
