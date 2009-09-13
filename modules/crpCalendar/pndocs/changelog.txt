@@ -1,5 +1,6 @@
 crpCalendar
 v0.5.3 - ??? september 2009
+- updated datepicker to v5
 - added config for showing sub-categories events when watching a category
 - fix for block from locations module
 - rss validation fixes
