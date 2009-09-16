@@ -35,7 +35,7 @@
 		<!--[/section]-->
 		
 		<!--[if $event.image]-->
-		<div>
+		<div class="crpcalendar_image" style="width:<!--[$image_width+2]-->px">
 			<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="get_image" eventid=$event.eventid]-->" title="<!--[$event.title]-->" target="_blank">
 			<!--[if $crpcalendar_use_gd eq '1']-->
 			<img src="<!--[pnmodurl modname="crpCalendar" type="user" func="get_thumbnail" eventid=$event.eventid]-->" alt="<!--[$event.title]-->" title="<!--[$event.title]-->"/>
@@ -43,6 +43,7 @@
 			<img src="<!--[pnmodurl modname="crpCalendar" type="user" func="get_image" eventid=$event.eventid]-->" alt="<!--[$event.title]-->" title="<!--[$event.title]-->" width="<!--[$image_width]-->px"/>
 			<!--[/if]-->
 			</a>
+			<span class="crpcalendar_caption"><!--[$event.image_caption]--></span>
 		</div>
 		<!--[/if]-->
 		

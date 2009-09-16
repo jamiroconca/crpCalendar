@@ -39,6 +39,8 @@ define('_CRPCALENDAR_EVENT_IMAGE', 'Immagine evento (.gif, .jpg, .png) - Max');
 define('_CRPCALENDAR_ID_FORMICULA', 'ID modulo Formicula');
 define('_CRPCALENDAR_LOCATION', 'Luogo');
 define('_CRPCALENDAR_LOCATIONS', 'dal modulo Locations');
+define('_CRPCALENDAR_IMAGE_CAPTION','Didascalia immagine');
+define('_CRPCALENDAR_IMAGE_CAPTION_HINT','La didascalia verra\' visualizzata solo se in presenza di una immagine');
 define('_CRPCALENDAR_IMAGE_WIDTH', 'Larghezza delle immagini per gli eventi');
 define('_CRPCALENDAR_ORGANISER', 'Organizzazione');
 define('_CRPCALENDAR_PENDING', 'In attesa');

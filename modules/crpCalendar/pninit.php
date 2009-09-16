@@ -252,6 +252,13 @@ function crpCalendar_upgrade($oldversion)
 			return crpCalendar_upgrade("0.5.3");
 			break;
 		case "0.5.3" :
+			$sql = "ALTER TABLE $tables[crpcalendar] ADD image_caption VARCHAR( 255 ) NOT NULL DEFAULT '' AFTER organiser";
+			if (!DBUtil :: executeSQL($sql))
+				return LogUtil :: registerError(_UPDATETABLEFAILED);
+			
+			return crpCalendar_upgrade("0.5.4");
+			break;
+		case "0.5.4" :
 			break;
 	}
 	return true;

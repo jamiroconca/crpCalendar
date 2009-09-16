@@ -47,7 +47,9 @@ table.crpcalendar-table {
 	width: 100%;
 }
 
-* html table.crpcalendar-table {width: 98%;}
+* html table.crpcalendar-table {
+	width: 98%;
+}
 
 table.mini {
 	padding: 1px 1px 2px 1px;
@@ -143,6 +145,24 @@ table.crpcalendar-table div {
 }
 
 /* style for event visualization */
+div.crpcalendar_image {
+	background: #EEEEEE none repeat scroll 0 0;
+	border: 1px solid #DDDDDD;
+	margin-bottom: 1.5em;
+	padding: 3px;
+}
+
+div.crpcalendar_image img {
+	border: 1px solid #A1A1A1;
+}
+
+div.crpcalendar_image .crpcalendar_caption {
+	display: block;
+	font: italic normal 80% serif;
+	margin: 0;
+	padding: 3px;
+}
+
 div.crpcalendar_container {
 	margin-bottom: 5px;
 }

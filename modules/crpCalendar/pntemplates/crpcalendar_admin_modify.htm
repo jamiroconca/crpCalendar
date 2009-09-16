@@ -83,6 +83,11 @@
 		</fieldset>
 		<!--[/if]-->
 		<div class="pn-formrow">
+   		<label for="crpcalendar_image_caption"><!--[pnml name="_CRPCALENDAR_IMAGE_CAPTION" html=1]--></label>
+   		<input id="crpcalendar_image_caption" class="pn-form-text" name="event[image_caption]" type="text" size="32" maxlength="255" value="<!--[$image_caption|pnvarprephtmldisplay]-->" />
+    	<span class="pn-sub"><!--[pnml name="_CRPCALENDAR_IMAGE_CAPTION_HINT"]--></span>
+    </div>
+		<div class="pn-formrow">
 			<label for="crpcalendar_event_document"><!--[pnml name="_CRPCALENDAR_EVENT_DOCUMENT" html=1]--> <!--[pnmodgetvar module=crpCalendar name=document_dimension]--> bytes</label>
 			<input type="hidden" name="MAX_FILE_SIZE" value="<!--[pnmodgetvar module=crpCalendar name=document_dimension]-->"/>
 			<input id="crpcalendar_event_document" name="event_document" type="file" size="32"/>

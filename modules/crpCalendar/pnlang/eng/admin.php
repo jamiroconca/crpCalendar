@@ -38,6 +38,8 @@ define('_CRPCALENDAR_EVENT_IMAGE', 'Event image (.gif, .jpg, .png) - Max');
 define('_CRPCALENDAR_ID_FORMICULA', 'Formicula form identifier');
 define('_CRPCALENDAR_LOCATION', 'Location');
 define('_CRPCALENDAR_LOCATIONS', 'from Locations module');
+define('_CRPCALENDAR_IMAGE_CAPTION','Image caption');
+define('_CRPCALENDAR_IMAGE_CAPTION_HINT','Image caption will be displayed only if an image is present');
 define('_CRPCALENDAR_IMAGE_WIDTH', 'Event image width');
 define('_CRPCALENDAR_ORGANISER', 'Organiser');
 define('_CRPCALENDAR_PENDING', 'Pending');

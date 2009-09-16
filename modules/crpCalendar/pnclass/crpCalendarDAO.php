@@ -70,6 +70,8 @@ class crpCalendarDAO
 			if ($modvars['subcategory_listing'])
 			{
 				$catstofilter[] = $category;
+				// TODO : Zikula 1.1.1 fail to load CategoryUtil from blocks ?
+				Loader::loadClass ('CategoryUtil');				
 				$childs = CategoryUtil::getSubCategories($category);
 				// TODO : attributes param is commented ?
 				foreach ($childs as $child) 
@@ -737,6 +739,7 @@ class crpCalendarDAO
 		"$pntable[crpcalendar].$crpcalendarcolumn[url] as url, " .
 		"$pntable[crpcalendar].$crpcalendarcolumn[contact] as contact, " .
 		"$pntable[crpcalendar].$crpcalendarcolumn[organiser] as organiser, " .
+		"$pntable[crpcalendar].$crpcalendarcolumn[image_caption] as image_caption, " .
 		"$pntable[crpcalendar].$crpcalendarcolumn[event_text] as event_text, " .
 		"$pntable[crpcalendar].$crpcalendarcolumn[start_date] as start_date, " .
 		"$pntable[crpcalendar].$crpcalendarcolumn[end_date] as end_date, " .
@@ -758,6 +761,7 @@ class crpCalendarDAO
 			'url',
 			'contact',
 			'organiser',
+			'image_caption',
 			'event_text',
 			'start_date',
 			'end_date',

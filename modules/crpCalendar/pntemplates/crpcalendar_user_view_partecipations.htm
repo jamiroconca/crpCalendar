@@ -35,13 +35,16 @@
 		<!--[if $crpcalendar_userlist_image]-->
 		<td>
 			<!--[if $event.image]-->
-			<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="display" eventid=$event.eventid]-->" title="<!--[$event.title]-->">
-			<!--[if $crpcalendar_use_gd eq '1']-->
-			<img src="<!--[pnmodurl modname="crpCalendar" type="user" func="get_thumbnail" eventid=$event.eventid width=$userlist_width]-->" alt="<!--[$event.title]-->" title="<!--[$event.title]-->"/>
-			<!--[else]-->
-			<img src="<!--[pnmodurl modname="crpCalendar" type="user" func="get_image" eventid=$event.eventid]-->" alt="<!--[$event.title]-->" title="<!--[$event.title]-->" width="<!--[$userlist_width]-->px"/>
-			<!--[/if]-->
-			</a>
+			<div class="crpcalendar_image" style="width:<!--[$userlist_width+2]-->px">
+				<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="display" eventid=$event.eventid]-->" title="<!--[$event.title]-->">
+				<!--[if $crpcalendar_use_gd eq '1']-->
+				<img src="<!--[pnmodurl modname="crpCalendar" type="user" func="get_thumbnail" eventid=$event.eventid width=$userlist_width]-->" alt="<!--[$event.title]-->" title="<!--[$event.title]-->"/>
+				<!--[else]-->
+				<img src="<!--[pnmodurl modname="crpCalendar" type="user" func="get_image" eventid=$event.eventid]-->" alt="<!--[$event.title]-->" title="<!--[$event.title]-->" width="<!--[$userlist_width]-->px"/>
+				<!--[/if]-->
+				</a>
+				<span class="crpcalendar_caption"><!--[$event.image_caption|truncate:"32"]--></span>
+			</div>
 			<!--[/if]-->
 		</td>
 		<!--[/if]-->
