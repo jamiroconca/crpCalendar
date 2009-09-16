@@ -1,4 +1,4 @@
-<!--[pnajaxheader modname=crpCalendar filename=crpcalendar.js noscriptaculous=true nobehaviour=true]-->
+<!--[pnajaxheader modname="crpCalendar" filename=crpcalendar.js noscriptaculous=true nobehaviour=true]-->
 <!--[pnpageaddvar name="javascript" value="modules/crpCalendar/pnjavascript/datepicker/datepicker.js"]-->
 <!--[pnpageaddvar name="stylesheet" value="modules/crpCalendar/pnjavascript/datepicker/css/datepicker.css"]-->
 
@@ -64,6 +64,11 @@
    		<input type="hidden" name="MAX_FILE_SIZE" value="<!--[pnmodgetvar module=crpCalendar name=file_dimension]-->"/>
    		<input id="crpcalendar_event_image" name="event_image" type="file" size="32"/>
    		<span class="pn-sub"><!--[pnml name="_CRPCALENDAR_IMAGE_RESIZE"]--> <!--[pnmodgetvar module=crpCalendar name=image_width]--> px</span>
+    </div>
+    <div class="pn-formrow">
+   		<label for="crpcalendar_image_caption"><!--[pnml name="_CRPCALENDAR_IMAGE_CAPTION" html=1]--></label>
+   		<input id="crpcalendar_image_caption" class="pn-form-text" name="event[image_caption]" type="text" size="32" maxlength="255" value="<!--[$image_caption|pnvarprephtmldisplay]-->" />
+    	<span class="pn-sub"><!--[pnml name="_CRPCALENDAR_IMAGE_CAPTION_HINT"]--></span>
     </div>
     <div class="pn-formrow">
 	    <label for="crpcalendar_event_document"><!--[pnml name="_CRPCALENDAR_EVENT_DOCUMENT" html=1]--> <!--[pnmodgetvar module=crpCalendar name=document_dimension]--> bytes</label>

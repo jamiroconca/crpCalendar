@@ -44,6 +44,7 @@ define('_CRPCALENDAR_END_DATE', 'End date');
 define('_CRPCALENDAR_EVENT_DOCUMENT', 'Event document');
 define('_CRPCALENDAR_EVENT_IMAGE', 'Event image (.gif, .jpg, .png) - Max');
 define('_CRPCALENDAR_IMAGE_CAPTION','Image caption');
+define('_CRPCALENDAR_IMAGE_CAPTION_HINT','Image caption will be displayed only if an image is present');
 define('_CRPCALENDAR_IMAGE_RESIZE', 'Image would be resized (by browser) to');
 define('_CRPCALENDAR_NONE', 'None');
 define('_CRPCALENDAR_PARTECIPATIONS', 'Event partecipations');

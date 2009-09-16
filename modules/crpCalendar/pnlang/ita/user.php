@@ -44,6 +44,7 @@ define('_CRPCALENDAR_END_DATE', 'Data termine');
 define('_CRPCALENDAR_EVENT_DOCUMENT', 'Documento allegato');
 define('_CRPCALENDAR_EVENT_IMAGE', 'Immagine evento (.gif, .jpg, .png) - Max');
 define('_CRPCALENDAR_IMAGE_CAPTION','Didascalia immagine');
+define('_CRPCALENDAR_IMAGE_CAPTION_HINT','La didascalia verra\' visualizzata solo se in presenza di una immagine');
 define('_CRPCALENDAR_IMAGE_RESIZE', 'Le immagini saranno scalate (dal browser) a');
 define('_CRPCALENDAR_NONE', 'Nessuno');
 define('_CRPCALENDAR_PARTECIPATIONS', 'Partecipazioni all\'evento');
