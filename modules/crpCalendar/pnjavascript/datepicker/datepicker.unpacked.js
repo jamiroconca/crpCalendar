@@ -1,5 +1,5 @@
 /*
-        DatePicker v5.0 by frequency-decoder.com
+        DatePicker v5.1 by frequency-decoder.com
 
         Released under a creative commons Attribution-Share Alike 3.0 Unported license (http://creativecommons.org/licenses/by-sa/3.0/)
 
@@ -21,7 +21,7 @@ var datePickerController = (function datePickerController() {
         var debug               = false,
             isOpera             = Object.prototype.toString.call(window.opera) === "[object Opera]",
             isMoz               = /mozilla/.test( navigator.userAgent.toLowerCase() ) && !/(compatible|webkit)/.test( navigator.userAgent.toLowerCase() ),
-            languageInfo        = parseNavigatorLanguage(),
+            languageInfo        = parseUILanguage(),
             datePickers         = {},
             uniqueId            = 0,
             weeksInYearCache    = {},
@@ -88,15 +88,16 @@ var datePickerController = (function datePickerController() {
                 };                              
         }();
         
-        function parseHTMLLanguage() {
-                var languageTag = document.getElementsByTagName('html')[0].getAttribute('lang');
-                return (!languageTag) ? document.getElementsByTagName('html')[0].getAttribute('xml:lang') : languageTag;       
-        };
-        
-        function parseNavigatorLanguage() {                    
-                var languageTag = parseHTMLLanguage();
-                if(!languageTag) languageTag = navigator.language ? navigator.language.toLowerCase() : navigator.userLanguage ? navigator.userLanguage.toLowerCase() : "en";                                     
-                return languageTag.search(/^([a-z]{2})-([a-z]{2})$/) != -1 ? [languageTag.match(/^([a-z]{2})-([a-z]{2})$/)[1], languageTag] : [languageTag.substr(0,2)];                       
+        function parseUILanguage() {                                 
+                var languageTag = document.getElementsByTagName('html')[0].getAttribute('lang') || document.getElementsByTagName('html')[0].getAttribute('xml:lang');
+                
+                if(!languageTag) {
+                        languageTag = "en";
+                } else {
+                        languageTag = languageTag.toLowerCase();
+                };
+                                                            
+                return languageTag.search(/^([a-z]{2,3})-([a-z]{2})$/) != -1 ? [languageTag.match(/^([a-z]{2,3})-([a-z]{2})$/)[1], languageTag] : [languageTag];                       
         };
         
         function affectJSON(json) {
@@ -105,7 +106,7 @@ var datePickerController = (function datePickerController() {
                         value = json[key];                                                                
                         switch(key.toLowerCase()) { 
                                 case "lang":
-                                        if(value.search(/^[a-z]{2}(-([a-z]{2}))?$/i) != -1) {                                                
+                                        if(value.search(/^[a-z]{2,3}(-([a-z]{2}))?$/i) != -1) {                                                
                                                 languageInfo = [value.toLowerCase()];                                                   
                                                 returnLocaleDate = true;
                                         };
@@ -287,7 +288,10 @@ var datePickerController = (function datePickerController() {
                 this.interval            = new Date();
                 this.clickActivated      = false;
                 this.noFocus             = true;
-                this.kbEvent             = false;                
+                this.kbEvent             = false; 
+                this.disabledDates       = {};
+                this.enabledDates        = {};
+                this.delayedUpdate       = false;               
                 
                 for(var thing in options) {
                         if(thing.search(/callbacks|formElements|formatMasks/) != -1) continue;
@@ -456,7 +460,7 @@ var datePickerController = (function datePickerController() {
                         o.inUpdate = true;                                         
                         o.removeOldFocus();
                         
-                        if(o.timerSet) {
+                        if(o.timerSet && !o.delayedUpdate) {
                                 if(o.monthInc) {
                                         var n = o.date.getDate(),
                                             d = new Date(o.date);                         
@@ -485,12 +489,11 @@ var datePickerController = (function datePickerController() {
                         
                         tmpDate.setHours(5);
                         
-                        var dt, cName, td, i, currentDate, cellAdded, col, currentStub, abbr, bespokeRenderClass, spnC,
+                        var dt, cName, td, i, currentDate, cellAdded, col, currentStub, abbr, bespokeRenderClass, spnC, dateSetD,
                         weekDayC            = ( tmpDate.getDay() + 6 ) % 7,                
                         firstColIndex       = (((weekDayC - o.firstDayOfWeek) + 7 ) % 7) - 1,
                         dpm                 = daysInMonth(cm, cy),
-                        today               = new Date(),
-                        dateSetD            = (o.dateSet != null) ? o.dateSet.getFullYear() + pad(o.dateSet.getMonth()+1) + pad(o.dateSet.getDate()) : false,
+                        today               = new Date(),                        
                         stub                = String(tmpDate.getFullYear()) + pad(tmpDate.getMonth()+1),
                         cellAdded           = [4,4,4,4,4,4],                                                                   
                         lm                  = new Date(cy, cm-1, 1),
@@ -501,16 +504,18 @@ var datePickerController = (function datePickerController() {
                         weekDayN            = (nm.getDay() + 6) % 7,
                         weekDayP            = (lm.getDay() + 6) % 7,                                       
                         today               = today.getFullYear() + pad(today.getMonth()+1) + pad(today.getDate()),
-                        spn                 = document.createElement('span');
-                        
+                        spn                 = document.createElement('span');                        
                         
                         o.firstDateShown    = !o.constrainSelection && o.fillGrid && (0 - firstColIndex < 1) ? String(stubP) + (daySub + (0 - firstColIndex)) : stub + "01";            
                         o.lastDateShown     = !o.constrainSelection && o.fillGrid ? stubN + pad(41 - firstColIndex - dpm) : stub + String(dpm);
                         o.currentYYYYMM     = stub;                    
                 
                         bespokeRenderClass  = o.callback("redraw", {id:o.id, dd:pad(cd), mm:pad(cm+1), yyyy:cy, firstDateDisplayed:o.firstDateShown, lastDateDisplayed:o.lastDateShown}) || {};                                            
-                        dts                 = o.getDates(cy, cm+1);
+                        dts                 = o.getDates(cy, cm+1);                               
+                
+                        o.checkSelectedDate();
                         
+                        dateSetD            = (o.dateSet != null) ? o.dateSet.getFullYear() + pad(o.dateSet.getMonth()+1) + pad(o.dateSet.getDate()) : false;
                         spn.className       = "fd-screen-reader";
                         
                         if(this.selectedTD != null) {
@@ -615,7 +620,7 @@ var datePickerController = (function datePickerController() {
                                 o.timer = window.setTimeout(o.updateTable, o.timerInc);
                         };
                         
-                        o.inUpdate = false; 
+                        o.inUpdate = o.delayedUpdate = false; 
                         o.setNewFocus();                         
                 };
                 
@@ -774,7 +779,8 @@ var datePickerController = (function datePickerController() {
                                 elem = document.getElementById(this.positioned ? this.positioned : this.id);
                                 if(!elem) {
                                         this.div = null;
-                                        throw this.positioned ? "Could not locate a datePickers associated parent element with an id:" + this.positioned : "Could not locate a datePickers associated input with an id:" + this.id;
+                                        if(debug) throw this.positioned ? "Could not locate a datePickers associated parent element with an id:" + this.positioned : "Could not locate a datePickers associated input with an id:" + this.id;
+                                        return;
                                 };
 
                                 this.div.className += " static-datepicker";                          
@@ -1033,6 +1039,7 @@ var datePickerController = (function datePickerController() {
                         
                         // We check the mousedown events on the buttons
                         if(origEl.id.search(new RegExp("^" + o.id + "(-prev-year-but|-prev-month-but|-next-month-but|-next-year-but)$")) != -1) {
+                                
                                 o.mouseDownElem = origEl;
                                 
                                 addEvent(document, "mouseup", o.clearTimer);
@@ -1047,13 +1054,25 @@ var datePickerController = (function datePickerController() {
                                     check = origEl.id.replace(o.id, ""),
                                     dateYYYYMM = Number(o.date.getFullYear() + pad(o.date.getMonth()+1));
                                 
-                                o.timerInc      = (o.currentYYYYMM > dateYYYYMM || o.currentYYYYMM < dateYYYYMM) ? 1600 : 800;
+                                o.timerInc      = 800;
                                 o.timerSet      = true;
                                 o.dayInc        = incs[check][0];
                                 o.yearInc       = incs[check][1];
                                 o.monthInc      = incs[check][2]; 
                                 
+                                if(!(o.currentYYYYMM == dateYYYYMM)) {
+                                        if((o.currentYYYYMM < dateYYYYMM && (o.yearInc == -1 || o.monthInc == -1)) || (o.currentYYYYMM > dateYYYYMM && (o.yearInc == 1 || o.monthInc == 1))) {
+                                                o.delayedUpdate = false; 
+                                                o.timerInc = 1200;                                                
+                                        } else {
+                                                o.delayedUpdate = true;
+                                                o.timerInc = 800;                                                
+                                        };  
+                                };
+                                
                                 o.updateTable();    
+                                
+                                return stopEvent(e);
                                                             
                         } else if(el.className.search("drag-enabled") != -1) {                                  
                                 o.mx = e.pageX ? e.pageX : e.clientX ? e.clientX : e.x;
@@ -1065,6 +1084,8 @@ var datePickerController = (function datePickerController() {
                                 var b = document.getElementsByTagName("body")[0];
                                 b.className = b.className.replace(/fd-drag-active/g, "") + " fd-drag-active";
                                 o.div.style.zIndex = 10000;
+                                
+                                return stopEvent(e);
                         };
                         return true;                                                                      
                 }; 
@@ -1076,16 +1097,19 @@ var datePickerController = (function datePickerController() {
                           
                         while(el.parentNode) {
                                 // Are we within a valid i.e. clickable TD node  
-                                if(el.tagName && el.tagName.toLowerCase() == "td") {
+                                if(el.tagName && el.tagName.toLowerCase() == "td") {                                        
                                         if(el.className.search(/cd-([0-9]{8})/) == -1 || el.className.search(/date-picker-unused|out-of-range|day-disabled|no-selection|not-selectable/) != -1) return stopEvent(e);
+                                        
                                         var cellDate = el.className.match(/cd-([0-9]{8})/)[1];                                                                                                                                                                           
-                                        o.date          = new Date(cellDate.substr(0,4),cellDate.substr(4,2)-1,cellDate.substr(6,2));
-                                        o.dateSet       = new Date(o.date); 
-                                        o.noFocus       = true;                                                                       
+                                        o.date       = new Date(cellDate.substr(0,4),cellDate.substr(4,2)-1,cellDate.substr(6,2));                                                                                
+                                        o.dateSet    = new Date(o.date); 
+                                        o.noFocus    = true;                                                                       
                                         o.callback("dateset", { "id":o.id, "date":o.dateSet, "dd":o.dateSet.getDate(), "mm":o.dateSet.getMonth() + 1, "yyyy":o.dateSet.getFullYear() });                                          
                                         o.returnFormattedDate();
-                                        o.hide();                            
+                                        o.hide();                  
+                                                
                                         o.stopTimer();
+                                        
                                         break;   
                                 // Today button pressed             
                                 } else if(el.id && el.id == o.id + "-today-but") {                                 
@@ -1389,6 +1413,8 @@ var datePickerController = (function datePickerController() {
                                 o.currentTR.className = ""; 
                                 o.currentTR = null;
                         };
+                        
+                        if(o.statusBar) { o.updateStatus(printFormattedDate(o.date, o.statusFormat, true)); };                          
                 };
                 this.onmouseover = function(e) {
                         e = e || document.parentWindow.event;
@@ -1601,11 +1627,11 @@ var datePickerController = (function datePickerController() {
         };   
         datePicker.prototype.setRangeLow = function(range) {
                 this.rangeLow = (String(range).search(/^(\d\d\d\d)(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$/) == -1) ? false : range;                                
-                this.setDateFromInput();                
+                if(!this.inUpdate) this.setDateFromInput();                
         };
         datePicker.prototype.setRangeHigh = function(range) {
                 this.rangeHigh = (String(range).search(/^(\d\d\d\d)(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$/) == -1) ? false : range;                                               
-                this.setDateFromInput();                
+                if(!this.inUpdate) this.setDateFromInput();                
         };
         datePicker.prototype.setDisabledDays = function(dayArray) {
                 if(!dayArray.length || dayArray.length != 7 || dayArray.join("").search(/^([0|1]{7})$/) == -1) {
@@ -1615,7 +1641,7 @@ var datePickerController = (function datePickerController() {
                         return false;
                 };                
                 this.disabledDays = dayArray;                 
-                this.setDateFromInput();    
+                if(!this.inUpdate) this.setDateFromInput();    
         };
         datePicker.prototype.setDisabledDates = function(dateObj) {                               
                 this.disabledDates  = {};               
@@ -1634,8 +1660,10 @@ var datePickerController = (function datePickerController() {
                                 this.disabledDates[startD] = dateObj[startD];
                         };
                 };
+                
+                //this.checkSelectedDate();
                              
-                this.setDateFromInput();                                                                
+                if(!this.inUpdate) this.setDateFromInput();                                                                
         };
         datePicker.prototype.addEnabledDates = function(dateObj) {
                 this.disabledDates = {}; 
@@ -1646,14 +1674,14 @@ var datePickerController = (function datePickerController() {
                                 this.enabledDates[startD] = dateObj[startD];
                         };
                 };
-                             
-                this.setDateFromInput();                                                                   
+                            
+                if(!this.inUpdate) this.setDateFromInput();                                                                   
         };
         datePicker.prototype.checkSelectedDate = function() {                
-                if(this.dateSet && !this.canDateBeSelected(this.dateSet)) {
+                if(this.dateSet && !this.canDateBeSelected(this.dateSet)) {                        
                         this.dateSet = null;
                 };
-                if(this.created) this.updateTable();
+                if(!this.inUpdate) this.updateTable();
         };
         datePicker.prototype.addOnFocusEvents = function() {                              
                 if(this.kbEventsAdded || this.noFocus) {                         
@@ -1837,7 +1865,7 @@ var datePickerController = (function datePickerController() {
                     dd = this.getDates(y, m),                    
                     wd = tmpDate.getDay() == 0 ? 7 : tmpDate.getDay();               
                 
-                if((this.rangeLow && +dt < +this.rangeLow) || (this.rangeHigh && +dt > +this.rangeHigh) || (dd[dt] == 0) || (this.disabledDays[wd-1] && !(dd[dt] == 1))) {
+                if((this.rangeLow && +dt < +this.rangeLow) || (this.rangeHigh && +dt > +this.rangeHigh) || (dd[dt] == 0) || this.disabledDays[wd-1]) {
                         return false;
                 };
                 
@@ -1908,12 +1936,19 @@ var datePickerController = (function datePickerController() {
                 
                 dt = false;
                 
-                if(d && !(m === false) && y) { 
-                        dt = new Date(y, m, Math.min(d, daysInMonth(+m, +y)));                       
+                if(d && !(m === false) && y) {                                            
+                        if(+d > daysInMonth(+m, +y)) { 
+                                d  = daysInMonth(+m, +y);
+                                dt = false;
+                        } else {
+                                dt = new Date(+y, +m, +d);
+                        };
                 };
                
-                if(!dt || isNaN(dt)) {  
-                        this.date = this.cursorDate ? new Date(+this.cursorDate.substr(0,4), +this.cursorDate.substr(4,2) - 1, +this.cursorDate.substr(6,2)) : new Date();
+                if(!dt || isNaN(dt)) {                        
+                        var newDate = new Date(y || new Date().getFullYear(), !(m === false) ? m : new Date().getMonth(), 1);
+                        this.date = this.cursorDate ? new Date(+this.cursorDate.substr(0,4), +this.cursorDate.substr(4,2) - 1, +this.cursorDate.substr(6,2)) : new Date(newDate.getFullYear(), newDate.getMonth(), Math.min(+d || new Date().getDate(), daysInMonth(newDate.getMonth(), newDate.getFullYear())));
+                        
                         this.date.setHours(5);
                         this.outOfRange();                         
                         this.callback("dateset", this.createCbArgObj());  
@@ -1921,11 +1956,12 @@ var datePickerController = (function datePickerController() {
                         return;
                 };
 
+        
                 dt.setHours(5);
                 this.date = new Date(dt);                            
                 this.outOfRange();                 
                 
-                if(dt.getTime() == this.date.getTime() && this.canDateBeSelected(this.date)) {                        
+                if(dt.getTime() == this.date.getTime() && this.canDateBeSelected(this.date)) {                                              
                         this.dateSet = new Date(this.date);
                 };
                 
@@ -2420,23 +2456,14 @@ var datePickerController = (function datePickerController() {
                         return false;
                 };                
                 
-                m = m === false ? now.getMonth()     : m;
-                y = y === false ? now.getFullYear()  : y;
+                m = m === false ? 11                  : m;
+                y = y === false ? now.getFullYear()   : y;
+                d = d === false ? daysInMonth(+m, +y) : d;
                 
-                if(!(m === false && y === false)) {
-                        if(!(d === false)) {
-                                d = Math.min(d, daysInMonth(m,y));
-                        } else {
-                                d = daysInMonth(m,y);
-                        };
-                } else {
-                        if(d === false) {
-                                d = 1;
-                        };                                
+                if(d > daysInMonth(+m, +y)) {
+                        return false;
                 };
                 
-                //d = d === false ? (!(m === false && y === false) ? daysInMonth(m,y) : 1) : d;
-                   
                 var tmpDate = new Date(y,m,d);
                 
                 return isNaN(tmpDate) ? false : tmpDate;
