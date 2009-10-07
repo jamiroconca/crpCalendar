@@ -728,20 +728,24 @@ class crpCalendar
 		SessionUtil :: setVar('crpCalendar_temp_values', $inputValues['event']);
 
 		$startDate = $this->buildDate($inputValues['event']['startDay'], $inputValues['event']['startMonth'], $inputValues['event']['startYear']);
+		$startTime = $this->buildTime($inputValues['event']['startMinute'], $inputValues['event']['startHour']);
 
 		if (!$inputValues['event']['day_event'])
+		{
 			$endDate = $this->buildDate($inputValues['event']['endDay'], $inputValues['event']['endMonth'], $inputValues['event']['endYear']);
+			$endTime = $this->buildTime($inputValues['event']['endMinute'], $inputValues['event']['endHour']);
+		}
 		else
+		{
 			$endDate = $startDate;
+			$endTime = $this->buildTime('59', '23');
+		}
 
 		if (!$startDate || !$endDate)
 		{
 			LogUtil :: registerError(_CRPCALENDAR_INVALID_DATE);
 			return pnRedirect(pnModUrl('crpCalendar', $returnType, 'new'));
 		}
-
-		$startTime = $this->buildTime($inputValues['event']['startMinute'], $inputValues['event']['startHour']);
-		$endTime = $this->buildTime($inputValues['event']['endMinute'], $inputValues['event']['endHour']);
 
 		$inputValues['event']['start_date'] = $startDate.' '.$startTime;
 		$inputValues['event']['end_date'] = $endDate.' '.$endTime;
@@ -925,11 +929,18 @@ class crpCalendar
 		}
 
 		$startDate = $this->buildDate($inputValues['event']['startDay'], $inputValues['event']['startMonth'], $inputValues['event']['startYear']);
+		$startTime = $this->buildTime($inputValues['event']['startMinute'], $inputValues['event']['startHour']);
 
 		if (!$inputValues['event']['day_event'])
+		{
 			$endDate = $this->buildDate($inputValues['event']['endDay'], $inputValues['event']['endMonth'], $inputValues['event']['endYear']);
+			$endTime = $this->buildTime($inputValues['event']['endMinute'], $inputValues['event']['endHour']);
+		}
 		else
+		{
 			$endDate = $startDate;
+			$endTime = $this->buildTime('59', '23');
+		}
 
 		if (!$startDate || !$endDate)
 		{
@@ -937,10 +948,7 @@ class crpCalendar
 			return pnRedirect(pnModUrl('crpCalendar', 'admin', 'modify', array (
 				'eventid' => $inputValues['eventid']
 			)));
-		}
-
-		$startTime = $this->buildTime($inputValues['event']['startMinute'], $inputValues['event']['startHour']);
-		$endTime = $this->buildTime($inputValues['event']['endMinute'], $inputValues['event']['endHour']);
+		}		
 
 		$inputValues['event']['start_date'] = $startDate.' '.$startTime;
 		$inputValues['event']['end_date'] = $endDate.' '.$endTime;
