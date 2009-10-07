@@ -29,7 +29,7 @@ define('_CRPCALENDAR_STATUS', 'Status');
 define('_CRPCALENDAR_SORT_COLUMN','Order by');
 define('_CRPCALENDAR_SORT_ASC','Ascendant');
 define('_CRPCALENDAR_SORT_DESC','Descendant');
-define('_CRPCALENDAR_SORT_ORDER','Ordinamento');
+define('_CRPCALENDAR_SORT_ORDER','Sorting');
 define('_CRPCALENDAR_TITLE', 'Title');
 
 // event detail
