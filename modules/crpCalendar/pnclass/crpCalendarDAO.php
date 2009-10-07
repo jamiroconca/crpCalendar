@@ -127,10 +127,10 @@ class crpCalendarDAO
 
 		if ($startDate && $endDate)
 		{
-			$queryargs[] = "( (($crpcalendarcolumn[start_date] BETWEEN '" . DataUtil :: formatForStore($startDate) . "' AND '" . DataUtil :: formatForStore($endDate) . "') " .
-			"OR ($crpcalendarcolumn[end_date] BETWEEN '" . DataUtil :: formatForStore($startDate) . "' AND '" . DataUtil :: formatForStore($endDate) . "')) " .
-			"OR (('" . DataUtil :: formatForStore($startDate) . "' BETWEEN $crpcalendarcolumn[start_date] AND $crpcalendarcolumn[end_date]) " .
-			"AND ('" . DataUtil :: formatForStore($endDate) . "' BETWEEN $crpcalendarcolumn[start_date] AND $crpcalendarcolumn[end_date])) )";
+			$queryargs[] = "( (($crpcalendarcolumn[start_date] >= '" . DataUtil :: formatForStore($startDate) . "' AND $crpcalendarcolumn[start_date] < '" . DataUtil :: formatForStore($endDate) . "') " .
+			"OR ($crpcalendarcolumn[end_date] > '" . DataUtil :: formatForStore($startDate) . "' AND $crpcalendarcolumn[end_date] < '" . DataUtil :: formatForStore($endDate) . "')) " .
+			"OR (('" . DataUtil :: formatForStore($startDate) . "' >= $crpcalendarcolumn[start_date] AND '" . DataUtil :: formatForStore($startDate) . "' < $crpcalendarcolumn[end_date]) " .
+			"AND ('" . DataUtil :: formatForStore($endDate) . "' > $crpcalendarcolumn[start_date] AND '" . DataUtil :: formatForStore($endDate) . "' < $crpcalendarcolumn[end_date])) )";
 		}
 
 		switch ($typeList)
@@ -1460,7 +1460,7 @@ class crpCalendarDAO
 		$crpcalendarcolumn = $pntable['crpcalendar_column'];
 		$queryargs = array ();
 
-		$queryargs[] = "($crpcalendarcolumn[start_date] <= '$endYear-$endMonth-$endDay')";
+		$queryargs[] = "($crpcalendarcolumn[end_date] <= '$endYear-$endMonth-$endDay')";
 
 		$where = null;
 		if (count($queryargs) > 0)
