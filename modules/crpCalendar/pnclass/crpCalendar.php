@@ -98,7 +98,7 @@ class crpCalendar
 			$rows[] = $item;
 		}
 
-		return $this->ui->adminList($rows, $navigationValues['category'], $navigationValues['mainCat'], $navigationValues['modvars'], $navigationValues['active']);
+		return $this->ui->adminList($rows, $navigationValues['category'], $navigationValues['mainCat'], $navigationValues['modvars'], $navigationValues['active'], $navigationValues['sortColumn'], $navigationValues['sortOrder']);
 	}
 
 	/**
@@ -1324,6 +1324,7 @@ class crpCalendar
 
 		$ignoreml = FormUtil :: getPassedValue('ignoreml', true);
 		$sortOrder = FormUtil :: getPassedValue('sortOrder', (SessionUtil :: getVar('crpCalendar_choosed_view') == 'mont_view') ? 'ASC' : 'DESC');
+		$sortColumn = FormUtil :: getPassedValue('sortColumn', 'start_date');
 
 		// load the category registry util
 		if (!($class = Loader :: loadClass('CategoryRegistryUtil')))
@@ -1337,7 +1338,7 @@ class crpCalendar
 		// get all module vars
 		$modvars = $this->modvars;
 
-		$data = compact('startnum', 'category', 'active', 'clear', 'ignoreml', 'mainCat', 'cats', 'modvars', 'sortOrder', 't', 'typeList', 'viewForm');
+		$data = compact('startnum', 'category', 'active', 'clear', 'ignoreml', 'mainCat', 'cats', 'modvars', 'sortOrder', 't', 'typeList', 'viewForm', 'sortColumn');
 
 		return $data;
 	}

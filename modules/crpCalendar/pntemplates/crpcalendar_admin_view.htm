@@ -18,6 +18,17 @@
 		<option value="P"<!--[if $events_status eq 'P']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_PENDING" html=1]--></option>
 		<option value="R"<!--[if $events_status eq 'R']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_REJECTED" html=1]--></option>
 	</select>
+	<label for="crpcalendar_sortColumn"><!--[pnml name="_CRPCALENDAR_SORT_COLUMN" html=1]--></label>
+  <select id="crpcalendar_sortColumn" name="sortColumn">
+  	<option value="start_date"<!--[if $sortColumn eq 'start_date']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_START_DATE" html=1]--></option>
+		<option value="title"<!--[if $sortColumn eq 'title']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_TITLE" html=1]--></option>
+		<option value="end_date"<!--[if $sortColumn eq 'end_date']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_END_DATE" html=1]--></option>
+	</select>
+	<label for="crpcalendar_sortOrder"><!--[pnml name="_CRPCALENDAR_SORT_ORDER" html=1]--></label>
+  <select id="crpcalendar_sortOrder" name="sortOrder">
+  	<option value="DESC"<!--[if $sortOrder eq 'DESC']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_SORT_DESC" html=1]--></option>
+		<option value="ASC"<!--[if $sortOrder eq 'ASC']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_SORT_ASC" html=1]--></option>
+	</select>
   <input name="submit" type="submit" value="<!--[pnml name="_SUBMIT" html=1]-->" />
   <input name="clear" type="submit" value="<!--[pnml name="_CLEAR" html=1]-->" />
 </div>

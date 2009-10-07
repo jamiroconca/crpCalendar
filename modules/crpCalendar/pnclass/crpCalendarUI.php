@@ -67,7 +67,7 @@ class crpCalendarUI
 	 *
 	 * @return string html code
 	 */
-	function adminList($rows = array (), $category = null, $mainCat = null, $modvars = array (), $active = null)
+	function adminList($rows = array (), $category = null, $mainCat = null, $modvars = array (), $active = null, $sortColumn = 'start_date', $sortOrder = 'DESC')
 	{
 		// Create output object
 		$pnRender = pnRender :: getInstance('crpCalendar', false);
@@ -79,6 +79,8 @@ class crpCalendarUI
 		$pnRender->assign($modvars);
 		$pnRender->assign('lang', pnUserGetLang());
 		$pnRender->assign('events_status', $active);
+		$pnRender->assign('sortColumn', $sortColumn);
+		$pnRender->assign('sortOrder', $sortOrder);
 
 		// Assign the information required to create the pager
 		$pnRender->assign('pager', array (

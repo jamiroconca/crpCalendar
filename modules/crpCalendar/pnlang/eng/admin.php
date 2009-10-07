@@ -26,6 +26,10 @@ define('_CRPCALENDAR_EVENTS', 'Calendar');
 define('_CRPCALENDAR_NOT_SPECIFIED', 'Not specified');
 define('_CRPCALENDAR_INVALID_DATE', 'Invalid date');
 define('_CRPCALENDAR_STATUS', 'Status');
+define('_CRPCALENDAR_SORT_COLUMN','Order by');
+define('_CRPCALENDAR_SORT_ASC','Ascendant');
+define('_CRPCALENDAR_SORT_DESC','Descendant');
+define('_CRPCALENDAR_SORT_ORDER','Ordinamento');
 define('_CRPCALENDAR_TITLE', 'Title');
 
 // event detail

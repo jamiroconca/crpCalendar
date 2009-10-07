@@ -49,10 +49,11 @@ class crpCalendarDAO
 	 * @param string $endDate end date filter
 	 * @param string $typeList output type
 	 * @param string $bylocation location filter
+	 * @param string $sortColumn which column for list order
 	 *
 	 * @return array events list
 	 */
-	function adminList($startnum = 1, $category = null, $clear = false, $ignoreml = true, $modvars = array (), $mainCat = null, $active = null, $interval = null, $sortOrder = 'DESC', $startDate = null, $endDate = null, $typeList = null, $bylocation = null)
+	function adminList($startnum = 1, $category = null, $clear = false, $ignoreml = true, $modvars = array (), $mainCat = null, $active = null, $interval = null, $sortOrder = 'DESC', $startDate = null, $endDate = null, $typeList = null, $bylocation = null, $sortColumn = 'start_date')
 	{
 		(empty ($startnum)) ? $startnum = 1 : '';
 		(empty ($modvars['itemsperpage'])) ? $modvars['itemsperpage'] = '-1' : '';
@@ -169,7 +170,7 @@ class crpCalendarDAO
 			)
 		);
 
-		$orderby = "ORDER BY $crpcalendarcolumn[start_date] $sortOrder";
+		$orderby = "ORDER BY " . $crpcalendarcolumn[$sortColumn] . " $sortOrder";
 
 		// get the objects from the db
 		$objArray = DBUtil :: selectObjectArray('crpcalendar', $where, $orderby, $startnum -1, $modvars['itemsperpage'], '', $permFilter, $catFilter);

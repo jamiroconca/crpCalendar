@@ -1,5 +1,6 @@
 crpCalendar
 v0.5.4 - ??? 2009
+- added more sort options in admin view ticket:73
 - added caption field for files
 v0.5.3 - 15 september 2009
 - updated datepicker to v5
