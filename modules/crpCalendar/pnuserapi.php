@@ -110,7 +110,7 @@ function crpCalendar_userapi_countitems($args)
 
 	$calendar = new crpCalendar();
 
-	return $calendar->dao->countItems($args['category'], $args['active'], $args['uid'], $args['eventid'], $args['typeList'], $calendar->modvars);
+	return $calendar->dao->countItems($args['category'], $args['active'], $args['uid'], $args['eventid'], $args['typeList'], $calendar->modvars, $args['startDate'], $args['endDate']);
 }
 
 /**
