@@ -12,9 +12,7 @@
 	
 	<thead>
 	<tr>
-		<!--[if $crpcalendar_userlist_image]-->
     <th class="crpcalendar_w1"><!--[pnml name="_CRPCALENDAR_IMAGES" html=1]--></th>
-	  <!--[/if]-->
     <th class="sortable"><!--[pnml name="_NAME" html=1]--></th>
 	  <th class="crpcalendar_w3"><!--[pnml name="_CRPCALENDAR_CONTENT" html=1]--></th>
 	</tr>
@@ -23,6 +21,7 @@
 	<!--[foreach from=$users item=user]-->
     <tr class="<!--[cycle values="odd,even"]-->  vcard">
 		<!--[assign var="uid" value=$user.uid ]-->
+
 		<td>
 			<!--[if pnModAvailable("Avatar") && pnUserGetVar('_YOURAVATAR',$uid)]-->
 				<img class="photo" src="<!--[pnmodgetvar module="Avatar" name="avatardir"]-->/<!--[pnusergetvar name=_YOURAVATAR uid=$uid]-->" alt="Avatar" />
