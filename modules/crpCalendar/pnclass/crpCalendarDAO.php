@@ -1043,7 +1043,7 @@ class crpCalendarDAO
 	 *
 	 * @return int on success
 	 */
-	function countItems($category = null, $active = null, $uid = null, $eventid = false, $typeList = null, $modvars=array())
+	function countItems($category = null, $active = null, $uid = null, $eventid = false, $typeList = null, $modvars=array(), $startDate = null, $endDate = null)
 	{
 		$pntable = pnDBGetTables();
 		$crpcalendarcolumn = $pntable['crpcalendar_column'];
@@ -1075,6 +1075,14 @@ class crpCalendarDAO
 				$catFilter['__META__']['module'] = 'crpCalendar';
 			}
 
+    if ($startDate && $endDate)
+		{
+			$queryargs[] = "( (($crpcalendarcolumn[start_date] >= '" . DataUtil :: formatForStore($startDate) . "' AND $crpcalendarcolumn[start_date] < '" . DataUtil :: formatForStore($endDate) . "') " .
+			"OR ($crpcalendarcolumn[end_date] > '" . DataUtil :: formatForStore($startDate) . "' AND $crpcalendarcolumn[end_date] < '" . DataUtil :: formatForStore($endDate) . "')) " .
+			"OR (('" . DataUtil :: formatForStore($startDate) . "' >= $crpcalendarcolumn[start_date] AND '" . DataUtil :: formatForStore($startDate) . "' < $crpcalendarcolumn[end_date]) " .
+			"AND ('" . DataUtil :: formatForStore($endDate) . "' > $crpcalendarcolumn[start_date] AND '" . DataUtil :: formatForStore($endDate) . "' < $crpcalendarcolumn[end_date])) )";
+		}
+    
 		switch ($typeList)
 		{
 			case "upcoming" :
