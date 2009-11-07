@@ -225,7 +225,7 @@ class crpCalendar
 
 		if ($navigationValues['modvars']['yearlist_categorized'])
 		{
-			$cats = CategoryUtil :: getCategoriesByParentID($navigationValues['mainCat']);
+			$cats = CategoryUtil :: getSubCategories($navigationValues['mainCat']);
 			$userLang = pnUserGetLang();
 			foreach ($cats as $cat)
 			{
@@ -411,10 +411,15 @@ class crpCalendar
 		$navigationValues['startDate'] = DateUtil :: getDatetime(DateUtil :: parseUIDateTime($day));
 		$navigationValues['endDate'] = DateUtil :: getDatetime(DateUtil :: parseUIDateTime($tomorrow));
 		$navigationValues['sortOrder'] = 'ASC';
-		// reset page limit for daylist
-		$navigationValues['modvars']['itemsperpage'] = '-1';
-		// Get all matching events
-		$items = pnModAPIFunc('crpCalendar', 'user', 'getall', $navigationValues);
+
+    // reset page limit for daylist counter
+    if ($navigationValues['modvars']['daylist_categorized'])
+    {
+      $navigationValues['modvars']['itemsperpage'] = '-1';
+      $navigationValues['startnum'] = '1';
+    }
+    // all matching events
+    $items = pnModAPIFunc('crpCalendar', 'user', 'getall', $navigationValues);
 
 		if (!$items)
 			$items = array ();
@@ -455,7 +460,7 @@ class crpCalendar
 
 		if ($navigationValues['modvars']['daylist_categorized'])
 		{
-			$cats = CategoryUtil :: getCategoriesByParentID($navigationValues['mainCat']);
+			$cats = CategoryUtil::getSubCategories($navigationValues['mainCat']);
 			$userLang = pnUserGetLang();
 			foreach ($cats as $cat)
 			{
@@ -468,7 +473,7 @@ class crpCalendar
 			$items = $categorizedEvents;
 		}
 
-		return $this->ui->userDayList($items, $day, $navigationValues['t'], $date, $navigationValues['startDate'], $navigationValues['endDate'], $today, $navigationValues['category'], $navigationValues['mainCat'], $navigationValues['modvars']);
+		return $this->ui->userDayList($items, $navigationValues['startnum'], $day, $navigationValues['t'], $date, $navigationValues['startDate'], $navigationValues['endDate'], $today, $navigationValues['category'], $navigationValues['mainCat'], $navigationValues['modvars']);
 	}
 
 	/**
