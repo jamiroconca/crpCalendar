@@ -63,7 +63,7 @@ function crpCalendar_userapi_getall_formlist($navigationValues)
 
 	$calendar = new crpCalendar();
 
-	return $calendar->dao->formList($navigationValues['startnum'], $navigationValues['category'], $navigationValues['clear'], $navigationValues['ignoreml'], $navigationValues['modvars'], $navigationValues['mainCat'], 'A', $navigationValues['interval'], $navigationValues['sortOrder']);
+	return $calendar->dao->formList($navigationValues['startnum'], $navigationValues['category'], $navigationValues['clear'], $navigationValues['ignoreml'], $navigationValues['modvars'], 'A', $navigationValues['interval'], $navigationValues['sortOrder']);
 }
 
 /**
@@ -110,7 +110,7 @@ function crpCalendar_userapi_countitems($args)
 
 	$calendar = new crpCalendar();
 
-	return $calendar->dao->countItems($args['category'], $args['active'], $args['uid'], $args['eventid'], $args['typeList']);
+	return $calendar->dao->countItems($args['category'], $args['active'], $args['uid'], $args['eventid'], $args['typeList'], $calendar->modvars);
 }
 
 /**
@@ -128,7 +128,7 @@ function crpCalendar_userapi_countitems_attendance($args)
 
 	$calendar = new crpCalendar();
 
-	return $calendar->dao->countAttendeeItems($args['category'], $args['active'], $args['uid'], $args['eventid']);
+	return $calendar->dao->countAttendeeItems($args['category'], $args['active'], $args['uid'], $args['eventid'], $calendar->modvars);
 }
 
 /**

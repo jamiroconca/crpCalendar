@@ -210,14 +210,13 @@ class crpCalendarDAO
 	 * @param int $category current category if specified
 	 * @param bool $ignoreml ignore multilanguage
 	 * @param array $modvars module's variables
-	 * @param int $mainCat main module's category
 	 * @param int $active event status
 	 * @param int $interval event date interval
 	 * @param string $sortOrder results sort order
 	 *
 	 * @return array element list
 	 */
-	function formList($startnum = 1, $category = null, $clear = false, $ignoreml = true, $modvars = array (), $mainCat, $active = null, $interval = null, $sortOrder = 'DESC')
+	function formList($startnum = 1, $category = null, $clear = false, $ignoreml = true, $modvars = array (), $active = null, $interval = null, $sortOrder = 'DESC')
 	{
 		if (!is_numeric($startnum) || !is_numeric($modvars['itemsperpage']))
 		{
@@ -230,7 +229,21 @@ class crpCalendarDAO
 		else
 			if ($category)
 			{
-				$catFilter['Main'] = $category;
+        if ($modvars['subcategory_listing'])
+        {
+          $catstofilter[] = $category;
+          // TODO : Zikula 1.1.1 fail to load CategoryUtil from blocks ?
+          Loader::loadClass ('CategoryUtil');
+          $childs = CategoryUtil::getSubCategories($category);
+          // TODO : attributes param is commented ?
+          foreach ($childs as $child)
+            $catstofilter[] = $child['id'];
+
+          $catFilter['Main'] = $catstofilter;
+        }
+        else
+          $catFilter['Main'] = $category;
+          
 				$catFilter['__META__']['module'] = 'crpCalendar';
 			}
 
@@ -947,10 +960,11 @@ class crpCalendarDAO
 	 * @param string $active status required
 	 * @param int $uid user identifier
 	 * @param int $eventid item identifier
+   * @param array $modvars module's variables
 	 *
 	 * @return int on success
 	 */
-	function countAttendeeItems($category = null, $active = null, $uid = null, $eventid = null)
+	function countAttendeeItems($category = null, $active = null, $uid = null, $eventid = null, $modvars=array())
 	{
 		$pntable = pnDBGetTables();
 		$crpcalendarcolumn = $pntable['crpcalendar_column'];
@@ -964,7 +978,21 @@ class crpCalendarDAO
 		else
 			if ($category)
 			{
-				$catFilter['Main'] = $category;
+        if ($modvars['subcategory_listing'])
+        {
+          $catstofilter[] = $category;
+          // TODO : Zikula 1.1.1 fail to load CategoryUtil from blocks ?
+          Loader::loadClass ('CategoryUtil');
+          $childs = CategoryUtil::getSubCategories($category);
+          // TODO : attributes param is commented ?
+          foreach ($childs as $child)
+            $catstofilter[] = $child['id'];
+
+          $catFilter['Main'] = $catstofilter;
+        }
+        else
+          $catFilter['Main'] = $category;
+          
 				$catFilter['__META__']['module'] = 'crpCalendar';
 			}
 
@@ -1011,10 +1039,11 @@ class crpCalendarDAO
 	 * @param int $uid user identifier
 	 * @param int $eventid item identifier
 	 * @param string $typeList output type
+   * @param array $modvars module's variables
 	 *
 	 * @return int on success
 	 */
-	function countItems($category = null, $active = null, $uid = null, $eventid = false, $typeList = null)
+	function countItems($category = null, $active = null, $uid = null, $eventid = false, $typeList = null, $modvars=array())
 	{
 		$pntable = pnDBGetTables();
 		$crpcalendarcolumn = $pntable['crpcalendar_column'];
@@ -1028,7 +1057,21 @@ class crpCalendarDAO
 		else
 			if ($category)
 			{
-				$catFilter['Main'] = $category;
+        if ($modvars['subcategory_listing'])
+        {
+          $catstofilter[] = $category;
+          // TODO : Zikula 1.1.1 fail to load CategoryUtil from blocks ?
+          Loader::loadClass ('CategoryUtil');
+          $childs = CategoryUtil::getSubCategories($category);
+          // TODO : attributes param is commented ?
+          foreach ($childs as $child)
+            $catstofilter[] = $child['id'];
+
+          $catFilter['Main'] = $catstofilter;
+        }
+        else
+          $catFilter['Main'] = $category;
+
 				$catFilter['__META__']['module'] = 'crpCalendar';
 			}
 
