@@ -114,7 +114,7 @@ function crpCalendar_searchapi_search($args)
     $query .= ')';
     $flag = true;
   }
-  (!$archive) ? $query .= " AND $eventscolumn[start_date] > '" . DataUtil :: formatForStore($nowDate) . "' " : '';
+  (!$archive) ? $query .= " AND $eventscolumn[end_date] > '" . DataUtil :: formatForStore($nowDate) . "' " : '';
   $query .= " AND $eventscolumn[obj_status]='A' ";
   $query .= " ORDER BY $eventscolumn[start_date] DESC";
 
