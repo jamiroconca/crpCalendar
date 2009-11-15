@@ -11,7 +11,7 @@
 
 class crpCalendarEventSelector extends pnFormPlugin
 {
-	var $inputName;
+  var $inputName;
   var $dataField;
   var $dataBased;
   var $group;
@@ -25,7 +25,7 @@ class crpCalendarEventSelector extends pnFormPlugin
     return __FILE__;
   }
 
-	function create(&$render, $params)
+  function create(&$render, $params)
   {
     $this->inputName = $this->id;
     $this->dataBased = (array_key_exists('dataBased', $params) ? $params['dataBased'] : true);
@@ -48,26 +48,26 @@ class crpCalendarEventSelector extends pnFormPlugin
     PageUtil::AddVar('stylesheet', ThemeUtil::getModuleStylesheet('crpCalendar'));
 
     // get all module vars
-		$modvars = pnModGetVar('crpCalendar');
+    $modvars = pnModGetVar('crpCalendar');
 
-		// load the category registry util
-		if (!($class = Loader :: loadClass('CategoryRegistryUtil')))
-			pn_exit('Unable to load class [CategoryRegistryUtil] ...');
-		if (!($class = Loader :: loadClass('CategoryUtil')))
-			pn_exit('Unable to load class [CategoryUtil] ...');
+    // load the category registry util
+    if (!($class = Loader :: loadClass('CategoryRegistryUtil')))
+      pn_exit('Unable to load class [CategoryRegistryUtil] ...');
+    if (!($class = Loader :: loadClass('CategoryUtil')))
+      pn_exit('Unable to load class [CategoryUtil] ...');
 
-		$category = null;
-		$startnum = '1';
-		$mainCat = CategoryRegistryUtil :: getRegisteredModuleCategory('crpCalendar', 'crpcalendar', 'Main', '/__SYSTEM__/Modules/crpCalendar');
-		$cats = CategoryUtil::getCategoriesByParentID($mainCat);
-		$ignoreml = true;
-		$sortOrder = 'DESC';
+    $category = null;
+    $startnum = '1';
+    $mainCat = CategoryRegistryUtil :: getRegisteredModuleCategory('crpCalendar', 'crpcalendar', 'Main', '/__SYSTEM__/Modules/crpCalendar');
+    $cats = CategoryUtil::getCategoriesByParentID($mainCat);
+    $ignoreml = true;
+    $sortOrder = 'DESC';
 
-		$data = compact('startnum', 'category', 'clear', 'ignoreml', 'mainCat', 'cats', 'modvars', 'sortOrder');
+    $data = compact('startnum', 'category', 'clear', 'ignoreml', 'mainCat', 'cats', 'modvars', 'sortOrder');
 
     $events = pnModAPIFunc('crpCalendar', 'user', 'getall_formlist', $data);
 
-   	if ($events === false)
+    if ($events === false)
       return LogUtil::registerError (_MODARGSERROR);
 
     if ($this->selectedItemId != null)
@@ -86,16 +86,17 @@ class crpCalendarEventSelector extends pnFormPlugin
       $selectedCategoryId = null;
     }
 
-		$crpRender = pnRender::getInstance('crpCalendar', false);
-		$crpRender->assign('mainCategory', $mainCat);
-		$crpRender->assign('selectedEventId', $selectedEventId);
-		$crpRender->assign('selectedCategoryId', $selectedCategoryId);
+    $crpRender = pnRender::getInstance('crpCalendar', false);
+    $crpRender->assign('mainCategory', $mainCat);
+    $crpRender->assign('selectedEventId', $selectedEventId);
+    $crpRender->assign('selectedCategoryId', $selectedCategoryId);
+    $crpRender->assign($modvars);
 
-		$crpRender->assign('events', $events);
+    $crpRender->assign('events', $events);
 
-		$output = $crpRender->fetch('crpcalendar_event.htm');
+    $output = $crpRender->fetch('crpcalendar_event.htm');
 
-		return $output;
+    return $output;
   }
 
   function decode(&$render)
@@ -105,7 +106,7 @@ class crpCalendarEventSelector extends pnFormPlugin
     $value = FormUtil::getPassedValue($this->inputName, null, 'POST');
     if (get_magic_quotes_gpc())
       $value = stripslashes($value);
-		//
+    //
     $category = FormUtil::getPassedValue("{$this->inputName}_category", null, 'POST');
     if (get_magic_quotes_gpc())
       $category = stripslashes($category);
@@ -136,7 +137,7 @@ class crpCalendarEventSelector extends pnFormPlugin
 
   function saveValue(&$render, &$data)
   {
-		if ($this->dataBased)
+    if ($this->dataBased)
     {
       if ($this->group == null)
       {
@@ -154,7 +155,7 @@ class crpCalendarEventSelector extends pnFormPlugin
 
   function loadValue(&$render, &$values)
   {
-		if ($this->dataBased)
+    if ($this->dataBased)
     {
       $value = null;
 
