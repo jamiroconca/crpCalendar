@@ -19,7 +19,7 @@ Loader :: includeOnce('modules/crpCalendar/pnclass/crpCalendar.php');
  */
 function crpCalendar_user_main()
 {
-	// Security check
+// Security check
 	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
 	{
 		return LogUtil :: registerPermissionError();
@@ -39,7 +39,7 @@ function crpCalendar_user_main()
  */
 function crpCalendar_user_view()
 {
-	// Security check
+// Security check
 	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
 	{
 		return LogUtil :: registerPermissionError();
@@ -56,7 +56,7 @@ function crpCalendar_user_view()
  */
 function crpCalendar_user_year_view()
 {
-	// Security check
+// Security check
 	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
 	{
 		return LogUtil :: registerPermissionError();
@@ -73,7 +73,7 @@ function crpCalendar_user_year_view()
  */
 function crpCalendar_user_month_view()
 {
-	// Security check
+// Security check
 	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
 	{
 		return LogUtil :: registerPermissionError();
@@ -90,7 +90,7 @@ function crpCalendar_user_month_view()
  */
 function crpCalendar_user_week_view()
 {
-	// Security check
+// Security check
 	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
 	{
 		return LogUtil :: registerPermissionError();
@@ -107,7 +107,7 @@ function crpCalendar_user_week_view()
  */
 function crpCalendar_user_day_view()
 {
-	// Security check
+// Security check
 	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
 	{
 		return LogUtil :: registerPermissionError();
@@ -124,7 +124,7 @@ function crpCalendar_user_day_view()
  */
 function crpCalendar_user_display()
 {
-	// Security check
+// Security check
 	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
 	{
 		return LogUtil :: registerPermissionError();
@@ -141,14 +141,54 @@ function crpCalendar_user_display()
  */
 function crpCalendar_user_simple_display($args)
 {
+// Security check
+	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
+	{
+		return LogUtil :: registerPermissionError();
+	}
+
+	if (!pnModAvailable('crpCalendar'))
+		return;
+
+	$calendar = new crpCalendar();
+	return $calendar->simpleDisplayEvent($args['eventid']);
+}
+
+/**
+ * diaplay category items, for content module
+ *
+ * @return string HTML output
+ */
+function crpCalendar_user_simple_category_display($args)
+{
 	// Security check
 	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
 	{
 		return LogUtil :: registerPermissionError();
 	}
 
+	if (!pnModAvailable('crpCalendar'))
+		return;
+
+	$modvars = pnModGetVar('crpCalendar');
+
+	$apiargs['interval'] = $args['limit'];
+	$apiargs['startnum'] = 1;
+	$apiargs['category'] = $args['categoryid'];
+	$apiargs['active'] = 'A';
+	$apiargs['modvars'] = $modvars;
+
+	// call the api
+	$items = pnModAPIFunc('crpCalendar', 'user', 'getall', $apiargs);
+
 	$calendar = new crpCalendar();
-	return $calendar->simpleDisplayEvent($args['eventid']);
+	$htmlText = "";
+
+	foreach ($items as $kEvent => $vEvent)
+	{
+		$htmlText .= $calendar->simpleDisplayEvent($vEvent['eventid']);
+	}
+	return $htmlText;
 }
 
 /**
@@ -158,7 +198,7 @@ function crpCalendar_user_simple_display($args)
  */
 function crpCalendar_user_get_image()
 {
-	// Security check
+// Security check
 	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
 	{
 		return LogUtil :: registerPermissionError();
@@ -175,7 +215,7 @@ function crpCalendar_user_get_image()
  */
 function crpCalendar_user_get_partecipations()
 {
-	// Security check
+// Security check
 	if (!pnModGetVar('crpCalendar', 'enable_partecipation'))
 	{
 		return LogUtil :: registerPermissionError();
@@ -192,7 +232,7 @@ function crpCalendar_user_get_partecipations()
  */
 function crpCalendar_user_get_attendees()
 {
-	// Security check
+// Security check
 	if (!pnModGetVar('crpCalendar', 'enable_partecipation'))
 	{
 		return LogUtil :: registerPermissionError();
@@ -209,7 +249,7 @@ function crpCalendar_user_get_attendees()
  */
 function crpCalendar_user_get_file()
 {
-	// Security check
+// Security check
 	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
 	{
 		return LogUtil :: registerPermissionError();
@@ -236,7 +276,7 @@ function crpCalendar_user_get_file()
  */
 function crpCalendar_user_get_thumbnail()
 {
-	// Security check
+// Security check
 	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
 	{
 		return LogUtil :: registerPermissionError();
@@ -253,7 +293,7 @@ function crpCalendar_user_get_thumbnail()
  */
 function crpCalendar_user_new()
 {
-	// Security check
+// Security check
 	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_COMMENT))
 	{
 		return LogUtil :: registerPermissionError();
@@ -270,7 +310,7 @@ function crpCalendar_user_new()
  */
 function crpCalendar_user_create()
 {
-	// Security check
+// Security check
 	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_COMMENT))
 	{
 		return LogUtil :: registerPermissionError();
@@ -287,7 +327,7 @@ function crpCalendar_user_create()
  */
 function crpCalendar_user_modify()
 {
-	// Security check
+// Security check
 	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_MODERATE))
 	{
 		return LogUtil :: registerPermissionError();
@@ -304,7 +344,7 @@ function crpCalendar_user_modify()
  */
 function crpCalendar_user_update()
 {
-	// Security check
+// Security check
 	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_MODERATE))
 	{
 		return LogUtil :: registerPermissionError();
@@ -321,7 +361,7 @@ function crpCalendar_user_update()
  */
 function crpCalendar_user_getfeed()
 {
-	// Security check
+// Security check
 	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
 	{
 		return LogUtil :: registerPermissionError();
@@ -338,7 +378,7 @@ function crpCalendar_user_getfeed()
  */
 function crpCalendar_user_getICal()
 {
-	// Security check
+// Security check
 	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
 	{
 		return LogUtil :: registerPermissionError();
@@ -355,7 +395,7 @@ function crpCalendar_user_getICal()
  */
 function crpCalendar_user_ical_exports()
 {
-	// Security check
+// Security check
 	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
 	{
 		return LogUtil :: registerPermissionError();
@@ -372,7 +412,7 @@ function crpCalendar_user_ical_exports()
  */
 function crpCalendar_user_add_partecipation()
 {
-	// Security check
+// Security check
 	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ) || !pnUserLoggedIn() || !pnModGetVar('crpCalendar', 'enable_partecipation'))
 	{
 		return LogUtil :: registerPermissionError();
@@ -389,7 +429,7 @@ function crpCalendar_user_add_partecipation()
  */
 function crpCalendar_user_delete_partecipation()
 {
-	// Security check
+// Security check
 	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ) || !pnUserLoggedIn() || !pnModGetVar('crpCalendar', 'enable_partecipation'))
 	{
 		return LogUtil :: registerPermissionError();
