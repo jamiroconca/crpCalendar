@@ -1,0 +1,22 @@
+<!--[if $crpcalendar_userlist_image]-->
+<!--[pnajaxheader modname="crpCalendar" nobehaviour=true noscriptaculous=true]-->
+<!--[/if]-->
+<!--[pnpageaddvar name="javascript" value="modules/crpCalendar/pnjavascript/tablesort.js"]-->
+<!--[include file="crpcalendar_user_menu.htm"]-->
+
+<!--[include file="crpcalendar_user_filtermenu.htm"]-->
+
+<!--[crpcalendar_yearnav date=$date t=$t container="h4"]-->
+
+<!--[if $yearlist_categorized]-->
+	<!--[include file="crpcalendar_user_view_year_grouped.htm"]-->
+<!--[else]-->
+	<!--[include file="crpcalendar_user_view_year_flat.htm"]-->
+<!--[/if]-->
+
+<!--[if empty($events)]-->
+<br /><br />
+<p>
+<!--[pnml name=_CRPCALENDAR_NO_EVENTS html=1]-->
+</p>
+<!--[/if]-->
