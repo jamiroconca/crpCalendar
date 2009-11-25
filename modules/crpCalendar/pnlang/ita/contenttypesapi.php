@@ -15,3 +15,9 @@ define('_CRPCALENDAR_CONTENTENTTYPE_EVENTDESCR', 'Visualizza un evento da crpCal
 
 define('_CRPCALENDAR_CONTENTENTTYPE_EVENTLABEL', 'Seleziona un evento da visualizzare');
 define('_CRPCALENDAR_CONTENTENTTYPE_NOEVENT', 'Nessun evento');
+
+define('_CRPCALENDAR_CONTENTENTTYPE_CATEGORY_EVENTTITLE', 'Eventi in una categoria di crpCalendar');
+define('_CRPCALENDAR_CONTENTENTTYPE_CATEGORY_EVENTDESCR', 'Visualizza elenco di eventi da una categoria di crpCalendar');
+
+define('_CRPCALENDAR_CONTENTENTTYPE_CATEGORY_EVENTLABEL', 'Seleziona una categoria di cui visualizzare gli eventi');
+define('_CRPCALENDAR_CONTENTENTTYPE_NOCATEGORY', 'Nessuna categoria');
