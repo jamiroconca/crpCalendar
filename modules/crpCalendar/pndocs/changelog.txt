@@ -1,6 +1,7 @@
 crpCalendar
 v0.5.4 - ??? 2009
-- added more sort options in admin view ticket:73
+- added Content plugin for display category events, view ticket:63
+- added more sort options in admin, view ticket:73
 - added caption field for files
 - fixed sub-categories counters and listings
 - added pager on day view
