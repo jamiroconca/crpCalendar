@@ -1,0 +1,47 @@
+<!--[pnsessiongetvar name="crpCalendar_choosed_view" assign=choosed_view]-->
+
+<form action="<!--[pnmodurl modname=crpCalendar type=user func=$choosed_view]-->" method="post" enctype="application/x-www-form-urlencoded">
+<div>
+	<!--[if $enablecategorization]-->
+  	<label for="events_category"><!--[pnml name=_CATEGORY html=1]--></label>
+  	<!--[ pnml assign="lblDef" name="_ALLCATEGORIES" html=1]-->
+  	<!--[ selector_category category=$mainCategory name="events_category" selectedValue=$events_category defaultValue="0" defaultText="$lblDef" ]-->
+ 	<!--[/if]-->
+  	
+	<!--[if $choosed_view neq "view" && $choosed_view neq "get_partecipations"  && $choosed_view neq "year_view"]-->
+	  	
+  	<!--[if $choosed_view eq "month_view"]-->
+  	<label for="crpcalendar_viewForm"><!--[pnml name=_CRPCALENDAR_VIEW_FORM html=1]--></label>
+  	<select id="crpcalendar_viewForm" name="viewForm">
+  		<option value="table"<!--[if $viewForm eq 'table']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_VIEW_TABLE" html=1]--></option>
+  		<option value="list"<!--[if $viewForm eq 'list']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_VIEW_LIST" html=1]--></option>
+  	</select>
+  	<!--[/if]-->
+	  	
+  	<!--[pnajaxheader modname=crpCalendar filename=crpcalendar.js nobehaviour=true noscriptaculous=true]-->
+  	<!--[pnpageaddvar name="javascript" value="modules/crpCalendar/pnjavascript/datepicker/datepicker.js"]-->
+		<!--[pnpageaddvar name="stylesheet" value="modules/crpCalendar/pnjavascript/datepicker/css/datepicker.css"]-->
+  	<!--[html_select_date time=$t end_year="+4" display_months=false display_years=false id="start_datefield-dd"]-->
+		<!--[html_select_date time=$t end_year="+4" display_days=false display_years=false id="start_datefield-mm"]-->
+		<!--[html_select_date time=$t start_year=$crpcalendar_start_year end_year="+4" display_days=false display_months=false id="start_datefield"]-->
+  
+  <!--[elseif $choosed_view neq "get_partecipations"  && $choosed_view neq "year_view"]-->
+  	<label for="crpcalendar_typeList"><!--[pnml name=_CRPCALENDAR_STATUS html=1]--></label>
+  	<select id="crpcalendar_typeList" name="typeList">
+  		<option value=""><!--[pnml name="_CRPCALENDAR_NOT_SPECIFIED" html=1]--></option>
+  		<option value="upcoming"<!--[if $typeList eq 'upcoming']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_UPCOMING" html=1]--></option>
+  		<option value="archive"<!--[if $typeList eq 'archive']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_ARCHIVED" html=1]--></option>
+  	</select>
+ 	<!--[/if]-->
+  
+  <input name="submit" type="submit" value="<!--[pnml name="_SUBMIT" html=1]-->" />
+  <input name="clear" type="submit" value="<!--[pnml name="_CLEAR" html=1]-->" />
+
+</div>
+</form>
+
+<br />
+
+<script type="text/javascript">
+	Event.observe(window, 'load', function(){crpCalendarFilterInit();}, false);
+</script>

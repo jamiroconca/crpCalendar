@@ -1,0 +1,29 @@
+<!--[include file="crpcalendar_admin_menu.htm"]-->
+
+<div class="pn-admincontainer">
+<div class="pn-adminpageicon"><!--[pnimg modname=core src=windowlist.gif set=icons/large alt=$templatetitle]--></div>
+<h2><!--[pnml name="_CRPCALENDAR_IMPORT_ICAL"]--></h2>
+
+<form class="pn-adminform" name="import_ical" action="<!--[pnmodurl modname="crpCalendar" type="admin" func="import_create"]-->" method="post" enctype="multipart/form-data">
+<div>	
+	<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="crpCalendar"]-->" />
+	<div class="pn-adminformrow">
+		<label for="event_category_cat_val"><!--[pnml name="_CATEGORY" html=1]--></label>
+		<!--[ pnml assign="lblDef" name="_CHOOSECATEGORY" ]-->
+		<!--[ selector_category category=$mainCategory name="id_category" field="id" selectedValue=$__CATEGORIES__.Main.id defaultValue="0" defaultText="$lblDef" ]-->
+	</div>
+	
+	<div class="pn-adminformrow">
+	    <label for="crpcalendar_event_document"><!--[pnml name="_CRPCALENDAR_EVENT_DOCUMENT" html=1]--> <!--[pnmodgetvar module=crpCalendar name=document_dimension]--> bytes</label>
+		<input type="hidden" name="MAX_FILE_SIZE" value="<!--[pnmodgetvar module=crpCalendar name=document_dimension]-->"/>
+	  	<input id="ics_file" name="ics_file" type="file" size="32"/>
+	</div>
+	
+	<div class="pn-adminformrow pn-adminformbuttons">
+	    <a href="<!--[pnmodurl modname=crpCalendar type=admin func=view]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt="_CANCEL" title="_CANCEL"]--></a>
+	    <!--[pnbutton src=button_ok.gif set=icons/small alt="_UPDATE" title="_UPDATE"]-->
+	</div>
+</div>
+</form>
+
+</div>

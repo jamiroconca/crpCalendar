@@ -1,0 +1,90 @@
+<!--[pnajaxheader modname=crpCalendar filename=crpcalendar.js noscriptaculous=true nobehaviour=true]-->
+<!--[include file="crpcalendar_admin_menu.htm"]-->
+<!--[pnml name=_CRPCALENDAR_EVENTS html=1 assign=itemname]-->
+<!--[pnml name="_VIEWITEMS" i=$itemname assign=templatetitle]-->
+<div class="pn-admincontainer">
+<div class="pn-adminpageicon"><!--[pnimg modname=core src=windowlist.gif set=icons/large alt=$templatetitle]--></div>
+<h2><!--[$templatetitle]--></h2>
+<!--[if $enablecategorization]-->
+<form action="<!--[pnmodurl modname=crpCalendar type=admin func=view]-->" method="post" enctype="application/x-www-form-urlencoded">
+<div>
+  <label for="quotes_category"><!--[pnml name=_CATEGORY html=1]--></label>
+  <!--[ pnml assign="lblDef" name="_ALLCATEGORIES" html=1]-->
+  <!--[ selector_category category=$mainCategory name="events_category" selectedValue=$events_category defaultValue="0" defaultText="$lblDef" ]-->
+  <label for="crpcalendar_event_status"><!--[pnml name="_CRPCALENDAR_STATUS" html=1]--></label>
+  <select id="crpcalendar_event_status" name="events_status">
+  	<option value=""<!--[if $events_status eq '']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_NOT_SPECIFIED" html=1]--></option>
+		<option value="A"<!--[if $events_status eq 'A']--> selected="selected"<!--[/if]-->><!--[pnml name="_ACTIVE" html=1]--></option>
+		<option value="P"<!--[if $events_status eq 'P']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_PENDING" html=1]--></option>
+		<option value="R"<!--[if $events_status eq 'R']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_REJECTED" html=1]--></option>
+	</select>
+	<label for="crpcalendar_sortColumn"><!--[pnml name="_CRPCALENDAR_SORT_COLUMN" html=1]--></label>
+  <select id="crpcalendar_sortColumn" name="sortColumn">
+  	<option value="start_date"<!--[if $sortColumn eq 'start_date']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_START_DATE" html=1]--></option>
+		<option value="title"<!--[if $sortColumn eq 'title']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_TITLE" html=1]--></option>
+		<option value="end_date"<!--[if $sortColumn eq 'end_date']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_END_DATE" html=1]--></option>
+	</select>
+	<label for="crpcalendar_sortOrder"><!--[pnml name="_CRPCALENDAR_SORT_ORDER" html=1]--></label>
+  <select id="crpcalendar_sortOrder" name="sortOrder">
+  	<option value="DESC"<!--[if $sortOrder eq 'DESC']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_SORT_DESC" html=1]--></option>
+		<option value="ASC"<!--[if $sortOrder eq 'ASC']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_SORT_ASC" html=1]--></option>
+	</select>
+  <input name="submit" type="submit" value="<!--[pnml name="_SUBMIT" html=1]-->" />
+  <input name="clear" type="submit" value="<!--[pnml name="_CLEAR" html=1]-->" />
+</div>
+</form>
+<!--[/if]-->
+<table class="pn-admintable">
+  <tr>
+      <th><!--[pnml name="_CRPCALENDAR_TITLE" html=1]--></th>
+      <th class="crpcalendar_w2"><!--[pnml name="_ID"]--></th>
+      <th class="crpcalendar_w2"><!--[pnml name="_BY"]--></th>
+	  <!--[if $enablecategorization]-->
+      <th class="crpcalendar_w3"><!--[pnml name="_CATEGORY" html=1]--></th>
+	  <!--[/if]-->
+	  	<th class="crpcalendar_w3"><!--[pnml name="_CRPCALENDAR_START_DATE" html=1]--></th>
+	  	<th class="crpcalendar_w3"><!--[pnml name="_CRPCALENDAR_END_DATE" html=1]--></th>
+	  	<th class="crpcalendar_w1"><!--[pnml name="_CRPCALENDAR_STATUS" html=1]--></th>
+      <th class="crpcalendar_w2"><!--[pnml name="_OPTIONS" html=1]--></th>
+  </tr>
+  <!--[foreach from=$events item=event]-->
+    <tr class="<!--[cycle values="pn-odd,pn-even"]-->">
+      <td>
+      	<span class="<!--[if $event.start_date > date("Y-m-d")]-->crpcalendar-upcoming<!--[/if]-->">
+      		<!--[$event.title|pnvarprephtmldisplay]-->
+      	</span>
+      </td>
+      <td><!--[$event.eventid|pnvarprephtmldisplay]--></td>
+      <!--[if $event.cr_uid]-->
+				<!--[pnusergetvar name=uname uid=$event.cr_uid assign=cr_profilename]-->
+			<!--[else]-->
+				<!--[pnmodgetvar module="Users" name="anonymous" assign=cr_profilename]-->
+			<!--[/if]-->
+      <td><!--[$cr_profilename]--></td>
+	  <!--[if $enablecategorization]-->
+      <td>
+          <!--[ $event.__CATEGORIES__.Main.display_name.$lang ]-->
+      </td>
+	  <!--[/if]-->
+	  	<td><!--[$event.start_date|pndate_format:$complete_date_format]--></td>
+			<td><!--[$event.end_date|pndate_format:$complete_date_format]--></td>
+			<td>
+				<span class="crp-status-real"><!--[crpcalendarstatus status=$event.obj_status eventid=$event.eventid]--></span>
+				<span class="crp-status-fake pn-hide"><!--[crpcalendarstatus status=$event.obj_status eventid=$event.eventid fake=true]--></span>
+			</td>	  	
+      <td>
+        <!--[assign var="options" value=$event.options]-->
+        <!--[section name=options loop=$options]-->
+          <a href="<!--[$options[options].url|pnvarprepfordisplay]-->"><!--[pnimg modname=core set=icons/extrasmall src=$options[options].image alt=$options[options].title]--></a>
+        <!--[/section]-->
+      </td>
+    </tr>
+  <!--[/foreach]-->
+</table>
+
+<script type="text/javascript">
+	Event.observe(window, 'load', function(){crpCalendarAdminViewInit();}, false);
+</script>
+
+<!--[pager rowcount=$pager.numitems limit=$pager.itemsperpage posvar=startnum shift=1 img_prev=images/icons/extrasmall/previous.gif img_next=images/icons/extrasmall/next.gif]-->
+</div>

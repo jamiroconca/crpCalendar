@@ -1,0 +1,11 @@
+BEGIN:VEVENT
+DESCRIPTION;CHARSET=<!--[charset]-->:<!--[$data.description]-->
+LOCATION;CHARSET=<!--[charset]-->:<!--[$data.location]-->
+SUMMARY;CHARSET=<!--[charset]-->:<!--[$data.summary]-->
+UID:<!--[$data.dtstamp|pndate_format:"%Y%m%dT%H%M%SZ"]-->-<!--[$data.uid]-->@<!--[sitename]-->
+URL:<!--[$data.url]-->
+DTSTART;VALUE=DATE-TIME:<!--[$data.dtstart|pndate_format:"%Y%m%dT%H%M%SZ"]-->
+DTEND;VALUE=DATE-TIME:<!--[$data.dtend|pndate_format:"%Y%m%dT%H%M%SZ"]-->
+DTSTAMP:<!--[$data.dtstamp|pndate_format:"%Y-%m-%dT%H:%M:%SZ"]-->
+CATEGORIES;CHARSET=<!--[charset]-->:<!--[$data.categories]-->
+END:VEVENT

@@ -1,0 +1,19 @@
+<!--[pnajaxheader modname=crpCalendar filename=crpcalendar.js noscriptaculous=true nobehaviour=true]-->
+
+<div class="row">
+  <label for="eventid_category"><!--[pnml name="_CATEGORY" html=1]--></label>
+  <!--[ pnml assign="lblDef" name="_CHOOSECATEGORY" html=1]-->
+  <!--[ selector_category category=$mainCategory name="eventid_category" field="id" selectedValue=$selectedCategoryId defaultValue="0" defaultText="$lblDef" editLink=false]-->
+</div>
+<div class="row">
+  <label for="contentEvent"><!--[pnml name="_CRPCALENDAR_CONTENTENTTYPE_EVENTTITLE" html=1]--></label>
+  <select id="contentEvent" name ="eventid">
+    <!--[section name=item loop=$events]-->
+    <option value="<!--[$events[item].id]-->"><!--[$events[item].start_date]--> - <!--[$events[item].name]--></option>
+    <!--[/section]-->
+  </select>
+</div>
+
+<script type="text/javascript">
+  Event.observe(window, 'load', function(){crpCalendarContentLoad();}, false);
+</script>

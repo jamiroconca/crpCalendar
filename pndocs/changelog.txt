@@ -1,0 +1,87 @@
+crpCalendar
+v0.5.4 - ??? 2009
+- added Content plugin for display category events, view ticket:63
+- added more sort options in admin, view ticket:73
+- added caption field for files
+- fixed sub-categories counters and listings
+- added pager on day view
+v0.5.3 - 15 september 2009
+- updated datepicker to v5
+- added config for showing sub-categories events when watching a category
+- fix for block from locations module
+- rss validation fixes
+v0.5.2 - 18 april 2009
+- fixed tons of cached and compiled templates generation
+- added config param for complete or date only format
+v0.5.1 - 4 march 2009
+- added config param week starts on (monday or sunday)
+v0.5.0 - 17 february 2009
+- removed pn_ prefix from table definitions
+- added support for formicula's inclusions (only from admin new and modify funcs)
+- added more compatibility with PostGRE backend
+v0.4.9 - 18 august 2008
+- added event multiple start dates for admins, by module vars
+- added re-enter admin creation button
+- added delete link in admin modify, near CANCEL and UPDATE
+- added date and location to title search result
+v0.4.8 - 14 august 2008
+- added module var for events submitted by users initial status
+- added check to prevent duplicate entries by "title,location,start_date"
+v0.4.7 - 13 august 2008
+- added setting for mandatory/not mandatory event content
+- added purge event from a date
+v0.4.6 - 11 august 2008
+- categorized day-list view(settings): show day events grouped by category(ordered)
+- categorized or not year-list view(settings): show year events grouped by category(ordered) or not
+- added table sort by title
+- added events block by location
+- basic iCal import
+- added events month block
+v0.4.5 - 13 July 2008
+- added e-mail notification for user submission
+- added display/hide event end date based on "day event" check
+- better visualization for "day event" date
+- new unobtrusive datepicker
+- if locations module is enabled, you can take places from there (or use your own manually inserted)
+- added automatic categories feeds to browser address-bar (where supported ;-) )
+- added upcoming/archive filter into list view
+- it's possible to turn monthly view into a list and viceversa
+- updated Content (tested 2.1) plugin layout
+v0.4.4 - 28 June 2008
+- bugfixing
+- adapt to Zikula 1.0.0
+- more complex attendance to events (personal and by others)
+- module scribite! suggested for textarea
+- module Avatar suggested for user's image with partecipations enabled 
+v0.4.3 - 27 April 2008
+- user can add/delete himself to the event
+v0.4.2 - 18 April 2008
+- added ajax status admin management
+- added a slot for attachment
+- added clone event function
+v0.4.1 - 30 March 2008
+- added month, week and day views
+- added start year, for calendar jump to
+- added jump to date
+- added theme settings for table views
+v0.4.0 - 19 March 2008
+- added plugin for Content module
+- formatted user list and display to hCalendar microformat
+- added location, url, contact and organizer fields
+- fixed countitems bug
+- more complex permission level use
+- added numitems to eventblocks
+- added Account Panel link
+- added .ics event and eventlist export
+v0.3.1 - 23 December 2007
+- fixed exit() malfunction
+- added GD library function for thumbnail generation
+- added thumbnails in userlist
+v0.3.0 - 27 September 2007
+- Added event image management: images are stored in the db(limited in size and width by settings) and displayed with the help of lightbox.js, minor bug-fix
+v0.2.0 - 8 August 2007
+- Added rss calendar feed, block for category's events, bug-fix
+v0.1.1 - 17 May 2007
+- Added event's counter, first complete release
+v0.1.0 - 10 May 2007
+- Initial version 
