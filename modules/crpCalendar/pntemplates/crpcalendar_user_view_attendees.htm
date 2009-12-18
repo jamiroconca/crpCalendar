@@ -7,14 +7,14 @@
 <table class="pn-datatable">
 	
 	<caption>		
-		<!--[pnml name=_CRPCALENDAR_EVENTS_MYLIST html=1]-->
+		<!--[pnml name="_CRPCALENDAR_EVENTS_MYLIST"]-->
 	</caption>
 	
 	<thead>
 	<tr>
-    <th class="crpcalendar_w1"><!--[pnml name="_CRPCALENDAR_IMAGES" html=1]--></th>
-    <th class="sortable"><!--[pnml name="_NAME" html=1]--></th>
-	  <th class="crpcalendar_w3"><!--[pnml name="_CRPCALENDAR_CONTENT" html=1]--></th>
+    <th class="crpcalendar_w1"><!--[pnml name="_CRPCALENDAR_IMAGES"]--></th>
+    <th class="sortable"><!--[pnml name="_NAME"]--></th>
+	  <th class="crpcalendar_w3"><!--[pnml name="_CRPCALENDAR_CONTENT"]--></th>
 	</tr>
 	</thead>
 	
@@ -24,11 +24,11 @@
 
 		<td>
 			<!--[if pnModAvailable("Avatar") && pnUserGetVar('_YOURAVATAR',$uid)]-->
-				<img class="photo" src="<!--[pnmodgetvar module="Avatar" name="avatardir"]-->/<!--[pnusergetvar name=_YOURAVATAR uid=$uid]-->" alt="Avatar" />
+				<img class="photo" src="<!--[pnmodgetvar module="Avatar" name="avatardir"]-->/<!--[pnusergetvar name="_YOURAVATAR" uid=$uid]-->" alt="Avatar" />
 			<!--[ elseif pnUserGetVar('_YOURAVATAR',$uid) neq '']-->
-				<img class="photo" src="images/avatar/<!--[pnusergetvar name=_YOURAVATAR uid=$uid]-->" alt="Avatar" />
+				<img class="photo" src="images/avatar/<!--[pnusergetvar name="_YOURAVATAR" uid=$uid]-->" alt="Avatar" />
 			<!--[else]-->
-				<!--[pnimg modname=crpCalendar altml=true src="blank.jpg" class="photo" altml=true alt=_CRPCALENDAR_NOAVATARSELECTED]-->
+				<!--[pnimg modname=crpCalendar altml=true src="blank.jpg" class="photo" altml=true alt="_CRPCALENDAR_NOAVATARSELECTED"]-->
 			<!--[/if]-->
 		</td>
 	  
@@ -36,10 +36,10 @@
 	  	<div>	  		
 			<span class="fn n"><strong class="nickname"><!--[pnusergetvar name=uname uid=$uid]--></strong></span><br />
 			<span class="adr">
-		  	<!--[if pnUserGetVar('_YLOCATION',$uid)]--><span class="locality"><!--[pnusergetvar name=_YLOCATION uid=$uid]--></span><br /><!--[/if]-->
+		  	<!--[if pnUserGetVar('_YLOCATION',$uid)]--><span class="locality"><!--[pnusergetvar name="_YLOCATION" uid=$uid]--></span><br /><!--[/if]-->
 			</span>
-			<!--[if pnUserGetVar('_UFAKEMAIL',$uid)]--><!--[pnml name="_UFAKEMAIL" html=1]-->: <a class="email" href="mailto:<!--[pnusergetvar name=_UFAKEMAIL uid=$uid]-->"><!--[pnusergetvar name=_UFAKEMAIL uid=$uid]--></a><br /><!--[/if]-->
-			<!--[if pnUserGetVar('_YOURHOMEPAGE',$uid)]--><!--[pnml name="_YOURHOMEPAGE" html=1]-->: <a class="url" href="<!--[pnusergetvar name=_YOURHOMEPAGE uid=$uid]-->"><!--[pnusergetvar name=_YOURHOMEPAGE uid=$uid]--></a><br /><!--[/if]-->
+			<!--[if pnUserGetVar('_UFAKEMAIL',$uid)]--><!--[pnml name="_UFAKEMAIL"]-->: <a class="email" href="mailto:<!--[pnusergetvar name="_UFAKEMAIL" uid=$uid]-->"><!--[pnusergetvar name="_UFAKEMAIL" uid=$uid]--></a><br /><!--[/if]-->
+			<!--[if pnUserGetVar('_YOURHOMEPAGE',$uid)]--><!--[pnml name="_YOURHOMEPAGE"]-->: <a class="url" href="<!--[pnusergetvar name="_YOURHOMEPAGE" uid=$uid]-->"><!--[pnusergetvar name="_YOURHOMEPAGE" uid=$uid]--></a><br /><!--[/if]-->
 		</div>
 		</td>
 		

@@ -17,17 +17,17 @@
 </div>
 
 <div class="crpcalendar-box" style="background: url(modules/crpCalendar/pnimages/<!--[$crpcalendar_theme]-->/time_bg.gif) repeat-x;">
-	<h1><!--[sitename]--> <!--[pnml name="_CRPCALENDAR" html=1]--></h1>
+	<h1><!--[sitename]--> <!--[pnml name="_CRPCALENDAR"]--></h1>
 	
 	<div class="pn-menu">
 	<!--[pnsessiongetvar name="crpCalendar_choosed_view" assign=choosed_view]-->
 	<!--[securityutil_checkpermission component="crpCalendar::" instance="::" level="ACCESS_COMMENT" assign="can_submit"]-->
-	<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="view"]-->"><!--[pnml name="_CRPCALENDAR_VIEW" html=1]--></a>
-	|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="day_view" t=$smarty.now]-->"><!--[pnml name="_CRPCALENDAR_VIEW_TODAY" html=1]--></a>
-	|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="week_view" t=$smarty.now]-->"><!--[pnml name="_CRPCALENDAR_VIEW_THIS_WEEK" html=1]--></a>
-	|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="month_view" t=$smarty.now]-->"><!--[pnml name="_CRPCALENDAR_VIEW_THIS_MONTH" html=1]--></a>
+	<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="view"]-->"><!--[pnml name="_CRPCALENDAR_VIEW"]--></a>
+	|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="day_view" t=$smarty.now]-->"><!--[pnml name="_CRPCALENDAR_VIEW_TODAY"]--></a>
+	|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="week_view" t=$smarty.now]-->"><!--[pnml name="_CRPCALENDAR_VIEW_THIS_WEEK"]--></a>
+	|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="month_view" t=$smarty.now]-->"><!--[pnml name="_CRPCALENDAR_VIEW_THIS_MONTH"]--></a>
 	<!--[if $can_submit]-->
-	|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="new"]-->"><!--[pnml name="_CRPCALENDAR_SUBMIT" html=1]--></a>
+	|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="new"]-->"><!--[pnml name="_CRPCALENDAR_SUBMIT"]--></a>
 	<!--[/if]-->
 	</div>
 	

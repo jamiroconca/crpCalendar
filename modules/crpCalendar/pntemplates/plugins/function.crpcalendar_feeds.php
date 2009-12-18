@@ -36,7 +36,7 @@ function smarty_function_crpcalendar_feeds($params, & $smarty)
 
 		$mainCat = CategoryRegistryUtil :: getRegisteredModuleCategory('crpCalendar', 'crpcalendar', 'Main', '/__SYSTEM__/Modules/crpCalendar');
 		$cats = CategoryUtil :: getCategoriesByParentID($mainCat);
-		$userLang = pnUserGetLang();
+		$userLang = ZLanguage::getLanguageCode();
 
 		foreach ($cats as $cat)
 		{

@@ -9,16 +9,16 @@
 
 <table class="pn-datatable">
 	
-	<!--[pnml name="_CRPCALENDAR_EVENTS_LIST" html=1 assign="table_caption"]-->
+	<!--[pnml name="_CRPCALENDAR_EVENTS_LIST" assign="table_caption"]-->
 	<caption><!--[$table_caption]--></caption>
 	
 	<thead>
 	<tr>
 		<!--[if $crpcalendar_userlist_image]-->
-    <th class="crpcalendar_w1"><!--[pnml name="_CRPCALENDAR_IMAGES" html=1]--></th>
+    <th class="crpcalendar_w1"><!--[pnml name="_CRPCALENDAR_IMAGES"]--></th>
 	  <!--[/if]-->
-    <th class="sortable"><!--[pnml name="_CRPCALENDAR_TITLE" html=1]--></th>
-	  <th class="crpcalendar_w3"><!--[pnml name="_CRPCALENDAR_CONTENT" html=1]--></th>
+    <th class="sortable"><!--[pnml name="_CRPCALENDAR_TITLE"]--></th>
+	  <th class="crpcalendar_w3"><!--[pnml name="_CRPCALENDAR_CONTENT"]--></th>
 	</tr>
 	</thead>
 	
@@ -65,18 +65,18 @@
 					<!--[pnmodgetvar module="Users" name="anonymous" assign=cr_profilename]-->
 				<!--[/if]-->
 				<div>
-					<!--[pnml name=_CRPCALENDAR_CREATEDON html=1]--> <abbr class="dtstamp" title="<!--[$event.cr_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.cr_date|pndate_format]--></abbr>
-					<!--[pnml name=_BY]--> <span class="uid"><a href="<!--[$cr_profilelink|pnvarprepfordisplay]-->"><!--[$cr_profilename]--></a></span>
+					<!--[pnml name="_CRPCALENDAR_CREATEDON"]--> <abbr class="dtstamp" title="<!--[$event.cr_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.cr_date|pndate_format]--></abbr>
+					<!--[pnml name="_BY"]--> <span class="uid"><a href="<!--[$cr_profilelink|pnvarprepfordisplay]-->"><!--[$cr_profilename]--></a></span>
 				</div>
 				<!--[if !$event.day_event]-->
 				<div>
-					<!--[pnml name="_CRPCALENDAR_START_DATE" html=1]-->: <strong><abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.start_date|pndate_format:$complete_date_format]--></abbr></strong>
-	 				<strong>&middot;</strong> <!--[pnml name="_CRPCALENDAR_END_DATE" html=1]-->: <strong><abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.end_date|pndate_format:$complete_date_format]--></abbr></strong>
+					<!--[pnml name="_CRPCALENDAR_START_DATE"]-->: <strong><abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.start_date|pndate_format:$complete_date_format]--></abbr></strong>
+	 				<strong>&middot;</strong> <!--[pnml name="_CRPCALENDAR_END_DATE"]-->: <strong><abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.end_date|pndate_format:$complete_date_format]--></abbr></strong>
 	   		</div>
 				<!--[else]-->
 				<div>
-					<!--[pnml name="_CRPCALENDAR_START_DATE" html=1]-->: <strong><abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%d"]-->"><!--[$event.start_date|pndate_format:$only_date_format]--></abbr></strong>
-	   			<span class="pn-hide"><strong>&middot;</strong> <!--[pnml name="_CRPCALENDAR_END_DATE" html=1]-->: <strong><abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%d"]-->"><!--[$event.end_date|pndate_format:$only_date_format]--></abbr></strong></span>
+					<!--[pnml name="_CRPCALENDAR_START_DATE"]-->: <strong><abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%d"]-->"><!--[$event.start_date|pndate_format:$only_date_format]--></abbr></strong>
+	   			<span class="pn-hide"><strong>&middot;</strong> <!--[pnml name="_CRPCALENDAR_END_DATE"]-->: <strong><abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%d"]-->"><!--[$event.end_date|pndate_format:$only_date_format]--></abbr></strong></span>
 	   		</div>
 				<!--[/if]-->
 			</div>

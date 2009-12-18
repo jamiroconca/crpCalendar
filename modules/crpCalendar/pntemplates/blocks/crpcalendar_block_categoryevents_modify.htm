@@ -1,15 +1,15 @@
 <div class="crpcalendar-formrow">
-	<label for="eventsblock_limit"><!--[pnml name=_CRPCALENDAR_MAXDAY html=1]--></label>
+	<label for="eventsblock_limit"><!--[pnml name="_CRPCALENDAR_MAXDAY"]--></label>
 	<input id="eventsblock_limit" type="text" name="limit" size="2" value="<!--[$limit|pnvarprepfordisplay]-->" />
 </div>
 
 <div class="crpcalendar-formrow">
-	<label for="eventsblock_numitems"><!--[pnml name=_CRPCALENDAR_MAXEVENTS html=1]--></label>
+	<label for="eventsblock_numitems"><!--[pnml name="_CRPCALENDAR_MAXEVENTS"]--></label>
 	<input id="eventsblock_numitems" type="text" name="numitems" size="2" value="<!--[$numitems|pnvarprepfordisplay]-->" />
 </div>
 
 <div>
-  <label for="quotes_category"><!--[pnml name=_CATEGORY html=1]--></label>
-  <!--[ pnml assign="lblDef" name="_ALLCATEGORIES" html=1]-->
+  <label for="quotes_category"><!--[pnml name="_CATEGORY"]--></label>
+  <!--[ pnml assign="lblDef" name="_ALLCATEGORIES"]-->
   <!--[ selector_category category=$mainCategory name="events_category" selectedValue=$events_category defaultValue="0" defaultText="$lblDef" ]-->
 </div>

@@ -3,8 +3,8 @@
 <!--[pnpageaddvar name="stylesheet" value="modules/crpCalendar/pnjavascript/datepicker/css/datepicker.css"]-->
 
 <!--[include file="crpcalendar_admin_menu.htm"]-->
-<!--[pnml name=_CRPCALENDAR_EVENT html=1 assign=itemname]-->
-<!--[pnml name="_CRPCALENDAR_PURGE_EVENTS" html=1 i=$itemname assign=templatetitle]-->
+<!--[pnml name="_CRPCALENDAR_EVENT" assign=itemname]-->
+<!--[pnml name="_CRPCALENDAR_PURGE_EVENTS" i=$itemname assign=templatetitle]-->
 <div class="pn-admincontainer">
 <div class="pn-adminpageicon"><!--[pnimg modname=core src=editdelete.gif set=icons/large alt=$templatetitle]--></div>
 <h2><!--[$templatetitle]--></h2>
@@ -12,10 +12,10 @@
 <div>
     <input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="crpCalendar"]-->" />
     <div class="pn-formrow">
-			<p><!--[pnml name="_CONFIRMDELETE" html=1]--> (<!--[pnml name="_CRPCALENDAR_NOT_REVERSIBLE" html=1]-->)</p>
+			<p><!--[pnml name="_CONFIRMDELETE"]--> (<!--[pnml name="_CRPCALENDAR_NOT_REVERSIBLE"]-->)</p>
 		</div>
 		<div class="pn-formrow" id="end_date_block">
-			<label><!--[pnml name="_CRPCALENDAR_FROM_DATE" html=1]--></label>
+			<label><!--[pnml name="_CRPCALENDAR_FROM_DATE"]--></label>
 			<!--[html_select_date prefix="end" end_year="+4" time=$end_date field_array=event display_months=false display_years=false id="end_datefield-dd"]-->
 			<!--[html_select_date prefix="end" end_year="+4" time=$end_date field_array=event display_days=false display_years=false id="end_datefield-mm"]-->
 			<!--[html_select_date prefix="end" start_year="-4" end_year="+4" time=$end_date field_array=event display_days=false display_months=false id="end_datefield"]-->

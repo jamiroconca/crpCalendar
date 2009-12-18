@@ -29,8 +29,10 @@ function smarty_function_crpcalendar_yearnav($params, & $smarty)
 		return LogUtil :: registerPermissionError();
 	}
 
+	$dom = ZLanguage::getModuleDomain('crpCalendar');
+
 	if (!$params['date'] || !$params['t'])
-		return LogUtil :: registerError(_MODARGSERROR);
+		return LogUtil :: registerError(__('Error! Could not do what you wanted. Please check your input.', $dom));
 	else
 	{
 		$date = $params['date'];

@@ -67,7 +67,7 @@ class crpCalendarCategoryEventSelector extends pnFormPlugin
       $selectedCategoryId = null;
     }
 
-    $crpRender = pnRender::getInstance('crpCalendar', false);
+    $crpRender = &pnRender::getInstance('crpCalendar', false);
     $crpRender->assign('mainCategory', $mainCat);
     $crpRender->assign('selectedCategoryId', $selectedCategoryId);
     $crpRender->assign($modvars);
@@ -96,7 +96,8 @@ class crpCalendarCategoryEventSelector extends pnFormPlugin
   {
     if ($this->mandatory  &&  empty($this->selectedItemId))
     {
-      $this->setError(_PNFORM_MANDATORYSELECTERROR);
+    	$dom = ZLanguage::getModuleDomain('crpCalendar');
+      $this->setError(__('A selection here is mandatory.', $dom));
     }
   }
 

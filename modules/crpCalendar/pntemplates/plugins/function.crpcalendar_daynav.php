@@ -28,8 +28,10 @@ function smarty_function_crpcalendar_daynav($params, &$smarty)
 		return LogUtil::registerPermissionError();
 	}
 
+	$dom = ZLanguage::getModuleDomain('crpCalendar');
+
 	if (!$params['t'])
-		return LogUtil::registerError (_MODARGSERROR);
+		return LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
 	else
 	{
 		$date = $params['date'];
@@ -55,25 +57,25 @@ function smarty_function_crpcalendar_daynav($params, &$smarty)
 	$nav['t'] = $t;
 
 	$navbar .= '<'.$container.'>';
-	$navbar .= '<a href="'.DataUtil :: formatForDisplay(pnModUrl('crpCalendar','user','day_view', array('t' => $nav['prev_week_time']))).'" title="'._CRPCALENDAR_PREV_WEEK.'">'."\n";
+	$navbar .= '<a href="'.DataUtil :: formatForDisplay(pnModUrl('crpCalendar','user','day_view', array('t' => $nav['prev_week_time']))).'" title="'.__('Previous week', $dom).'">'."\n";
 	$navbar .= $prev_week_char."\n";
 	$navbar .= '</a>'."\n";
 
 	$navbar .= $separator;
 
-	$navbar .= '<a href="'.DataUtil :: formatForDisplay(pnModUrl('crpCalendar','user','day_view', array('t' => $nav['prev_day_time']))).'" title="'._CRPCALENDAR_PREV_DAY.'">'."\n";
+	$navbar .= '<a href="'.DataUtil :: formatForDisplay(pnModUrl('crpCalendar','user','day_view', array('t' => $nav['prev_day_time']))).'" title="'.__('Yesterday', $dom).'">'."\n";
 	$navbar .= $prev_day_char."\n";
 	$navbar .= '</a>'."\n";
 
 	($dateview)?$navbar .= $space.DateUtil::getDatetime($t, $dateformat).$space."\n":$navbar.= $separator."\n";
 
-	$navbar .= '<a href="'.DataUtil :: formatForDisplay(pnModUrl('crpCalendar','user','day_view', array('t' => $nav['next_day_time']))).'" title="'._CRPCALENDAR_NEXT_DAY.'">'."\n";
+	$navbar .= '<a href="'.DataUtil :: formatForDisplay(pnModUrl('crpCalendar','user','day_view', array('t' => $nav['next_day_time']))).'" title="'.__('Tomorrow', $dom).'">'."\n";
 	$navbar .= $next_day_char."\n";
 	$navbar .= '</a>'."\n";
 
 	$navbar .= $separator;
 
-	$navbar .= '<a href="'.DataUtil :: formatForDisplay(pnModUrl('crpCalendar','user','day_view', array('t' => $nav['next_week_time']))).'" title="'._CRPCALENDAR_NEXT_WEEK.'">'."\n";
+	$navbar .= '<a href="'.DataUtil :: formatForDisplay(pnModUrl('crpCalendar','user','day_view', array('t' => $nav['next_week_time']))).'" title="'.__('Next week', $dom).'">'."\n";
 	$navbar .= $next_week_char."\n";
 	$navbar .= '</a>'."\n";
 	$navbar .= '</'.$container.'>';

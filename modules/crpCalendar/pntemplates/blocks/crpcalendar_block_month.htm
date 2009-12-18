@@ -3,7 +3,7 @@
 
 <div class="pn-menu">
 <!--[securityutil_checkpermission component="crpCalendar::" instance="::" level="ACCESS_COMMENT" assign="can_submit"]-->
-[&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func=$choosed_view|pnvarprepfordisplay]-->"><!--[pnml name="_CRPCALENDAR_VIEW" html=1]--></a>&nbsp;<!--[if $can_submit]-->|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="new"|pnvarprepfordisplay]-->"><!--[pnml name="_CRPCALENDAR_SUBMIT" html=1]--></a>&nbsp;<!--[/if]-->]
+[&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func=$choosed_view|pnvarprepfordisplay]-->"><!--[pnml name="_CRPCALENDAR_VIEW"]--></a>&nbsp;<!--[if $can_submit]-->|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="new"|pnvarprepfordisplay]-->"><!--[pnml name="_CRPCALENDAR_SUBMIT"]--></a>&nbsp;<!--[/if]-->]
 </div>
 
 <h4><!--[$t|pndate_format:"%B %Y"]--></h4>
@@ -20,10 +20,10 @@
 	</span>
 </div>
 
-<!--[pnml name=_CRPCALENDAR_PREV_WEEK html=1 assign="pwchar"]-->
-<!--[pnml name=_CRPCALENDAR_NEXT_WEEK html=1 assign="nwchar"]-->
-<!--[pnml name=_CRPCALENDAR_PREV_DAY html=1 assign="pdchar"]-->
-<!--[pnml name=_CRPCALENDAR_NEXT_DAY html=1 assign="ndchar"]-->
+<!--[pnml name="_CRPCALENDAR_PREV_WEEK" assign="pwchar"]-->
+<!--[pnml name="_CRPCALENDAR_NEXT_WEEK" assign="nwchar"]-->
+<!--[pnml name="_CRPCALENDAR_PREV_DAY" assign="pdchar"]-->
+<!--[pnml name="_CRPCALENDAR_NEXT_DAY" assign="ndchar"]-->
 <!--[crpcalendar_daynav date=$date t=$t container="div" separator="<br />" prev_week_char=$pwchar next_week_char=$nwchar prev_day_char=$pdchar next_day_char=$ndchar dateview="false"]-->
 
 <br />

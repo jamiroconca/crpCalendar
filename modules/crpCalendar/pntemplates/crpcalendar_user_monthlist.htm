@@ -23,7 +23,7 @@
 	<tr>
 		<td style="border-bottom:1px solid #CCC;">
 		<!--[crpcalendar_datetime_stamp datetime=$days.1 assign=weektime]-->
-		<!--[pnml name="_WEEK" html=1]--> <!--[$weektime+8*86400|pndate_format:"%W"]-->
+		<!--[pnml name="_WEEK"]--> <!--[$weektime+8*86400|pndate_format:"%W"]-->
 		<br />
 		<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="week_view" t=$weektime+86400]-->">
 			<!--[pnimg modname=crpCalendar titleml=true src=$crpcalendar_theme|cat:"/right_arrows.gif" title=_CRPCALENDAR_VIEW_WEEK]-->
@@ -74,7 +74,7 @@
 		<!--[if !$smarty.foreach.cell.last]-->
 			<td style="border-bottom:1px solid #CCC;">
 				<!--[crpcalendar_datetime_stamp datetime=$daysexpanded.$point assign=weektime]-->
-				<!--[pnml name="_WEEK" html=1]--> <!--[$weektime+8*86400|pndate_format:"%W"]-->
+				<!--[pnml name="_WEEK"]--> <!--[$weektime+8*86400|pndate_format:"%W"]-->
 				<br />
 				<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="week_view" t=$weektime+86400]-->">
 					<!--[pnimg modname=crpCalendar titleml=true src=$crpcalendar_theme|cat:"/right_arrows.gif" title=_CRPCALENDAR_VIEW_WEEK]-->

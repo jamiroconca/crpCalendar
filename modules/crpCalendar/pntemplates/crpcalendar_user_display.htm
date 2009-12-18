@@ -23,8 +23,8 @@
 			<!--[assign var="cr_profilelink" value="#"]-->
 			<!--[pnmodgetvar module="Users" name="anonymous" assign=cr_profilename]-->
 		<!--[/if]-->
-		<!--[pnml name=_CRPCALENDAR_CREATEDON html=1]--> <abbr class="dtstamp" title="<!--[$event.cr_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.cr_date|pndate_format]--></abbr>
-		<!--[pnml name=_BY]--> <span class="uid"><a href="<!--[$cr_profilelink|pnvarprepfordisplay]-->"><!--[$cr_profilename]--></a></span>
+		<!--[pnml name="_CRPCALENDAR_CREATEDON"]--> <abbr class="dtstamp" title="<!--[$event.cr_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.cr_date|pndate_format]--></abbr>
+		<!--[pnml name="_BY"]--> <span class="uid"><a href="<!--[$cr_profilelink|pnvarprepfordisplay]-->"><!--[$cr_profilename]--></a></span>
 	</div>
 	
 	<div class="crpcalendar_body">
@@ -48,16 +48,16 @@
 		<!--[/if]-->
 		
 		<!--[if !$event.day_event]-->
-		<div><strong><!--[pnml name="_CRPCALENDAR_START_DATE" html=1]--></strong>: <abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.start_date|pndate_format:$complete_date_format]--></abbr></div>
-	  	<div><strong><!--[pnml name="_CRPCALENDAR_END_DATE" html=1]--></strong>: <abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.end_date|pndate_format:$complete_date_format]--></abbr></div>
+		<div><strong><!--[pnml name="_CRPCALENDAR_START_DATE"]--></strong>: <abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.start_date|pndate_format:$complete_date_format]--></abbr></div>
+	  	<div><strong><!--[pnml name="_CRPCALENDAR_END_DATE"]--></strong>: <abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.end_date|pndate_format:$complete_date_format]--></abbr></div>
 		<!--[else]-->
-		<div><strong><!--[pnml name="_CRPCALENDAR_START_DATE" html=1]--></strong>: <abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%d"]-->"><!--[$event.start_date|pndate_format:$only_date_format]--></abbr></div>
-	  	<div class="pn-hide"><strong><!--[pnml name="_CRPCALENDAR_END_DATE" html=1]--></strong>: <abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%d"]-->"><!--[$event.end_date|pndate_format:$only_date_format]--></abbr></div>
+		<div><strong><!--[pnml name="_CRPCALENDAR_START_DATE"]--></strong>: <abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%d"]-->"><!--[$event.start_date|pndate_format:$only_date_format]--></abbr></div>
+	  	<div class="pn-hide"><strong><!--[pnml name="_CRPCALENDAR_END_DATE"]--></strong>: <abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%d"]-->"><!--[$event.end_date|pndate_format:$only_date_format]--></abbr></div>
 		<!--[/if]-->
 		
 		<!--[if $event.location]-->
 		<div>
-			<strong><!--[pnml name="_CRPCALENDAR_LOCATION" html=1]--></strong>:
+			<strong><!--[pnml name="_CRPCALENDAR_LOCATION"]--></strong>:
 			<!--[if $enable_locations && pnModAvailable('locations') && is_numeric($event.location.locationid)]-->
 			<!--[include file="locations/crpcalendar_user_location_card.htm"]-->
 			<!--[else]-->
@@ -66,13 +66,13 @@
 		</div>
 		<!--[/if]-->
 		<!--[if $event.organiser]-->
-		<div><strong><!--[pnml name="_CRPCALENDAR_ORGANISER" html=1]--></strong>: <span class="organiser"><!--[$event.organiser]--></span></div>
+		<div><strong><!--[pnml name="_CRPCALENDAR_ORGANISER"]--></strong>: <span class="organiser"><!--[$event.organiser]--></span></div>
 		<!--[/if]-->
 		<!--[if $event.contact]-->
-		<div><strong><!--[pnml name="_CRPCALENDAR_CONTACT" html=1]--></strong>: <span class="contact"><!--[$event.contact|replace:"@":"[at]"]--></span></div>
+		<div><strong><!--[pnml name="_CRPCALENDAR_CONTACT"]--></strong>: <span class="contact"><!--[$event.contact|replace:"@":"[at]"]--></span></div>
 		<!--[/if]-->
 		<!--[if $event.url]-->
-		<div><strong><!--[pnml name="_CRPCALENDAR_URL" html=1]--></strong>: <span class="url"><!--[$event.url|activatelinks]--></span></div>
+		<div><strong><!--[pnml name="_CRPCALENDAR_URL"]--></strong>: <span class="url"><!--[$event.url|activatelinks]--></span></div>
 		<!--[/if]-->
 		<br />
 		<div class="description"><!--[$event.event_text|nl2paragraphs|pnvarprephtmldisplay]--></div>
@@ -90,15 +90,15 @@
 
 <!--[if $enable_partecipation]-->
 <div>
-	<h3><!--[pnml name=_CRPCALENDAR_PARTECIPATIONS html=1]--> <!--[pnml name=_BY html=1]--> <!--[pnml name=_MEMBERS html=1]--></h3>
+	<h3><!--[pnml name="_CRPCALENDAR_PARTECIPATIONS"]--> <!--[pnml name="_BY"]--> <!--[pnml name="_MEMBERS"]--></h3>
 	<!--[assign var="partecipations" value=$event.partecipations]-->
-	<!--[if empty($partecipations)]--><!--[pnml name=_CRPCALENDAR_NONE html=1]--><!--[/if]-->
+	<!--[if empty($partecipations)]--><!--[pnml name="_CRPCALENDAR_NONE"]--><!--[/if]-->
 	<ul id="event_partecipation">	
 	<!--[section name=partecipations loop=$partecipations]-->
 		<!--[pnmodurl modname=Profile func=view uid=$partecipations[partecipations].uid assign=partecipation_profilelink]-->
 		<li>
 			<a href="<!--[$partecipation_profilelink]-->"><!--[pnusergetvar name=uname uid=$partecipations[partecipations].uid]--></a>
-			- <a href="<!--[pnmodurl modname=crpCalendar func=get_partecipations uid=$partecipations[partecipations].uid]-->"><!--[pnml name=_CRPCALENDAR_USER_PARTECIPATIONS html=1]--></a>
+			- <a href="<!--[pnmodurl modname=crpCalendar func=get_partecipations uid=$partecipations[partecipations].uid]-->"><!--[pnml name="_CRPCALENDAR_USER_PARTECIPATIONS"]--></a>
 		</li>
 	<!--[/section]-->
 	</ul>	
@@ -106,7 +106,7 @@
 <!--[/if]-->
 
 <div class="crpcalendar_footer">
-	<!--[pnml name=_CRPCALENDAR_WORDSINTHISTEXT html=1]--> <!--[$event.event_text|count_words]--> - <!--[pnml name=_CRPCALENDAR_READS html=1]--> <!--[$event.counter]--> -
+	<!--[pnml name="_CRPCALENDAR_WORDSINTHISTEXT"]--> <!--[$event.event_text|count_words]--> - <!--[pnml name="_CRPCALENDAR_READS"]--> <!--[$event.counter]--> -
 	<span>
 	<a href="<!--[pnmodurl modname=crpCalendar func=display eventid=$event.eventid theme=printer]-->"><!--[pnimg modname=core src=printer1.gif set=icons/small alt='_PAGES_PRINT' altml=true style="vertical-align:middle"]--></a>
 	</span>

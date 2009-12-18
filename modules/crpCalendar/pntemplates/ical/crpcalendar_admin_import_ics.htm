@@ -8,13 +8,13 @@
 <div>	
 	<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="crpCalendar"]-->" />
 	<div class="pn-adminformrow">
-		<label for="event_category_cat_val"><!--[pnml name="_CATEGORY" html=1]--></label>
+		<label for="event_category_cat_val"><!--[pnml name="_CATEGORY"]--></label>
 		<!--[ pnml assign="lblDef" name="_CHOOSECATEGORY" ]-->
 		<!--[ selector_category category=$mainCategory name="id_category" field="id" selectedValue=$__CATEGORIES__.Main.id defaultValue="0" defaultText="$lblDef" ]-->
 	</div>
 	
 	<div class="pn-adminformrow">
-	    <label for="crpcalendar_event_document"><!--[pnml name="_CRPCALENDAR_EVENT_DOCUMENT" html=1]--> <!--[pnmodgetvar module=crpCalendar name=document_dimension]--> bytes</label>
+	    <label for="crpcalendar_event_document"><!--[pnml name="_CRPCALENDAR_EVENT_DOCUMENT"]--> <!--[pnmodgetvar module=crpCalendar name=document_dimension]--> bytes</label>
 		<input type="hidden" name="MAX_FILE_SIZE" value="<!--[pnmodgetvar module=crpCalendar name=document_dimension]-->"/>
 	  	<input id="ics_file" name="ics_file" type="file" size="32"/>
 	</div>

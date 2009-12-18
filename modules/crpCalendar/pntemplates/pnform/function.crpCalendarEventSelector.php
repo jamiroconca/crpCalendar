@@ -56,6 +56,8 @@ class crpCalendarEventSelector extends pnFormPlugin
     if (!($class = Loader :: loadClass('CategoryUtil')))
       pn_exit('Unable to load class [CategoryUtil] ...');
 
+    $dom = ZLanguage::getModuleDomain('crpCalendar');
+
     $category = null;
     $startnum = '1';
     $mainCat = CategoryRegistryUtil :: getRegisteredModuleCategory('crpCalendar', 'crpcalendar', 'Main', '/__SYSTEM__/Modules/crpCalendar');
@@ -68,13 +70,13 @@ class crpCalendarEventSelector extends pnFormPlugin
     $events = pnModAPIFunc('crpCalendar', 'user', 'getall_formlist', $data);
 
     if ($events === false)
-      return LogUtil::registerError (_MODARGSERROR);
+      return LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
 
     if ($this->selectedItemId != null)
     {
       $event = pnModAPIFunc('crpCalendar', 'user', 'get', array('eventid' => $this->selectedItemId));
       if ($event === false)
-        return LogUtil::registerError (_MODARGSERROR);
+        return LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
 
       $selectedEventId = $event['eventid'];
       $selectedCategoryId = $event[__CATEGORIES__]['Main']['id'];
@@ -86,7 +88,7 @@ class crpCalendarEventSelector extends pnFormPlugin
       $selectedCategoryId = null;
     }
 
-    $crpRender = pnRender::getInstance('crpCalendar', false);
+    $crpRender = &pnRender::getInstance('crpCalendar', false);
     $crpRender->assign('mainCategory', $mainCat);
     $crpRender->assign('selectedEventId', $selectedEventId);
     $crpRender->assign('selectedCategoryId', $selectedCategoryId);
@@ -118,7 +120,7 @@ class crpCalendarEventSelector extends pnFormPlugin
   {
     if ($this->mandatory  &&  empty($this->selectedItemId))
     {
-      $this->setError(_PNFORM_MANDATORYSELECTERROR);
+      $this->setError(__('A selection here is mandatory.', $dom));
     }
   }
 
