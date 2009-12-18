@@ -53,7 +53,7 @@ function crpCalendar_events_rss_feed($rssinfo)
 	}
 
 	// get the current language
-	$currentlang = pnUserGetLang();
+	$currentlang = ZLanguage::getLanguageCode();
 
 	// Break out options from our content field
 	$vars['limit'] = 10;

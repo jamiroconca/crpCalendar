@@ -18,8 +18,8 @@ class crpCalendar_contenttypesapi_category_eventPlugin extends contentTypeBase
 
   function getModule() { return 'crpCalendar'; }
   function getName() { return 'category_event'; }
-  function getTitle() { return _CRPCALENDAR_CONTENTENTTYPE_CATEGORY_EVENTTITLE; }
-  function getDescription() { return _CRPCALENDAR_CONTENTENTTYPE_CATEGORY_EVENTDESCR; }
+  function getTitle() { $dom = ZLanguage::getModuleDomain('crpCalendar'); return __('Events in a crpCalendar category', $dom); }
+  function getDescription() { $dom = ZLanguage::getModuleDomain('crpCalendar'); return __('Show a list of events from a crpCalendar category', $dom); }
 
 
   function loadData($data)
@@ -38,15 +38,17 @@ class crpCalendar_contenttypesapi_category_eventPlugin extends contentTypeBase
 
   function displayEditing()
   {
+  	$dom = ZLanguage::getModuleDomain('crpCalendar');
+
     if (!empty($this->categoryid))
     {
 			// TODO : Zikula 1.1.2 fail to load CategoryUtil ?
       Loader::loadClass ('CategoryUtil');
       $category = CategoryUtil::getCategoryByID($this->categoryid);
-			$lang = pnUserGetLang();
+			$lang = ZLanguage::getLanguageCode();
       return '<strong>'.$category['display_name'][$lang].'</strong><br />'.$category['display_desc'][$lang];
     }
-    return _CRPCALENDAR_CONTENTENTTYPE_NOCATEGORY;
+    return __('No category', $dom);
   }
 
 

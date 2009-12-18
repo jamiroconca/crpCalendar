@@ -60,7 +60,7 @@ class crpCalendarDAO
 
     if (!is_numeric($startnum) || !is_numeric($modvars['itemsperpage']))
     {
-      return LogUtil :: registerError(_MODARGSERROR);
+      return LogUtil :: registerError(__('Error! Could not do what you wanted. Please check your input.', $this->dom));
     }
 
     $catFilter = array ();
@@ -105,7 +105,7 @@ class crpCalendarDAO
 
     if (pnConfigGetVar('multilingual') == 1 && !$ignoreml)
     {
-      $queryargs[] = "($crpcalendarcolumn[language]='" . DataUtil :: formatForStore(pnUserGetLang()) . "' " .
+      $queryargs[] = "($crpcalendarcolumn[language]='" . DataUtil :: formatForStore(ZLanguage::getLanguageCode()) . "' " .
           "OR $crpcalendarcolumn[language]='')";
     }
 
@@ -179,7 +179,7 @@ class crpCalendarDAO
     // error message and return
     if ($objArray === false)
     {
-      return LogUtil :: registerError(_GETFAILED);
+      return LogUtil :: registerError(__('Error! Could not load items.', $this->dom));
     }
 
     // need to do this here as the category expansion code can't know the
@@ -220,7 +220,7 @@ class crpCalendarDAO
   {
     if (!is_numeric($startnum) || !is_numeric($modvars['itemsperpage']))
     {
-      return LogUtil :: registerError(_MODARGSERROR);
+      return LogUtil :: registerError(__('Error! Could not do what you wanted. Please check your input.', $this->dom));
     }
 
     $catFilter = array ();
@@ -261,7 +261,7 @@ class crpCalendarDAO
     $queryargs = array ();
     if (pnConfigGetVar('multilingual') == 1 && !$ignoreml)
     {
-      $queryargs[] = "($crpcalendarcolumn[language]='" . DataUtil :: formatForStore(pnUserGetLang()) . "' " .
+      $queryargs[] = "($crpcalendarcolumn[language]='" . DataUtil :: formatForStore(ZLanguage::getLanguageCode()) . "' " .
           "OR $crpcalendarcolumn[language]='')";
     }
 
@@ -314,7 +314,7 @@ class crpCalendarDAO
     // error message and return
     if ($objArray === false)
     {
-      return LogUtil :: registerError(_GETFAILED);
+      return LogUtil :: registerError(__('Error! Could not load items.', $this->dom));
     }
 
     foreach ($objArray as $kObj => $vObj)
@@ -466,7 +466,7 @@ class crpCalendarDAO
     {
       $inputValues['event']['language'] = '';
     }
-    if (!$this->getAuth(ACCESS_EDIT))
+    if (!$this->getAuth(ACCESS__('Edit', $dom)))
       $inputValues['event']['obj_status'] = $inputValues['modvars']['submitted_status'];
 
     if (pnModAvailable('locations') && pnModGetVar('crpCalendar', 'enable_locations') && $inputValues['event']['locations'])
@@ -477,7 +477,7 @@ class crpCalendarDAO
     $object = DBUtil :: insertObject($inputValues['event'], 'crpcalendar', 'eventid');
     if (!$object)
     {
-      LogUtil :: registerError(_CREATEFAILED);
+      LogUtil :: registerError(__('Error! Creation attempt failed.', $this->dom));
       return false;
     }
 
@@ -535,7 +535,7 @@ class crpCalendarDAO
 
     if ($item == false)
     {
-      LogUtil :: registerError(_NOSUCHITEM);
+      LogUtil :: registerError(__('No such item found.', $this->dom));
       return false;
     }
 
@@ -547,7 +547,7 @@ class crpCalendarDAO
 
     if (!DBUtil :: updateObject($inputValues['event'], 'crpcalendar', '', 'eventid'))
     {
-      LogUtil :: registerError(_UPDATEFAILED);
+      LogUtil :: registerError(__('Error! Update attempt failed.', $this->dom));
       return false;
     }
 
@@ -575,8 +575,8 @@ class crpCalendarDAO
     ));
 
     // The item has been modified, so we clear all cached pages of this item.
-    $pnRender = new pnRender('crpCalendar');
-    $pnRender->clear_cache(null, $inputValues['eventid']);
+    $render = new pnRender('crpCalendar');
+    $render->clear_cache(null, $inputValues['eventid']);
 
     return true;
   }
@@ -600,7 +600,7 @@ class crpCalendarDAO
     $object = DBUtil :: insertObject($inputValues['event'], 'crpcalendar', 'eventid');
     if (!$object)
     {
-      LogUtil :: registerError(_CREATEFAILED);
+      LogUtil :: registerError(__('Error! Creation attempt failed.', $this->dom));
       return false;
     }
 
@@ -643,8 +643,8 @@ class crpCalendarDAO
     ));
 
     // The item has been modified, so we clear all cached pages of this item.
-    $pnRender = new pnRender('crpCalendar');
-    $pnRender->clear_cache(null, $inputValues['eventid']);
+    $render = new pnRender('crpCalendar');
+    $render->clear_cache(null, $inputValues['eventid']);
 
     return true;
   }
@@ -712,7 +712,7 @@ class crpCalendarDAO
 
     if (!is_numeric($startnum) || !is_numeric($modvars['itemsperpage']))
     {
-      return LogUtil :: registerError(_MODARGSERROR);
+      return LogUtil :: registerError(__('Error! Could not do what you wanted. Please check your input.', $this->dom));
     }
 
     $pntable = pnDBGetTables();
@@ -790,7 +790,7 @@ class crpCalendarDAO
     // error message and return
     if ($objArray === false)
     {
-      return LogUtil :: registerError(_GETFAILED);
+      return LogUtil :: registerError(__('Error! Could not load items.', $this->dom));
     }
 
     // need to do this here as the category expansion code can't know the
@@ -878,7 +878,7 @@ class crpCalendarDAO
     // error message and return
     if ($objArray === false)
     {
-      return LogUtil :: registerError(_GETFAILED);
+      return LogUtil :: registerError(__('Error! Could not load items.', $this->dom));
     }
 
     // need to do this here as the category expansion code can't know the
@@ -1126,16 +1126,16 @@ class crpCalendarDAO
   {
   // Argument check
     if (!$eventid)
-      return LogUtil :: registerError(_MODARGSERROR);
+      return LogUtil :: registerError(__('Error! Could not do what you wanted. Please check your input.', $this->dom));
 
     // Check item exists before attempting deletion
     $item = $this->getAdminData($eventid);
 
     if ($item == false)
-      return LogUtil :: registerError(_NOSUCHITEM);
+      return LogUtil :: registerError(__('No such item found.', $this->dom));
 
     if (!DBUtil :: deleteObjectByID('crpcalendar', $eventid, 'eventid'))
-      return LogUtil :: registerError(_DELETEFAILED);
+      return LogUtil :: registerError(__('Error! Sorry! Deletion attempt failed.', $this->dom));
 
     $this->deleteFile('image', $eventid);
     $this->deleteFile('document', $eventid);
@@ -1188,7 +1188,7 @@ class crpCalendarDAO
         $document['id'] = $item['id'];
         if (!DBUtil :: updateObject($document, 'crpcalendar_files', '', 'id'))
         {
-          LogUtil :: registerError(_UPDATEFAILED);
+          LogUtil :: registerError(__('Error! Update attempt failed.', $this->dom));
           return false;
         }
         $result = 0;
@@ -1197,7 +1197,7 @@ class crpCalendarDAO
       {
         if (!DBUtil :: insertObject($document, 'crpcalendar_files', 'id'))
         {
-          LogUtil :: registerError(_CREATEFAILED);
+          LogUtil :: registerError(__('Error! Creation attempt failed.', $this->dom));
           return false;
         }
         $result = DBUtil :: getInsertID('crpcalendar_files', 'id');
@@ -1326,12 +1326,12 @@ class crpCalendarDAO
   {
   // Argument check
     if (!$eventid)
-      return LogUtil :: registerError(_MODARGSERROR);
+      return LogUtil :: registerError(__('Error! Could not do what you wanted. Please check your input.', $this->dom));
 
     $item = $this->getFile($eventid, $file_type);
 
     if ($item && !DBUtil :: deleteObjectByID('crpcalendar_files', $item['id'], 'id'))
-      return LogUtil :: registerError(_DELETEFAILED);
+      return LogUtil :: registerError(__('Error! Sorry! Deletion attempt failed.', $this->dom));
 
     return true;
   }
@@ -1407,7 +1407,7 @@ class crpCalendarDAO
 
     if (!$data['event']['title'] || (!$data['event']['event_text'] && pnModGetVar('crpCalendar', 'mandatory_description')))
     {
-      LogUtil :: registerError(_MODARGSERROR);
+      LogUtil :: registerError(__('Error! Could not do what you wanted. Please check your input.', $this->dom));
     }
     elseif (($data['event_image']['error']) && $data['event_image']['error'] != UPLOAD_ERR_NO_FILE)
     {
@@ -1415,11 +1415,11 @@ class crpCalendarDAO
       {
         case UPLOAD_ERR_INI_SIZE :
         case UPLOAD_ERR_FORM_SIZE :
-          LogUtil :: registerError(_CRPCALENDAR_ERROR_IMAGE_FILE_SIZE_TOO_BIG);
+          LogUtil :: registerError(__('Image File size not allowed', $this->dom));
           break;
         case UPLOAD_ERR_PARTIAL :
         case UPLOAD_ERR_NO_TMP_DIR :
-          LogUtil :: registerError(_CRPCALENDAR_ERROR_IMAGE_NO_FILE);
+          LogUtil :: registerError(__('Image file not uploaded', $this->dom));
           break;
       }
     }
@@ -1429,25 +1429,25 @@ class crpCalendarDAO
       {
         case UPLOAD_ERR_INI_SIZE :
         case UPLOAD_ERR_FORM_SIZE :
-          LogUtil :: registerError(_CRPCALENDAR_ERROR_DOCUMENT_FILE_SIZE_TOO_BIG);
+          LogUtil :: registerError(__('Document size not allowed', $this->dom));
           break;
         case UPLOAD_ERR_PARTIAL :
         case UPLOAD_ERR_NO_TMP_DIR :
-          LogUtil :: registerError(_CRPCALENDAR_ERROR_DOCUMENT_NO_FILE);
+          LogUtil :: registerError(__('Document file not uploaded', $this->dom));
           break;
       }
     }
     elseif ($data['event_image']['name'] && !in_array($data['event_image']['type'], $this->ImageTypes))
     {
-      LogUtil :: registerError(_CRPCALENDAR_IMAGE_INVALID_TYPE);
+      LogUtil :: registerError(__('Image invalid type', $this->dom));
     }
     elseif ($data['event']['url'] && !pnVarValidate($data['event']['url'], 'url'))
     {
-      LogUtil :: registerError(_CRPCALENDAR_INVALID_URL);
+      LogUtil :: registerError(__('Invalid URL', $this->dom));
     }
     elseif (empty ($data['event']['__CATEGORIES__']['Main']) && pnModGetVar('crpCalendar', 'enablecategorization'))
     {
-      LogUtil :: registerError(_CRPCALENDAR_ERROR_EVENT_NO_CATEGORY);
+      LogUtil :: registerError(__('Categorisation is enabled, choose a category', $this->dom));
     }
 		/*
 		elseif($data['event']['contact'] && !pnVarValidate($data['event']['contact'],'email'))
@@ -1484,7 +1484,7 @@ class crpCalendarDAO
     $object = DBUtil :: insertObject($data, 'crpcalendar', 'eventid');
     if (!$object)
     {
-      LogUtil :: registerError(_CREATEFAILED);
+      LogUtil :: registerError(__('Error! Creation attempt failed.', $this->dom));
       return false;
     }
     // Let any other modules know we have created an item
@@ -1508,7 +1508,7 @@ class crpCalendarDAO
   {
   // Argument check
     if (!$endDay || !$endMonth || !$endYear)
-      return LogUtil :: registerError(_MODARGSERROR);
+      return LogUtil :: registerError(__('Error! Could not do what you wanted. Please check your input.', $this->dom));
 
     $pntable = pnDBGetTables();
     $crpcalendarcolumn = $pntable['crpcalendar_column'];
@@ -1549,16 +1549,16 @@ class crpCalendarDAO
     // error message and return
     if ($objArray === false)
     {
-      return LogUtil :: registerError(_GETFAILED);
+      return LogUtil :: registerError(__('Error! Could not load items.', $this->dom));
     }
 
     foreach ($objArray as $purgetitem)
     {
       if ($purgetitem['eventid'] == false)
-        return LogUtil :: registerError(_NOSUCHITEM);
+        return LogUtil :: registerError(__('No such item found.', $this->dom));
 
       if (!DBUtil :: deleteObjectByID('crpcalendar', $purgetitem['eventid'], 'eventid'))
-        return LogUtil :: registerError(_DELETEFAILED);
+        return LogUtil :: registerError(__('Error! Sorry! Deletion attempt failed.', $this->dom));
 
       $this->deleteFile('image', $purgetitem['eventid']);
       $this->deleteFile('document', $purgetitem['eventid']);
@@ -1593,7 +1593,7 @@ class crpCalendarDAO
       ));
 
       $locations['values'][] = null;
-      $locations['output'][] = _CRPCALENDAR_NONE;
+      $locations['output'][] = __('None', $this->dom);
       foreach ($objArray as $klocation => $vlocation)
       {
         $locations['values'][] = $vlocation['locationid'];
