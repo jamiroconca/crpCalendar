@@ -17,12 +17,12 @@
  */
 function crpCalendar_ajax_getCategorizedEvent()
 {
+	$dom = ZLanguage::getModuleDomain('crpCalendar');
+
 	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
 	{
-		AjaxUtil :: error(pnVarPrepHTMLDisplay(_MODULENOAUTH));
+		AjaxUtil :: error(pnVarPrepHTMLDisplay(__('Sorry! No authorization to access this module.', $dom)));
 	}
-
-	pnModLangLoad('crpCalendar', 'admin');
 
 	// get all module vars
 	$modvars = pnModGetVar('crpCalendar');
@@ -53,9 +53,11 @@ function crpCalendar_ajax_getCategorizedEvent()
  */
 function crpCalendar_ajax_toggleStatus()
 {
+	$dom = ZLanguage::getModuleDomain('crpCalendar');
+
 	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_ADD))
 	{
-		AjaxUtil :: error(pnVarPrepHTMLDisplay(_MODULENOAUTH));
+		AjaxUtil :: error(pnVarPrepHTMLDisplay(__('Sorry! No authorization to access this module.', $dom)));
 	}
 
 	$eventid = FormUtil :: getPassedValue('eventid', null, 'GET');

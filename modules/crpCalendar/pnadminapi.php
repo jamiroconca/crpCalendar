@@ -43,29 +43,25 @@ function crpCalendar_adminapi_getlinks()
 		return LogUtil :: registerPermissionError();
 	}
 
+	$dom = ZLanguage::getModuleDomain('crpCalendar');
+
 	$links = array ();
 
-	pnModLangLoad('crpCalendar', 'admin');
-
-	$itemname = _CRPCALENDAR_EVENT;
-	$itemsname = _CRPCALENDAR_EVENTS;
+	$itemname = __('Event', $dom);
+	$itemsname = __('Calendar', $dom);
 
 	if (SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_EDIT))
 	{
 		$links[] = array (
 			'url' => pnModURL('crpCalendar', 'admin', 'view'),
-			'text' => pnML('_VIEWITEMS', array (
-				'i' => $itemsname
-			))
+			'text' => __f('%s List', $itemsname)
 		);
 	}
 	if (SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_EDIT))
 	{
 		$links[] = array (
 			'url' => pnModURL('crpCalendar', 'admin', 'new'),
-			'text' => pnML('_CREATEITEM', array (
-				'i' => $itemname
-			))
+			'text' => __f('Create %s', $itemname)
 		);
 	}
 	if (SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_EDIT))

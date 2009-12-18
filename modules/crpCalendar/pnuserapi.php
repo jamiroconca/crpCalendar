@@ -79,6 +79,8 @@ function crpCalendar_userapi_get($args)
 		return LogUtil :: registerPermissionError();
 	}
 
+	$dom = ZLanguage::getModuleDomain('crpCalendar');
+
 	// optional arguments
 	if (isset ($args['objectid']))
 	{
@@ -88,7 +90,7 @@ function crpCalendar_userapi_get($args)
 	// Argument check
 	if ((!isset ($args['eventid']) || !is_numeric($args['eventid'])) && !isset ($args['title']))
 	{
-		return LogUtil :: registerError(_MODARGSERROR);
+		return LogUtil :: registerError(__('Error! Could not do what you wanted. Please check your input.', $dom));
 	}
 
 	$calendar = new crpCalendar();

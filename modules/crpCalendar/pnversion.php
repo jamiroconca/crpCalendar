@@ -10,9 +10,12 @@
  * @package crpCalendar
  */
 
-$modversion['name'] = _CRPCALENDAR_NAME;
-$modversion['displayname'] = _CRPCALENDAR_DISPLAYNAME;
-$modversion['description'] = _CRPCALENDAR_DESCRIPTION;
+$dom = ZLanguage::getModuleDomain('crpCalendar');
+
+$modversion['name'] = 'crpCalendar';
+$modversion['displayname'] = __('crpCalendar', $dom);
+$modversion['description'] = __('Simple event calendar', $dom);
+$modversion['url'] = __('crpCalendar', $dom);
 $modversion['version'] = '0.5.4';
 $modversion['credits'] = 'pndocs/credits.txt';
 $modversion['help'] = 'pndocs/install.txt';

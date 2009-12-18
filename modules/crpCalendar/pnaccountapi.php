@@ -36,12 +36,13 @@ function crpCalendar_accountapi_getall($args)
 	// Create an array of links to return
 	if ($uname != null)
 	{
-		pnModLangLoad('crpCalendar');
+		$dom = ZLanguage::getModuleDomain('crpCalendar');
+
 		$items[] = array (
 			'url' => pnModURL('crpCalendar', 'user', 'new'),
 			'module' => 'crpCalendar',
 			'set' => 'pnimages',
-			'title' => _CRPCALENDAR_SUBMIT,
+			'title' => __('Submit event', $dom),
 			'icon' => 'admin.gif'
 		);
 		if (pnModGetVar('crpCalendar', 'enable_partecipation'))
@@ -49,7 +50,7 @@ function crpCalendar_accountapi_getall($args)
 				'url' => pnModURL('crpCalendar', 'user', 'get_partecipations'),
 				'module' => 'crpCalendar',
 				'set' => 'pnimages',
-				'title' => _CRPCALENDAR_EVENTS_MYLIST,
+				'title' => __('attendance to events', $dom),
 				'icon' => 'userdate.gif'
 			);
 	}

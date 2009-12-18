@@ -33,6 +33,8 @@ function crpCalendar_init()
 		return false;
 	}
 
+	$dom = ZLanguage::getModuleDomain('crpCalendar');
+
 	// Create the index
 	if (!DBUtil :: createIndex('event_image', 'crpcalendar_files', array (
 			'eventid',
@@ -54,7 +56,7 @@ function crpCalendar_init()
 	// create our default category
 	if (!_crpCalendar_createdefaultcategory())
 	{
-		return LogUtil :: registerError(_CREATEFAILED);
+		return LogUtil :: registerError(__('Error! Creation attempt failed.', $dom));
 	}
 
 	// Set default pages per page
@@ -98,6 +100,7 @@ function crpCalendar_init()
 function crpCalendar_upgrade($oldversion)
 {
 	$tables = pnDBGetTables();
+	$dom = ZLanguage::getModuleDomain('crpCalendar');
 
 	// Upgrade dependent on old version number
 	switch ($oldversion)
@@ -105,7 +108,7 @@ function crpCalendar_upgrade($oldversion)
 		case "0.1.0" :
 			$sql = "ALTER TABLE $tables[crpcalendar] ADD pn_counter INT( 11 ) NOT NULL DEFAULT '0' AFTER pn_language";
 			if (!DBUtil :: executeSQL($sql))
-				return LogUtil :: registerError(_UPDATETABLEFAILED);
+				return LogUtil :: registerError(__('Error! Table update failed.', $dom));
 			return crpCalendar_upgrade("0.1.1");
 		case "0.1.1" :
 			pnModSetVar('crpCalendar', 'crpcalendar_enable_rss', true);
@@ -118,7 +121,7 @@ function crpCalendar_upgrade($oldversion)
 
 			if (!DBUtil :: createTable('crpcalendar_files'))
 			{
-				return LogUtil :: registerError(_UPDATETABLEFAILED);
+				return LogUtil :: registerError(__('Error! Table update failed.', $dom));
 			}
 
 			if (!DBUtil :: createIndex('event_image', 'crpcalendar_files', array (
@@ -127,7 +130,7 @@ function crpCalendar_upgrade($oldversion)
 				), array (
 					'UNIQUE' => '1'
 				)))
-				LogUtil :: registerError(_UPDATETABLEFAILED);
+				LogUtil :: registerError(__('Error! Table update failed.', $dom));
 			return crpCalendar_upgrade("0.3.0");
 		case "0.3.0" :
 			pnModSetVar('crpCalendar', 'crpcalendar_use_gd', false);
@@ -137,16 +140,16 @@ function crpCalendar_upgrade($oldversion)
 		case "0.3.1" :
 			$sql = "ALTER TABLE $tables[crpcalendar] ADD pn_location VARCHAR( 255 ) NOT NULL DEFAULT '' AFTER pn_urltitle";
 			if (!DBUtil :: executeSQL($sql))
-				return LogUtil :: registerError(_UPDATETABLEFAILED);
+				return LogUtil :: registerError(__('Error! Table update failed.', $dom));
 			$sql = "ALTER TABLE $tables[crpcalendar] ADD pn_url VARCHAR( 255 ) NOT NULL DEFAULT '' AFTER pn_location";
 			if (!DBUtil :: executeSQL($sql))
-				return LogUtil :: registerError(_UPDATETABLEFAILED);
+				return LogUtil :: registerError(__('Error! Table update failed.', $dom));
 			$sql = "ALTER TABLE $tables[crpcalendar] ADD pn_contact VARCHAR( 255 ) NOT NULL DEFAULT '' AFTER pn_url";
 			if (!DBUtil :: executeSQL($sql))
-				return LogUtil :: registerError(_UPDATETABLEFAILED);
+				return LogUtil :: registerError(__('Error! Table update failed.', $dom));
 			$sql = "ALTER TABLE $tables[crpcalendar] ADD pn_organiser VARCHAR( 255 ) NOT NULL DEFAULT '' AFTER pn_contact";
 			if (!DBUtil :: executeSQL($sql))
-				return LogUtil :: registerError(_UPDATETABLEFAILED);
+				return LogUtil :: registerError(__('Error! Table update failed.', $dom));
 			return crpCalendar_upgrade("0.4.0");
 		case "0.4.0" :
 			pnModSetVar('crpCalendar', 'crpcalendar_theme', 'default');
@@ -158,7 +161,7 @@ function crpCalendar_upgrade($oldversion)
 		case "0.4.2" :
 			if (!DBUtil :: createTable('crpcalendar_attendee'))
 			{
-				return LogUtil :: registerError(_UPDATETABLEFAILED);
+				return LogUtil :: registerError(__('Error! Table update failed.', $dom));
 			}
 			if (!DBUtil :: createIndex('event_uid', 'crpcalendar_attendee', array (
 					'uid',
@@ -166,7 +169,7 @@ function crpCalendar_upgrade($oldversion)
 				), array (
 					'UNIQUE' => '1'
 				)))
-				LogUtil :: registerError(_UPDATETABLEFAILED);
+				LogUtil :: registerError(__('Error! Table update failed.', $dom));
 			pnModSetVar('crpCalendar', 'enable_partecipation', false);
 			return crpCalendar_upgrade("0.4.3");
 		case "0.4.3" :
@@ -198,7 +201,7 @@ function crpCalendar_upgrade($oldversion)
 
 			$sql = "ALTER TABLE $tables[crpcalendar] ADD id_formicula VARCHAR( 255 ) NOT NULL DEFAULT '' AFTER pn_counter";
 			if (!DBUtil :: executeSQL($sql))
-				return LogUtil :: registerError(_UPDATETABLEFAILED);
+				return LogUtil :: registerError(__('Error! Table update failed.', $dom));
 
 			$sql = "ALTER TABLE $tables[crpcalendar] CHANGE `pn_eventid` `eventid` INT( 11 ) NOT NULL AUTO_INCREMENT ,
 													CHANGE `pn_title` `title` TEXT NOT NULL DEFAULT '' ,
@@ -219,7 +222,7 @@ function crpCalendar_upgrade($oldversion)
 													CHANGE `pn_lu_date` `lu_date` DATETIME NOT NULL DEFAULT '1970-01-01 00:00:00' ,
 													CHANGE `pn_lu_uid` `lu_uid` INT( 11 ) NOT NULL DEFAULT '0' ";
 			if (!DBUtil :: executeSQL($sql))
-				return LogUtil :: registerError(_UPDATETABLEFAILED);
+				return LogUtil :: registerError(__('Error! Table update failed.', $dom));
 
 			$sql = "ALTER TABLE $tables[crpcalendar_files] CHANGE `pn_id` `id` INT( 11 ) NOT NULL AUTO_INCREMENT ,
 													CHANGE `pn_eventid` `eventid` INT( 11 ) NOT NULL DEFAULT '0' ,
@@ -229,12 +232,12 @@ function crpCalendar_upgrade($oldversion)
 													CHANGE `pn_size` `size` INT NOT NULL DEFAULT '0' ,
 													CHANGE `pn_binary_data` `binary_data` LONGBLOB NOT NULL DEFAULT '' ";
 			if (!DBUtil :: executeSQL($sql))
-				return LogUtil :: registerError(_UPDATETABLEFAILED);
+				return LogUtil :: registerError(__('Error! Table update failed.', $dom));
 
 			$sql = "ALTER TABLE $tables[crpcalendar_attendee] CHANGE `pn_uid` `uid` INT( 11 ) NOT NULL DEFAULT '0' ,
 													CHANGE `pn_eventid` `eventid` INT( 11 ) NOT NULL DEFAULT '0' ";
 			if (!DBUtil :: executeSQL($sql))
-				return LogUtil :: registerError(_UPDATETABLEFAILED);
+				return LogUtil :: registerError(__('Error! Table update failed.', $dom));
 
 			return crpCalendar_upgrade("0.5.0");
 			break;
@@ -254,8 +257,8 @@ function crpCalendar_upgrade($oldversion)
 		case "0.5.3" :
 			$sql = "ALTER TABLE $tables[crpcalendar] ADD image_caption VARCHAR( 255 ) NOT NULL DEFAULT '' AFTER organiser";
 			if (!DBUtil :: executeSQL($sql))
-				return LogUtil :: registerError(_UPDATETABLEFAILED);
-			
+				return LogUtil :: registerError(__('Error! Table update failed.', $dom));
+
 			return crpCalendar_upgrade("0.5.4");
 			break;
 		case "0.5.4" :
@@ -307,7 +310,7 @@ function _crpCalendar_createdefaultcategory()
 	Loader :: loadClassFromModule('Categories', 'CategoryRegistry');
 
 	// get the language file
-	$lang = pnUserGetLang();
+	$lang = ZLanguage::getLanguageCode();
 
 	// get the category path for which we're going to insert our place holder category
 	$rootcat = CategoryUtil :: getCategoryByPath('/__SYSTEM__/Modules');
