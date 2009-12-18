@@ -52,7 +52,7 @@
 	  	<div><strong><!--[pnml name="_CRPCALENDAR_END_DATE"]--></strong>: <abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.end_date|pndate_format:$complete_date_format]--></abbr></div>
 		<!--[else]-->
 		<div><strong><!--[pnml name="_CRPCALENDAR_START_DATE"]--></strong>: <abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%d"]-->"><!--[$event.start_date|pndate_format:$only_date_format]--></abbr></div>
-	  	<div class="pn-hide"><strong><!--[pnml name="_CRPCALENDAR_END_DATE"]--></strong>: <abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%d"]-->"><!--[$event.end_date|pndate_format:$only_date_format]--></abbr></div>
+	  	<div class="z-hide"><strong><!--[pnml name="_CRPCALENDAR_END_DATE"]--></strong>: <abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%d"]-->"><!--[$event.end_date|pndate_format:$only_date_format]--></abbr></div>
 		<!--[/if]-->
 		
 		<!--[if $event.location]-->

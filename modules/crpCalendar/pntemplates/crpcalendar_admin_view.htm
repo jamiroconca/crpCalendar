@@ -2,8 +2,8 @@
 <!--[include file="crpcalendar_admin_menu.htm"]-->
 <!--[pnml name="_CRPCALENDAR_EVENTS" assign=itemname]-->
 <!--[pnml name="_VIEWITEMS" i=$itemname assign=templatetitle]-->
-<div class="pn-admincontainer">
-<div class="pn-adminpageicon"><!--[pnimg modname=core src=windowlist.gif set=icons/large alt=$templatetitle]--></div>
+<div class="z-admincontainer">
+<div class="z-adminpageicon"><!--[pnimg modname=core src=windowlist.gif set=icons/large alt=$templatetitle]--></div>
 <h2><!--[$templatetitle]--></h2>
 <!--[if $enablecategorization]-->
 <form action="<!--[pnmodurl modname=crpCalendar type=admin func=view]-->" method="post" enctype="application/x-www-form-urlencoded">
@@ -34,7 +34,7 @@
 </div>
 </form>
 <!--[/if]-->
-<table class="pn-admintable">
+<table class="z-admintable">
   <tr>
       <th><!--[pnml name="_CRPCALENDAR_TITLE"]--></th>
       <th class="crpcalendar_w2"><!--[pnml name="_ID"]--></th>
@@ -48,7 +48,7 @@
       <th class="crpcalendar_w2"><!--[pnml name="_OPTIONS"]--></th>
   </tr>
   <!--[foreach from=$events item=event]-->
-    <tr class="<!--[cycle values="pn-odd,pn-even"]-->">
+    <tr class="<!--[cycle values="z-odd,z-even"]-->">
       <td>
       	<span class="<!--[if $event.start_date > date("Y-m-d")]-->crpcalendar-upcoming<!--[/if]-->">
       		<!--[$event.title|pnvarprephtmldisplay]-->
@@ -70,7 +70,7 @@
 			<td><!--[$event.end_date|pndate_format:$complete_date_format]--></td>
 			<td>
 				<span class="crp-status-real"><!--[crpcalendarstatus status=$event.obj_status eventid=$event.eventid]--></span>
-				<span class="crp-status-fake pn-hide"><!--[crpcalendarstatus status=$event.obj_status eventid=$event.eventid fake=true]--></span>
+				<span class="crp-status-fake z-hide"><!--[crpcalendarstatus status=$event.obj_status eventid=$event.eventid fake=true]--></span>
 			</td>	  	
       <td>
         <!--[assign var="options" value=$event.options]-->

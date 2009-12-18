@@ -44,11 +44,11 @@
 				<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="display" eventid=$event.eventid]-->" title="<!--[$event.title]-->">
 					<span class="summary"><!--[$event.title|truncate:"48"]--></span>
 				</a>
-				<span class="dtstart pn-hide"><!--[$event.cr_date]--></span>
-				<span class="uid pn-hide"><!--[$event.cr_uid]--></span>
-				<span class="category pn-hide"><!--[$event.__CATEGORIES__.Main.display_name.$lang]--></span>
-				<abbr class="dtstart pn-hide" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%MZ"]-->"></abbr>
-				<abbr class="dtend pn-hide" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"></abbr>
+				<span class="dtstart z-hide"><!--[$event.cr_date]--></span>
+				<span class="uid z-hide"><!--[$event.cr_uid]--></span>
+				<span class="category z-hide"><!--[$event.__CATEGORIES__.Main.display_name.$lang]--></span>
+				<abbr class="dtstart z-hide" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%MZ"]-->"></abbr>
+				<abbr class="dtend z-hide" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"></abbr>
 			</div>
 			<!--[elseif ($event.start_date|pndate_format:"%Y%m%d" neq $event.end_date|pndate_format:"%Y%m%d") && ($day|pndate_format:"%Y%m%d" >= $event.start_date|pndate_format:"%Y%m%d") && ($day|pndate_format:"%Y%m%d" <= $event.end_date|pndate_format:"%Y%m%d")]-->
 			<div class="vevent">
@@ -56,11 +56,11 @@
 				<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="display" eventid=$event.eventid]-->" title="<!--[$event.title]-->">
 					<span class="summary"><!--[$event.title|truncate:"48"]--></span>
 				</a>
-				<span class="dtstart pn-hide"><!--[$event.cr_date]--></span>
-				<span class="uid pn-hide"><!--[$event.cr_uid]--></span>
-				<span class="category pn-hide"><!--[$event.__CATEGORIES__.Main.display_name.$lang]--></span>
-				<abbr class="dtstart pn-hide" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%MZ"]-->"></abbr>
-				<abbr class="dtend pn-hide" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"></abbr>
+				<span class="dtstart z-hide"><!--[$event.cr_date]--></span>
+				<span class="uid z-hide"><!--[$event.cr_uid]--></span>
+				<span class="category z-hide"><!--[$event.__CATEGORIES__.Main.display_name.$lang]--></span>
+				<abbr class="dtstart z-hide" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%MZ"]-->"></abbr>
+				<abbr class="dtend z-hide" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"></abbr>
 			</div>
 			<!--[/if]-->
 			<!--[/foreach]-->

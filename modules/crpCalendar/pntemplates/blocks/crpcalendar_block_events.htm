@@ -1,7 +1,7 @@
 <!--[pnpageaddvar name=stylesheet value="modules/crpCalendar/pnstyle/style.css"]-->
 <!--[crpcalendar_feeds]-->
 
-<div class="pn-menu">
+<div class="z-menu">
 <!--[securityutil_checkpermission component="crpCalendar::" instance="::" level="ACCESS_COMMENT" assign="can_submit"]-->
 [&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func=$choosed_view|pnvarprepfordisplay]-->"><!--[pnml name="_CRPCALENDAR_VIEW"]--></a>&nbsp;<!--[if $can_submit]-->|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="new"|pnvarprepfordisplay]-->"><!--[pnml name="_CRPCALENDAR_SUBMIT"]--></a>&nbsp;<!--[/if]-->]
 </div>
@@ -22,7 +22,7 @@
 <!--[/if]-->
 <a href="<!--[pnmodurl modname=crpCalendar func=display eventid=$event.eventid|pnvarprepfordisplay]-->">
 	<span class="summary"><!--[$event.title|pnvarprephtmldisplay]--></span>
-</a> (<abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%M%sZ"]-->"><!--[$event.start_date|pndate_format:$this_date_format]--></abbr><span class="<!--[if $event.day_event]-->pn-hide<!--[/if]-->"> &raquo; <abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%M%sZ"]-->"><!--[$event.end_date|pndate_format:$this_date_format]--></abbr></span>)
+</a> (<abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%M%sZ"]-->"><!--[$event.start_date|pndate_format:$this_date_format]--></abbr><span class="<!--[if $event.day_event]-->z-hide<!--[/if]-->"> &raquo; <abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%M%sZ"]-->"><!--[$event.end_date|pndate_format:$this_date_format]--></abbr></span>)
 <div class="description"><!--[$event.event_text|truncate:"50"|pnvarprephtmldisplay]--></div>
 <div style="clear:left"></div>
 </div>
