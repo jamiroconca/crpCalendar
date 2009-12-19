@@ -3,7 +3,7 @@
 
 <div class="z-menu">
 <!--[securityutil_checkpermission component="crpCalendar::" instance="::" level="ACCESS_COMMENT" assign="can_submit"]-->
-[&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func=$choosed_view|pnvarprepfordisplay]-->"><!--[pnml name="_CRPCALENDAR_VIEW"]--></a>&nbsp;<!--[if $can_submit]-->|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="new"|pnvarprepfordisplay]-->"><!--[pnml name="_CRPCALENDAR_SUBMIT"]--></a>&nbsp;<!--[/if]-->]
+[&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func=$choosed_view|pnvarprepfordisplay]-->"><!--[gt text="Events list" domain="module_crpcalendar"]--></a>&nbsp;<!--[if $can_submit]-->|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="new"|pnvarprepfordisplay]-->"><!--[gt text="Submit event" domain="module_crpcalendar"]--></a>&nbsp;<!--[/if]-->]
 </div>
 
 <h4><!--[$t|pndate_format:"%B %Y"]--></h4>
@@ -20,10 +20,10 @@
 	</span>
 </div>
 
-<!--[pnml name="_CRPCALENDAR_PREV_WEEK" assign="pwchar"]-->
-<!--[pnml name="_CRPCALENDAR_NEXT_WEEK" assign="nwchar"]-->
-<!--[pnml name="_CRPCALENDAR_PREV_DAY" assign="pdchar"]-->
-<!--[pnml name="_CRPCALENDAR_NEXT_DAY" assign="ndchar"]-->
+<!--[gt text="Previous week" domain="module_crpcalendar" assign="pwchar"]-->
+<!--[gt text="Next week" domain="module_crpcalendar" assign="nwchar"]-->
+<!--[gt text="Yesterday" domain="module_crpcalendar" assign="pdchar"]-->
+<!--[gt text="Tomorrow" domain="module_crpcalendar" assign="ndchar"]-->
 <!--[crpcalendar_daynav date=$date t=$t container="div" separator="<br />" prev_week_char=$pwchar next_week_char=$nwchar prev_day_char=$pdchar next_day_char=$ndchar dateview="false"]-->
 
 <br />
@@ -42,7 +42,7 @@
 		<td>
 		<!--[crpcalendar_datetime_stamp datetime=$days.1 assign=weektime]-->
 		<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="week_view" t=$weektime|pnvarprepfordisplay]-->">
-			<!--[pnimg modname=crpCalendar titleml=true src=$crpcalendar_theme|cat:"/right_arrows.gif" title=_CRPCALENDAR_VIEW_WEEK]-->
+			<!--[pnimg modname='crpCalendar'  src=$crpcalendar_theme|cat:"/right_arrows.gif" __title='Weekly view']-->
 		</a>
 		</td>
 		<!--[else]-->
@@ -62,11 +62,11 @@
 			<div>
 			<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="display" eventid=$event.eventid|pnvarprepfordisplay]-->" title="<!--[$event.title]-->">
 			<!--[if $event.start_date|pndate_format:"%Y%m%d" eq $day|pndate_format:"%Y%m%d" && $event.day_event]-->
-			<!--[pnimg modname=crpCalendar src=$crpcalendar_theme|cat:"/allday_dot.gif" alt=$event.title]-->
+			<!--[pnimg modname='crpCalendar' src=$crpcalendar_theme|cat:"/allday_dot.gif" __alt=$event.title]-->
 			<!--[elseif $event.start_date|pndate_format:"%Y%m%d" eq $day|pndate_format:"%Y%m%d" && ($event.start_date|pndate_format:"%Y%m%d" eq $event.end_date|pndate_format:"%Y%m%d")]-->
-			<!--[pnimg modname=crpCalendar src=$crpcalendar_theme|cat:"/event_dot.gif" alt=$event.title]-->
+			<!--[pnimg modname='crpCalendar' src=$crpcalendar_theme|cat:"/event_dot.gif" __alt=$event.title]-->
 			<!--[elseif ($event.start_date|pndate_format:"%Y%m%d" neq $event.end_date|pndate_format:"%Y%m%d") && ($day|pndate_format:"%Y%m%d" >= $event.start_date|pndate_format:"%Y%m%d") && ($day|pndate_format:"%Y%m%d" <= $event.end_date|pndate_format:"%Y%m%d")]-->
-			<!--[pnimg modname=crpCalendar src=$crpcalendar_theme|cat:"/monthdot_3.gif" alt=$event.title]-->
+			<!--[pnimg modname='crpCalendar' src=$crpcalendar_theme|cat:"/monthdot_3.gif" __alt=$event.title]-->
 			<!--[/if]-->
 			</a>
 			</div>
@@ -83,7 +83,7 @@
 			<td>
 				<!--[crpcalendar_datetime_stamp datetime=$daysexpanded.$point assign=weektime]-->
 				<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="week_view" t=$weektime|pnvarprepfordisplay]-->">
-					<!--[pnimg modname=crpCalendar titleml=true src=$crpcalendar_theme|cat:"/right_arrows.gif" title=_CRPCALENDAR_VIEW_WEEK]-->
+					<!--[pnimg modname='crpCalendar'  src=$crpcalendar_theme|cat:"/right_arrows.gif" __title='Weekly view']-->
 				</a>
 			</td>
 		<!--[else]-->

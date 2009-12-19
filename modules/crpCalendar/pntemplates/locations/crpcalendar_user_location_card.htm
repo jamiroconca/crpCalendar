@@ -21,21 +21,21 @@
 		<!--[/if]-->
 		</span>
 		
-		<!--[if $event.location.phone]--><!--[pnml name="_LOCATIONS_LOCATION_PHONE"]-->: <span class="tel"><!--[$event.location.phone|default:""]--></span>
+		<!--[if $event.location.phone]--><!--[gt text="Phone"]-->: <span class="tel"><!--[$event.location.phone|default:""]--></span>
 		<br/>
 		<!--[/if]-->
-		<!--[if $event.location.fax]--><!--[pnml name="_LOCATIONS_LOCATION_FAX"]-->: <span class="fax"><!--[$event.location.fax|default:""]--></span>
+		<!--[if $event.location.fax]--><!--[gt text="Fax"]-->: <span class="fax"><!--[$event.location.fax|default:""]--></span>
 		<br/>
 		<!--[/if]-->
 		<!--[if $event.location.email]-->
-		<!--[pnml name="_LOCATIONS_LOCATION_EMAIL"]-->: 
+		<!--[gt text="E-mail address"]-->: 
 		<a class="email" href="mailto:<!--[$event.location.email|default:""]-->">
 			<!--[$event.location.email|default:""]-->
 		</a>
 		<br/>
 		<!--[/if]-->
 		<!--[if $event.location.url]-->
-		<!--[pnml name="_LOCATIONS_LOCATION_URL"]-->
+		<!--[gt text="URL"]-->
 		: 
 		<a class="url" href="<!--[$event.location.url|default:""]-->">
 			<!--[$event.location.url|default:""]-->

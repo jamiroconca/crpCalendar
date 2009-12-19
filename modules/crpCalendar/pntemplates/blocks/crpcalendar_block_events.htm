@@ -3,7 +3,7 @@
 
 <div class="z-menu">
 <!--[securityutil_checkpermission component="crpCalendar::" instance="::" level="ACCESS_COMMENT" assign="can_submit"]-->
-[&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func=$choosed_view|pnvarprepfordisplay]-->"><!--[pnml name="_CRPCALENDAR_VIEW"]--></a>&nbsp;<!--[if $can_submit]-->|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="new"|pnvarprepfordisplay]-->"><!--[pnml name="_CRPCALENDAR_SUBMIT"]--></a>&nbsp;<!--[/if]-->]
+[&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func=$choosed_view|pnvarprepfordisplay]-->"><!--[gt text="Events list" domain="module_crpcalendar"]--></a>&nbsp;<!--[if $can_submit]-->|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="new"|pnvarprepfordisplay]-->"><!--[gt text="Submit event" domain="module_crpcalendar"]--></a>&nbsp;<!--[/if]-->]
 </div>
 
 <!--[foreach from=$events item=event]-->
@@ -28,5 +28,5 @@
 </div>
 <!--[/foreach]-->
 <!--[if empty($events)]-->
-<!--[pnml name="_CRPCALENDAR_BLOCK_NO_EVENTS"]--> <!--[$interval]--> <!--[pnml name="_DAYS"]-->
+<!--[gt text="There are no events in the next" domain="module_crpcalendar"]--> <!--[$interval]--> <!--[gt text="days" domain="module_crpcalendar"]-->
 <!--[/if]-->

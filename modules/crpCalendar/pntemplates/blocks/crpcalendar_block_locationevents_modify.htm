@@ -1,22 +1,22 @@
 <div class="crpcalendar-formrow">
-	<label for="eventsblock_limit"><!--[pnml name="_CRPCALENDAR_MAXDAY"]--></label>
+	<label for="eventsblock_limit"><!--[gt text="Days interval to show" domain="module_crpcalendar"]--></label>
 	<input id="eventsblock_limit" type="text" name="limit" size="2" value="<!--[$limit|pnvarprepfordisplay]-->" />
 </div>
 
 <div class="crpcalendar-formrow">
-	<label for="eventsblock_numitems"><!--[pnml name="_CRPCALENDAR_MAXEVENTS"]--></label>
+	<label for="eventsblock_numitems"><!--[gt text="Maximum number of events" domain="module_crpcalendar"]--></label>
 	<input id="eventsblock_numitems" type="text" name="numitems" size="2" value="<!--[$numitems|pnvarprepfordisplay]-->" />
 </div>
 
 <!--[if pnModGetVar('crpCalendar','enable_locations')]-->
 <div>
-  <label for="crpcalendar_location"><!--[pnml name="_CRPCALENDAR_LOCATION"]--></label>
-  <!--[ pnml assign="lblDef" name="_ALLCATEGORIES"]-->
-  <!--[ html_options values=$avail.values output=$avail.output name="bylocation" selected=$bylocation ]-->
+  <label for="crpcalendar_location"><!--[gt text="Location" domain="module_crpcalendar"]--></label>
+  <!--[pnml assign="lblDef" name="All"]-->
+  <!--[html_options values=$avail.values output=$avail.output name="bylocation" selected=$bylocation]-->
 </div>
 <!--[else]-->
 <div>
-	<label for="crpcalendar_location"><!--[pnml name="_CRPCALENDAR_LOCATION"]--></label>
+	<label for="crpcalendar_location"><!--[gt text="Location" domain="module_crpcalendar"]--></label>
 	<input id="crpcalendar_location" type="text" name="bylocation" size="32" maxlength="255" value="<!--[$bylocation|pnvarprepfordisplay]-->" />
 </div>
 <!--[/if]-->
