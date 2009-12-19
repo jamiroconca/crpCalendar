@@ -466,7 +466,7 @@ class crpCalendarDAO
     {
       $inputValues['event']['language'] = '';
     }
-    if (!$this->getAuth(ACCESS__('Edit', $dom)))
+    if (!$this->getAuth(ACCESS_EDIT))
       $inputValues['event']['obj_status'] = $inputValues['modvars']['submitted_status'];
 
     if (pnModAvailable('locations') && pnModGetVar('crpCalendar', 'enable_locations') && $inputValues['event']['locations'])
