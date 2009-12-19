@@ -6,9 +6,9 @@
 	
 	<tr>
 		<!--[if $crpcalendar_userlist_image]-->
-    <th class="crpcalendar_w1"><!--[pnml name="_CRPCALENDAR_IMAGES"]--></th>
+    <th class="crpcalendar_w1"><!--[gt text="Images"]--></th>
 	  <!--[/if]-->
-	  <th class="sortable"><!--[pnml name="_CRPCALENDAR_CONTENT"]--></th>
+	  <th class="sortable"><!--[gt text="Event detail"]--></th>
 	</tr>
 	
 	<!--[foreach from=$events item=event name=single]-->
@@ -31,16 +31,16 @@
 		<td>	
 	  	<div class="vevent">
 		  	<div>
-		  		<!--[if $event.__CATEGORIES__.Main.__ATTRIBUTES__.Color]--><span  style="background-color:<!--[$event.__CATEGORIES__.Main.__ATTRIBUTES__.Color]-->">&nbsp;&nbsp;</span><!--[/if]-->
+		  		<!--[if $event.__CATEGORIES__.Main._Attributes__.Color]--><span  style="background-color:<!--[$event.__CATEGORIES__.Main._Attributes__.Color]-->">&nbsp;&nbsp;</span><!--[/if]-->
 			  	<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="display" eventid=$event.eventid]-->" title="<!--[$event.title]-->">
 	      		<span class="<!--[if $event.start_date > date("Y-m-d")]-->crpcalendar-upcoming<!--[/if]--> summary">
 	      			<!--[$event.title|pnvarprephtmldisplay]-->
 				</span>
 				</a>
 				<!--[if $enablecategorization]-->
-				<!--[ foreach from=$event.__CATEGORIES__ item=cat ]-->
-			    <strong>&middot;</strong> <!--[pnml name="_CATEGORY"]-->: <span class="category"><!--[ $cat.display_name.$lang ]--></span>
-			    <!--[ /foreach ]-->	
+				<!--[foreach from=$event.__CATEGORIES__ item=cat]-->
+			    <strong>&middot;</strong> <!--[gt text="Category"]-->: <span class="category"><!--[$cat.display_name.$lang]--></span>
+			    <!--[/foreach]-->	
 			    <!--[/if]-->				
 			</div>
 			<!--[if $event.cr_uid]-->
@@ -51,16 +51,16 @@
 				<!--[pnmodgetvar module="Users" name="anonymous" assign=cr_profilename]-->
 			<!--[/if]-->
 			<div>
-				<!--[pnml name="_CRPCALENDAR_CREATEDON"]--> <abbr class="dtstamp" title="<!--[$event.cr_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.cr_date|pndate_format]--></abbr>
-				<!--[pnml name="_BY"]--> <span class="uid"><a href="<!--[$cr_profilelink|pnvarprepfordisplay]-->"><!--[$cr_profilename]--></a></span>
+				<!--[gt text="Posted on"]--> <abbr class="dtstamp" title="<!--[$event.cr_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.cr_date|pndate_format]--></abbr>
+				<!--[gt text="by"]--> <span class="uid"><a href="<!--[$cr_profilelink|pnvarprepfordisplay]-->"><!--[$cr_profilename]--></a></span>
 			</div>
 			<div>
-				<!--[pnml name="_CRPCALENDAR_START_DATE"]-->: <strong><abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.start_date|pndate_format:$complete_date_format]--></abbr></strong>
-   				<strong>&middot;</strong> <!--[pnml name="_CRPCALENDAR_END_DATE"]-->: <strong><abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.end_date|pndate_format:$complete_date_format]--></abbr></strong>
+				<!--[gt text="Start date"]-->: <strong><abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.start_date|pndate_format:$complete_date_format]--></abbr></strong>
+   				<strong>&middot;</strong> <!--[gt text="End date"]-->: <strong><abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.end_date|pndate_format:$complete_date_format]--></abbr></strong>
    			</div>
    			<!--[assign var="options" value=$event.options]-->
 			<!--[section name=options loop=$options]-->
-				<a href="<!--[$options[options].url|pnvarprepfordisplay]-->"><!--[pnimg modname=core set=icons/extrasmall src=$options[options].image alt=$options[options].title]--></a>
+				<a href="<!--[$options[options].url|pnvarprepfordisplay]-->"><!--[pnimg modname='core' set='icons/extrasmall' src=$options[options].image __alt=$options[options].title]--></a>
 			<!--[/section]-->
    		</div>
 		</td>

@@ -3,18 +3,18 @@
 <form action="<!--[pnmodurl modname=crpCalendar type=user func=$choosed_view]-->" method="post" enctype="application/x-www-form-urlencoded">
 <div>
 	<!--[if $enablecategorization]-->
-  	<label for="events_category"><!--[pnml name="_CATEGORY"]--></label>
-  	<!--[ pnml assign="lblDef" name="_ALLCATEGORIES"]-->
-  	<!--[ selector_category category=$mainCategory name="events_category" selectedValue=$events_category defaultValue="0" defaultText="$lblDef" ]-->
+  	<label for="events_category"><!--[gt text="Category"]--></label>
+  	<!--[pnml assign="lblDef" name="All"]-->
+  	<!--[selector_category category=$mainCategory name="events_category" selectedValue=$events_category defaultValue="0" defaultText="$lblDef"]-->
  	<!--[/if]-->
   	
 	<!--[if $choosed_view neq "view" && $choosed_view neq "get_partecipations"  && $choosed_view neq "year_view"]-->
 	  	
   	<!--[if $choosed_view eq "month_view"]-->
-  	<label for="crpcalendar_viewForm"><!--[pnml name="_CRPCALENDAR_VIEW_FORM"]--></label>
+  	<label for="crpcalendar_viewForm"><!--[gt text="View as"]--></label>
   	<select id="crpcalendar_viewForm" name="viewForm">
-  		<option value="table"<!--[if $viewForm eq 'table']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_VIEW_TABLE"]--></option>
-  		<option value="list"<!--[if $viewForm eq 'list']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_VIEW_LIST"]--></option>
+  		<option value="table"<!--[if $viewForm eq 'table']--> selected="selected"<!--[/if]-->><!--[gt text="Table"]--></option>
+  		<option value="list"<!--[if $viewForm eq 'list']--> selected="selected"<!--[/if]-->><!--[gt text="List"]--></option>
   	</select>
   	<!--[/if]-->
 	  	
@@ -26,16 +26,16 @@
 		<!--[html_select_date time=$t start_year=$crpcalendar_start_year end_year="+4" display_days=false display_months=false id="start_datefield"]-->
   
   <!--[elseif $choosed_view neq "get_partecipations"  && $choosed_view neq "year_view"]-->
-  	<label for="crpcalendar_typeList"><!--[pnml name="_CRPCALENDAR_STATUS"]--></label>
+  	<label for="crpcalendar_typeList"><!--[gt text="Status"]--></label>
   	<select id="crpcalendar_typeList" name="typeList">
-  		<option value=""><!--[pnml name="_CRPCALENDAR_NOT_SPECIFIED"]--></option>
-  		<option value="upcoming"<!--[if $typeList eq 'upcoming']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_UPCOMING"]--></option>
-  		<option value="archive"<!--[if $typeList eq 'archive']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_ARCHIVED"]--></option>
+  		<option value=""><!--[gt text="Not specified"]--></option>
+  		<option value="upcoming"<!--[if $typeList eq 'upcoming']--> selected="selected"<!--[/if]-->><!--[gt text="Upcoming"]--></option>
+  		<option value="archive"<!--[if $typeList eq 'archive']--> selected="selected"<!--[/if]-->><!--[gt text="Archived"]--></option>
   	</select>
  	<!--[/if]-->
   
-  <input name="submit" type="submit" value="<!--[pnml name="_SUBMIT"]-->" />
-  <input name="clear" type="submit" value="<!--[pnml name="_CLEAR"]-->" />
+  <input name="submit" type="submit" value="<!--[gt text="Submit"]-->" />
+  <input name="clear" type="submit" value="<!--[gt text="Clear"]-->" />
 
 </div>
 </form>

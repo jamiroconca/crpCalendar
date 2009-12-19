@@ -1,51 +1,50 @@
 <!--[pnajaxheader modname=crpCalendar filename=crpcalendar.js noscriptaculous=true nobehaviour=true]-->
 <!--[include file="crpcalendar_admin_menu.htm"]-->
-<!--[pnml name="_CRPCALENDAR_EVENTS" assign=itemname]-->
-<!--[pnml name="_VIEWITEMS" i=$itemname assign=templatetitle]-->
+<!--[gt text="Calendar List" assign=templatetitle]-->
 <div class="z-admincontainer">
-<div class="z-adminpageicon"><!--[pnimg modname=core src=windowlist.gif set=icons/large alt=$templatetitle]--></div>
+<div class="z-adminpageicon"><!--[pnimg modname='core' src='windowlist.gif' set='icons/large' __alt=$templatetitle]--></div>
 <h2><!--[$templatetitle]--></h2>
 <!--[if $enablecategorization]-->
 <form action="<!--[pnmodurl modname=crpCalendar type=admin func=view]-->" method="post" enctype="application/x-www-form-urlencoded">
 <div>
-  <label for="quotes_category"><!--[pnml name="_CATEGORY"]--></label>
-  <!--[ pnml assign="lblDef" name="_ALLCATEGORIES"]-->
-  <!--[ selector_category category=$mainCategory name="events_category" selectedValue=$events_category defaultValue="0" defaultText="$lblDef" ]-->
-  <label for="crpcalendar_event_status"><!--[pnml name="_CRPCALENDAR_STATUS"]--></label>
+  <label for="quotes_category"><!--[gt text="Category"]--></label>
+  <!--[pnml assign="lblDef" name="All"]-->
+  <!--[selector_category category=$mainCategory name="events_category" selectedValue=$events_category defaultValue="0" defaultText="$lblDef"]-->
+  <label for="crpcalendar_event_status"><!--[gt text="Status"]--></label>
   <select id="crpcalendar_event_status" name="events_status">
-  	<option value=""<!--[if $events_status eq '']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_NOT_SPECIFIED"]--></option>
-		<option value="A"<!--[if $events_status eq 'A']--> selected="selected"<!--[/if]-->><!--[pnml name="_ACTIVE"]--></option>
-		<option value="P"<!--[if $events_status eq 'P']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_PENDING"]--></option>
-		<option value="R"<!--[if $events_status eq 'R']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_REJECTED"]--></option>
+  	<option value=""<!--[if $events_status eq '']--> selected="selected"<!--[/if]-->><!--[gt text="Not specified"]--></option>
+		<option value="A"<!--[if $events_status eq 'A']--> selected="selected"<!--[/if]-->><!--[gt text="Active"]--></option>
+		<option value="P"<!--[if $events_status eq 'P']--> selected="selected"<!--[/if]-->><!--[gt text="Pending"]--></option>
+		<option value="R"<!--[if $events_status eq 'R']--> selected="selected"<!--[/if]-->><!--[gt text="Rejected"]--></option>
 	</select>
-	<label for="crpcalendar_sortColumn"><!--[pnml name="_CRPCALENDAR_SORT_COLUMN"]--></label>
+	<label for="crpcalendar_sortColumn"><!--[gt text="Order by"]--></label>
   <select id="crpcalendar_sortColumn" name="sortColumn">
-  	<option value="start_date"<!--[if $sortColumn eq 'start_date']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_START_DATE"]--></option>
-		<option value="title"<!--[if $sortColumn eq 'title']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_TITLE"]--></option>
-		<option value="end_date"<!--[if $sortColumn eq 'end_date']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_END_DATE"]--></option>
+  	<option value="start_date"<!--[if $sortColumn eq 'start_date']--> selected="selected"<!--[/if]-->><!--[gt text="Start date"]--></option>
+		<option value="title"<!--[if $sortColumn eq 'title']--> selected="selected"<!--[/if]-->><!--[gt text="Title"]--></option>
+		<option value="end_date"<!--[if $sortColumn eq 'end_date']--> selected="selected"<!--[/if]-->><!--[gt text="End date"]--></option>
 	</select>
-	<label for="crpcalendar_sortOrder"><!--[pnml name="_CRPCALENDAR_SORT_ORDER"]--></label>
+	<label for="crpcalendar_sortOrder"><!--[gt text="Sorting"]--></label>
   <select id="crpcalendar_sortOrder" name="sortOrder">
-  	<option value="DESC"<!--[if $sortOrder eq 'DESC']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_SORT_DESC"]--></option>
-		<option value="ASC"<!--[if $sortOrder eq 'ASC']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_SORT_ASC"]--></option>
+  	<option value="DESC"<!--[if $sortOrder eq 'DESC']--> selected="selected"<!--[/if]-->><!--[gt text="Descendant"]--></option>
+		<option value="ASC"<!--[if $sortOrder eq 'ASC']--> selected="selected"<!--[/if]-->><!--[gt text="Ascendant"]--></option>
 	</select>
-  <input name="submit" type="submit" value="<!--[pnml name="_SUBMIT"]-->" />
-  <input name="clear" type="submit" value="<!--[pnml name="_CLEAR"]-->" />
+  <input name="submit" type="submit" value="<!--[gt text="Submit"]-->" />
+  <input name="clear" type="submit" value="<!--[gt text="Clear"]-->" />
 </div>
 </form>
 <!--[/if]-->
 <table class="z-admintable">
   <tr>
-      <th><!--[pnml name="_CRPCALENDAR_TITLE"]--></th>
-      <th class="crpcalendar_w2"><!--[pnml name="_ID"]--></th>
-      <th class="crpcalendar_w2"><!--[pnml name="_BY"]--></th>
+      <th><!--[gt text="Title"]--></th>
+      <th class="crpcalendar_w2"><!--[gt text="Internal ID"]--></th>
+      <th class="crpcalendar_w2"><!--[gt text="by"]--></th>
 	  <!--[if $enablecategorization]-->
-      <th class="crpcalendar_w3"><!--[pnml name="_CATEGORY"]--></th>
+      <th class="crpcalendar_w3"><!--[gt text="Category"]--></th>
 	  <!--[/if]-->
-	  	<th class="crpcalendar_w3"><!--[pnml name="_CRPCALENDAR_START_DATE"]--></th>
-	  	<th class="crpcalendar_w3"><!--[pnml name="_CRPCALENDAR_END_DATE"]--></th>
-	  	<th class="crpcalendar_w1"><!--[pnml name="_CRPCALENDAR_STATUS"]--></th>
-      <th class="crpcalendar_w2"><!--[pnml name="_OPTIONS"]--></th>
+	  	<th class="crpcalendar_w3"><!--[gt text="Start date"]--></th>
+	  	<th class="crpcalendar_w3"><!--[gt text="End date"]--></th>
+	  	<th class="crpcalendar_w1"><!--[gt text="Status"]--></th>
+      <th class="crpcalendar_w2"><!--[gt text="Options"]--></th>
   </tr>
   <!--[foreach from=$events item=event]-->
     <tr class="<!--[cycle values="z-odd,z-even"]-->">
@@ -63,7 +62,7 @@
       <td><!--[$cr_profilename]--></td>
 	  <!--[if $enablecategorization]-->
       <td>
-          <!--[ $event.__CATEGORIES__.Main.display_name.$lang ]-->
+          <!--[$event.__CATEGORIES__.Main.display_name.$lang]-->
       </td>
 	  <!--[/if]-->
 	  	<td><!--[$event.start_date|pndate_format:$complete_date_format]--></td>
@@ -75,7 +74,7 @@
       <td>
         <!--[assign var="options" value=$event.options]-->
         <!--[section name=options loop=$options]-->
-          <a href="<!--[$options[options].url|pnvarprepfordisplay]-->"><!--[pnimg modname=core set=icons/extrasmall src=$options[options].image alt=$options[options].title]--></a>
+          <a href="<!--[$options[options].url|pnvarprepfordisplay]-->"><!--[pnimg modname='core' set='icons/extrasmall' src=$options[options].image __alt=$options[options].title]--></a>
         <!--[/section]-->
       </td>
     </tr>

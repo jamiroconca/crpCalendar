@@ -31,7 +31,7 @@
 			<!--[foreach from=$events item=event name=single]-->
 			<!--[if $event.start_date|pndate_format:"%Y%m%d" eq $day|pndate_format:"%Y%m%d"]-->
 			<div class="vevent">
-				<!--[if $event.__CATEGORIES__.Main.__ATTRIBUTES__.Color]--><span  style="background-color:<!--[$event.__CATEGORIES__.Main.__ATTRIBUTES__.Color]-->">&nbsp;</span><!--[/if]-->
+				<!--[if $event.__CATEGORIES__.Main._Attributes__.Color]--><span  style="background-color:<!--[$event.__CATEGORIES__.Main._Attributes__.Color]-->">&nbsp;</span><!--[/if]-->
 				<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="display" eventid=$event.eventid]-->" title="<!--[$event.title]-->">
 					<span class="summary"><!--[$event.title|truncate:"48"]--></span>
 				</a>
@@ -43,7 +43,7 @@
 			</div>
 			<!--[elseif ($event.start_date|pndate_format:"%Y%m%d" neq $event.end_date|pndate_format:"%Y%m%d") && ($day|pndate_format:"%Y%m%d" >= $event.start_date|pndate_format:"%Y%m%d") && ($day|pndate_format:"%Y%m%d" <= $event.end_date|pndate_format:"%Y%m%d")]-->
 			<div class="vevent">
-				<!--[if $event.__CATEGORIES__.Main.__ATTRIBUTES__.Color]--><span  style="background-color:<!--[$event.__CATEGORIES__.Main.__ATTRIBUTES__.Color]-->">&nbsp;</span><!--[/if]-->
+				<!--[if $event.__CATEGORIES__.Main._Attributes__.Color]--><span  style="background-color:<!--[$event.__CATEGORIES__.Main._Attributes__.Color]-->">&nbsp;</span><!--[/if]-->
 				<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="display" eventid=$event.eventid]-->" title="<!--[$event.title]-->">
 					<span class="summary"><!--[$event.title|truncate:"48"]--></span>
 				</a>

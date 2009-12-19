@@ -3,31 +3,31 @@
 
 <div class="crpcalendar-rss">
 	<a href="http://microformats.org/wiki/hcalendar" title="hCalendar Wiki">
-		<!--[pnimg modname=crpCalendar src=microformat_hcalendar.png alt="_CRPCALENDAR_HCALENDAR" altml=true]-->
+		<!--[pnimg modname='crpCalendar' src='microformat_hcalendar.png' __alt="hCalendar microformat" ]-->
 	</a>
 	<a href="http://microformats.org/wiki/hcard" title="hCard Wiki">
-		<!--[pnimg modname=crpCalendar src=microformat_hcard.png alt="_CRPCALENDAR_HCARD" altml=true]-->
+		<!--[pnimg modname='crpCalendar' src='microformat_hcard.png' __alt="Calendar_HCARD" ]-->
 	</a>
 	<!--[if $crpcalendar_show_rss]-->
 	<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="getfeed"]-->">
-		<!--[pnimg modname=crpCalendar src=rss_button.gif alt="_CRPCALENDAR_RSS" altml=true]-->
+		<!--[pnimg modname='crpCalendar' src='rss_button.gif' __alt="crpCalendar feed" ]-->
 	</a>
 	<!--[/if]-->
-	<a href="<!--[pnmodurl modname=crpCalendar func=ical_exports]-->"><!--[pnimg modname=crpCalendar altml=true src="ical.gif" alt=_CRPCALENDAR_ICAL]--></a>
+	<a href="<!--[pnmodurl modname=crpCalendar func=ical_exports]-->"><!--[pnimg modname='crpCalendar'  src="ical.gif" __alt='crpCalendar iCal event']--></a>
 </div>
 
 <div class="crpcalendar-box" style="background: url(modules/crpCalendar/pnimages/<!--[$crpcalendar_theme]-->/time_bg.gif) repeat-x;">
-	<h1><!--[sitename]--> <!--[pnml name="_CRPCALENDAR"]--></h1>
+	<h1><!--[sitename]--> <!--[gt text="Calendar"]--></h1>
 	
 	<div class="z-menu">
 	<!--[pnsessiongetvar name="crpCalendar_choosed_view" assign=choosed_view]-->
 	<!--[securityutil_checkpermission component="crpCalendar::" instance="::" level="ACCESS_COMMENT" assign="can_submit"]-->
-	<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="view"]-->"><!--[pnml name="_CRPCALENDAR_VIEW"]--></a>
-	|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="day_view" t=$smarty.now]-->"><!--[pnml name="_CRPCALENDAR_VIEW_TODAY"]--></a>
-	|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="week_view" t=$smarty.now]-->"><!--[pnml name="_CRPCALENDAR_VIEW_THIS_WEEK"]--></a>
-	|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="month_view" t=$smarty.now]-->"><!--[pnml name="_CRPCALENDAR_VIEW_THIS_MONTH"]--></a>
+	<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="view"]-->"><!--[gt text="Events list"]--></a>
+	|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="day_view" t=$smarty.now]-->"><!--[gt text="Today"]--></a>
+	|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="week_view" t=$smarty.now]-->"><!--[gt text="This week"]--></a>
+	|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="month_view" t=$smarty.now]-->"><!--[gt text="This month"]--></a>
 	<!--[if $can_submit]-->
-	|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="new"]-->"><!--[pnml name="_CRPCALENDAR_SUBMIT"]--></a>
+	|&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="new"]-->"><!--[gt text="Submit event"]--></a>
 	<!--[/if]-->
 	</div>
 	
@@ -36,18 +36,18 @@
 <div>
 	<!--[if $enable_partecipation && pnUserLoggedIn()]-->
 	<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="get_partecipations"]-->">
-	<!--[pnimg modname=core set=icons/small src=edit_user.gif alt="_CRPCALENDAR_EVENTS_MYLIST" altml=true]-->
+	<!--[pnimg modname='core' set='icons/small' src='edit_user.gif' __alt="attendance to events" ]-->
 	</a>&nbsp;
 	<!--[/if]-->
 	<!--[if $enable_partecipation]-->
 	<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="get_attendees"]-->">
-	<!--[pnimg modname=core set=icons/small src=edit_group.gif alt="_CRPCALENDAR_EVENTS_ATTENDEES" altml=true]-->
+	<!--[pnimg modname='core' set='icons/small' src='edit_group.gif' __alt="Calendar_ATTENDEES" ]-->
 	</a>&nbsp;
 	<!--[/if]-->
-	<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="view"]-->"><!--[pnimg modname=crpCalendar altml=true src=$crpcalendar_theme|cat:"/list_on.gif" alt=_CRPCALENDAR_VIEW]--></a>
-	<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="day_view"]-->"><!--[pnimg modname=crpCalendar altml=true src=$crpcalendar_theme|cat:"/day_on.gif" alt=_CRPCALENDAR_VIEW_DAY]--></a>
-	<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="week_view"]-->"><!--[pnimg modname=crpCalendar altml=true src=$crpcalendar_theme|cat:"/week_on.gif" alt=_CRPCALENDAR_VIEW_WEEK]--></a>
-	<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="month_view"]-->"><!--[pnimg modname=crpCalendar altml=true src=$crpcalendar_theme|cat:"/month_on.gif" alt=_CRPCALENDAR_VIEW_MONTH]--></a>
-	<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="year_view"]-->"><!--[pnimg modname=crpCalendar altml=true src=$crpcalendar_theme|cat:"/year_on.gif" alt=_CRPCALENDAR_VIEW_YEAR]--></a>
+	<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="view"]-->"><!--[pnimg modname='crpCalendar'  src=$crpcalendar_theme|cat:"/list_on.gif" __alt='Events list']--></a>
+	<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="day_view"]-->"><!--[pnimg modname='crpCalendar'  src=$crpcalendar_theme|cat:"/day_on.gif" __alt='Daily view']--></a>
+	<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="week_view"]-->"><!--[pnimg modname='crpCalendar'  src=$crpcalendar_theme|cat:"/week_on.gif" __alt='Weekly view']--></a>
+	<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="month_view"]-->"><!--[pnimg modname='crpCalendar'  src=$crpcalendar_theme|cat:"/month_on.gif" __alt='Monthly view']--></a>
+	<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="year_view"]-->"><!--[pnimg modname='crpCalendar'  src=$crpcalendar_theme|cat:"/year_on.gif" __alt='Yearly view']--></a>
 	<br />	
 </div>

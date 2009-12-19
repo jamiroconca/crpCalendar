@@ -9,8 +9,8 @@
 	<h2><span class="summary"><!--[$event.title|pnvarprephtmldisplay]--></span></h2>
 	
 	<h3>
-		<!--[if $event.__CATEGORIES__.Main.__ATTRIBUTES__.Color]-->
-		<span  style="background-color:<!--[$event.__CATEGORIES__.Main.__ATTRIBUTES__.Color]-->">&nbsp;&nbsp;&nbsp;</span>
+		<!--[if $event.__CATEGORIES__.Main._Attributes__.Color]-->
+		<span  style="background-color:<!--[$event.__CATEGORIES__.Main._Attributes__.Color]-->">&nbsp;&nbsp;&nbsp;</span>
 		<!--[/if]-->
 		<span class="category"><!--[$event.__CATEGORIES__.Main.display_name.$lang]--></span>
 	</h3>
@@ -23,15 +23,15 @@
 			<!--[assign var="cr_profilelink" value="#"]-->
 			<!--[pnmodgetvar module="Users" name="anonymous" assign=cr_profilename]-->
 		<!--[/if]-->
-		<!--[pnml name="_CRPCALENDAR_CREATEDON"]--> <abbr class="dtstamp" title="<!--[$event.cr_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.cr_date|pndate_format]--></abbr>
-		<!--[pnml name="_BY"]--> <span class="uid"><a href="<!--[$cr_profilelink|pnvarprepfordisplay]-->"><!--[$cr_profilename]--></a></span>
+		<!--[gt text="Posted on"]--> <abbr class="dtstamp" title="<!--[$event.cr_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.cr_date|pndate_format]--></abbr>
+		<!--[gt text="by"]--> <span class="uid"><a href="<!--[$cr_profilelink|pnvarprepfordisplay]-->"><!--[$cr_profilename]--></a></span>
 	</div>
 	
 	<div class="crpcalendar_body">
-		<a class="crpcalendar-rss" href="<!--[$event.exports.url|pnvarprepfordisplay]-->"><!--[pnimg modname=crpCalendar src=$event.exports.image alt=$event.exports.title]--></a>
+		<a class="crpcalendar-rss" href="<!--[$event.exports.url|pnvarprepfordisplay]-->"><!--[pnimg modname='crpCalendar' src=$event.exports.image __alt=$event.exports.title]--></a>
 		<!--[assign var="options" value=$event.options]-->
 		<!--[section name=options loop=$options]-->
-			<a class="crpcalendar-rss" href="<!--[$options[options].url|pnvarprepfordisplay]-->"><!--[pnimg modname=core set=icons/extrasmall src=$options[options].image alt=$options[options].title]--></a>
+			<a class="crpcalendar-rss" href="<!--[$options[options].url|pnvarprepfordisplay]-->"><!--[pnimg modname='core' set='icons/extrasmall' src=$options[options].image __alt=$options[options].title]--></a>
 		<!--[/section]-->
 		
 		<!--[if $event.image]-->
@@ -48,16 +48,16 @@
 		<!--[/if]-->
 		
 		<!--[if !$event.day_event]-->
-		<div><strong><!--[pnml name="_CRPCALENDAR_START_DATE"]--></strong>: <abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.start_date|pndate_format:$complete_date_format]--></abbr></div>
-	  	<div><strong><!--[pnml name="_CRPCALENDAR_END_DATE"]--></strong>: <abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.end_date|pndate_format:$complete_date_format]--></abbr></div>
+		<div><strong><!--[gt text="Start date"]--></strong>: <abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.start_date|pndate_format:$complete_date_format]--></abbr></div>
+	  	<div><strong><!--[gt text="End date"]--></strong>: <abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.end_date|pndate_format:$complete_date_format]--></abbr></div>
 		<!--[else]-->
-		<div><strong><!--[pnml name="_CRPCALENDAR_START_DATE"]--></strong>: <abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%d"]-->"><!--[$event.start_date|pndate_format:$only_date_format]--></abbr></div>
-	  	<div class="z-hide"><strong><!--[pnml name="_CRPCALENDAR_END_DATE"]--></strong>: <abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%d"]-->"><!--[$event.end_date|pndate_format:$only_date_format]--></abbr></div>
+		<div><strong><!--[gt text="Start date"]--></strong>: <abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%d"]-->"><!--[$event.start_date|pndate_format:$only_date_format]--></abbr></div>
+	  	<div class="z-hide"><strong><!--[gt text="End date"]--></strong>: <abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%d"]-->"><!--[$event.end_date|pndate_format:$only_date_format]--></abbr></div>
 		<!--[/if]-->
 		
 		<!--[if $event.location]-->
 		<div>
-			<strong><!--[pnml name="_CRPCALENDAR_LOCATION"]--></strong>:
+			<strong><!--[gt text="Location"]--></strong>:
 			<!--[if $enable_locations && pnModAvailable('locations') && is_numeric($event.location.locationid)]-->
 			<!--[include file="locations/crpcalendar_user_location_card.htm"]-->
 			<!--[else]-->
@@ -66,20 +66,20 @@
 		</div>
 		<!--[/if]-->
 		<!--[if $event.organiser]-->
-		<div><strong><!--[pnml name="_CRPCALENDAR_ORGANISER"]--></strong>: <span class="organiser"><!--[$event.organiser]--></span></div>
+		<div><strong><!--[gt text="Organiser"]--></strong>: <span class="organiser"><!--[$event.organiser]--></span></div>
 		<!--[/if]-->
 		<!--[if $event.contact]-->
-		<div><strong><!--[pnml name="_CRPCALENDAR_CONTACT"]--></strong>: <span class="contact"><!--[$event.contact|replace:"@":"[at]"]--></span></div>
+		<div><strong><!--[gt text="Contact"]--></strong>: <span class="contact"><!--[$event.contact|replace:"@":"[at]"]--></span></div>
 		<!--[/if]-->
 		<!--[if $event.url]-->
-		<div><strong><!--[pnml name="_CRPCALENDAR_URL"]--></strong>: <span class="url"><!--[$event.url|activatelinks]--></span></div>
+		<div><strong><!--[gt text="URL"]--></strong>: <span class="url"><!--[$event.url|activatelinks]--></span></div>
 		<!--[/if]-->
 		<br />
 		<div class="description"><!--[$event.event_text|nl2paragraphs|pnvarprephtmldisplay]--></div>
 		<!--[if $event.document]-->
 		<div>
 			<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="get_file" eventid=$event.eventid]-->" title="<!--[$event.title]-->">
-				<!--[pnimg modname=core set=icons/extrasmall src="attach.gif" altml=true titleml=true alt=$event.title title=$event.title]-->
+				<!--[pnimg modname='core' set='icons/extrasmall' src="attach.gif"   __alt=$event.title __title=$event.title]-->
 				<!--[$event.document.name]-->
 			</a>
 		</div>
@@ -90,15 +90,15 @@
 
 <!--[if $enable_partecipation]-->
 <div>
-	<h3><!--[pnml name="_CRPCALENDAR_PARTECIPATIONS"]--> <!--[pnml name="_BY"]--> <!--[pnml name="_MEMBERS"]--></h3>
+	<h3><!--[gt text="Event partecipations"]--> <!--[gt text="by"]--> <!--[gt text="registered users"]--></h3>
 	<!--[assign var="partecipations" value=$event.partecipations]-->
-	<!--[if empty($partecipations)]--><!--[pnml name="_CRPCALENDAR_NONE"]--><!--[/if]-->
+	<!--[if empty($partecipations)]--><!--[gt text="None"]--><!--[/if]-->
 	<ul id="event_partecipation">	
 	<!--[section name=partecipations loop=$partecipations]-->
 		<!--[pnmodurl modname=Profile func=view uid=$partecipations[partecipations].uid assign=partecipation_profilelink]-->
 		<li>
 			<a href="<!--[$partecipation_profilelink]-->"><!--[pnusergetvar name=uname uid=$partecipations[partecipations].uid]--></a>
-			- <a href="<!--[pnmodurl modname=crpCalendar func=get_partecipations uid=$partecipations[partecipations].uid]-->"><!--[pnml name="_CRPCALENDAR_USER_PARTECIPATIONS"]--></a>
+			- <a href="<!--[pnmodurl modname=crpCalendar func=get_partecipations uid=$partecipations[partecipations].uid]-->"><!--[gt text="user's attendance to events"]--></a>
 		</li>
 	<!--[/section]-->
 	</ul>	
@@ -106,9 +106,9 @@
 <!--[/if]-->
 
 <div class="crpcalendar_footer">
-	<!--[pnml name="_CRPCALENDAR_WORDSINTHISTEXT"]--> <!--[$event.event_text|count_words]--> - <!--[pnml name="_CRPCALENDAR_READS"]--> <!--[$event.counter]--> -
+	<!--[gt text="Words in text"]--> <!--[$event.event_text|count_words]--> - <!--[gt text="Reads"]--> <!--[$event.counter]--> -
 	<span>
-	<a href="<!--[pnmodurl modname=crpCalendar func=display eventid=$event.eventid theme=printer]-->"><!--[pnimg modname=core src=printer1.gif set=icons/small alt='_PAGES_PRINT' altml=true style="vertical-align:middle"]--></a>
+	<a href="<!--[pnmodurl modname=crpCalendar func=display eventid=$event.eventid theme=printer]-->"><!--[pnimg modname='core' src='printer1.gif' set='icons/small' __alt='PageS_PRINT'  style="vertical-align:middle"]--></a>
 	</span>
 </div>
 

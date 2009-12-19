@@ -1,167 +1,167 @@
 <!--[pnajaxheader modname=crpCalendar filename=crpcalendar.js noscriptaculous=true nobehaviour=true]-->
 <!--[include file="crpcalendar_admin_menu.htm"]-->
 <div class="z-admincontainer">
-<div class="z-adminpageicon"><!--[pnimg modname=core src=configure.gif set=icons/large alt='_MODIFYCONFIG' altml=true]--></div>
-<h2><!--[pnml name="_MODIFYCONFIG"]--></h2>
+<div class="z-adminpageicon"><!--[pnimg modname='core' src='configure.gif' set='icons/large' __alt='Settings' ]--></div>
+<h2><!--[gt text="Settings"]--></h2>
 <form class="z-form" action="<!--[pnmodurl modname="crpCalendar" type="admin" func="updateconfig"]-->" method="post" enctype="application/x-www-form-urlencoded">
 <div>
 	<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="crpCalendar"]-->" />
 	<fieldset>
-		<legend><!--[pnml name="_CRPCALENDAR_GENERAL"]--></legend>
+		<legend><!--[gt text="General"]--></legend>
 		<div class="z-formrow">
-			<label for="crpcalendar_enablecategorization"><!--[pnml name="_ENABLECATEGORIZATION"]--></label>
+			<label for="crpcalendar_enablecategorization"><!--[gt text="Enable categorization"]--></label>
 			<input id="crpcalendar_enablecategorization" type="checkbox" name="enablecategorization"<!--[if $enablecategorization]--> checked="checked"<!--[/if]--> />
 		</div>
 		<div class="z-formrow">
-			<label for="crpcalendar_itemsperpage"><!--[pnml name="_ITEMSPERPAGE"]--></label>
+			<label for="crpcalendar_itemsperpage"><!--[gt text="Items per page"]--></label>
 			<input id="crpcalendar_itemsperpage" type="text" name="itemsperpage" size="3" value="<!--[$itemsperpage|pnvarprepfordisplay]-->" />
 		</div>
 		<div class="z-formrow">
-			<label for="crpcalendar_file_dimension"><!--[pnml name="_CRPCALENDAR_FILE_DIMENSION"]--></label>
+			<label for="crpcalendar_file_dimension"><!--[gt text="Max upload image size (bytes)"]--></label>
 			<input id="crpcalendar_file_dimension" type="text" name="file_dimension" maxlength="6" size="7" value="<!--[$file_dimension|pnvarprepfordisplay]-->" />
 		</div>
 		<div class="z-formrow">
-			<label for="crpcalendar_document_dimension"><!--[pnml name="_CRPCALENDAR_DOCUMENT_DIMENSION"]--></label>
+			<label for="crpcalendar_document_dimension"><!--[gt text="Max upload document size (bytes)"]--></label>
 			<input id="crpcalendar_document_dimension" type="text" name="document_dimension" maxlength="6" size="7" value="<!--[$document_dimension|pnvarprepfordisplay]-->" />
 		</div>
 		<div class="z-formrow">
-			<label for="crpcalendar_notification"><!--[pnml name="_CRPCALENDAR_NOTIFICATION_MAIL"]--></label>
+			<label for="crpcalendar_notification"><!--[gt text="Notification for user's creation (none if empty)"]--></label>
 			<input id="crpcalendar_notification" type="text" name="crpcalendar_notification" maxlength="64" size="32" value="<!--[$crpcalendar_notification|pnvarprepfordisplay]-->" />
 		</div>
 		<div class="z-formrow">
-			<label for="crpcalendar_enable_partecipation"><!--[pnml name="_CRPCALENDAR_ENABLE_PARTECIPATION"]--></label>
+			<label for="crpcalendar_enable_partecipation"><!--[gt text="Enable user's partecipation to events"]--></label>
 			<input id="crpcalendar_enable_partecipation" type="checkbox" name="enable_partecipation"<!--[if $enable_partecipation]--> checked="checked"<!--[/if]--> />
 		</div>		
 		<div class="z-formrow">
-			<label for="crpcalendar_mandatory_description"><!--[pnml name="_CRPCALENDAR_MANDATORY_DESCRIPTION"]--></label>
+			<label for="crpcalendar_mandatory_description"><!--[gt text="Mandatory event description"]--></label>
 			<input id="crpcalendar_mandatory_description" type="checkbox" name="mandatory_description"<!--[if $mandatory_description]--> checked="checked"<!--[/if]--> />
 		</div>
 		<div class="z-formrow">
-			<label for="crpcalendar_submitted_status"><!--[pnml name="_CRPCALENDAR_SUBMITTED_STATUS"]--></label>
+			<label for="crpcalendar_submitted_status"><!--[gt text="Initial status for events submitted by users"]--></label>
 			<select id="crpcalendar_submitted_status" name="submitted_status">
-				<option value="A"<!--[if $submitted_status eq 'A']--> selected="selected"<!--[/if]-->><!--[pnml name="_ACTIVE"]--></option>
-				<option value="P"<!--[if $submitted_status eq 'P']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_PENDING"]--></option>
-				<option value="R"<!--[if $submitted_status eq 'R']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_REJECTED"]--></option>
+				<option value="A"<!--[if $submitted_status eq 'A']--> selected="selected"<!--[/if]-->><!--[gt text="Active"]--></option>
+				<option value="P"<!--[if $submitted_status eq 'P']--> selected="selected"<!--[/if]-->><!--[gt text="Pending"]--></option>
+				<option value="R"<!--[if $submitted_status eq 'R']--> selected="selected"<!--[/if]-->><!--[gt text="Rejected"]--></option>
 			</select>
 		</div>
 		<div class="z-formrow">
-			<label for="crpcalendar_multiple_insert"><!--[pnml name="_CRPCALENDAR_MULTIPLE_INSERT"]--></label>
+			<label for="crpcalendar_multiple_insert"><!--[gt text="Use multiple dates for admin's creation"]--></label>
 			<input id="crpcalendar_multiple_insert" type="checkbox" name="multiple_insert"<!--[if $multiple_insert]--> checked="checked"<!--[/if]--> />
 		</div>
 		<div class="z-formrow">
-			<label for="crpcalendar_weekday_start"><!--[pnml name="_CRPCALENDAR_WEEKDAY_START"]--></label>
+			<label for="crpcalendar_weekday_start"><!--[gt text="Week starts on"]--></label>
 			<select id="crpcalendar_weekday_start" name="crpcalendar_weekday_start">
-				<option value="1"<!--[if $crpcalendar_weekday_start eq '1']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_MONDAY"]--></option>
-				<option value="0"<!--[if $crpcalendar_weekday_start eq '0']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPCALENDAR_SUNDAY"]--></option>
+				<option value="1"<!--[if $crpcalendar_weekday_start eq '1']--> selected="selected"<!--[/if]-->><!--[gt text="Monday"]--></option>
+				<option value="0"<!--[if $crpcalendar_weekday_start eq '0']--> selected="selected"<!--[/if]-->><!--[gt text="Sunday"]--></option>
 			</select>
 		</div>
 	</fieldset>
 	<fieldset>
-		<legend><!--[pnml name="_CRPCALENDAR_VISUALIZATION"]--></legend>
+		<legend><!--[gt text="Visualization"]--></legend>
 		<div class="z-formrow">
-			<label for="crpcalendar_theme"><!--[pnml name="_CRPCALENDAR_THEME]--></label>
+			<label for="crpcalendar_theme"><!--[gt text="crpCalendar theme"]--></label>
 	        <!--[html_options options=$theme_options id=crpcalendar_theme name=crpcalendar_theme selected=$crpcalendar_theme]-->
 		</div>
 		<div class="z-formrow">
-			<label for="crpcalendar_start_year"><!--[pnml name="_CRPCALENDAR_START_YEAR"]--></label>
+			<label for="crpcalendar_start_year"><!--[gt text="Calendar start Year"]--></label>
 			<input id="crpcalendar_start_year" type="text" name="crpcalendar_start_year" maxlength="4" size="7" value="<!--[$crpcalendar_start_year|pnvarprepfordisplay]-->" />
 		</div>
 		<div class="z-formrow">
-			<label for="crpcalendar_daylist_categorized"><!--[pnml name="_CRPCALENDAR_DAYLIST_CATEGORIZED"]--></label>
+			<label for="crpcalendar_daylist_categorized"><!--[gt text="Categorized day-list view"]--></label>
 			<input id="crpcalendar_daylist_categorized" type="checkbox" name="daylist_categorized"<!--[if $daylist_categorized]--> checked="checked"<!--[/if]--> />
 		</div>
 		<div class="z-formrow">
-			<label for="crpcalendar_yearlist_categorized"><!--[pnml name="_CRPCALENDAR_YEARLIST_CATEGORIZED"]--></label>
+			<label for="crpcalendar_yearlist_categorized"><!--[gt text="Categorized year-list view"]--></label>
 			<input id="crpcalendar_yearlist_categorized" type="checkbox" name="yearlist_categorized"<!--[if $yearlist_categorized]--> checked="checked"<!--[/if]--> />
 		</div>
-		<div class="z-sub"><!--[pnml name="_CRPCALENDAR_COMPLETE_DATE_FORMAT_HINT"]--></div>
+		<div class="z-sub"><!--[gt text="For available formats, see the PHP's strftime() documentation"]--></div>
 		<div class="z-formrow">
-			<label for="complete_date_format"><!--[pnml name="_CRPCALENDAR_COMPLETE_DATE_FORMAT"]--></label>
+			<label for="complete_date_format"><!--[gt text="Complete date format (date and time)"]--></label>
 			<input id="complete_date_format" type="text" name="complete_date_format" maxlength="24" size="32" value="<!--[$complete_date_format|pnvarprepfordisplay]-->" />
 		</div>
 		<div class="z-formrow">
-			<label for="only_date_format"><!--[pnml name="_CRPCALENDAR_ONLY_DATE_FORMAT"]--></label>
+			<label for="only_date_format"><!--[gt text="Date format (only date)"]--></label>
 			<input id="only_date_format" type="text" name="only_date_format" maxlength="24" size="32" value="<!--[$only_date_format|pnvarprepfordisplay]-->" />
 		</div>
 		<div class="z-formrow">
-			<label for="crpcalendar_subcategory_listing"><!--[pnml name="_CRPCALENDAR_SUBCATEGORY_LISTING"]--></label>
+			<label for="crpcalendar_subcategory_listing"><!--[gt text="Show sub-categories events when watching a category"]--></label>
 			<input id="crpcalendar_subcategory_listing" type="checkbox" name="subcategory_listing"<!--[if $subcategory_listing]--> checked="checked"<!--[/if]--> />
 		</div>
 	</fieldset>	
 	<fieldset>
-		<legend><!--[pnml name="_CRPCALENDAR_IMAGES"]--></legend>		
+		<legend><!--[gt text="Images"]--></legend>		
 		<div class="z-formrow">
-			<label for="crpcalendar_gd_version"><!--[pnml name="_CRPCALENDAR_GD_AVAILABLE"]--></label>
+			<label for="crpcalendar_gd_version"><!--[gt text="GD Library"]--></label>
 			<input id="crpcalendar_gd_version" type="text" name="gd_version" disabled="disabled" size="32" value="<!--[$gd_version.string|pnvarprepfordisplay]-->" />
 			<!--[if $gd_version.value >= 2]-->
-				<!--[pnimg modname=core src=button_ok.gif set=icons/small altml=true titleml=true alt="_OK" title="_OK"]-->
+				<!--[pnimg modname='core' src='button_ok.gif' set='icons/small'   __alt="OK" __title="OK"]-->
 			<!--[else]-->
-				<!--[pnimg modname=core src=editdelete.gif set=icons/small altml=true titleml=true alt="_CANCEL" title="_CANCEL"]-->
+				<!--[pnimg modname='core' src='editdelete.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]-->
 			<!--[/if]-->
 		</div>
 		<div class="z-formrow z-hide" id="crpcalendar_use_browser">
-			<label><!--[pnml name="_CRPCALENDAR_USE_BROWSER"]--></label>
+			<label><!--[gt text="GD Library requirement failed"]--></label>
 			<input type="hidden" name="crpcalendar_use_gd" value="0" />
 		</div>
 		<div class="z-formrow">
-			<label for="crpcalendar_use_gd"><!--[pnml name="_CRPCALENDAR_USE_GD"]--></label>
+			<label for="crpcalendar_use_gd"><!--[gt text="crpCalendar use GD Library"]--></label>
 			<input id="crpcalendar_use_gd" type="checkbox" name="crpcalendar_use_gd"<!--[if $crpcalendar_use_gd]--> checked="checked"<!--[/if]--> />
 		</div>
 		<div class="z-formrow">
-			<label for="crpcalendar_userlist_image"><!--[pnml name="_CRPCALENDAR_USERLIST_IMAGE"]--></label>
+			<label for="crpcalendar_userlist_image"><!--[gt text="Show thumbnails in user list"]--></label>
 			<input id="crpcalendar_userlist_image" type="checkbox" name="crpcalendar_userlist_image"<!--[if $crpcalendar_userlist_image]--> checked="checked"<!--[/if]--> />
 		</div>		
 		<div class="z-formrow">
-			<label for="crpcalendar_image_width"><!--[pnml name="_CRPCALENDAR_IMAGE_WIDTH"]--></label>
+			<label for="crpcalendar_image_width"><!--[gt text="Event image width"]--></label>
 			<input id="crpcalendar_image_width" type="text" name="image_width" maxlength="3" size="4" value="<!--[$image_width|pnvarprepfordisplay]-->" />
 		</div>
 		<div class="z-formrow">
-			<label for="userlist_width"><!--[pnml name="_CRPCALENDAR_USERLIST_WIDTH"]--></label>
+			<label for="userlist_width"><!--[gt text="User list thumbnail width"]--></label>
 			<input id="userlist_width" type="text" name="userlist_width" maxlength="3" size="4" value="<!--[$userlist_width|pnvarprepfordisplay]-->" />
 		</div>
 	</fieldset>
 	<fieldset>
-		<legend><!--[pnml name="_CRPCALENDAR_OTHER_MODULES"]--></legend>
+		<legend><!--[gt text="Other modules"]--></legend>
 		<div class="z-formrow">
 			<!--[if pnModAvailable('locations')]--><!--[assign var="locations_avail" value="1"]--><!--[/if]-->
-			<label for="crpcalendar_enable_locations"><!--[pnml name="_CRPCALENDAR_ENABLE_LOCATIONS"]--></label>
+			<label for="crpcalendar_enable_locations"><!--[gt text="Enable Locations"]--></label>
 			<input id="crpcalendar_enable_locations" type="checkbox" name="enable_locations"<!--[if $enable_locations]--> checked="checked"<!--[/if]--> />
 		</div>
 		<div class="z-formrow">
 			<!--[if pnModAvailable('formicula')]--><!--[assign var="formicula_avail" value="1"]--><!--[/if]-->
-			<label for="crpcalendar_enable_formicula"><!--[pnml name="_CRPCALENDAR_ENABLE_FORMICULA"]--></label>
+			<label for="crpcalendar_enable_formicula"><!--[gt text="Enable formicula"]--></label>
 			<input id="crpcalendar_enable_formicula" type="checkbox" name="enable_formicula"<!--[if $enable_formicula]--> checked="checked"<!--[/if]--> />
 		</div>
 	</fieldset>
 	<fieldset>
-		<legend><!--[pnml name="_PERMALINKS"]--></legend>
+		<legend><!--[gt text="PermaLinks"]--></legend>
 		<div class="z-formrow">
-			<label for="crpcalendar_addcategorytitletopermalink"><!--[pnml name="_ADDCATEGORYTITLETOPERMALINK"]--></label>
+			<label for="crpcalendar_addcategorytitletopermalink"><!--[gt text="Add category title to PermaLink"]--></label>
 			<input id="crpcalendar_addcategorytitletopermalink" type="checkbox" name="addcategorytitletopermalink"<!--[if $addcategorytitletopermalink]--> checked="checked"<!--[/if]--> />
 		</div>
 	</fieldset>
 	<fieldset>
-		<legend><!--[pnml name="_CRPCALENDAR_RSS"]--></legend>
+		<legend><!--[gt text="crpCalendar feed"]--></legend>
 		<div class="z-formrow">
-			<label for="crpcalendar_enable_rss"><!--[pnml name="_CRPCALENDAR_ENABLE_RSS"]--></label>
+			<label for="crpcalendar_enable_rss"><!--[gt text="Enable RSS feed"]--></label>
 			<input id="crpcalendar_enable_rss" type="checkbox" name="crpcalendar_enable_rss"<!--[if $crpcalendar_enable_rss]--> checked="checked"<!--[/if]--> />
 		</div>
 		<div class="z-formrow">
-			<label for="crpcalendar_show_rss"><!--[pnml name="_CRPCALENDAR_SHOW_RSS"]--></label>
+			<label for="crpcalendar_show_rss"><!--[gt text="Display link to RSS feed"]--></label>
 			<input id="crpcalendar_show_rss" type="checkbox" name="crpcalendar_show_rss"<!--[if $crpcalendar_show_rss]--> checked="checked"<!--[/if]--> />
 		</div>
 		<div class="z-formrow">
-			<label for="crpcalendar_rss"><!--[pnml name="_CRPCALENDAR_USE_RSS"]--></label>
+			<label for="crpcalendar_rss"><!--[gt text="Feed format"]--></label>
 			<div id ="crpcalendar_rss">
-				<input id="crpcalendar_rss_1" type="radio" name="crpcalendar_rss" value="rss1"<!--[if $crpcalendar_rss eq "rss1"]--> checked="checked"<!--[/if]--> /> <!--[pnml name="_CRPCALENDAR_RSS1"]-->
-				<input id="crpcalendar_rss_2" type="radio" name="crpcalendar_rss" value="rss2"<!--[if $crpcalendar_rss eq "rss2"]--> checked="checked"<!--[/if]--> /> <!--[pnml name="_CRPCALENDAR_RSS2"]-->
-				<input id="crpcalendar_rss_atom" type="radio" name="crpcalendar_rss" value="atom"<!--[if $crpcalendar_rss eq "atom"]--> checked="checked"<!--[/if]--> /> <!--[pnml name="_CRPCALENDAR_ATOM"]-->
+				<input id="crpcalendar_rss_1" type="radio" name="crpcalendar_rss" value="rss1"<!--[if $crpcalendar_rss eq "rss1"]--> checked="checked"<!--[/if]--> /> <!--[gt text="RSS 1.0"]-->
+				<input id="crpcalendar_rss_2" type="radio" name="crpcalendar_rss" value="rss2"<!--[if $crpcalendar_rss eq "rss2"]--> checked="checked"<!--[/if]--> /> <!--[gt text="RSS 2.0"]-->
+				<input id="crpcalendar_rss_atom" type="radio" name="crpcalendar_rss" value="atom"<!--[if $crpcalendar_rss eq "atom"]--> checked="checked"<!--[/if]--> /> <!--[gt text="ATOM"]-->
 		</div>
 	</fieldset>
     <!--[pnmodcallhooks hookobject=module hookaction=modifyconfig module=crpCalendar]-->
     <div class="z-formrow z-formbuttons">
-    <a href="<!--[pnmodurl modname=crpCalendar type=admin func=view]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt="_CANCEL" title="_CANCEL"]--></a>
-    <!--[pnbutton src=button_ok.gif set=icons/small alt="_UPDATECONFIG" title="_UPDATECONFIG"]-->
+    <a href="<!--[pnmodurl modname=crpCalendar type=admin func=view]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
+    <!--[pnbutton src='button_ok.gif' set='icons/small' __alt="Update Configuration" __title="Update Configuration"]-->
     </div>
 </div>
 </form>
