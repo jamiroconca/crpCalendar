@@ -32,7 +32,7 @@ class crpCalendar
 		$this->modvars = pnModGetVar('crpCalendar');
 
 		//gettext
-		$this->dom = ZLanguage::getModuleDomain('crpCalendar');
+		$this->dom = ZLanguage :: getModuleDomain('crpCalendar');
 	}
 
 	/**
@@ -88,11 +88,11 @@ class crpCalendar
 			// display link
 			$options[] = crpCalendar :: buildLinkArray(__("View", $this->dom), $item, 'user');
 			// edit, copy, delete
-			if ($this->authAction(ACCESS__('Add', $this->dom), $item['cr_uid'], $item['eventid'], $item['title']) || ($this->authAction(ACCESS__('Edit', $this->dom), $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid'])))
+			if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']) || ($this->authAction(ACCESS_EDIT, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid'])))
 			{
 				$options[] = crpCalendar :: buildLinkArray(__("Edit", $this->dom), $item, 'admin');
 				$options[] = crpCalendar :: buildLinkArray(__("Copy", $this->dom), $item, 'admin');
-				if ($this->authAction(ACCESS__('Delete', $this->dom), $item['cr_uid'], $item['eventid'], $item['title']))
+				if ($this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
 					$options[] = crpCalendar :: buildLinkArray(__("Delete", $this->dom), $item, 'admin');
 			}
 
@@ -143,11 +143,11 @@ class crpCalendar
 			}
 
 			// edit, copy, delete
-			if ($this->authAction(ACCESS__('Add', $this->dom), $item['cr_uid'], $item['eventid'], $item['title']))
+			if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']))
 			{
 				$options[] = crpCalendar :: buildLinkArray(__("Edit", $this->dom), $item, 'admin');
 				$options[] = crpCalendar :: buildLinkArray(__("Copy", $this->dom), $item, 'admin');
-				if ($this->authAction(ACCESS__('Delete', $this->dom), $item['cr_uid'], $item['eventid'], $item['title']))
+				if ($this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
 					$options[] = crpCalendar :: buildLinkArray(__("Delete", $this->dom), $item, 'admin');
 			}
 			elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid'])) $options[] = crpCalendar :: buildLinkArray(__("Edit", $this->dom), $item, 'user');
@@ -211,11 +211,11 @@ class crpCalendar
 			}
 
 			// edit, copy, delete
-			if ($this->authAction(ACCESS__('Add', $this->dom), $item['cr_uid'], $item['eventid'], $item['title']))
+			if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']))
 			{
 				$options[] = crpCalendar :: buildLinkArray(__("Edit", $this->dom), $item, 'admin');
 				$options[] = crpCalendar :: buildLinkArray(__("Copy", $this->dom), $item, 'admin');
-				if ($this->authAction(ACCESS__('Delete', $this->dom), $item['cr_uid'], $item['eventid'], $item['title']))
+				if ($this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
 					$options[] = crpCalendar :: buildLinkArray(__("Delete", $this->dom), $item, 'admin');
 			}
 			elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid'])) $options[] = crpCalendar :: buildLinkArray(__("Edit", $this->dom), $item, 'user');
@@ -229,7 +229,7 @@ class crpCalendar
 		if ($navigationValues['modvars']['yearlist_categorized'])
 		{
 			$cats = CategoryUtil :: getSubCategories($navigationValues['mainCat']);
-			$userLang = ZLanguage::getLanguageCode();
+			$userLang = ZLanguage :: getLanguageCode();
 			foreach ($cats as $cat)
 			{
 				foreach ($items as $kitem => $vitem)
@@ -297,11 +297,11 @@ class crpCalendar
 				}
 
 				// edit, copy, delete
-				if ($this->authAction(ACCESS__('Add', $this->dom), $item['cr_uid'], $item['eventid'], $item['title']))
+				if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']))
 				{
 					$options[] = crpCalendar :: buildLinkArray(__("Edit", $this->dom), $item, 'admin');
 					$options[] = crpCalendar :: buildLinkArray(__("Copy", $this->dom), $item, 'admin');
-					if ($this->authAction(ACCESS__('Delete', $this->dom), $item['cr_uid'], $item['eventid'], $item['title']))
+					if ($this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
 						$options[] = crpCalendar :: buildLinkArray(__("Delete", $this->dom), $item, 'admin');
 				}
 				elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid'])) $options[] = crpCalendar :: buildLinkArray(__("Edit", $this->dom), $item, 'user');
@@ -415,14 +415,14 @@ class crpCalendar
 		$navigationValues['endDate'] = DateUtil :: getDatetime(DateUtil :: parseUIDateTime($tomorrow));
 		$navigationValues['sortOrder'] = 'ASC';
 
-    // reset page limit for daylist counter
-    if ($navigationValues['modvars']['daylist_categorized'])
-    {
-      $navigationValues['modvars']['itemsperpage'] = '-1';
-      $navigationValues['startnum'] = '1';
-    }
-    // all matching events
-    $items = pnModAPIFunc('crpCalendar', 'user', 'getall', $navigationValues);
+		// reset page limit for daylist counter
+		if ($navigationValues['modvars']['daylist_categorized'])
+		{
+			$navigationValues['modvars']['itemsperpage'] = '-1';
+			$navigationValues['startnum'] = '1';
+		}
+		// all matching events
+		$items = pnModAPIFunc('crpCalendar', 'user', 'getall', $navigationValues);
 
 		if (!$items)
 			$items = array ();
@@ -443,11 +443,11 @@ class crpCalendar
 			}
 
 			// edit, copy, delete
-			if ($this->authAction(ACCESS__('Add', $this->dom), $item['cr_uid'], $item['eventid'], $item['title']))
+			if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']))
 			{
 				$options[] = crpCalendar :: buildLinkArray(__("Edit", $this->dom), $item, 'admin');
 				$options[] = crpCalendar :: buildLinkArray(__("Copy", $this->dom), $item, 'admin');
-				if ($this->authAction(ACCESS__('Delete', $this->dom), $item['cr_uid'], $item['eventid'], $item['title']))
+				if ($this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
 					$options[] = crpCalendar :: buildLinkArray(__("Delete", $this->dom), $item, 'admin');
 			}
 			elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid'])) $options[] = crpCalendar :: buildLinkArray(__("Edit", $this->dom), $item, 'user');
@@ -463,8 +463,8 @@ class crpCalendar
 
 		if ($navigationValues['modvars']['daylist_categorized'])
 		{
-			$cats = CategoryUtil::getSubCategories($navigationValues['mainCat']);
-			$userLang = ZLanguage::getLanguageCode();
+			$cats = CategoryUtil :: getSubCategories($navigationValues['mainCat']);
+			$userLang = ZLanguage :: getLanguageCode();
 			foreach ($cats as $cat)
 			{
 				foreach ($items as $kitem => $vitem)
@@ -500,11 +500,11 @@ class crpCalendar
 			$options[] = crpCalendar :: buildLinkArray(__("View", $this->dom), $item, 'user');
 
 			// edit, copy, delete
-			if ($this->authAction(ACCESS__('Add', $this->dom), $item['cr_uid'], $item['eventid'], $item['title']))
+			if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']))
 			{
 				$options[] = crpCalendar :: buildLinkArray(__("Edit", $this->dom), $item, 'admin');
 				$options[] = crpCalendar :: buildLinkArray(__("Copy", $this->dom), $item, 'admin');
-				if ($this->authAction(ACCESS__('Delete', $this->dom), $item['cr_uid'], $item['eventid'], $item['title']))
+				if ($this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
 					$options[] = crpCalendar :: buildLinkArray(__("Delete", $this->dom), $item, 'admin');
 			}
 			elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid'])) $options[] = crpCalendar :: buildLinkArray(__("Edit", $this->dom), $item, 'user');
@@ -581,7 +581,7 @@ class crpCalendar
 		$modvars = $this->modvars;
 
 		// The return value of the function is checked here
-		if ($item == false || ($item['obj_status'] == 'P' && !$this->authAction(ACCESS__('Edit', $this->dom), $item['cr_uid'], $item['eventid'], $item['title'])))
+		if ($item == false || ($item['obj_status'] == 'P' && !$this->authAction(ACCESS_EDIT, $item['cr_uid'], $item['eventid'], $item['title'])))
 		{
 			return LogUtil :: registerError(__('No such item found.', $this->dom));
 		}
@@ -594,11 +594,11 @@ class crpCalendar
 		$item['exports'] = $exports;
 
 		// edit, copy, delete
-		if ($this->authAction(ACCESS__('Add', $this->dom), $item['cr_uid'], $item['eventid'], $item['title']))
+		if ($this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']))
 		{
 			$options[] = crpCalendar :: buildLinkArray(__("Edit", $this->dom), $item, 'admin');
 			$options[] = crpCalendar :: buildLinkArray(__("Copy", $this->dom), $item, 'admin');
-			if ($this->authAction(ACCESS__('Delete', $this->dom), $item['cr_uid'], $item['eventid'], $item['title']))
+			if ($this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
 				$options[] = crpCalendar :: buildLinkArray(__("Delete", $this->dom), $item, 'admin');
 		}
 		elseif ($this->authAction(ACCESS_MODERATE, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid'])) $options[] = crpCalendar :: buildLinkArray(__("Edit", $this->dom), $item, 'user');
@@ -658,7 +658,7 @@ class crpCalendar
 		$modvars = $this->modvars;
 
 		// The return value of the function is checked here
-		if ($item == false || ($item['obj_status'] == 'P' && !$this->authAction(ACCESS__('Edit', $this->dom), $item['cr_uid'], $item['eventid'], $item['title'])))
+		if ($item == false || ($item['obj_status'] == 'P' && !$this->authAction(ACCESS_EDIT, $item['cr_uid'], $item['eventid'], $item['title'])))
 		{
 			return LogUtil :: registerError(__('No such item found.', $this->dom));
 		}
@@ -718,7 +718,7 @@ class crpCalendar
 		$returnFunc = 'view';
 		$inputValues = array ();
 
-		if (!$this->authAction(ACCESS__('Edit', $this->dom)))
+		if (!$this->authAction(ACCESS_EDIT))
 		{
 			$returnType = 'user';
 			$returnFunc = SessionUtil :: getVar('crpCalendar_choosed_view');
@@ -753,8 +753,8 @@ class crpCalendar
 			return pnRedirect(pnModUrl('crpCalendar', $returnType, 'new'));
 		}
 
-		$inputValues['event']['start_date'] = $startDate.' '.$startTime;
-		$inputValues['event']['end_date'] = $endDate.' '.$endTime;
+		$inputValues['event']['start_date'] = $startDate . ' ' . $startTime;
+		$inputValues['event']['end_date'] = $endDate . ' ' . $endTime;
 
 		if (!$inputValues['event']['day_event'] && (strtotime($inputValues['event']['start_date']) > strtotime($inputValues['event']['end_date'])))
 		{
@@ -797,8 +797,8 @@ class crpCalendar
 				$serialStartTime = $this->buildTime($inputValues['serial']['startMinute'][$kserial], $inputValues['serial']['startHour'][$kserial]);
 				$serialEndTime = $this->buildTime($inputValues['serial']['startMinute'][$kserial] + $serialMinuteDiff, $inputValues['serial']['startHour'][$kserial] + $serialHourDiff);
 
-				$inputValues['event']['start_date'] = $serialStartDate.' '.$serialStartTime;
-				$inputValues['event']['end_date'] = $serialEndDate.' '.$serialEndTime;
+				$inputValues['event']['start_date'] = $serialStartDate . ' ' . $serialStartTime;
+				$inputValues['event']['end_date'] = $serialEndDate . ' ' . $serialEndTime;
 
 				// don't create in the same day
 				if (!$this->dao->existEvent($inputValues['event']['title'], $inputValues['event']['location'], $inputValues['event']['start_date']))
@@ -807,11 +807,11 @@ class crpCalendar
 		}
 
 		// notify by mail if not an admin
-		if (!$this->authAction(ACCESS__('Edit', $this->dom)) && $inputValues['modvars']['crpcalendar_notification'])
+		if (!$this->authAction(ACCESS_EDIT) && $inputValues['modvars']['crpcalendar_notification'])
 			$this->notifyByMail($inputValues, $eventid);
 
 		// all went fine
-		LogUtil :: registerStatus(__('Done! Item created.', $this->dom).' '. (($returnType == 'user' && $inputValues['modvars']['submitted_status'] != 'A') ? _CRPCALENDAR_WAITING : ''));
+		LogUtil :: registerStatus(__('Done! Item created.', $this->dom) . ' ' . (($returnType == 'user' && $inputValues['modvars']['submitted_status'] != 'A') ? _CRPCALENDAR_WAITING : ''));
 
 		if ($inputValues['reenter'])
 			return pnRedirect(pnModUrl('crpCalendar', $returnType, 'new'));
@@ -841,7 +841,7 @@ class crpCalendar
 		}
 
 		// Security check
-		if (!$this->authAction(ACCESS__('Add', $this->dom), $item['cr_uid'], $item['eventid'], $item['title']) && (!$this->authAction(ACCESS__('Edit', $this->dom), $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid'])))
+		if (!$this->authAction(ACCESS_ADD, $item['cr_uid'], $item['eventid'], $item['title']) && (!$this->authAction(ACCESS_EDIT, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid'])))
 		{
 			return LogUtil :: registerPermissionError();
 		}
@@ -929,7 +929,7 @@ class crpCalendar
 		$inputValues = $this->collectDataFromInput();
 
 		// Security check
-		if (!$this->authAction(ACCESS__('Add', $this->dom)) && !($this->authAction(ACCESS_MODERATE) && $this->isAuthor($inputValues['eventid'])))
+		if (!$this->authAction(ACCESS_ADD) && !($this->authAction(ACCESS_MODERATE) && $this->isAuthor($inputValues['eventid'])))
 		{
 			return LogUtil :: registerPermissionError();
 		}
@@ -956,8 +956,8 @@ class crpCalendar
 			)));
 		}
 
-		$inputValues['event']['start_date'] = $startDate.' '.$startTime;
-		$inputValues['event']['end_date'] = $endDate.' '.$endTime;
+		$inputValues['event']['start_date'] = $startDate . ' ' . $startTime;
+		$inputValues['event']['end_date'] = $endDate . ' ' . $endTime;
 
 		if (!$inputValues['event']['day_event'] && (strtotime($inputValues['event']['start_date']) > strtotime($inputValues['event']['end_date'])))
 		{
@@ -1002,7 +1002,7 @@ class crpCalendar
 
 		// change values
 		$inputValues['event'] = array (
-			'title' => __('Copy of', $this->dom).' '.$item['title'],
+			'title' => __('Copy of', $this->dom) . ' ' . $item['title'],
 			'urltitle' => null,
 			'location' => $item['location'],
 			'url' => $item['url'],
@@ -1026,7 +1026,7 @@ class crpCalendar
 		);
 
 		// Security check
-		if (!$this->authAction(ACCESS__('Add', $this->dom)) && !($this->authAction(ACCESS__('Edit', $this->dom), $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid'])))
+		if (!$this->authAction(ACCESS_ADD) && !($this->authAction(ACCESS_EDIT, $item['cr_uid'], $item['eventid'], $item['title']) && $this->isAuthor($item['eventid'])))
 		{
 			return LogUtil :: registerPermissionError();
 		}
@@ -1064,7 +1064,7 @@ class crpCalendar
 		}
 
 		// Security check
-		if (!$this->authAction(ACCESS__('Delete', $this->dom), $item['cr_uid'], $item['eventid'], $item['title']))
+		if (!$this->authAction(ACCESS_DELETE, $item['cr_uid'], $item['eventid'], $item['title']))
 		{
 			return LogUtil :: registerPermissionError();
 		}
@@ -1085,7 +1085,7 @@ class crpCalendar
 		$file_type = FormUtil :: getPassedValue('file_type', null, 'GET');
 
 		// Security check
-		if (!$this->authAction(ACCESS__('Add', $this->dom)) && !($this->authAction(ACCESS__('Edit', $this->dom)) && $this->isAuthor($eventid)))
+		if (!$this->authAction(ACCESS_ADD) && !($this->authAction(ACCESS_EDIT) && $this->isAuthor($eventid)))
 		{
 			return LogUtil :: registerPermissionError();
 		}
@@ -1112,7 +1112,7 @@ class crpCalendar
 		$eventid = FormUtil :: getPassedValue('eventid', null);
 
 		// Security check
-		if (!$this->authAction(ACCESS__('Delete', $this->dom)))
+		if (!$this->authAction(ACCESS_DELETE))
 		{
 			return LogUtil :: registerPermissionError();
 		}
@@ -1312,7 +1312,7 @@ class crpCalendar
 		$viewForm = FormUtil :: getPassedValue('viewForm', 'table');
 
 		if ($day && $month && $year)
-			SessionUtil :: setVar('crpCalendar_choosed_time', DateUtil :: makeTimestamp($year.'-'.$month.'-'.$day));
+			SessionUtil :: setVar('crpCalendar_choosed_time', DateUtil :: makeTimestamp($year . '-' . $month . '-' . $day));
 
 		$t = FormUtil :: getPassedValue('t', null);
 		if (!$t && SessionUtil :: getVar('crpCalendar_choosed_time'))
@@ -1406,7 +1406,7 @@ class crpCalendar
 		if (!checkdate($month, $day, $year))
 			$dateBuild = null;
 		else
-			$dateBuild = $year.'-'.$month.'-'.$day;
+			$dateBuild = $year . '-' . $month . '-' . $day;
 
 		return $dateBuild;
 	}
@@ -1421,7 +1421,7 @@ class crpCalendar
 	 */
 	function buildTime($minute, $hour)
 	{
-		$timeBuild = $hour.':'.$minute.':00';
+		$timeBuild = $hour . ':' . $minute . ':00';
 
 		return $timeBuild;
 	}
@@ -1451,24 +1451,24 @@ class crpCalendar
 		$result = false;
 
 		$modinfo = pnModGetInfo(pnModGetIdFromName($modname));
-		$moddir = 'modules/'.pnVarPrepForOS($modinfo['directory']).'/pnrss';
-		$langdir = 'modules/'.pnVarPrepForOS($modinfo['directory']).'/pnlang';
+		$moddir = 'modules/' . pnVarPrepForOS($modinfo['directory']) . '/pnrss';
+		$langdir = 'modules/' . pnVarPrepForOS($modinfo['directory']) . '/pnlang';
 		$infofunc = "{$modname}_{$modrss}rss_info";
 
 		if (!$id_lang)
-			$id_lang = ZLanguage::getLanguageCode();
+			$id_lang = ZLanguage :: getLanguageCode();
 
 		// Load the rss
-		$incfile = $modrss.'.php';
-		$filepath = $moddir.'/'.pnVarPrepForOS($incfile);
+		$incfile = $modrss . '.php';
+		$filepath = $moddir . '/' . pnVarPrepForOS($incfile);
 		if (!file_exists($filepath))
 			return false;
 
 		include_once $filepath;
 
 		// Load the RSS language files
-		$currentlangfile = $langdir.'/'.pnVarPrepForOS($id_lang).'/'.pnVarPrepForOS($incfile);
-		$defaultlangfile = $langdir.'/'.pnVarPrepForOS(pnConfigGetVar('language')).'/'.pnVarPrepForOS($incfile);
+		$currentlangfile = $langdir . '/' . pnVarPrepForOS($id_lang) . '/' . pnVarPrepForOS($incfile);
+		$defaultlangfile = $langdir . '/' . pnVarPrepForOS(pnConfigGetVar('language')) . '/' . pnVarPrepForOS($incfile);
 		if (file_exists($currentlangfile))
 			include_once $currentlangfile;
 		elseif (file_exists($defaultlangfile)) include_once $defaultlangfile;
@@ -1506,21 +1506,21 @@ class crpCalendar
 			return $result;
 		//	header("Content-Type: text/plain\n\n");	//debug
 
-		$rssinfo = $this->loadRSS('crpCalendar', 'events', ZLanguage::getLanguageCode());
+		$rssinfo = $this->loadRSS('crpCalendar', 'events', ZLanguage :: getLanguageCode());
 
 		$feedfunc = "crpCalendar_events_rss_feed";
 		$list = array ();
 		if (function_exists($feedfunc))
 			$list = $feedfunc ();
 
-		$data['xml_lang'] = substr(ZLanguage::getLanguageCode(), 0, 2);
+		$data['xml_lang'] = substr(ZLanguage :: getLanguageCode(), 0, 2);
 		$data['publ_date'] = date('Y-m-d H:i:s', time());
 		$selfurl = pnModUrl('crpCalendar', 'user', 'getfeed');
 		$data['selfurl'] = $selfurl;
 		$data['format'] = pnModGetVar('crpCalendar', 'crpcalendar_rss');
 		$sitename = pnConfigGetVar('sitename');
 
-		Header("Content-Disposition: inline; filename=".$sitename."_events.xml");
+		Header("Content-Disposition: inline; filename=" . $sitename . "_events.xml");
 		if ($data['format'] == __('ATOM', $this->dom))
 			header("Content-Type: application/atom+xml\n\n");
 		else
@@ -1548,7 +1548,7 @@ class crpCalendar
 		$selfurl = pnModUrl('crpCalendar', 'user', 'display', array (
 			'eventid' => $eventid
 		));
-		$result .= $this->ui->drawICalHeader($selfurl)."\n";
+		$result .= $this->ui->drawICalHeader($selfurl) . "\n";
 
 		// Get the event
 		$item = $this->dao->getAdminData($eventid, false);
@@ -1558,13 +1558,13 @@ class crpCalendar
 		$data['dtstart'] = $item['start_date'];
 		$data['dtend'] = $item['end_date'];
 		$data['description'] = $item['event_text'];
-		$data['categories'] = $item['__CATEGORIES__']['Main']['display_name'][''.ZLanguage::getLanguageCode().''];
+		$data['categories'] = $item['__CATEGORIES__']['Main']['display_name']['' . ZLanguage :: getLanguageCode() . ''];
 		$data['dtstamp'] = $item['cr_date'];
 		$data['location'] = $item['location'];
 		$data['url'] = $item['url'];
 		$data['eventid'] = $eventid;
 
-		$result .= $this->ui->drawICal($data)."\n";
+		$result .= $this->ui->drawICal($data) . "\n";
 		$result .= $this->ui->drawICalFooter();
 
 		Header("Content-Disposition: attachment; filename={$eventid}.ics");
@@ -1586,7 +1586,7 @@ class crpCalendar
 		$result = '';
 
 		$selfurl = pnModUrl('crpCalendar', 'user', 'view');
-		$result .= $this->ui->drawICalHeader($selfurl)."\n";
+		$result .= $this->ui->drawICalHeader($selfurl) . "\n";
 		// Get the events
 		foreach ($exports as $eventid)
 		{
@@ -1597,13 +1597,13 @@ class crpCalendar
 			$data['dtstart'] = $item['start_date'];
 			$data['dtend'] = $item['end_date'];
 			$data['description'] = $item['event_text'];
-			$data['categories'] = $item['__CATEGORIES__']['Main']['display_name'][''.ZLanguage::getLanguageCode().''];
+			$data['categories'] = $item['__CATEGORIES__']['Main']['display_name']['' . ZLanguage :: getLanguageCode() . ''];
 			$data['dtstamp'] = $item['cr_date'];
 			$data['location'] = $item['location'];
 			$data['url'] = $item['url'];
 			$data['eventid'] = $eventid;
 
-			$result .= $this->ui->drawICal($data)."\n";
+			$result .= $this->ui->drawICal($data) . "\n";
 		}
 
 		$result .= $this->ui->drawICalFooter();
@@ -1645,7 +1645,7 @@ class crpCalendar
 	{
 		// we need a timestamp
 		$server_etag = DateUtil :: makeTimestamp($params['modifiedDate']);
-		$server_date = gmdate('D, d M Y H:i:s', $server_etag)." GMT";
+		$server_date = gmdate('D, d M Y H:i:s', $server_etag) . " GMT";
 
 		// Check cached versus modified date
 		$client_etag = $_SERVER['HTTP_IF_NONE_MATCH'];
@@ -1659,11 +1659,11 @@ class crpCalendar
 		}
 		else
 		{
-			header("Expires: ".gmdate('D, d M Y H:i:s', time() + 24 * 3600)." GMT");
+			header("Expires: " . gmdate('D, d M Y H:i:s', time() + 24 * 3600) . " GMT");
 			header('Pragma: cache');
 			header('Cache-Control: public, must-revalidate');
 			header("ETag: $server_etag");
-			header("Last-Modified: ".gmdate('D, d M Y H:i:s', $server_etag)." GMT");
+			header("Last-Modified: " . gmdate('D, d M Y H:i:s', $server_etag) . " GMT");
 			header("Content-Type: $content_type");
 			header("Content-Disposition: inline; filename=thumb_{$filename}");
 		}
@@ -1950,12 +1950,12 @@ class crpCalendar
 	}
 
 	/**
-	* send an email notification
-	*/
+	 * send an email notification
+	 */
 	function notifyByMail($inputValues = array (), $eventid = null)
 	{
 		// send the email
-		$render = &pnRender :: getInstance('crpCalendar', false);
+		$render = & pnRender :: getInstance('crpCalendar', false);
 		$render->assign('inputValues', $inputValues['event']);
 		$render->assign('eventid', $eventid);
 		$body = $render->fetch('crpcalendar_user_notify_newevent.htm');
@@ -2024,18 +2024,18 @@ class crpCalendar
 	}
 
 	/**
-	* iCalendar Parser
-	*
-	* Pass it the name (minus extension) of a .ics file and it'll return
-	* a multidimensional array of calendar events on success, a string on some errors
-	* and nothing on others as it's quite incomplete.
-	*
-	* CANT_OPEN_FILE ==> Function can't read ics file
-	* INVALID_FILETYPE ==> The file isn't recognised as an ics file
-	*
-	* @param string $calendar The file to open
-	* @return array An array of calendar events
-	*/
+	 * iCalendar Parser
+	 *
+	 * Pass it the name (minus extension) of a .ics file and it'll return
+	 * a multidimensional array of calendar events on success, a string on some errors
+	 * and nothing on others as it's quite incomplete.
+	 *
+	 * CANT_OPEN_FILE ==> Function can't read ics file
+	 * INVALID_FILETYPE ==> The file isn't recognised as an ics file
+	 *
+	 * @param string $calendar The file to open
+	 * @return array An array of calendar events
+	 */
 	function parse_ical($calendar)
 	{
 		// Open calendar
@@ -2081,7 +2081,7 @@ class crpCalendar
 			{
 				// If yes, process it and keep reading until
 				// new buffer line doesn't begin with " ".
-				$buffer = $buffer.substr($buffer_temp, 1);
+				$buffer = $buffer . substr($buffer_temp, 1);
 				$buffer_temp = fgets($fp, 1024);
 				$buffer_temp = ereg_replace("[\r\n]", '', $buffer_temp);
 			}
@@ -2198,7 +2198,7 @@ class crpCalendar
 								}
 
 								$cal[$event]['day_event'] = 1;
-								$cal[$event]['start_date'] = $date[1].'-'.$date[2].'-'.$date[3];
+								$cal[$event]['start_date'] = $date[1] . '-' . $date[2] . '-' . $date[3];
 								$cal[$event]['start_time'] = 0;
 								$cal[$event]['start_unix'] = mktime(0, 0, 0, $date[2], $date[3], $date[1]);
 							}
@@ -2214,8 +2214,8 @@ class crpCalendar
 								}
 
 								$cal[$event]['day_event'] = 0;
-								$cal[$event]['start_date'] = $date[1].'-'.$date[2].'-'.$date[3];
-								$cal[$event]['start_time'] = $date[4].':'.$date[5];
+								$cal[$event]['start_date'] = $date[1] . '-' . $date[2] . '-' . $date[3];
+								$cal[$event]['start_time'] = $date[4] . ':' . $date[5];
 								$cal[$event]['start_unix'] = mktime($date[4], $date[5], $date[6], $date[2], $date[3], $date[1]);
 							}
 							break;
@@ -2229,7 +2229,7 @@ class crpCalendar
 							// TIME LIMITED EVENT
 							ereg('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})([0-9]{0,2})', $data, $date);
 
-							$cal[$event]['cr_date'] = $date[1].'-'.$date[2].'-'.$date[3].' '.$date[4].':'.$date[5];
+							$cal[$event]['cr_date'] = $date[1] . '-' . $date[2] . '-' . $date[3] . ' ' . $date[4] . ':' . $date[5];
 							break;
 
 							// Start time of event
@@ -2241,7 +2241,7 @@ class crpCalendar
 							// TIME LIMITED EVENT
 							ereg('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})([0-9]{0,2})', $data, $date);
 
-							$cal[$event]['lu_date'] = $date[1].'-'.$date[2].'-'.$date[3].' '.$date[4].':'.$date[5];
+							$cal[$event]['lu_date'] = $date[1] . '-' . $date[2] . '-' . $date[3] . ' ' . $date[4] . ':' . $date[5];
 							break;
 
 							// End time of event
@@ -2258,8 +2258,8 @@ class crpCalendar
 								$date[1] = 1971;
 							}
 
-							$cal[$event]['end_date'] = $date[1].'-'.$date[2].'-'.$date[3];
-							$cal[$event]['end_time'] = $date[4].':'.$date[5];
+							$cal[$event]['end_date'] = $date[1] . '-' . $date[2] . '-' . $date[3];
+							$cal[$event]['end_time'] = $date[4] . ':' . $date[5];
 							$cal[$event]['end_unix'] = mktime($date[4], $date[5], $date[6], $date[2], $date[3], $date[1]);
 							break;
 
@@ -2278,8 +2278,8 @@ class crpCalendar
 								$date[1] = 1971;
 							}
 
-							$cal[$event]['stamp_date'] = $date[1].'-'.$date[2].'-'.$date[3];
-							$cal[$event]['stamp_time'] = $date[4].':'.$date[5];
+							$cal[$event]['stamp_date'] = $date[1] . '-' . $date[2] . '-' . $date[3];
+							$cal[$event]['stamp_time'] = $date[4] . ':' . $date[5];
 							$cal[$event]['stamp_unix'] = mktime($date[4], $date[5], $date[6], $date[2], $date[3], $date[1]);
 							break;
 
@@ -2450,139 +2450,139 @@ class crpCalendar
 
 							/********** RECURRENCE RULE INFO ***********/
 							/* TODO: implement with recursion
-							case 'RRULE' :
-								$cal[$event]['rrule'] = array ();
-								$rrule = explode(';', $data);
+							 case 'RRULE' :
+							 $cal[$event]['rrule'] = array ();
+							 $rrule = explode(';', $data);
 
-								foreach ($rrule as $value)
-								{
-									$rrule_content = explode('=', $value);
+							 foreach ($rrule as $value)
+							 {
+							 $rrule_content = explode('=', $value);
 
-									switch ($rrule_content[0])
-									{
-										// Frequency of repeating event
-										case 'FREQ' :
-											$cal[$event]['rrule']['freq'] = $rrule_content[1];
-											break;
+							 switch ($rrule_content[0])
+							 {
+							 // Frequency of repeating event
+							  case 'FREQ' :
+							  $cal[$event]['rrule']['freq'] = $rrule_content[1];
+							  break;
 
-											// Interval to repeat the frequency
-											// eg. FREQ=WEEKLY;INTERVAL=2 ==> repeat every 2 weeks
-										case 'INTERVAL' :
-											$cal[$event]['rrule']['interval'] = $rrule_content[1];
-											break;
+							  // Interval to repeat the frequency
+							   // eg. FREQ=WEEKLY;INTERVAL=2 ==> repeat every 2 weeks
+							    case 'INTERVAL' :
+							    $cal[$event]['rrule']['interval'] = $rrule_content[1];
+							    break;
 
-											// Number of times to repeat event
-										case 'COUNT' :
-											$cal[$event]['rrule']['count'] = $rrule_content[1];
-											break;
+							    // Number of times to repeat event
+							     case 'COUNT' :
+							     $cal[$event]['rrule']['count'] = $rrule_content[1];
+							     break;
 
-											// Repeat event until date/time
-										case 'UNTIL' :
-											$data = str_replace('T', '', $data);
-											$data = str_replace('Z', '', $data);
+							     // Repeat event until date/time
+							      case 'UNTIL' :
+							      $data = str_replace('T', '', $data);
+							      $data = str_replace('Z', '', $data);
 
-											// TIME LIMITED EVENT
-											ereg('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})([0-9]{0,2})', $data, $date);
+							      // TIME LIMITED EVENT
+							       ereg('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})([0-9]{0,2})', $data, $date);
 
-											// UNIX timestamps can't deal with pre 1970 dates
-											if ($date[1] <= 1970)
-											{
-												$date[1] = 1971;
-											}
+							       // UNIX timestamps can't deal with pre 1970 dates
+							        if ($date[1] <= 1970)
+							        {
+							        $date[1] = 1971;
+							        }
 
-											$cal[$event]['rrule']['until_date'] = $date[1] . '-' . $date[2] . '-' . $date[3];
-											$cal[$event]['rrule']['until_time'] = $date[4] . $date[5];
-											$cal[$event]['rrule']['until_unix'] = mktime($date[4], $date[5], $date[6], $date[2], $date[3], $date[1]);
-											break;
+							        $cal[$event]['rrule']['until_date'] = $date[1] . '-' . $date[2] . '-' . $date[3];
+							        $cal[$event]['rrule']['until_time'] = $date[4] . $date[5];
+							        $cal[$event]['rrule']['until_unix'] = mktime($date[4], $date[5], $date[6], $date[2], $date[3], $date[1]);
+							        break;
 
-										case 'BYSECOND' :
-											$cal[$event]['rrule']['bysecond'] = $rrule_content[1];
-											break;
+							        case 'BYSECOND' :
+							        $cal[$event]['rrule']['bysecond'] = $rrule_content[1];
+							        break;
 
-										case 'BYMINUTE' :
-											$cal[$event]['rrule']['byminute'] = $rrule_content[1];
-											break;
+							        case 'BYMINUTE' :
+							        $cal[$event]['rrule']['byminute'] = $rrule_content[1];
+							        break;
 
-										case 'BYHOUR' :
-											$cal[$event]['rrule']['byhour'] = $rrule_content[1];
-											break;
+							        case 'BYHOUR' :
+							        $cal[$event]['rrule']['byhour'] = $rrule_content[1];
+							        break;
 
-										case 'BYDAY' :
-											$cal[$event]['rrule']['byday'] = $rrule_content[1];
-											break;
+							        case 'BYDAY' :
+							        $cal[$event]['rrule']['byday'] = $rrule_content[1];
+							        break;
 
-										case 'BYMONTH' :
-											$cal[$event]['rrule']['bymonth'] = $rrule_content[1];
-											break;
+							        case 'BYMONTH' :
+							        $cal[$event]['rrule']['bymonth'] = $rrule_content[1];
+							        break;
 
-										case 'BYYEAR' :
-											$cal[$event]['rrule']['byyear'] = $rrule_content[1];
-											break;
+							        case 'BYYEAR' :
+							        $cal[$event]['rrule']['byyear'] = $rrule_content[1];
+							        break;
 
-										case 'BYMONTHDAY' :
-											$cal[$event]['rrule']['bymonthday'] = $rrule_content[1];
-											break;
+							        case 'BYMONTHDAY' :
+							        $cal[$event]['rrule']['bymonthday'] = $rrule_content[1];
+							        break;
 
-										case 'BYYEARDAY' :
-											$cal[$event]['rrule']['byyearday'] = $rrule_content[1];
-											break;
+							        case 'BYYEARDAY' :
+							        $cal[$event]['rrule']['byyearday'] = $rrule_content[1];
+							        break;
 
-										case 'BYWEEKNO' :
-											$cal[$event]['rrule']['byweekno'] = $rrule_content[1];
-											break;
+							        case 'BYWEEKNO' :
+							        $cal[$event]['rrule']['byweekno'] = $rrule_content[1];
+							        break;
 
-											// Day that work week start
-										case 'WKST' :
-											$cal[$event]['rrule']['wkst'] = $rrule_content[1];
-											break;
+							        // Day that work week start
+							         case 'WKST' :
+							         $cal[$event]['rrule']['wkst'] = $rrule_content[1];
+							         break;
 
-											//
-										case 'BYSETPOS' :
-											$cal[$event]['rrule']['bysetpos'] = $rrule_content[1];
-											break;
+							         //
+							          case 'BYSETPOS' :
+							          $cal[$event]['rrule']['bysetpos'] = $rrule_content[1];
+							          break;
 
-									}
-								}
-								unset ($rrule, $rrule_content, $value);
-								break;
-								*/
+							          }
+							          }
+							          unset ($rrule, $rrule_content, $value);
+							          break;
+							          */
 
 							/********** RECURRENCE RULE INFO ***********/
 
 							/* TODO: implement with recursion
-							case 'EXDATE' :
-								$data = str_replace('T', '', $data);
+							 case 'EXDATE' :
+							 $data = str_replace('T', '', $data);
 
-								if (ereg('EXDATE;VALUE=DATE', $field))
-								{
-									// ALL-DAY EVENT
-									ereg('([0-9]{4})([0-9]{2})([0-9]{2})', $data, $date);
+							 if (ereg('EXDATE;VALUE=DATE', $field))
+							 {
+							 // ALL-DAY EVENT
+							  ereg('([0-9]{4})([0-9]{2})([0-9]{2})', $data, $date);
 
-									// UNIX timestamps can't deal with pre 1970 dates
-									if ($date[1] <= 1970)
-									{
-										$date[1] = 1971;
-									}
+							  // UNIX timestamps can't deal with pre 1970 dates
+							   if ($date[1] <= 1970)
+							   {
+							   $date[1] = 1971;
+							   }
 
-									$cal[$event]['exdate'][] = $date[1] . '-' . $date[2] . '-' . $date[3];
-									$cal[$event]['exdate_unix'][] = mktime(0, 0, 0, $date[2], $date[3], $date[1]);
-								}
-								else
-								{
-									// TIME LIMITED EVENT
-									ereg('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})([0-9]{0,2})', $data, $date);
+							   $cal[$event]['exdate'][] = $date[1] . '-' . $date[2] . '-' . $date[3];
+							   $cal[$event]['exdate_unix'][] = mktime(0, 0, 0, $date[2], $date[3], $date[1]);
+							   }
+							   else
+							   {
+							   // TIME LIMITED EVENT
+							    ereg('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})([0-9]{0,2})', $data, $date);
 
-									// UNIX timestamps can't deal with pre 1970 dates
-									if ($date[1] <= 1970)
-									{
-										$date[1] = 1971;
-									}
+							    // UNIX timestamps can't deal with pre 1970 dates
+							     if ($date[1] <= 1970)
+							     {
+							     $date[1] = 1971;
+							     }
 
-									$cal[$event]['exdate'][] = $date[1] . '-' . $date[2] . '-' . $date[3];
-									$cal[$event]['exdate_unix'][] = mktime($date[4], $date[5], $date[6], $date[2], $date[3], $date[1]);
-								}
-								break;
-							*/
+							     $cal[$event]['exdate'][] = $date[1] . '-' . $date[2] . '-' . $date[3];
+							     $cal[$event]['exdate_unix'][] = mktime($date[4], $date[5], $date[6], $date[2], $date[3], $date[1]);
+							     }
+							     break;
+							     */
 					}
 					/********** END EVENT INFO ***********/
 					break;
@@ -2635,7 +2635,7 @@ class crpCalendar
 		$event = FormUtil :: getPassedValue('event', null, 'POST');
 
 		// Security check
-		if (!$this->authAction(ACCESS__('Delete', $this->dom)))
+		if (!$this->authAction(ACCESS_DELETE))
 		{
 			return LogUtil :: registerPermissionError();
 		}
@@ -2661,76 +2661,76 @@ class crpCalendar
 
 		switch ($mlname)
 		{
-			case "_VIEW" :
+			case "".__("View", $this->dom)."" :
 				$linkArray = array (
 					'url' => pnModURL('crpCalendar', $actiontype, 'display', array (
 						'eventid' => $item['eventid']
 					)),
 					'image' => 'demo.gif',
-					'title' => _VIEW
+					'title' => __("View", $this->dom)
 				);
 				break;
-			case "_CRPCALENDAR_ADD_PARTECIPATION" :
+			case "".__("Add partecipation", $this->dom)."" :
 				$linkArray = array (
 					'url' => pnModURL('crpCalendar', $actiontype, 'add_partecipation', array (
 						'eventid' => $item['eventid']
 					)),
 					'image' => 'add_user.gif',
-					'title' => _CRPCALENDAR_ADD_PARTECIPATION
+					'title' => __("Add partecipation", $this->dom)
 				);
 				break;
-			case "_CRPCALENDAR_DELETE_PARTECIPATION" :
+			case "".__("Delete partecipation", $this->dom)."" :
 				$linkArray = array (
 					'url' => pnModURL('crpCalendar', $actiontype, 'delete_partecipation', array (
 						'eventid' => $item['eventid']
 					)),
 					'image' => 'delete_user.gif',
-					'title' => _CRPCALENDAR_DELETE_PARTECIPATION
+					'title' => __("Delete partecipation", $this->dom)
 				);
 				break;
-			case "_EDIT" :
+			case "".__("Edit", $this->dom)."" :
 				$linkArray = array (
 					'url' => pnModURL('crpCalendar', $actiontype, 'modify', array (
 						'eventid' => $item['eventid']
 					)),
 					'image' => 'xedit.gif',
-					'title' => _EDIT
+					'title' => __("Edit", $this->dom)
 				);
 				break;
-			case "_COPY" :
+			case "".__("Copy", $this->dom)."" :
 				$linkArray = array (
 					'url' => pnModURL('crpCalendar', $actiontype, 'clone', array (
 						'eventid' => $item['eventid']
 					)),
 					'image' => 'editcopy.gif',
-					'title' => _COPY
+					'title' => __("Copy", $this->dom)
 				);
 				break;
-			case "_DELETE" :
+			case "".__("Delete", $this->dom)."" :
 				$linkArray = array (
 					'url' => pnModURL('crpCalendar', $actiontype, 'delete', array (
 						'eventid' => $item['eventid']
 					)),
 					'image' => '14_layer_deletelayer.gif',
-					'title' => _DELETE
+					'title' => __("Delete", $this->dom)
 				);
 				break;
-			case "_CRPCALENDAR_EVENTS_MYLIST" :
+			case "".__("attendance to events", $this->dom)."" :
 				$linkArray = array (
 					'url' => pnModURL('crpCalendar', 'user', 'get_partecipations', array (
 						'uid' => $item['uid']
 					)),
 					'image' => 'vcalendar.gif',
-					'title' => _CRPCALENDAR_EVENTS_MYLIST
+					'title' => __("attendance to events", $this->dom)
 				);
 				break;
-			case "_CRPCALENDAR_ICAL" :
+			case "".__("crpCalendar iCal event", $this->dom)."" :
 				$linkArray = array (
 					'url' => pnModURL('crpCalendar', 'user', 'getICal', array (
 						'eventid' => $item['eventid']
 					)),
 					'image' => 'ical.gif',
-					'title' => _CRPCALENDAR_ICAL
+					'title' => __("crpCalendar iCal event", $this->dom)
 				);
 				break;
 			default :
