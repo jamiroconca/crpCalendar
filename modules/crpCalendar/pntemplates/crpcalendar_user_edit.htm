@@ -23,7 +23,7 @@
 		<div class="z-formrow">
 			<label for="event_urltitle"><!--[gt text="PermaLink URL title"]--></label>
 			<input id="event_urltitle" class="z-form-text" name="event[urltitle]" type="text" size="32" maxlength="255" value="<!--[$urltitle|pnvarprepfordisplay]-->" />
-			<span class="z-sub"><!--[gt text="(Blank = auto-generate)"]--></span>
+			<em class="z-formnote"><!--[gt text="(Blank = auto-generate)"]--></em>
 		</div>
 		<div class="z-formrow">
     		<label for="event_location"><!--[gt text="Location"]--></label>
@@ -65,7 +65,7 @@
 	    <label for="crpcalendar_event_image"><!--[gt text="Event image (.gif, .jpg, .png) - Max"]--> <!--[math equation="x/1024" x=$file_dimension format="%.1f"]--> KBytes</label>
    		<input type="hidden" name="MAX_FILE_SIZE" value="<!--[$file_dimension]-->"/>
    		<input id="crpcalendar_event_image" name="event_image" type="file" size="32"/>
-   		<span class="z-sub"><!--[gt text="Image would be resized to"]--> <!--[$image_width]--> px</span>
+   		<em class="z-formnote"><!--[gt text="Image would be resized to"]--> <!--[$image_width]--> px</em>
     </div>
     <!--[if $image.id]-->
 		<fieldset class="">
@@ -82,7 +82,7 @@
 		<div class="z-formrow">
    		<label for="crpcalendar_image_caption"><!--[gt text="Image caption"]--></label>
    		<input id="crpcalendar_image_caption" class="z-form-text" name="event[image_caption]" type="text" size="32" maxlength="255" value="<!--[$image_caption|pnvarprephtmldisplay]-->" />
-    	<span class="z-sub"><!--[gt text="Image caption will be displayed only if an image is present"]--></span>
+    	<em class="z-formnote"><!--[gt text="Image caption will be displayed only if an image is present"]--></em>
     </div>
     <div class="z-formrow">
 	    <label for="crpcalendar_document_dimension"><!--[gt text="Event document"]--> <!--[math equation="x/1024" x=$document_dimension format="%.1f"]--> KBytes</label>
