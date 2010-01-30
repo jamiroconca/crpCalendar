@@ -33,24 +33,24 @@ class crpCalendarUI
 		{
 			case "1" :
 				$this->day_of_week_short = array (
-					__('M', $this->dom),
-					__('T', $this->dom),
-					__('W', $this->dom),
-					__('T', $this->dom),
-					__('F', $this->dom),
-					__('S', $this->dom),
-					_CRPCALENDAR_SUN
+					__('Mo', $this->dom),
+					__('Th', $this->dom),
+					__('We', $this->dom),
+					__('Tu', $this->dom),
+					__('Fr', $this->dom),
+					__('Sa', $this->dom),
+					__('Su', $this->dom)
 				);
 				break;
 			default :
 				$this->day_of_week_short = array (
-					__('S', $this->dom),
-					__('M', $this->dom),
-					__('T', $this->dom),
-					__('W', $this->dom),
-					__('T', $this->dom),
-					__('F', $this->dom),
-					_CRPCALENDAR_SAT
+					__('Su', $this->dom),
+					__('Mo', $this->dom),
+					__('Th', $this->dom),
+					__('We', $this->dom),
+					__('Tu', $this->dom),
+					__('Fr', $this->dom),
+					__('Sa', $this->dom)
 				);
 				break;
 		}

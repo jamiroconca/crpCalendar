@@ -68,21 +68,21 @@ function crpCalendar_adminapi_getlinks()
 	{
 		$links[] = array (
 			'url' => pnModURL('crpCalendar', 'admin', 'import_ical'),
-			'text' => _CRPCALENDAR_IMPORT_ICAL
+			'text' => __('iCal Import', $dom)
 		);
 	}
 	if (SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_DELETE))
 	{
 		$links[] = array (
 			'url' => pnModURL('crpCalendar', 'admin', 'purge_events'),
-			'text' => _CRPCALENDAR_PURGE_EVENTS
+			'text' => __('Purge events', $dom)
 		);
 	}
 	if (SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_ADMIN))
 	{
 		$links[] = array (
 			'url' => pnModURL('crpCalendar', 'admin', 'modifyconfig'),
-			'text' => _MODIFYCONFIG
+			'text' => __('Settings', $dom)
 		);
 	}
 

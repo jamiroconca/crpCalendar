@@ -14,12 +14,12 @@
     <div class="z-formrow">
 			<p><!--[gt text="Confirm deletion?"]--> (<!--[gt text="action not reversible, events will be deleted from database"]-->)</p>
 		</div>
-		<div class="z-formrow" id="end_date_block">
-			<label><!--[gt text="Including from date"]--></label>
+		<fieldset class="z-formrow" id="end_date_block">
+			<legenf><!--[gt text="Including from date"]--></legend>
 			<!--[html_select_date prefix="end" end_year="+4" time=$end_date field_array=event display_months=false display_years=false id="end_datefield-dd"]-->
 			<!--[html_select_date prefix="end" end_year="+4" time=$end_date field_array=event display_days=false display_years=false id="end_datefield-mm"]-->
 			<!--[html_select_date prefix="end" start_year="-4" end_year="+4" time=$end_date field_array=event display_days=false display_months=false id="end_datefield"]-->
-		</div>
+		</fieldset>
 	    <div class="z-formrow z-formbuttons">
 	    <a href="<!--[pnmodurl modname=crpCalendar type=admin func=view]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
 	    <!--[pnbutton src='button_ok.gif' set='icons/small'   __alt="Confirm deletion?" __title="Confirm deletion?"]-->

@@ -150,13 +150,13 @@
     <legend><!--[gt text="Meta data"]--></legend>
 			<ul>
 				<!--[pnusergetvar name=uname uid=$cr_uid assign=username]-->
-				<li><!--[gt text="Created by %username%" username=$username]--></li>
-				<li><!--[gt text="Created on %date%" date=$cr_date|pndate_format]--></li>
+				<li><!--[gt text="Created by %s" tag1=$username]--></li>
+				<li><!--[gt text="Created on %s" tag1=$cr_date|pndate_format]--></li>
 			</ul>
     </fieldset>		
     <div class="z-formrow z-formbuttons">
     	<a href="<!--[pnmodurl modname=crpCalendar type=admin func=view]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
-    	<!--[pnbutton src='button_ok.gif' set='icons/small'   __alt="Update" __title="Update"]-->
+    	<!--[pnbutton src='button_ok.gif' set='icons/small' __alt="Update" __title="Update"]-->
     	<a href="<!--[$deletelink.url|pnvarprepfordisplay]-->"><!--[pnimg modname='core' set='icons/small' src=$deletelink.image __alt=$deletelink.title]--></a>
     </div>
 </div>
