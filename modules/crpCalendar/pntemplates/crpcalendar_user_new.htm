@@ -3,7 +3,6 @@
 <!--[pnpageaddvar name="stylesheet" value="modules/crpCalendar/pnjavascript/datepicker/css/datepicker.css"]-->
 
 <!--[include file="crpcalendar_user_menu.htm"]-->
-
 <!--[gt text="Submit event" assign=templatetitle]-->
 
 <div class="z-frontendcontainer">
@@ -50,7 +49,7 @@
 		<div class="z-formrow">
 			<label for="event_category_cat_val"><!--[gt text="Category"]--> <span class="crpcalendar-required"><!--[gt text="*"]--></span></label>
 			<!--[pnml assign="lblDef" name="Choose Category"]-->
-			<!--[selector_category category=$mainCategory name="event[__CATEGORIES__][Main]" field="id" selectedValue=$__CATEGORIES__.Main defaultValue="0" defaultText="$lblDef"]-->
+			<!--[selector_category category=$mainCategory name="event[__CATEGORIES__][Main]" field="id" selectedValue=$__CATEGORIES__.Main defaultValue="0" defaultText="$lblDef" editLink=false]-->
 		</div>
 		<!--[/if]-->
 		<!--[if pnConfigGetVar('multilingual') eq 1]-->
@@ -87,20 +86,20 @@
 			<input id="crpcalendar_day_event" name="event[day_event]" type="checkbox" value="1" />
 			<!--[/if]-->
 		</div>
-	  <div class="z-formrow" id="start_date_block">
-			<label><!--[gt text="Start date"]--></label>
+	  <fieldset class="z-formrow" id="start_date_block">
+			<legend><!--[gt text="Start date"]--></legend>
 			<!--[if $startYear]--><!--[assign var="start_date" value=$startYear|cat:"-"|cat:$startMonth|cat:"-"|cat:$startDay|cat:" "|cat:$startHour|cat:":"|cat:$startMinute]--><!--[/if]-->
 			<!--[html_select_date prefix="start" end_year="+4" time=$start_date field_array=event display_months=false display_years=false id="start_datefield-dd"]-->
 			<!--[html_select_date prefix="start" end_year="+4" time=$start_date field_array=event display_days=false display_years=false id="start_datefield-mm"]-->
 			<!--[html_select_date prefix="start" start_year="-4" end_year="+4" time=$start_date field_array=event display_days=false display_months=false id="start_datefield"]-->&nbsp;&nbsp;<!--[html_select_time prefix="start" minute_interval="15" use_24_hours=true display_seconds=no time=$start_date field_array=event]-->
-		</div>
-		<div class="z-formrow" id="end_date_block">
-			<label><!--[gt text="End date"]--></label>
+		</fieldset>
+		<fieldset class="z-formrow" id="end_date_block">
+			<legend><!--[gt text="End date"]--></legend>
 			<!--[if $endYear]--><!--[assign var="end_date" value=$endYear|cat:"-"|cat:$endMonth|cat:"-"|cat:$endDay|cat:" "|cat:$endHour|cat:":"|cat:$endMinute]--><!--[/if]-->
 			<!--[html_select_date prefix="end" end_year="+4" time=$end_date field_array=event display_months=false display_years=false id="end_datefield-dd"]-->
 			<!--[html_select_date prefix="end" end_year="+4" time=$end_date field_array=event display_days=false display_years=false id="end_datefield-mm"]-->
 			<!--[html_select_date prefix="end" start_year="-4" end_year="+4" time=$end_date field_array=event display_days=false display_months=false id="end_datefield"]-->&nbsp;&nbsp;<!--[html_select_time prefix="end" minute_interval="15" use_24_hours=true display_seconds=no time=$end_date field_array=event]--> <br />
-		</div>
+		</fieldset>
 		<!--[pnmodcallhooks hookobject=item hookaction=new module=crpCalendar]-->
     </fieldset>		
     <div class="z-formrow z-formbuttons">
