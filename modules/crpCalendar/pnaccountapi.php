@@ -50,7 +50,7 @@ function crpCalendar_accountapi_getall($args)
 				'url' => pnModURL('crpCalendar', 'user', 'get_partecipations'),
 				'module' => 'crpCalendar',
 				'set' => 'pnimages',
-				'title' => __('attendance to events', $dom),
+				'title' => __('Attendance to events', $dom),
 				'icon' => 'userdate.gif'
 			);
 	}
