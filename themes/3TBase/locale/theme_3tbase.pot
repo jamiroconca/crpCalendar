@@ -1,0 +1,64 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Zikula 1.2.x\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-02-28 20:58+0000\n"
+"PO-Revision-Date: 2010-02-28 20:58+0000\n"
+"Last-Translator: Conca Daniele <conca.daniele@gmail.com>\n"
+"Language-Team: Conca Daniele <conca.daniele@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: version.php:3
+#: version.php:4
+msgid "3TBase"
+msgstr ""
+
+#: version.php:5
+msgid "The 3TBase theme is a basic CSS theme."
+msgstr ""
+
+#: templates/master.htm:37
+#: templates/modules/admin.htm:37
+#: templates/modules/home.htm:37
+msgid "Home"
+msgstr ""
+
+#: templates/master.htm:38
+#: templates/modules/admin.htm:38
+#: templates/modules/home.htm:38
+msgid "Search"
+msgstr ""
+
+#: templates/master.htm:40
+#: templates/modules/admin.htm:40
+#: templates/modules/home.htm:40
+msgid "User account panel"
+msgstr ""
+
+#: templates/master.htm:68
+#: templates/modules/admin.htm:63
+#: templates/modules/home.htm:69
+msgid "XHTML 1.1"
+msgstr ""
+
+#: templates/master.htm:68
+#: templates/modules/admin.htm:63
+#: templates/modules/home.htm:69
+msgid "Valid XHTML 1.1"
+msgstr ""
+
+#: templates/master.htm:69
+#: templates/modules/admin.htm:64
+#: templates/modules/home.htm:70
+msgid "Valid CSS"
+msgstr ""
+
