@@ -14,5 +14,5 @@ $themeversion['system'] = 0;
 $themeversion['credits'] = '';
 $themeversion['help'] = '';
 $themeversion['changelog'] = '';
-$themeversion['license'] = '';
+$themeversion['license'] = 'docs/license.txt';
 $themeversion['xhtml'] = true;

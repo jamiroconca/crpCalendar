@@ -1,0 +1,7 @@
+3TBase - License
+
+By downloading and using this theme (if you don't agree and you want to use the Liquid Layout (Pixel-widths) css, take it from the original source and make your own stylesheets), you agree to the following terms:
+
+    * You may NOT resell this theme
+    * You may use this theme for personal projects
+    * You can modify, translate or distribute with the same license
