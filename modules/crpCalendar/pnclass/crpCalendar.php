@@ -795,7 +795,10 @@ class crpCalendar
 					$serialEndDate = $serialStartDate;
 
 				$serialStartTime = $this->buildTime($inputValues['serial']['startMinute'][$kserial], $inputValues['serial']['startHour'][$kserial]);
-				$serialEndTime = $this->buildTime($inputValues['serial']['startMinute'][$kserial] + $serialMinuteDiff, $inputValues['serial']['startHour'][$kserial] + $serialHourDiff);
+				if (!$inputValues['event']['day_event'])
+					$serialEndTime = $this->buildTime($inputValues['serial']['startMinute'][$kserial] + $serialMinuteDiff, $inputValues['serial']['startHour'][$kserial] + $serialHourDiff);
+				else
+					$serialEndTime = $this->buildTime('59', '23');
 
 				$inputValues['event']['start_date'] = $serialStartDate . ' ' . $serialStartTime;
 				$inputValues['event']['end_date'] = $serialEndDate . ' ' . $serialEndTime;
