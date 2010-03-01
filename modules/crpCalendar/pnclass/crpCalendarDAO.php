@@ -1514,7 +1514,7 @@ class crpCalendarDAO
     $crpcalendarcolumn = $pntable['crpcalendar_column'];
     $queryargs = array ();
 
-    $queryargs[] = "($crpcalendarcolumn[end_date] <= '$endYear-$endMonth-$endDay')";
+    $queryargs[] = "($crpcalendarcolumn[end_date] <= '$endYear-$endMonth-$endDay 23:59:59')";
 
     $where = null;
     if (count($queryargs) > 0)
