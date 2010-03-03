@@ -9,7 +9,7 @@
  */
 function crpCalendarFormInit() {
   if ($('crpcalendar_day_event').checked == true) {
-    $('end_date_block').addClassName('pn-hide');
+    $('end_date_block').addClassName('z-hide');
   }
 
   Event.observe('crpcalendar_day_event', 'click', function() {
@@ -87,9 +87,9 @@ function crpCalendarFilterInit() {
 
 function hideDateFilter(trigger, block) {
   if ($(trigger).checked == true) {
-    $(block).addClassName('pn-hide');
+    $(block).addClassName('z-hide');
   } else {
-    $(block).removeClassName('pn-hide');
+    $(block).removeClassName('z-hide');
   }
 }
 
@@ -97,13 +97,13 @@ function crpCalendarAdminViewInit() {
   var real = $$('span.crp-status-real');
 
   real.each( function(node) {
-    node.addClassName('pn-hide');
+    node.addClassName('z-hide');
   })
 
   var fake = $$('span.crp-status-fake');
 
   fake.each( function(node) {
-    node.removeClassName('pn-hide');
+    node.removeClassName('z-hide');
   })
 }
 
@@ -132,7 +132,7 @@ function togglestatus_response(req) {
 function crpCalendarConfigInit(gd_version, locations_avail, formicula_avail) {
   if (gd_version < 2) {
     $('crpcalendar_use_gd').parentNode.remove();
-    $('crpcalendar_use_browser').removeClassName('pn-hide');
+    $('crpcalendar_use_browser').removeClassName('z-hide');
   }
   if (!locations_avail) {
     $('crpcalendar_enable_locations').checked = false;
