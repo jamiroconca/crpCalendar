@@ -310,6 +310,7 @@ function _crpCalendar_createdefaultcategory()
 	Loader :: loadClassFromModule('Categories', 'CategoryRegistry');
 
 	// get the language file
+	$dom = ZLanguage::getModuleDomain('crpCalendar');
 	$lang = ZLanguage::getLanguageCode();
 
 	// get the category path for which we're going to insert our place holder category
@@ -322,10 +323,10 @@ function _crpCalendar_createdefaultcategory()
 	$cat->setDataField('value', '-1');
 
 	$cat->setDataField('display_name', array (
-		$lang => _CRPCALENDAR_NAME
+		$lang => __('crpCalendar', $dom)
 	));
 	$cat->setDataField('display_desc', array (
-		$lang => _CRPCALENDAR_CATEGORY_DESCRIPTION
+		$lang => __('Main crpCalendar Category', $dom)
 	));
 	$cat->setDataField('security_domain', $rootcat['security_domain']);
 
