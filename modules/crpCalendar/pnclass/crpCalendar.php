@@ -777,8 +777,11 @@ class crpCalendar
 		// if multiple creation is enabled
 		if ($inputValues['serial']['startDay'] && $inputValues['modvars']['multiple_insert'])
 		{
-			$serialHourDiff = $inputValues['event']['endHour'] - $inputValues['event']['startHour'];
-			$serialMinuteDiff = $inputValues['event']['endMinute'] - $inputValues['event']['startMinute'];
+			$endSerialTime = mktime($inputValues['event']['endHour'], $inputValues['event']['endMinute'], 0, $inputValues['event']['endMonth'], $inputValues['event']['endDay'], $inputValues['event']['endYear']);
+			$startSerialTime = mktime($inputValues['event']['startHour'], $inputValues['event']['startMinute'], 0, $inputValues['event']['startMonth'], $inputValues['event']['startDay'], $inputValues['event']['startYear']);
+			$timeDifference =  $endSerialTime - $startSerialTime;
+			$serialHourDiff = floor(($timeDifference)/3600);
+			$serialMinuteDiff = floor(($timeDifference)/60) - $serialHourDiff * 60;
 
 			foreach ($inputValues['serial']['startDay'] as $kserial => $vserial)
 			{
