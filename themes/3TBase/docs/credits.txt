@@ -1,0 +1,6 @@
+3TBase
+==============================================
+(C) Daniele Conca 2010
+
+thanks to Matthew James Taylor at http://matthewjamestaylor.com for the inspiration and use in the CSS framework of his work
+

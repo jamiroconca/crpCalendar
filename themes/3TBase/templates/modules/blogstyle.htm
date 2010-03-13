@@ -34,18 +34,19 @@
 <div id="theme_navigation_bar">
 	<ul>
 		<li><a href="<!--[homepage]-->"><!--[gt text='Home']--></a></li>
-		<li><a href="<!--[pnmodurl modname=Search]-->"><!--[gt text='Search']--></a></li>
+		<li<!--[if $module eq 'Search']--> class="current"<!--[/if]-->><a href="<!--[pnmodurl modname=Search]-->"><!--[gt text='Search']--></a></li>
 		<!--[if $loggedin eq true]-->
-		<li><a href="<!--[pnmodurl modname=Users]-->"><!--[gt text='User account panel']--></a></li>
+		<li<!--[if $module eq 'Users']--> class="current"<!--[/if]-->><a href="<!--[pnmodurl modname=Users]-->"><!--[gt text='User account panel']--></a></li>
 		<!--[/if]-->
 	</ul>
 </div>
 
-<div class="colmask threecol">
+<div class="colmask blogstyle">
 	<div class="colmid">
 		<div class="colleft">			
 			
 			<div class="col1">
+			<!--[blockposition name="center"]-->
 			<!--[$maincontent]-->
 			</div>
 			

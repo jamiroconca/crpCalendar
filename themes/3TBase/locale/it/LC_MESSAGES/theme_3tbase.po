@@ -7,20 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zikula 1.2.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-28 20:58+0000\n"
-"PO-Revision-Date: 2010-02-28 21:38+0100\n"
+"POT-Creation-Date: 2010-03-13 17:23+0000\n"
+"PO-Revision-Date: 2010-03-13 17:54+0100\n"
 "Last-Translator: Daniele Conca <conca.daniele@gmail.com>\n"
-"Language-Team: Conca Daniele <conca.daniele@gmail.com>\n"
-"MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Poedit-Language: Italian\n"
-"X-Poedit-Country: ITALY\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
 
 #: version.php:3
 #: version.php:4
+#: templates/master.htm:65
+#: templates/modules/admin.htm:59
+#: templates/modules/home.htm:66
 msgid "3TBase"
 msgstr "3TBase"
 
@@ -28,38 +28,48 @@ msgstr "3TBase"
 msgid "The 3TBase theme is a basic CSS theme."
 msgstr "3TBase è un semplice."
 
-#: templates/master.htm:37
-#: templates/modules/admin.htm:37
-#: templates/modules/home.htm:37
+#: templates/master.htm:36
+#: templates/modules/admin.htm:36
+#: templates/modules/home.htm:36
 msgid "Home"
 msgstr "Home"
 
-#: templates/master.htm:38
-#: templates/modules/admin.htm:38
-#: templates/modules/home.htm:38
+#: templates/master.htm:37
+#: templates/modules/admin.htm:37
+#: templates/modules/home.htm:37
 msgid "Search"
 msgstr "Ricerca"
 
-#: templates/master.htm:40
-#: templates/modules/admin.htm:40
-#: templates/modules/home.htm:40
+#: templates/master.htm:39
+#: templates/modules/admin.htm:39
+#: templates/modules/home.htm:39
 msgid "User account panel"
 msgstr "Profilo utente"
 
-#: templates/master.htm:68
-#: templates/modules/admin.htm:63
+#: templates/master.htm:65
+#: templates/modules/admin.htm:59
+#: templates/modules/home.htm:66
+msgid "Design by Jami"
+msgstr "Design by Jami"
+
+#: templates/master.htm:67
+#: templates/modules/admin.htm:61
 #: templates/modules/home.htm:69
 msgid "XHTML 1.1"
 msgstr "XHTML 1.1"
 
-#: templates/master.htm:68
-#: templates/modules/admin.htm:63
+#: templates/master.htm:67
+#: templates/modules/admin.htm:61
 #: templates/modules/home.htm:69
 msgid "Valid XHTML 1.1"
 msgstr "Valid XHTML 1.1"
 
-#: templates/master.htm:69
-#: templates/modules/admin.htm:64
+#: templates/master.htm:68
+msgid "CSS"
+msgstr "CSS"
+
+#: templates/master.htm:68
+#: templates/modules/admin.htm:62
 #: templates/modules/home.htm:70
 msgid "Valid CSS"
 msgstr "Valid CSS"

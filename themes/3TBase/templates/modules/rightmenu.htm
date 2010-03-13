@@ -34,15 +34,14 @@
 <div id="theme_navigation_bar">
 	<ul>
 		<li><a href="<!--[homepage]-->"><!--[gt text='Home']--></a></li>
-		<li><a href="<!--[pnmodurl modname=Search]-->"><!--[gt text='Search']--></a></li>
+		<li<!--[if $module eq 'Search']--> class="current"<!--[/if]-->><a href="<!--[pnmodurl modname=Search]-->"><!--[gt text='Search']--></a></li>
 		<!--[if $loggedin eq true]-->
-		<li><a href="<!--[pnmodurl modname=Users]-->"><!--[gt text='User account panel']--></a></li>
+		<li<!--[if $module eq 'Users']--> class="current"<!--[/if]-->><a href="<!--[pnmodurl modname=Users]-->"><!--[gt text='User account panel']--></a></li>
 		<!--[/if]-->
 	</ul>
 </div>
 
-<div class="colmask threecol">
-	<div class="colmid">
+<div class="colmask rightmenu">
 		<div class="colleft">			
 			
 			<div class="col1">
@@ -50,15 +49,10 @@
 			</div>
 			
 			<div class="col2">
-			<!--[blockposition name="left"]-->
-			</div>
-			
-			<div class="col3">
-			<!--[blockposition name="right"]-->
+			<!--[blockposition name=left]-->
 			</div>
 		
 		</div>
-	</div>
 </div>
 
 <div id="theme_footer" class="tcenter">
