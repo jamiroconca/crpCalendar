@@ -1,0 +1,4 @@
+3TBase
+v0.1.1 - 13 march 2010
+- added three theme templates: blogstyle, fullpage, rightmenu
+- licensed under LGPL 2.1

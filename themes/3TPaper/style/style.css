@@ -1,0 +1,77 @@
+.colmask h2+p:first-letter, .news_body:first-letter, .news_hometext:first-letter, .pages_page_body:first-letter {
+	font-size: 3em;
+	text-transform: uppercase;
+	position: relative;
+	display: block;
+	float: left;
+	margin: 5px 5px 0px 10px;
+}
+
+.littleEye {
+	background: #F2EDDA;
+	padding: 8px 8px 12px 8px;
+	clear: both;
+	margin-bottom: 16px;
+}
+
+.littleEye h3 {
+	text-align: center;
+	font-variant: small-caps;
+	font-weight: normal;
+	line-height: 1.2em;
+	margin-bottom: 8px;
+	letter-spacing: 1px;
+	border-bottom: 1px solid #000000;
+	border-top: 1px solid #000000;
+	background-color: #FFFFFF;
+	padding: 10px 0 10px 0;
+}
+
+.littleEye p {
+	line-height: 1.5em;
+}
+
+div.littleEye h3+p:first-letter {
+	font-size: 200%;
+	height: 2em;
+	position: relative;
+	display: block;
+	float: left;
+	margin-top: 5px;
+	margin-right: 5px;
+}
+
+.eyelet {
+	background: #fff;
+	color: #666;
+	padding: 8px 8px 12px 8px;
+	clear: both;
+	margin-bottom: 16px;
+}
+
+.eyelet h3 {
+	text-align: right;
+	font-variant: small-caps;
+	font-weight: normal;
+	line-height: 1.2em;
+	margin-bottom: 8px;
+	letter-spacing: 1px;
+	border-bottom: 1px solid #000000;
+	color: #990000;
+	background-color: #FFFFFF;
+	padding: 10px 0 10px 0;
+}
+
+.eyelet p {
+	line-height: 1.5em;
+}
+
+div.eyelet h3+p:first-letter {
+	font-size: 200%;
+	height: 2em;
+	position: relative;
+	display: block;
+	float: left;
+	margin-top: 5px;
+	margin-right: 5px;
+}

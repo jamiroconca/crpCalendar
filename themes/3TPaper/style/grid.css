@@ -1,0 +1,295 @@
+body {
+	min-width: 600px;
+	background: #E7E7CD;
+}
+
+#theme_page_container {
+	width: 960px;
+	clear: both;
+	position: relative;
+	margin: 0px auto;
+	padding: 16px 16px;
+}
+
+#theme_header_container {
+	clear: both;
+	float: left;
+	display: inline;
+	position: relative;
+	width: 100%;
+	background: transparent;
+}
+
+#theme_header {
+	width: 100%;
+}
+
+#theme_header p,#theme_header h1 {
+	padding: .1em 15px 0 15px;
+	margin: 8px 0 12px 0;
+	color: #000;
+}
+
+#theme_header h2 {
+	padding: .1em 15px 0 15px;
+	margin: 0;
+	color: #666;
+	float: right;
+}
+
+#theme_logo {
+	float: left;
+	display: inline;
+	position: relative;
+	margin: 0 4px 0 4px;
+}
+
+#theme_logo_typography {
+	padding: .4em 15px 0 15px;
+	margin: 0;
+}
+
+#theme_navigation_bar {
+	clear: both;
+	float: left;
+	width: 100%;
+	border-bottom: 5px solid #000;
+}
+
+#theme_navigation_bar ul {
+	clear: left;
+	float: right;
+	width: 40%;
+	list-style: none;
+	margin: 10px 0 0 0;
+	padding: 0;
+}
+
+#theme_navigation_bar ul li {
+	display: inline;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	font-style: italic;
+	background-color: #000;
+	font-size: 120%;
+}
+
+#theme_navigation_bar ul li a {
+	display: block;
+	float: left;
+	margin: 0 0 0 1px;
+	padding: 3px 10px;
+	text-align: center;
+	background-color: #000;
+	color: #FFF;
+	text-decoration: none;
+	position: relative;
+	left: 15px;
+	line-height: 1.3em;
+}
+
+#theme_navigation_bar ul li a:hover {
+	background-color: #990000;
+	color: #fff;
+}
+
+#theme_navigation_bar ul li a.active,#theme_header ul li a.active:hover
+	{
+	color: #fff;
+	background-color: #990000;
+	font-weight: bold;
+}
+
+#theme_navigation_bar ul li a span {
+	display: block;
+}
+
+/* The Perfect 3 Column Liquid Layout (Percentage widths) */
+	/* column container */
+.colmask {
+	position: relative; /* This fixes the IE7 overflow hidden bug */
+	clear: both;
+	float: left;
+	width: 100%; /* width of whole page */
+	overflow: hidden; /* This chops off any overhanging divs */
+}
+
+/* common column settings */
+.colright,.colmid,.colleft {
+	float: left;
+	width: 100%; /* width of page */
+	position: relative;
+}
+
+.col1,.col2,.col3 {
+	float: left;
+	position: relative;
+	padding: 1em 0 1em 0;
+	/* no left and right padding on columns, we just make them narrower instead 
+	only padding top and bottom is included here, make it whatever value you need */
+	overflow: hidden;
+}
+
+/* 3 Column settings */
+.threecol {
+	background: #FFF; /* right column background colour */
+}
+
+.threecol .colmid {
+	right: 22%; /* width of the right column */
+	background: #fff; /* center column background colour */
+}
+
+.threecol .colleft {
+	right: 56%; /* width of the middle column */
+	background: #fff; /* left column background colour */
+}
+
+.threecol .col1 {
+	width: 54%;
+	/* width of center column content (column width minus padding on either side) */
+	left: 101%; /* 100% plus left padding of center column */
+}
+
+.threecol .col2 {
+	width: 20%;
+	/* Width of left column content (column width minus padding on either side) */
+	left: 25%;
+	/* width of (right column) plus (center column left and right padding) plus (left column left padding) */
+}
+
+.threecol .col3 {
+	width: 20%;
+	/* Width of right column content (column width minus padding on either side) */
+	left: 83%;
+	/* Please make note of the brackets here: (100% - left column width) plus (center column left and right padding) plus (left column left and right padding) plus (right column left padding) */
+}
+
+/* 3 Column blog style settings */
+.blogstyle {
+	background: #fff; /* right column background colour */
+}
+
+.blogstyle .colmid {
+	right: 22%; /* width of the right column */
+	background: #fff; /* center column background colour */
+}
+
+.blogstyle .colleft {
+	right: 22%; /* width of the middle column */
+	background: #fff; /* left column background colour */
+}
+
+.blogstyle .col1 {
+	width: 54%;
+	/* width of center column content (column width minus padding on either side) */
+	left: 45%; /* 100% minus center column width minus left padding of center column */
+}
+
+.blogstyle .col2 {
+	width: 20%;
+	/* Width of left column content (column width minus padding on either side) */
+	left: 47%;
+	/* width of (right column) plus (center column left and right padding) plus (left column left padding) */
+}
+
+.blogstyle .col3 {
+	width: 20%;
+	/* Width of right column content (column width minus padding on either side) */
+	left: 49%; /* Please make note of the brackets here:
+							(100% - left column width) plus (center column left and right padding) plus (left column left and right padding) plus (right column left padding) */
+}
+
+/* 2 Column (left menu) settings */
+.leftmenu {
+	background: #fff; /* right column background colour */
+}
+
+.leftmenu .colleft {
+	right: 78%; /* right column width */
+	background: #fff; /* left column background colour */
+}
+
+.leftmenu .col1 {
+	width: 74%; /* right column content width */
+	left: 102%; /* 100% plus left column left padding */
+}
+
+.leftmenu .col2 {
+	width: 18%;
+	/* left column content width (column width minus left and right padding) */
+	left: 6%;
+	/* (right column left and right padding) plus (left column left padding) */
+}
+
+/* 2 Column (right menu) settings */
+.rightmenu {
+	background: #fff; /* right column background colour */
+}
+
+.rightmenu .colleft {
+	right: 22%; /* right column width */
+	background: #fff; /* left column background colour */
+}
+
+.rightmenu .col1 {
+	width: 76%;
+	/* left column content width (left column width minus left and right padding) */
+	left: 24%; /* (right column width) plus (left column left padding) */
+}
+
+.rightmenu .col2 {
+	width: 20%;
+	/* right column content width (right column width minus left and right padding) */
+	left: 25%;
+	/* (right column width) plus (left column left and right padding) plus (right column left padding) */
+}
+
+/* 2 Column (double page) settings */
+.doublepage {
+	background: #eee; /* right column background colour */
+}
+
+.doublepage .colleft {
+	right: 50%; /* right column width */
+	background: #fff; /* left column background colour */
+}
+
+.doublepage .col1 {
+	width: 46%;
+	/* left column content width (column width minus left and right padding) */
+	left: 52%; /* right column width plus left column left padding */
+}
+
+.doublepage .col2 {
+	width: 46%;
+	/* right column content width (column width minus left and right padding) */
+	left: 56%;
+	/* (right column width) plus (left column left and right padding) plus (right column left padding) */
+}
+
+/* Full page settings */
+.fullpage {
+	background: #fff; /* page background colour */
+}
+
+.fullpage .col1 {
+	width: 96%; /* page width minus left and right padding */
+	left: 2%; /* page left padding */
+}
+
+/* Footer styles */
+#theme_footer {
+	clear: both;
+	float: left;
+	width: 100%;
+	font-size: 85%;
+	color: #999999;
+	border-top: 1px solid #000;
+}
+
+#theme_footer p {
+	padding: 10px;
+	margin: 0;
+}

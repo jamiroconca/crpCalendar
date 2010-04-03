@@ -1,0 +1,34 @@
+/* Fieldsets */
+fieldset {
+	padding: 1.4em; margin: 0 0 1.5em 0; border: 1px solid #ccc;
+}
+
+legend {
+	font-weight: bold; font-size: 1.2em;
+}
+
+/* Text fields */
+input.text,input.title,textarea {
+	margin: 0.75em 0; border: 1px solid #bbb;
+}
+
+textarea,select,input {
+
+}
+
+input.text:focus,input.title:focus,textarea:focus {
+	border: 1px solid #666;
+}
+
+input.text,input.title {
+	padding: 5px;
+}
+
+input.title {
+	font-size: 1.5em;
+}
+
+/* Textareas */
+textarea {
+	padding: 5px;
+}

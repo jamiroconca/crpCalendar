@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<!--[lang]-->">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<!--[charset]-->" />
+<title><!--[title]--></title>
+<meta name="description" content="<!--[pnsessiongetvar name="page-title"]--> :: <!--[slogan]-->" />
+<meta name="keywords" content="<!--[keywords]-->" />
+<meta name="author" content="<!--[sitename]-->" />
+<meta name="copyright" content="Copyright (c) 2009 by <!--[sitename]-->" />
+<!--[themeinfo]-->
+<link rel="icon" href="<!--[$imagepath]-->/favicon.png" type="image/png" />
+<link rel="shortcut icon" href="<!--[$imagepath]-->/favicon.png" type="image/png" />
+		
+<!--[pnpageaddvar name="stylesheet" value="$themepath/style/reset.css"]-->
+<!--[pnpageaddvar name="stylesheet" value="$themepath/style/typography.css"]-->
+<!--[pnpageaddvar name="stylesheet" value="$themepath/style/grid.css"]-->
+<!--[pnpageaddvar name="stylesheet" value="$themepath/style/forms.css"]-->
+<!--[pnpageaddvar name="stylesheet" value="$themepath/style/common.css"]-->
+<!--[pnpageaddvar name="stylesheet" value="$themepath/style/style.css"]-->
+</head>
+
+<body>
+
+<div id="theme_page_container">
+
+<div id="theme_header_container">
+	<div id="theme_header">
+		<img id="theme_logo" src="<!--[$imagepath]-->/logo.png" alt="<!--[sitename]-->" title="<!--[slogan]-->" />
+		<h1 id="theme_logo_typography"><!--[sitename]--></h1>
+		<h2 id="slogan"><!--[slogan]--></h2>
+	</div>
+</div>
+
+<div id="theme_navigation_bar">
+	<ul>
+		<li><a href="<!--[homepage]-->"><!--[gt text='Home']--></a></li>
+		<li<!--[if $module eq 'Search']--> class="current"<!--[/if]-->><a href="<!--[pnmodurl modname=Search]-->"><!--[gt text='Search']--></a></li>
+		<!--[if $loggedin eq true]-->
+		<li<!--[if $module eq 'Users']--> class="current"<!--[/if]-->><a href="<!--[pnmodurl modname=Users]-->"><!--[gt text='User account panel']--></a></li>
+		<!--[/if]-->
+	</ul>
+</div>
+
+<div class="colmask fullpage">
+		
+			<div class="col1">
+			<!--[$maincontent]-->
+			</div>
+
+</div>
+
+<div id="theme_footer" class="tcenter">
+	<code><a href="http://jami.cremonapalloza.org" title="<!--[gt text='3TPaper']-->"><!--[gt text='3TPaper']--></a> - <a href="http://jami.cremonapalloza.org" title="<!--[gt text='Design by Jami']-->"><!--[gt text='Design by Jami']--></a></code>
+	<p>
+	<!--[pnimg src="xhtml11.png" modname="core" set="powered" __alt="XHTML 1.1" __title="Valid XHTML 1.1"]-->
+	<!--[pnimg src="css.gif" modname="core" set="powered" __alt="CSS" __alt="Valid CSS"]-->
+	</p>
+	<!--[nocache]--><!--[pagerendertime]--><!--[/nocache]-->
+	<!--[nocache]--><!--[sqldebug]--><!--[/nocache]-->	
+</div>
+
+</div>
+
+</body>
+</html>
