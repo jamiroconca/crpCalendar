@@ -8,25 +8,27 @@ msgstr ""
 "Project-Id-Version: Zikula 1.2.x\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-13 17:23+0000\n"
-"PO-Revision-Date: 2010-03-13 17:55+0100\n"
+"PO-Revision-Date: 2010-04-03 19:16+0100\n"
 "Last-Translator: Daniele Conca <conca.daniele@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"Language-Team: \n"
+"Language-Team: Conca Daniele <conca.daniele@gmail.com> <Conca Daniele <conca.daniele@gmail.com>>\n"
 "MIME-Version: 1.0\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED KINGDOM\n"
 
 #: version.php:3
 #: version.php:4
 #: templates/master.htm:65
 #: templates/modules/admin.htm:59
 #: templates/modules/home.htm:66
-msgid "3TBase"
-msgstr "3TBase"
+msgid "3TPaper"
+msgstr "3TPaper"
 
 #: version.php:5
-msgid "The 3TBase theme is a basic CSS theme."
-msgstr "The 3TBase theme is a basic CSS theme."
+msgid "The 3TPaper theme is a basic typographic CSS theme."
+msgstr "The 3TPaper theme is a basic typographic CSS theme."
 
 #: templates/master.htm:36
 #: templates/modules/admin.htm:36
