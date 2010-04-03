@@ -2,7 +2,7 @@
 $themeversion['name'] = '3TPaper';
 $themeversion['display'] = __('3TPaper');
 $themeversion['displayname'] = __('3TPaper');
-$themeversion['description'] = __("The 3TPaper theme is a typographic CSS theme.");
+$themeversion['description'] = __("The 3TPaper theme is a basic typographic CSS theme.");
 $themeversion['regid'] = '0';
 $themeversion['version'] = '0.1.1';
 $themeversion['official'] = '1';
