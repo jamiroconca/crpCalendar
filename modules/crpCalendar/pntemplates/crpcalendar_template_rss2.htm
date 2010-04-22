@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="<!--[gt text="ISO-8859-1"]-->"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-	<channel>
-		<title>
-			<!--[pnconfiggetvar name="sitename"]-->::<!--[pnconfiggetvar name="slogan"]-->::<!--[$data.format|pnvarprepfordisplay]-->
-		</title>
-		<link>
-			<!--[pngetbaseurl]-->
-		</link>
-		<description>
-			<!--[$data.descr|pnvarprepfordisplay]-->
-		</description>
-		<!--[if $data.xml_lang]-->
-		<language>
-			<!--[$data.xml_lang|pnvarprepfordisplay]-->
-		</language>
-		<!--[/if]-->
-		<image>
-			<title>
-				<!--[pnconfiggetvar name="sitename"]-->::<!--[pnconfiggetvar name="slogan"]-->::<!--[$data.format|pnvarprepfordisplay]-->
-			</title>
-			<url>
-				<!--[pngetbaseurl]-->images/<!--[pnconfiggetvar name="site_logo"]-->
-			</url>
-			<link>
-				<!--[pngetbaseurl]-->
-			</link>
-		</image>
-		<pubDate>
-			<!--[$data.publ_date|pndate_format:"%a, %d %b %Y %H:%M:%S %z"]-->
-		</pubDate>
-		<lastBuildDate>
-			<!--[$data.publ_date|pndate_format:"%a, %d %b %Y %H:%M:%S %z"]-->
-		</lastBuildDate>
-		<webMaster>
-			<!--[pnconfiggetvar name="adminmail"]--> (<!--[pnconfiggetvar name="sitename"]-->)
-		</webMaster>
-		<atom:link href="<!--[pngetbaseurl]--><!--[pnmodurl modname="crpCalendar" type="user" func="getfeed"]-->" rel="self" type="application/rss+xml" />
-		<!--[section name=k loop=$list]-->
-		<item>
-			<title>
-				<!--[$list[k].title|pnvarprepfordisplay]-->(<!--[$list[k].start_date|pndate_format:$complete_date_format|pnvarprephtmldisplay]--><!--[if !$list[k].day_event]-->-<!--[$list[k].end_date|pndate_format:$complete_date_format|pnvarprephtmldisplay]--><!--[/if]-->)
-			</title>
-			<link>
-				<!--[pngetbaseurl]--><!--[$list[k].link|pnvarprepfordisplay]-->
-			</link>
-			<description>
-				<!--[$list[k].descr|pnvarprepfordisplay]-->
-			</description>
-			<pubDate>
-				<!--[$list[k].publ_date|pndate_format:"%a, %d %b %Y %H:%M:%S %z"]-->
-			</pubDate>
-			<guid>
-				<!--[pngetbaseurl]--><!--[$list[k].link|pnvarprepfordisplay]-->
-			</guid>
-		</item>
-		<!--[/section]-->
-	</channel>
+    <channel>
+        <title>
+            <!--[pnconfiggetvar name="sitename"]-->::<!--[pnconfiggetvar name="slogan"]-->::<!--[$data.format|pnvarprepfordisplay]-->
+        </title>
+        <link>
+        <!--[pngetbaseurl]-->
+    </link>
+    <description>
+        <!--[$data.descr|pnvarprepfordisplay]-->
+    </description>
+    <!--[if $data.xml_lang]-->
+    <language>
+        <!--[$data.xml_lang|pnvarprepfordisplay]-->
+    </language>
+    <!--[/if]-->
+    <image>
+        <title>
+            <!--[pnconfiggetvar name="sitename"]-->::<!--[pnconfiggetvar name="slogan"]-->::<!--[$data.format|pnvarprepfordisplay]-->
+        </title>
+        <url>
+            <!--[pngetbaseurl]-->images/<!--[pnconfiggetvar name="site_logo"]-->
+        </url>
+        <link>
+        <!--[pngetbaseurl]-->
+    </link>
+</image>
+<pubDate>
+    <!--[$data.publ_date|pndate_format:"%a, %d %b %Y %H:%M:%S %z"]-->
+</pubDate>
+<lastBuildDate>
+    <!--[$data.publ_date|pndate_format:"%a, %d %b %Y %H:%M:%S %z"]-->
+</lastBuildDate>
+<webMaster>
+    <!--[pnconfiggetvar name="adminmail"]--> (<!--[pnconfiggetvar name="sitename"]-->)
+</webMaster>
+<atom:link href="<!--[pngetbaseurl]--><!--[pnmodurl modname="crpCalendar" type="user" func="getfeed"]-->" rel="self" type="application/rss+xml" />
+    <!--[section name=k loop=$list]-->
+    <item>
+        <title>
+            <!--[$list[k].title|pnvarprepfordisplay]-->(<!--[$list[k].start_date|pndate_format:$complete_date_format|pnvarprephtmldisplay]--><!--[if !$list[k].day_event]-->-<!--[$list[k].end_date|pndate_format:$complete_date_format|pnvarprephtmldisplay]--><!--[/if]-->)
+        </title>
+        <link>
+        <!--[pngetbaseurl]--><!--[$list[k].link|pnvarprepfordisplay]-->
+    </link>
+    <description>
+        <!--[$list[k].descr|pnvarprepfordisplay]-->
+    </description>
+    <pubDate>
+        <!--[$list[k].publ_date|pndate_format:"%a, %d %b %Y %H:%M:%S %z"]-->
+    </pubDate>
+    <guid>
+        <!--[pngetbaseurl]--><!--[$list[k].link|pnvarprepfordisplay]-->
+    </guid>
+</item>
+<!--[/section]-->
+</channel>
 </rss>

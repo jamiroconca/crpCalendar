@@ -1,46 +1,46 @@
 
 <p class="vcard crpcalendar-quote">
-		<!--[if $event.location.logo]--><img src="<!--[$event.location.logo]-->" class="photo" /><!--[/if]-->
-		<a href="<!--[pnmodurl modname='locations' type='user' func='display' locationid=$event.location.locationid]-->">
-			<span class="fn n"><strong class="org"><!--[$event.location.name|pnvarprephtmldisplay]--></strong></span>
-		</a>
-		<br/>
-		
-		<span class="adr">
-		<!--[if $event.location.street]--><span class="street-address"><!--[$event.location.street|default:""]--></span>
-		<br/>
-		<!--[/if]-->
-		<!--[if $event.location.city]--><span class="postal-code"><!--[$event.location.zip|default:""]--></span> <span class="locality"><!--[$event.location.city|default:""]--></span>
-		<br/>
-		<!--[/if]-->
-		<!--[if $event.location.state]--><span class="region"><!--[$event.location.state|default:""]--></span>
-		<br/>
-		<!--[/if]-->
-		<!--[if $event.location.country]--><span class="country-name"><!--[$event.location.country|default:""]--></span>
-		<br/>
-		<!--[/if]-->
-		</span>
-		
-		<!--[if $event.location.phone]--><!--[gt text="Phone"]-->: <span class="tel"><!--[$event.location.phone|default:""]--></span>
-		<br/>
-		<!--[/if]-->
-		<!--[if $event.location.fax]--><!--[gt text="Fax"]-->: <span class="fax"><!--[$event.location.fax|default:""]--></span>
-		<br/>
-		<!--[/if]-->
-		<!--[if $event.location.email]-->
-		<!--[gt text="E-mail address"]-->: 
-		<a class="email" href="mailto:<!--[$event.location.email|default:""]-->">
-			<!--[$event.location.email|default:""]-->
-		</a>
-		<br/>
-		<!--[/if]-->
-		<!--[if $event.location.url]-->
-		<!--[gt text="URL"]-->
-		: 
-		<a class="url" href="<!--[$event.location.url|default:""]-->">
-			<!--[$event.location.url|default:""]-->
-		</a>
-		<br/>
-		<!--[/if]-->
+    <!--[if $event.location.logo]--><img src="<!--[$event.location.logo]-->" class="photo" /><!--[/if]-->
+    <a href="<!--[pnmodurl modname='locations' type='user' func='display' locationid=$event.location.locationid]-->">
+        <span class="fn n"><strong class="org"><!--[$event.location.name|pnvarprephtmldisplay]--></strong></span>
+    </a>
+    <br/>
+
+    <span class="adr">
+        <!--[if $event.location.street]--><span class="street-address"><!--[$event.location.street|default:""]--></span>
+        <br/>
+        <!--[/if]-->
+        <!--[if $event.location.city]--><span class="postal-code"><!--[$event.location.zip|default:""]--></span> <span class="locality"><!--[$event.location.city|default:""]--></span>
+        <br/>
+        <!--[/if]-->
+        <!--[if $event.location.state]--><span class="region"><!--[$event.location.state|default:""]--></span>
+        <br/>
+        <!--[/if]-->
+        <!--[if $event.location.country]--><span class="country-name"><!--[$event.location.country|default:""]--></span>
+        <br/>
+        <!--[/if]-->
+    </span>
+
+    <!--[if $event.location.phone]--><!--[gt text="Phone"]-->: <span class="tel"><!--[$event.location.phone|default:""]--></span>
+    <br/>
+    <!--[/if]-->
+    <!--[if $event.location.fax]--><!--[gt text="Fax"]-->: <span class="fax"><!--[$event.location.fax|default:""]--></span>
+    <br/>
+    <!--[/if]-->
+    <!--[if $event.location.email]-->
+    <!--[gt text="E-mail address"]-->:
+    <a class="email" href="mailto:<!--[$event.location.email|default:""]-->">
+        <!--[$event.location.email|default:""]-->
+    </a>
+    <br/>
+    <!--[/if]-->
+    <!--[if $event.location.url]-->
+    <!--[gt text="URL"]-->
+    :
+    <a class="url" href="<!--[$event.location.url|default:""]-->">
+        <!--[$event.location.url|default:""]-->
+    </a>
+    <br/>
+    <!--[/if]-->
 </p>
 

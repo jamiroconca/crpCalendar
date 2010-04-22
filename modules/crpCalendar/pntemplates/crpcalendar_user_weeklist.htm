@@ -3,73 +3,73 @@
 <!--[include file="crpcalendar_user_filtermenu.htm"]-->
 
 <div class="crpcalendar-box">
-	<h3><!--[$t|pndate_format:"%Y"]--> / <!--[$daysexpanded.0|pndate_format:"%d %B"]--> - <!--[$daysexpanded.6|pndate_format:"%d %B"]--></h3>
+    <h3><!--[$t|pndate_format:"%Y"]--> / <!--[$daysexpanded.0|pndate_format:"%d %B"]--> - <!--[$daysexpanded.6|pndate_format:"%d %B"]--></h3>
 </div>
 
 <table class="crpcalendar-table" style="table-layout: fixed;">
-	
-	<caption>
-	<!--[crpcalendar_datetime_stamp datetime=$daysexpanded.6 assign=weektime]-->
-	<!--[crpcalendar_weeknav date=$date t=$weektime]-->
-	</caption>
-	
-	<tr>
-	<!--[section name=dayHeader loop=$day_of_week_short]-->
-	<th><!--[$day_of_week_short[dayHeader]]--></th>
-	<!--[/section]-->
-	</tr>
-	
-	<tr>
-		<!--[foreach from=$daysexpanded item=day name=cell]-->
-		
-		<td class="month-cell<!--[if in_array($day,$days)]--> day-on<!--[else]--> day-off<!--[/if]-->">
-			<div<!--[if $todayEv|pndate_format:"%Y%m%d" eq $day|pndate_format:"%Y%m%d"]--> class="day-today"<!--[/if]-->>
-				<!--[crpcalendar_datetime_stamp datetime=$day assign=daytime]-->
-				<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="day_view" t=$daytime]-->"><!--[$day|pndate_format:"%d"]--></a>
-			</div>
-			
-			<!--[foreach from=$events item=event name=single]-->
-			<!--[if $event.start_date|pndate_format:"%Y%m%d" eq $day|pndate_format:"%Y%m%d"]-->
-			<div class="vevent">
-				<!--[if $event.__CATEGORIES__.Main._Attributes__.Color]--><span  style="background-color:<!--[$event.__CATEGORIES__.Main._Attributes__.Color]-->">&nbsp;</span><!--[/if]-->
-				<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="display" eventid=$event.eventid]-->" title="<!--[$event.title]-->">
-					<span class="summary"><!--[$event.title|truncate:"48"]--></span>
-				</a>
-				<span class="dtstart z-hide"><!--[$event.cr_date]--></span>
-				<span class="uid z-hide"><!--[$event.cr_uid]--></span>
-				<span class="category z-hide"><!--[$event.__CATEGORIES__.Main.display_name.$lang]--></span>
-				<abbr class="dtstart z-hide" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%MZ"]-->"></abbr>
-				<abbr class="dtend z-hide" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"></abbr>
-			</div>
-			<!--[elseif ($event.start_date|pndate_format:"%Y%m%d" neq $event.end_date|pndate_format:"%Y%m%d") && ($day|pndate_format:"%Y%m%d" >= $event.start_date|pndate_format:"%Y%m%d") && ($day|pndate_format:"%Y%m%d" <= $event.end_date|pndate_format:"%Y%m%d")]-->
-			<div class="vevent">
-				<!--[if $event.__CATEGORIES__.Main._Attributes__.Color]--><span  style="background-color:<!--[$event.__CATEGORIES__.Main._Attributes__.Color]-->">&nbsp;</span><!--[/if]-->
-				<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="display" eventid=$event.eventid]-->" title="<!--[$event.title]-->">
-					<span class="summary"><!--[$event.title|truncate:"48"]--></span>
-				</a>
-				<span class="dtstart z-hide"><!--[$event.cr_date]--></span>
-				<span class="uid z-hide"><!--[$event.cr_uid]--></span>
-				<span class="category z-hide"><!--[$event.__CATEGORIES__.Main.display_name.$lang]--></span>
-				<abbr class="dtstart z-hide" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%MZ"]-->"></abbr>
-				<abbr class="dtend z-hide" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"></abbr>
-			</div>
-			<!--[/if]-->
-			<!--[/foreach]-->
-			
-		</td>
-		
-		<!--[assign var=point value=$smarty.foreach.cell.index+1]--> 
-		<!--[if $point % 7 == 0]-->
-	</tr>
-	<tr>
-		<!--[if !$smarty.foreach.cell.last]-->
-		<td>&nbsp;</td>
-		<!--[else]-->
-		<td colspan="7"></td>
-		<!--[/if]-->
-		<!--[/if]-->
-		
-		<!--[/foreach]-->
-	</tr>
-	
+
+    <caption>
+        <!--[crpcalendar_datetime_stamp datetime=$daysexpanded.6 assign=weektime]-->
+        <!--[crpcalendar_weeknav date=$date t=$weektime]-->
+    </caption>
+
+    <tr>
+        <!--[section name=dayHeader loop=$day_of_week_short]-->
+        <th><!--[$day_of_week_short[dayHeader]]--></th>
+        <!--[/section]-->
+    </tr>
+
+    <tr>
+        <!--[foreach from=$daysexpanded item=day name=cell]-->
+
+        <td class="month-cell<!--[if in_array($day,$days)]--> day-on<!--[else]--> day-off<!--[/if]-->">
+            <div<!--[if $todayEv|pndate_format:"%Y%m%d" eq $day|pndate_format:"%Y%m%d"]--> class="day-today"<!--[/if]-->>
+                <!--[crpcalendar_datetime_stamp datetime=$day assign=daytime]-->
+                <a href="<!--[pnmodurl modname="crpCalendar" type="user" func="day_view" t=$daytime]-->"><!--[$day|pndate_format:"%d"]--></a>
+            </div>
+
+            <!--[foreach from=$events item=event name=single]-->
+            <!--[if $event.start_date|pndate_format:"%Y%m%d" eq $day|pndate_format:"%Y%m%d"]-->
+            <div class="vevent">
+                <!--[if $event.__CATEGORIES__.Main._Attributes__.Color]--><span  style="background-color:<!--[$event.__CATEGORIES__.Main._Attributes__.Color]-->">&nbsp;</span><!--[/if]-->
+                <a href="<!--[pnmodurl modname="crpCalendar" type="user" func="display" eventid=$event.eventid]-->" title="<!--[$event.title]-->">
+                    <span class="summary"><!--[$event.title|truncate:"48"]--></span>
+                </a>
+                <span class="dtstart z-hide"><!--[$event.cr_date]--></span>
+                <span class="uid z-hide"><!--[$event.cr_uid]--></span>
+                <span class="category z-hide"><!--[$event.__CATEGORIES__.Main.display_name.$lang]--></span>
+                <abbr class="dtstart z-hide" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%MZ"]-->"></abbr>
+                <abbr class="dtend z-hide" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"></abbr>
+            </div>
+            <!--[elseif ($event.start_date|pndate_format:"%Y%m%d" neq $event.end_date|pndate_format:"%Y%m%d") && ($day|pndate_format:"%Y%m%d" >= $event.start_date|pndate_format:"%Y%m%d") && ($day|pndate_format:"%Y%m%d" <= $event.end_date|pndate_format:"%Y%m%d")]-->
+            <div class="vevent">
+                <!--[if $event.__CATEGORIES__.Main._Attributes__.Color]--><span  style="background-color:<!--[$event.__CATEGORIES__.Main._Attributes__.Color]-->">&nbsp;</span><!--[/if]-->
+                <a href="<!--[pnmodurl modname="crpCalendar" type="user" func="display" eventid=$event.eventid]-->" title="<!--[$event.title]-->">
+                    <span class="summary"><!--[$event.title|truncate:"48"]--></span>
+                </a>
+                <span class="dtstart z-hide"><!--[$event.cr_date]--></span>
+                <span class="uid z-hide"><!--[$event.cr_uid]--></span>
+                <span class="category z-hide"><!--[$event.__CATEGORIES__.Main.display_name.$lang]--></span>
+                <abbr class="dtstart z-hide" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%MZ"]-->"></abbr>
+                <abbr class="dtend z-hide" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"></abbr>
+            </div>
+            <!--[/if]-->
+            <!--[/foreach]-->
+
+        </td>
+
+        <!--[assign var=point value=$smarty.foreach.cell.index+1]-->
+        <!--[if $point % 7 == 0]-->
+    </tr>
+    <tr>
+        <!--[if !$smarty.foreach.cell.last]-->
+        <td>&nbsp;</td>
+        <!--[else]-->
+        <td colspan="7"></td>
+        <!--[/if]-->
+        <!--[/if]-->
+
+        <!--[/foreach]-->
+    </tr>
+
 </table>

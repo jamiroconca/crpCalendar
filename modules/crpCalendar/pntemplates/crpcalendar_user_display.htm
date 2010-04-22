@@ -3,122 +3,122 @@
 <!--[pnpagesetvar name=title value=$event.title]-->
 
 <div class="crpcalendar_container">
-  
-<div class="vevent">
 
-	<h2><span class="summary"><!--[$event.title|pnvarprephtmldisplay]--></span></h2>
-	
-	<h3>
-		<!--[if $event.__CATEGORIES__.Main._Attributes__.Color]-->
-		<span  style="background-color:<!--[$event.__CATEGORIES__.Main._Attributes__.Color]-->">&nbsp;&nbsp;&nbsp;</span>
-		<!--[/if]-->
-		<span class="category"><!--[$event.__CATEGORIES__.Main.display_name.$lang]--></span>
-	</h3>
-	
-	<div class="crpcalendar_header">
-		<!--[if $event.cr_uid]-->
-			<!--[pnmodurl modname=Profile func=view uname=$event.cr_uid assign=cr_profilelink]-->
-			<!--[pnusergetvar name=uname uid=$event.cr_uid assign=cr_profilename]-->
-		<!--[else]-->
-			<!--[assign var="cr_profilelink" value="#"]-->
-			<!--[pnmodgetvar module="Users" name="anonymous" assign=cr_profilename]-->
-		<!--[/if]-->
-		<!--[gt text="Posted on"]--> <abbr class="dtstamp" title="<!--[$event.cr_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.cr_date|pndate_format]--></abbr>
-		<!--[gt text="by"]--> <span class="uid"><a href="<!--[$cr_profilelink|pnvarprepfordisplay]-->"><!--[$cr_profilename]--></a></span>
-	</div>
-	
-	<div class="crpcalendar_body">
-		<a class="crpcalendar-rss" href="<!--[$event.exports.url|pnvarprepfordisplay]-->"><!--[pnimg modname='crpCalendar' src=$event.exports.image __alt=$event.exports.title]--></a>
-		<!--[assign var="options" value=$event.options]-->
-		<!--[section name=options loop=$options]-->
-			<a class="crpcalendar-rss" href="<!--[$options[options].url|pnvarprepfordisplay]-->"><!--[pnimg modname='core' set='icons/extrasmall' src=$options[options].image __alt=$options[options].title]--></a>
-		<!--[/section]-->
-		
-		<!--[if $event.image]-->
-		<div class="crpcalendar_image" style="width:<!--[$image_width+2]-->px">
-			<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="get_image" eventid=$event.eventid]-->" title="<!--[$event.title]-->" target="_blank">
-			<!--[if $crpcalendar_use_gd eq '1']-->
-			<img src="<!--[pnmodurl modname="crpCalendar" type="user" func="get_thumbnail" eventid=$event.eventid]-->" alt="<!--[$event.title]-->" title="<!--[$event.title]-->"/>
-			<!--[else]-->
-			<img src="<!--[pnmodurl modname="crpCalendar" type="user" func="get_image" eventid=$event.eventid]-->" alt="<!--[$event.title]-->" title="<!--[$event.title]-->" width="<!--[$image_width]-->px"/>
-			<!--[/if]-->
-			</a>
-			<span class="crpcalendar_caption"><!--[$event.image_caption]--></span>
-		</div>
-		<!--[/if]-->
-		
-		<!--[if !$event.day_event]-->
-		<div><strong><!--[gt text="Start date"]--></strong>: <abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.start_date|pndate_format:$complete_date_format]--></abbr></div>
-	  	<div><strong><!--[gt text="End date"]--></strong>: <abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.end_date|pndate_format:$complete_date_format]--></abbr></div>
-		<!--[else]-->
-		<div><strong><!--[gt text="Start date"]--></strong>: <abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%d"]-->"><!--[$event.start_date|pndate_format:$only_date_format]--></abbr></div>
-	  	<div class="z-hide"><strong><!--[gt text="End date"]--></strong>: <abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%d"]-->"><!--[$event.end_date|pndate_format:$only_date_format]--></abbr></div>
-		<!--[/if]-->
-		
-		<!--[if $event.location]-->
-		<div>
-			<strong><!--[gt text="Location"]--></strong>:
-			<!--[if $enable_locations && pnModAvailable('locations') && is_numeric($event.location.locationid)]-->
-			<!--[include file="locations/crpcalendar_user_location_card.htm"]-->
-			<!--[else]-->
-			<span class="location"><!--[$event.location]--></span>
-			<!--[/if]-->
-		</div>
-		<!--[/if]-->
-		<!--[if $event.organiser]-->
-		<div><strong><!--[gt text="Organiser"]--></strong>: <span class="organiser"><!--[$event.organiser]--></span></div>
-		<!--[/if]-->
-		<!--[if $event.contact]-->
-		<div><strong><!--[gt text="Contact"]--></strong>: <span class="contact"><!--[$event.contact|replace:"@":"[at]"]--></span></div>
-		<!--[/if]-->
-		<!--[if $event.url]-->
-		<div><strong><!--[gt text="URL"]--></strong>: <span class="url"><!--[$event.url|activatelinks]--></span></div>
-		<!--[/if]-->
-		<br />
-		<div class="description"><!--[$event.event_text|nl2paragraphs|pnvarprephtmldisplay]--></div>
-		<!--[if $event.document]-->
-		<div>
-			<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="get_file" eventid=$event.eventid]-->" title="<!--[$event.title]-->">
-				<!--[pnimg modname='core' set='icons/extrasmall' src="attach.gif"   __alt=$event.title __title=$event.title]-->
-				<!--[$event.document.name]-->
-			</a>
-		</div>
-		<!--[/if]-->
-	</div>
-	
-</div>
+    <div class="vevent">
 
-<!--[if $enable_partecipation]-->
-<div>
-	<h3><!--[gt text="Event partecipations"]--> <!--[gt text="by"]--> <!--[gt text="registered users"]--></h3>
-	<!--[assign var="partecipations" value=$event.partecipations]-->
-	<!--[if empty($partecipations)]--><!--[gt text="None"]--><!--[/if]-->
-	<ul id="event_partecipation">	
-	<!--[section name=partecipations loop=$partecipations]-->
-		<!--[pnmodurl modname=Profile func=view uid=$partecipations[partecipations].uid assign=partecipation_profilelink]-->
-		<li>
-			<a href="<!--[$partecipation_profilelink]-->"><!--[pnusergetvar name=uname uid=$partecipations[partecipations].uid]--></a>
-			- <a href="<!--[pnmodurl modname=crpCalendar func=get_partecipations uid=$partecipations[partecipations].uid]-->"><!--[gt text="user's attendance to events"]--></a>
-		</li>
-	<!--[/section]-->
-	</ul>	
-</div>
-<!--[/if]-->
+        <h2><span class="summary"><!--[$event.title|pnvarprephtmldisplay]--></span></h2>
 
-<div class="crpcalendar_footer">
-	<!--[gt text="Words in text"]--> <!--[$event.event_text|count_words]--> - <!--[gt text="Reads"]--> <!--[$event.counter]--> -
-	<span>
-	<a href="<!--[pnmodurl modname=crpCalendar func=display eventid=$event.eventid theme=printer]-->"><!--[pnimg modname='core' src='printer1.gif' set='icons/small' __alt='Print Page'  style="vertical-align:middle"]--></a>
-	</span>
-</div>
+        <h3>
+            <!--[if $event.__CATEGORIES__.Main._Attributes__.Color]-->
+            <span  style="background-color:<!--[$event.__CATEGORIES__.Main._Attributes__.Color]-->">&nbsp;&nbsp;&nbsp;</span>
+            <!--[/if]-->
+            <span class="category"><!--[$event.__CATEGORIES__.Main.display_name.$lang]--></span>
+        </h3>
 
-<!--[pnmodurl modname=crpCalendar func=display eventid=$event.eventid assign=returnurl]-->
-<!--[pnmodcallhooks hookobject=item hookaction=display hookid=$event.eventid module=crpCalendar returnurl=$returnurl]-->
+        <div class="crpcalendar_header">
+            <!--[if $event.cr_uid]-->
+            <!--[pnmodurl modname=Profile func=view uname=$event.cr_uid assign=cr_profilelink]-->
+            <!--[pnusergetvar name=uname uid=$event.cr_uid assign=cr_profilename]-->
+            <!--[else]-->
+            <!--[assign var="cr_profilelink" value="#"]-->
+            <!--[pnmodgetvar module="Users" name="anonymous" assign=cr_profilename]-->
+            <!--[/if]-->
+            <!--[gt text="Posted on"]--> <abbr class="dtstamp" title="<!--[$event.cr_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.cr_date|pndate_format]--></abbr>
+            <!--[gt text="by"]--> <span class="uid"><a href="<!--[$cr_profilelink|pnvarprepfordisplay]-->"><!--[$cr_profilename]--></a></span>
+        </div>
+
+        <div class="crpcalendar_body">
+            <a class="crpcalendar-rss" href="<!--[$event.exports.url|pnvarprepfordisplay]-->"><!--[pnimg modname='crpCalendar' src=$event.exports.image alt=$event.exports.title]--></a>
+            <!--[assign var="options" value=$event.options]-->
+            <!--[section name=options loop=$options]-->
+            <a class="crpcalendar-rss" href="<!--[$options[options].url|pnvarprepfordisplay]-->"><!--[pnimg modname='core' set='icons/extrasmall' src=$options[options].image alt=$options[options].title]--></a>
+            <!--[/section]-->
+
+            <!--[if $event.image]-->
+            <div class="crpcalendar_image" style="width:<!--[$image_width+2]-->px">
+                <a href="<!--[pnmodurl modname="crpCalendar" type="user" func="get_image" eventid=$event.eventid]-->" title="<!--[$event.title]-->" target="_blank">
+                    <!--[if $crpcalendar_use_gd eq '1']-->
+                    <img src="<!--[pnmodurl modname="crpCalendar" type="user" func="get_thumbnail" eventid=$event.eventid]-->" alt="<!--[$event.title]-->" title="<!--[$event.title]-->"/>
+                    <!--[else]-->
+                    <img src="<!--[pnmodurl modname="crpCalendar" type="user" func="get_image" eventid=$event.eventid]-->" alt="<!--[$event.title]-->" title="<!--[$event.title]-->" width="<!--[$image_width]-->px"/>
+                    <!--[/if]-->
+                </a>
+                <span class="crpcalendar_caption"><!--[$event.image_caption]--></span>
+            </div>
+            <!--[/if]-->
+
+            <!--[if !$event.day_event]-->
+            <div><strong><!--[gt text="Start date"]--></strong>: <abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.start_date|pndate_format:$complete_date_format]--></abbr></div>
+            <div><strong><!--[gt text="End date"]--></strong>: <abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.end_date|pndate_format:$complete_date_format]--></abbr></div>
+            <!--[else]-->
+            <div><strong><!--[gt text="Start date"]--></strong>: <abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%d"]-->"><!--[$event.start_date|pndate_format:$only_date_format]--></abbr></div>
+            <div class="z-hide"><strong><!--[gt text="End date"]--></strong>: <abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%d"]-->"><!--[$event.end_date|pndate_format:$only_date_format]--></abbr></div>
+            <!--[/if]-->
+
+            <!--[if $event.location]-->
+            <div>
+                <strong><!--[gt text="Location"]--></strong>:
+                <!--[if $enable_locations && pnModAvailable('locations') && is_numeric($event.location.locationid)]-->
+                <!--[include file="locations/crpcalendar_user_location_card.htm"]-->
+                <!--[else]-->
+                <span class="location"><!--[$event.location]--></span>
+                <!--[/if]-->
+            </div>
+            <!--[/if]-->
+            <!--[if $event.organiser]-->
+            <div><strong><!--[gt text="Organiser"]--></strong>: <span class="organiser"><!--[$event.organiser]--></span></div>
+            <!--[/if]-->
+            <!--[if $event.contact]-->
+            <div><strong><!--[gt text="Contact"]--></strong>: <span class="contact"><!--[$event.contact|replace:"@":"[at]"]--></span></div>
+            <!--[/if]-->
+            <!--[if $event.url]-->
+            <div><strong><!--[gt text="URL"]--></strong>: <span class="url"><!--[$event.url|activatelinks]--></span></div>
+            <!--[/if]-->
+            <br />
+            <div class="description"><!--[$event.event_text|nl2paragraphs|pnvarprephtmldisplay]--></div>
+            <!--[if $event.document]-->
+            <div>
+                <a href="<!--[pnmodurl modname="crpCalendar" type="user" func="get_file" eventid=$event.eventid]-->" title="<!--[$event.title]-->">
+                    <!--[pnimg modname='core' set='icons/extrasmall' src="attach.gif" alt=$event.title title=$event.title]-->
+                    <!--[$event.document.name]-->
+                </a>
+            </div>
+            <!--[/if]-->
+        </div>
+
+    </div>
+
+    <!--[if $enable_partecipation]-->
+    <div>
+        <h3><!--[gt text="Event partecipations"]--> <!--[gt text="by"]--> <!--[gt text="registered users"]--></h3>
+        <!--[assign var="partecipations" value=$event.partecipations]-->
+        <!--[if empty($partecipations)]--><!--[gt text="None"]--><!--[/if]-->
+        <ul id="event_partecipation">
+            <!--[section name=partecipations loop=$partecipations]-->
+            <!--[pnmodurl modname=Profile func=view uid=$partecipations[partecipations].uid assign=partecipation_profilelink]-->
+            <li>
+                <a href="<!--[$partecipation_profilelink]-->"><!--[pnusergetvar name=uname uid=$partecipations[partecipations].uid]--></a>
+                - <a href="<!--[pnmodurl modname=crpCalendar func=get_partecipations uid=$partecipations[partecipations].uid]-->"><!--[gt text="user's attendance to events"]--></a>
+            </li>
+            <!--[/section]-->
+        </ul>
+    </div>
+    <!--[/if]-->
+
+    <div class="crpcalendar_footer">
+        <!--[gt text="Words in text"]--> <!--[$event.event_text|count_words]--> - <!--[gt text="Reads"]--> <!--[$event.counter]--> -
+        <span>
+            <a href="<!--[pnmodurl modname=crpCalendar func=display eventid=$event.eventid theme=printer]-->"><!--[pnimg modname='core' src='printer1.gif' set='icons/small' __alt='Print Page'  style="vertical-align:middle"]--></a>
+        </span>
+    </div>
+
+    <!--[pnmodurl modname=crpCalendar func=display eventid=$event.eventid assign=returnurl]-->
+    <!--[pnmodcallhooks hookobject=item hookaction=display hookid=$event.eventid module=crpCalendar returnurl=$returnurl]-->
 </div>
 
 <!--[if $enable_formicula && pnModAvailable('formicula') && $event.id_formicula neq '']-->
 <!--[pnpageaddvar name="stylesheet" value="modules/formicula/pnstyle/style.css"]-->
 <div>
-	<!--[pnmodfunc modname=formicula form=$event.id_formicula]-->
+    <!--[pnmodfunc modname=formicula form=$event.id_formicula]-->
 </div>
 <!--[/if]-->

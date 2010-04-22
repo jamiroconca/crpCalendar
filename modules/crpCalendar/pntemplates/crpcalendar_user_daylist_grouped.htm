@@ -1,74 +1,74 @@
 <!--[foreach from=$events key=kcategory item=category name=singlecat]-->
 
 <table class="crpcalendar-table">
-	
-	<caption>
-	<!--[$kcategory]-->
-	</caption>		
-	
-	<tr>
-		<!--[if $crpcalendar_userlist_image]-->
-    <th class="crpcalendar_w1"><!--[gt text="Images"]--></th>
-	  <!--[/if]-->
-	  <th class="sortable"><!--[gt text="Event detail"]--></th>
-	</tr>
-	
-	<!--[foreach from=$category key=kevent item=event name=single]-->
-	<tr>
-	
-		<!--[if $crpcalendar_userlist_image]-->
-		<td>
-	     	<!--[if $event.image]-->
-		     <a href="<!--[pnmodurl modname="crpCalendar" type="user" func="display" eventid=$event.eventid]-->" title="<!--[$event.title]-->">
-			<!--[if $crpcalendar_use_gd eq '1']-->
-			<img src="<!--[pnmodurl modname="crpCalendar" type="user" func="get_thumbnail" eventid=$event.eventid width=$userlist_width]-->" alt="<!--[$event.title]-->" title="<!--[$event.title]-->"/>
-			<!--[else]-->
-			<img src="<!--[pnmodurl modname="crpCalendar" type="user" func="get_image" eventid=$event.eventid]-->" alt="<!--[$event.title]-->" title="<!--[$event.title]-->" width="<!--[$userlist_width]-->px"/>
-			<!--[/if]-->
-			</a>
-			<!--[/if]-->
-		</td>
-	  	<!--[/if]-->
-	  
-		<td>	
-	  	<div class="vevent">
-		  	<div>
-		  		<!--[if $event.__CATEGORIES__.Main._Attributes__.Color]--><span  style="background-color:<!--[$event.__CATEGORIES__.Main._Attributes__.Color]-->">&nbsp;&nbsp;</span><!--[/if]-->
-			  	<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="display" eventid=$event.eventid]-->" title="<!--[$event.title]-->">
-	      		<span class="<!--[if $event.start_date > date("Y-m-d")]-->crpcalendar-upcoming<!--[/if]--> summary">
-	      			<!--[$event.title|pnvarprephtmldisplay]-->
-				</span>
-				</a>
-				<!--[if $enablecategorization]-->
-				<!--[foreach from=$event.__CATEGORIES__ item=cat]-->
-			    <strong>&middot;</strong> <!--[gt text="Category"]-->: <span class="category"><!--[$cat.display_name.$lang]--></span>
-			    <!--[/foreach]-->	
-			    <!--[/if]-->				
-			</div>
-			<!--[if $event.cr_uid]-->
-				<!--[pnmodurl modname=Profile func=view uname=$event.cr_uid assign=cr_profilelink]-->
-				<!--[pnusergetvar name=uname uid=$event.cr_uid assign=cr_profilename]-->
-			<!--[else]-->
-				<!--[assign var="cr_profilelink" value="#"]-->
-				<!--[pnmodgetvar module="Users" name="anonymous" assign=cr_profilename]-->
-			<!--[/if]-->
-			<div>
-				<!--[gt text="Posted on"]--> <abbr class="dtstamp" title="<!--[$event.cr_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.cr_date|pndate_format]--></abbr>
-				<!--[gt text="by"]--> <span class="uid"><a href="<!--[$cr_profilelink|pnvarprepfordisplay]-->"><!--[$cr_profilename]--></a></span>
-			</div>
-			<div>
-				<!--[gt text="Start date"]-->: <strong><abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.start_date|pndate_format:$complete_date_format]--></abbr></strong>
-   				<strong>&middot;</strong> <!--[gt text="End date"]-->: <strong><abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.end_date|pndate_format:$complete_date_format]--></abbr></strong>
-   			</div>
-   			<!--[assign var="options" value=$event.options]-->
-			<!--[section name=options loop=$options]-->
-				<a href="<!--[$options[options].url|pnvarprepfordisplay]-->"><!--[pnimg modname='core' set='icons/extrasmall' src=$options[options].image __alt=$options[options].title]--></a>
-			<!--[/section]-->
-   		</div>
-		</td>
-		
-	</tr>
-	<!--[/foreach]-->
-	
+
+    <caption>
+        <!--[$kcategory]-->
+    </caption>
+
+    <tr>
+        <!--[if $crpcalendar_userlist_image]-->
+        <th class="crpcalendar_w1"><!--[gt text="Images"]--></th>
+        <!--[/if]-->
+        <th class="sortable"><!--[gt text="Event detail"]--></th>
+    </tr>
+
+    <!--[foreach from=$category key=kevent item=event name=single]-->
+    <tr>
+
+        <!--[if $crpcalendar_userlist_image]-->
+        <td>
+            <!--[if $event.image]-->
+            <a href="<!--[pnmodurl modname="crpCalendar" type="user" func="display" eventid=$event.eventid]-->" title="<!--[$event.title]-->">
+                <!--[if $crpcalendar_use_gd eq '1']-->
+                <img src="<!--[pnmodurl modname="crpCalendar" type="user" func="get_thumbnail" eventid=$event.eventid width=$userlist_width]-->" alt="<!--[$event.title]-->" title="<!--[$event.title]-->"/>
+                <!--[else]-->
+                <img src="<!--[pnmodurl modname="crpCalendar" type="user" func="get_image" eventid=$event.eventid]-->" alt="<!--[$event.title]-->" title="<!--[$event.title]-->" width="<!--[$userlist_width]-->px"/>
+                <!--[/if]-->
+            </a>
+            <!--[/if]-->
+        </td>
+        <!--[/if]-->
+
+        <td>
+            <div class="vevent">
+                <div>
+                    <!--[if $event.__CATEGORIES__.Main._Attributes__.Color]--><span  style="background-color:<!--[$event.__CATEGORIES__.Main._Attributes__.Color]-->">&nbsp;&nbsp;</span><!--[/if]-->
+                    <a href="<!--[pnmodurl modname="crpCalendar" type="user" func="display" eventid=$event.eventid]-->" title="<!--[$event.title]-->">
+                        <span class="<!--[if $event.start_date > date("Y-m-d")]-->crpcalendar-upcoming<!--[/if]--> summary">
+                            <!--[$event.title|pnvarprephtmldisplay]-->
+                        </span>
+                    </a>
+                    <!--[if $enablecategorization]-->
+                    <!--[foreach from=$event.__CATEGORIES__ item=cat]-->
+                    <strong>&middot;</strong> <!--[gt text="Category"]-->: <span class="category"><!--[$cat.display_name.$lang]--></span>
+                    <!--[/foreach]-->
+                    <!--[/if]-->
+                </div>
+                <!--[if $event.cr_uid]-->
+                <!--[pnmodurl modname=Profile func=view uname=$event.cr_uid assign=cr_profilelink]-->
+                <!--[pnusergetvar name=uname uid=$event.cr_uid assign=cr_profilename]-->
+                <!--[else]-->
+                <!--[assign var="cr_profilelink" value="#"]-->
+                <!--[pnmodgetvar module="Users" name="anonymous" assign=cr_profilename]-->
+                <!--[/if]-->
+                <div>
+                    <!--[gt text="Posted on"]--> <abbr class="dtstamp" title="<!--[$event.cr_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.cr_date|pndate_format]--></abbr>
+                    <!--[gt text="by"]--> <span class="uid"><a href="<!--[$cr_profilelink|pnvarprepfordisplay]-->"><!--[$cr_profilename]--></a></span>
+                </div>
+                <div>
+                    <!--[gt text="Start date"]-->: <strong><abbr class="dtstart" title="<!--[$event.start_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.start_date|pndate_format:$complete_date_format]--></abbr></strong>
+                    <strong>&middot;</strong> <!--[gt text="End date"]-->: <strong><abbr class="dtend" title="<!--[$event.end_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.end_date|pndate_format:$complete_date_format]--></abbr></strong>
+                </div>
+                <!--[assign var="options" value=$event.options]-->
+                <!--[section name=options loop=$options]-->
+                <a href="<!--[$options[options].url|pnvarprepfordisplay]-->"><!--[pnimg modname='core' set='icons/extrasmall' src=$options[options].image alt=$options[options].title]--></a>
+                <!--[/section]-->
+            </div>
+        </td>
+
+    </tr>
+    <!--[/foreach]-->
+
 </table>
 <!--[/foreach]-->

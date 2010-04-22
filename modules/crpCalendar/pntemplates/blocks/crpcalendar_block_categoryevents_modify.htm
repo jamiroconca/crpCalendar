@@ -1,15 +1,14 @@
-<div class="crpcalendar-formrow">
-	<label for="eventsblock_limit"><!--[gt text="Days interval to show" domain="module_crpcalendar"]--></label>
-	<input id="eventsblock_limit" type="text" name="limit" size="2" value="<!--[$limit|pnvarprepfordisplay]-->" />
+<div class="z-formrow">
+    <label for="eventsblock_limit"><!--[gt text="Days interval to show" domain="module_crpcalendar"]--></label>
+    <input id="eventsblock_limit" type="text" name="limit" size="2" value="<!--[$limit|pnvarprepfordisplay]-->" />
 </div>
 
-<div class="crpcalendar-formrow">
-	<label for="eventsblock_numitems"><!--[gt text="Maximum number of events" domain="module_crpcalendar"]--></label>
-	<input id="eventsblock_numitems" type="text" name="numitems" size="2" value="<!--[$numitems|pnvarprepfordisplay]-->" />
+<div class="z-formrow">
+    <label for="eventsblock_numitems"><!--[gt text="Maximum number of events" domain="module_crpcalendar"]--></label>
+    <input id="eventsblock_numitems" type="text" name="numitems" size="2" value="<!--[$numitems|pnvarprepfordisplay]-->" />
 </div>
 
-<div>
-  <label for="quotes_category"><!--[gt text="Category" domain="module_crpcalendar"]--></label>
-  <!--[pnml assign="lblDef" name="All"]-->
-  <!--[selector_category category=$mainCategory name="events_category" selectedValue=$events_category defaultValue="0" defaultText="$lblDef"]-->
+<div class="z-formrow">
+    <label for="quotes_category"><!--[gt text="Category" domain="module_crpcalendar"]--></label>
+    <!--[selector_category category=$mainCategory name="events_category" selectedValue=$events_category defaultValue="0" __defaultText="All"]-->
 </div>
