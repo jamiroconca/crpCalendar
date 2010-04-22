@@ -4,17 +4,18 @@
 <div class="z-admincontainer">
     <div class="z-adminpageicon"><!--[pnimg modname='core' src='editdelete.gif' set='icons/large' alt=$templatetitle]--></div>
     <h2><!--[$templatetitle]--></h2>
+    <p class="z-warningmsg"><!--[gt text="Do you really want to delete this event?"]--></p>
     <form class="z-form" action="<!--[pnmodurl modname="crpCalendar" type="admin" func="remove"]-->" method="post" enctype="application/x-www-form-urlencoded">
         <div>
-            <input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="crpCalendar"]-->" />
+            <input type="hidden" name="authid" value="<!--[insert name='generateauthkey' module='crpCalendar']-->" />
             <input type="hidden" name="eventid" value="<!--[$eventid|pnvarprepfordisplay]-->" />
-            <div class="z-formrow">
-                <p><!--[gt text="Confirm deletion?"]--></p>
-            </div>
-            <div class="z-formbuttons">
-                <a href="<!--[pnmodurl modname=crpCalendar type=admin func=view]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
-                <!--[pnbutton src='button_ok.gif' set='icons/small'   __alt="Confirm deletion?" __title="Confirm deletion?"]-->
-            </div>
+            <fieldset>
+                <legend><!--[gt text="Confirmation prompt"]--></legend>
+                <div class="z-formbuttons">
+                    <!--[pnbutton src='button_ok.gif' set='icons/small'   __alt="Confirm deletion?" __title="Confirm deletion?"]-->
+                    <a href="<!--[pnmodurl modname=crpCalendar type=admin func=view]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
+                </div>
+            </fieldset>
         </div>
     </form>
 </div>

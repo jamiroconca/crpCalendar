@@ -31,7 +31,7 @@
             <a class="crpcalendar-rss" href="<!--[$event.exports.url|pnvarprepfordisplay]-->"><!--[pnimg modname='crpCalendar' src=$event.exports.image alt=$event.exports.title]--></a>
             <!--[assign var="options" value=$event.options]-->
             <!--[section name=options loop=$options]-->
-            <a class="crpcalendar-rss" href="<!--[$options[options].url|pnvarprepfordisplay]-->"><!--[pnimg modname='core' set='icons/extrasmall' src=$options[options].image alt=$options[options].title]--></a>
+            <a class="crpcalendar-rss" href="<!--[$options[options].url|pnvarprepfordisplay]-->"><!--[pnimg modname='core' set='icons/extrasmall' src=$options[options].image alt=$options[options].title title=$options[options].title]--></a>
             <!--[/section]-->
 
             <!--[if $event.image]-->

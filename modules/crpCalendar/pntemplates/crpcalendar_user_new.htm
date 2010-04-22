@@ -10,11 +10,11 @@
     <h2><!--[$templatetitle]--></h2>
     <form class="z-form" action="<!--[pnmodurl modname="crpCalendar" type="user" func="create"]-->" method="post" enctype="multipart/form-data">
         <div>
-            <input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="crpCalendar"]-->" />
+            <input type="hidden" name="authid" value="<!--[insert name='generateauthkey' module='crpCalendar']-->" />
             <fieldset>
                 <legend><!--[gt text="Content"]--></legend>
                 <div class="z-formrow">
-                    <label for="event_title"><!--[gt text="Title"]--> <span class="crpcalendar-required"><!--[gt text="*"]--></span></label>
+                    <label for="event_title"><!--[gt text="Title"]--> <span class="z-mandatorysym">*</span></label>
                     <input id="event_title" class="z-form-text" name="event[title]" type="text" size="32" maxlength="255" value="<!--[$title|pnvarprephtmldisplay]-->" />
                 </div>
                 <div class="z-formrow">
@@ -46,7 +46,7 @@
                 </div>
                 <!--[if $enablecategorization]-->
                 <div class="z-formrow">
-                    <label for="event_category_cat_val"><!--[gt text="Category"]--> <span class="crpcalendar-required"><!--[gt text="*"]--></span></label>
+                    <label for="event_category_cat_val"><!--[gt text="Category"]--> <span class="z-mandatorysym">*</span></label>
                     <!--[selector_category category=$mainCategory name="event[__CATEGORIES__][Main]" field="id" selectedValue=$__CATEGORIES__.Main defaultValue="0" __defaultText="Choose Category" editLink=false]-->
                 </div>
                 <!--[/if]-->
@@ -73,7 +73,7 @@
                     <input id="crpcalendar_event_document" name="event_document" type="file" size="32"/>
                 </div>
                 <div class="z-formrow">
-                    <label for="crpcalendar_event_text"><!--[gt text="Content"]--> <span class="crpcalendar-required"><!--[if $mandatory_description]--><!--[gt text="*"]--><!--[/if]--></span></label>
+                    <label for="crpcalendar_event_text"><!--[gt text="Content"]--> <span class="z-mandatorysym"><!--[if $mandatory_description]-->*<!--[/if]--></span></label>
                     <textarea id="crpcalendar_event_text" class="z-form-text" name="event[event_text]" rows="10" cols="50"><!--[$event_text|pnvarprepfordisplay]--></textarea>
                 </div>
                 <div class="z-formrow">
@@ -84,25 +84,29 @@
                     <input id="crpcalendar_day_event" name="event[day_event]" type="checkbox" value="1" />
                     <!--[/if]-->
                 </div>
-                <fieldset class="z-formrow" id="start_date_block">
-                    <legend><!--[gt text="Start date"]--></legend>
-                    <!--[if $startYear]--><!--[assign var="start_date" value=$startYear|cat:"-"|cat:$startMonth|cat:"-"|cat:$startDay|cat:" "|cat:$startHour|cat:":"|cat:$startMinute]--><!--[/if]-->
-                    <!--[html_select_date prefix="start" end_year="+4" time=$start_date field_array=event display_months=false display_years=false id="start_datefield-dd"]-->
-                    <!--[html_select_date prefix="start" end_year="+4" time=$start_date field_array=event display_days=false display_years=false id="start_datefield-mm"]-->
-                    <!--[html_select_date prefix="start" start_year="-4" end_year="+4" time=$start_date field_array=event display_days=false display_months=false id="start_datefield"]-->&nbsp;&nbsp;<!--[html_select_time prefix="start" minute_interval="15" use_24_hours=true display_seconds=no time=$start_date field_array=event]-->
-                </fieldset>
-                <fieldset class="z-formrow" id="end_date_block">
-                    <legend><!--[gt text="End date"]--></legend>
-                    <!--[if $endYear]--><!--[assign var="end_date" value=$endYear|cat:"-"|cat:$endMonth|cat:"-"|cat:$endDay|cat:" "|cat:$endHour|cat:":"|cat:$endMinute]--><!--[/if]-->
-                    <!--[html_select_date prefix="end" end_year="+4" time=$end_date field_array=event display_months=false display_years=false id="end_datefield-dd"]-->
-                    <!--[html_select_date prefix="end" end_year="+4" time=$end_date field_array=event display_days=false display_years=false id="end_datefield-mm"]-->
-                    <!--[html_select_date prefix="end" start_year="-4" end_year="+4" time=$end_date field_array=event display_days=false display_months=false id="end_datefield"]-->&nbsp;&nbsp;<!--[html_select_time prefix="end" minute_interval="15" use_24_hours=true display_seconds=no time=$end_date field_array=event]--> <br />
-                </fieldset>
+                <div class="z-formrow" id="start_date_block">
+                    <label><!--[gt text="Start date"]--></label>
+                    <div>
+                        <!--[if $startYear]--><!--[assign var="start_date" value=$startYear|cat:"-"|cat:$startMonth|cat:"-"|cat:$startDay|cat:" "|cat:$startHour|cat:":"|cat:$startMinute]--><!--[/if]-->
+                        <!--[html_select_date prefix="start" end_year="+4" time=$start_date field_array=event display_months=false display_years=false id="start_datefield-dd"]-->
+                        <!--[html_select_date prefix="start" end_year="+4" time=$start_date field_array=event display_days=false display_years=false id="start_datefield-mm"]-->
+                        <!--[html_select_date prefix="start" start_year="-4" end_year="+4" time=$start_date field_array=event display_days=false display_months=false id="start_datefield" class="highlight-days-67 no-transparency split-date"]-->&nbsp;&nbsp;<!--[html_select_time prefix="start" minute_interval="15" use_24_hours=true display_seconds=no time=$start_date field_array=event]-->
+                    </div>
+                </div>
+                <div class="z-formrow" id="end_date_block">
+                    <label><!--[gt text="End date"]--></label>
+                    <div>
+                        <!--[if $endYear]--><!--[assign var="end_date" value=$endYear|cat:"-"|cat:$endMonth|cat:"-"|cat:$endDay|cat:" "|cat:$endHour|cat:":"|cat:$endMinute]--><!--[/if]-->
+                        <!--[html_select_date prefix="end" end_year="+4" time=$end_date field_array=event display_months=false display_years=false id="end_datefield-dd"]-->
+                        <!--[html_select_date prefix="end" end_year="+4" time=$end_date field_array=event display_days=false display_years=false id="end_datefield-mm"]-->
+                        <!--[html_select_date prefix="end" start_year="-4" end_year="+4" time=$end_date field_array=event display_days=false display_months=false id="end_datefield" class="highlight-days-67 no-transparency split-date"]-->&nbsp;&nbsp;<!--[html_select_time prefix="end" minute_interval="15" use_24_hours=true display_seconds=no time=$end_date field_array=event]-->
+                    </div>
+                </div>
                 <!--[pnmodcallhooks hookobject=item hookaction=new module=crpCalendar]-->
             </fieldset>
             <div class="z-formbuttons">
-                <a href="<!--[pnmodurl modname=crpCalendar type=admin func=view]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
                 <!--[pnbutton src='button_ok.gif' set='icons/small' __alt="Create" __title="Create"]-->
+                <a href="<!--[pnmodurl modname=crpCalendar type=admin func=view]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
             </div>
         </div>
     </form>

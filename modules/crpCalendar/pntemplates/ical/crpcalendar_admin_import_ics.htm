@@ -6,21 +6,25 @@
 
     <form class="z-form" name="import_ical" action="<!--[pnmodurl modname="crpCalendar" type="admin" func="import_create"]-->" method="post" enctype="multipart/form-data">
         <div>
-            <input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="crpCalendar"]-->" />
-            <div class="z-formrow">
-                <label for="event_category_cat_val"><!--[gt text="Category"]--></label>
-                <!--[selector_category category=$mainCategory name="id_category" field="id" selectedValue=$__CATEGORIES__.Main.id defaultValue="0" __defaultText="Choose Category"]-->
-            </div>
-
-            <div class="z-formrow">
-                <label for="crpcalendar_event_document"><!--[gt text="Event document"]--> <!--[pnmodgetvar module=crpCalendar name=document_dimension]--> bytes</label>
-                <input type="hidden" name="MAX_FILE_SIZE" value="<!--[pnmodgetvar module=crpCalendar name=document_dimension]-->"/>
-                <input id="ics_file" name="ics_file" type="file" size="32"/>
-            </div>
+            <input type="hidden" name="authid" value="<!--[insert name='generateauthkey' module='crpCalendar']-->" />
+            <fieldset>
+                <legend><!--[gt text="iCal import"]--></legend>
+                <div class="z-formrow">
+                    <label for="event_category_cat_val"><!--[gt text="Category"]--></label>
+                    <div>
+                        <!--[selector_category category=$mainCategory name="id_category" field="id" selectedValue=$__CATEGORIES__.Main.id defaultValue="0" __defaultText="Choose Category"]-->
+                    </div>
+                </div>
+                <div class="z-formrow">
+                    <label for="ics_file"><!--[gt text="Event document"]--> <!--[pnmodgetvar module=crpCalendar name=document_dimension]--> bytes</label>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="<!--[pnmodgetvar module=crpCalendar name=document_dimension]-->"/>
+                    <input id="ics_file" name="ics_file" type="file" size="32"/>
+                </div>
+            </fieldset>
 
             <div class="z-formbuttons">
-                <a href="<!--[pnmodurl modname=crpCalendar type=admin func=view]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
                 <!--[pnbutton src='button_ok.gif' set='icons/small' __alt="Update" __title="Update"]-->
+                <a href="<!--[pnmodurl modname=crpCalendar type=admin func=view]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
             </div>
         </div>
     </form>

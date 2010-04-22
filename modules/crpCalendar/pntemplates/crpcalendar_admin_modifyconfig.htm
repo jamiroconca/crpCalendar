@@ -5,7 +5,7 @@
     <h2><!--[gt text="Settings"]--></h2>
     <form class="z-form" action="<!--[pnmodurl modname="crpCalendar" type="admin" func="updateconfig"]-->" method="post" enctype="application/x-www-form-urlencoded">
         <div>
-            <input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="crpCalendar"]-->" />
+            <input type="hidden" name="authid" value="<!--[insert name='generateauthkey' module='crpCalendar']-->" />
             <fieldset>
                 <legend><!--[gt text="General"]--></legend>
                 <div class="z-formrow">
@@ -92,12 +92,14 @@
                 <legend><!--[gt text="Images"]--></legend>
                 <div class="z-formrow">
                     <label for="crpcalendar_gd_version"><!--[gt text="GD Library"]--></label>
-                    <input id="crpcalendar_gd_version" type="text" name="gd_version" disabled="disabled" size="32" value="<!--[$gd_version.string|pnvarprepfordisplay]-->" />
-                    <!--[if $gd_version.value >= 2]-->
-                    <!--[pnimg modname='core' src='button_ok.gif' set='icons/small'   __alt="OK" __title="OK"]-->
-                    <!--[else]-->
-                    <!--[pnimg modname='core' src='editdelete.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]-->
-                    <!--[/if]-->
+                    <div>
+                        <input id="crpcalendar_gd_version" class="readonly" type="text" name="gd_version" disabled="disabled" size="32" value="<!--[$gd_version.string|pnvarprepfordisplay]-->" />
+                        <!--[if $gd_version.value >= 2]-->
+                        <!--[pnimg modname='core' src='button_ok.gif' set='icons/extrasmall'   __alt="OK" __title="OK"]-->
+                        <!--[else]-->
+                        <!--[pnimg modname='core' src='editdelete.gif' set='icons/extrasmall'   __alt="Cancel" __title="Cancel"]-->
+                        <!--[/if]-->
+                    </div>
                 </div>
                 <div class="z-formrow z-hide" id="crpcalendar_use_browser">
                     <label><!--[gt text="GD Library requirement failed"]--></label>
@@ -153,16 +155,20 @@
                 <div class="z-formrow">
                     <label for="crpcalendar_rss"><!--[gt text="Feed format"]--></label>
                     <div id ="crpcalendar_rss">
-                        <input id="crpcalendar_rss_1" type="radio" name="crpcalendar_rss" value="rss1"<!--[if $crpcalendar_rss eq "rss1"]--> checked="checked"<!--[/if]--> /> <!--[gt text="RSS 1.0"]-->
-                        <input id="crpcalendar_rss_2" type="radio" name="crpcalendar_rss" value="rss2"<!--[if $crpcalendar_rss eq "rss2"]--> checked="checked"<!--[/if]--> /> <!--[gt text="RSS 2.0"]-->
-                        <input id="crpcalendar_rss_atom" type="radio" name="crpcalendar_rss" value="atom"<!--[if $crpcalendar_rss eq "atom"]--> checked="checked"<!--[/if]--> /> <!--[gt text="ATOM"]-->
+                        <input id="crpcalendar_rss_1" type="radio" name="crpcalendar_rss" value="rss1"<!--[if $crpcalendar_rss eq "rss1"]--> checked="checked"<!--[/if]--> />
+                        <label for="crpcalendar_rss_1"><!--[gt text="RSS 1.0"]--></label>
+                        <input id="crpcalendar_rss_2" type="radio" name="crpcalendar_rss" value="rss2"<!--[if $crpcalendar_rss eq "rss2"]--> checked="checked"<!--[/if]--> />
+                        <label for="crpcalendar_rss_2"><!--[gt text="RSS 2.0"]--></label>
+                        <input id="crpcalendar_rss_atom" type="radio" name="crpcalendar_rss" value="atom"<!--[if $crpcalendar_rss eq "atom"]--> checked="checked"<!--[/if]--> />
+                        <label for="crpcalendar_rss_atom"><!--[gt text="ATOM"]--></label>
                     </div>
                 </div>
             </fieldset>
+
             <!--[pnmodcallhooks hookobject=module hookaction=modifyconfig module=crpCalendar]-->
             <div class="z-formbuttons">
-                <a href="<!--[pnmodurl modname=crpCalendar type=admin func=view]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
                 <!--[pnbutton src='button_ok.gif' set='icons/small' __alt="Update Configuration" __title="Update Configuration"]-->
+                <a href="<!--[pnmodurl modname=crpCalendar type=admin func=view]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
             </div>
         </div>
     </form>

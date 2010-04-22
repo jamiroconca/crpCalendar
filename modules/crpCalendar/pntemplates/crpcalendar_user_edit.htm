@@ -10,13 +10,13 @@
     <h2><!--[$templatetitle]--></h2>
     <form class="crpcalendar-form" action="<!--[pnmodurl modname="crpCalendar" type="user" func="update"]-->" method="post" enctype="multipart/form-data">
         <div>
-            <input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="crpCalendar"]-->" />
+            <input type="hidden" name="authid" value="<!--[insert name='generateauthkey' module='crpCalendar']-->" />
             <input type="hidden" name="eventid" value="<!--[$eventid|pnvarprepfordisplay]-->" />
             <input type="hidden" name="event[eventid]" value="<!--[$eventid|pnvarprepfordisplay]-->" />
             <fieldset>
                 <legend><!--[gt text="Content"]--></legend>
                 <div class="z-formrow">
-                    <label for="event_title"><!--[gt text="Title"]--> <span class="crpcalendar-required"><!--[gt text="*"]--></span></label>
+                    <label for="event_title"><!--[gt text="Title"]--> <span class="z-mandatorysym">*</span></label>
                     <input id="event_title" class="z-form-text" name="event[title]" type="text" size="32" maxlength="255" value="<!--[$title|pnvarprephtmldisplay]-->" />
                 </div>
                 <div class="z-formrow">
@@ -48,7 +48,7 @@
                 </div>
                 <!--[if $enablecategorization]-->
                 <div class="z-formrow">
-                    <label for="event_category_cat_val"><!--[gt text="Category"]--> <span class="crpcalendar-required"><!--[gt text="*"]--></span></label>
+                    <label for="event_category_cat_val"><!--[gt text="Category"]--> <span class="z-mandatorysym">*</span></label>
                     <!--[selector_category category=$mainCategory name="event[__CATEGORIES__][Main]" field="id" selectedValue=$__CATEGORIES__.Main.id defaultValue="0" __defaultText="Choose Category" editLink=false]-->
                 </div>
                 <!--[/if]-->
@@ -99,7 +99,7 @@
                 </fieldset>
                 <!--[/if]-->
                 <div class="z-formrow">
-                    <label for="crpcalendar_event_text"><!--[gt text="Content"]--> <span class="crpcalendar-required"><!--[if $mandatory_description]--><!--[gt text="*"]--><!--[/if]--></span></label>
+                    <label for="crpcalendar_event_text"><!--[gt text="Content"]--> <span class="z-mandatorysym"><!--[if $mandatory_description]-->*<!--[/if]--></span></label>
                     <textarea id="crpcalendar_event_text" class="z-form-text" name="event[event_text]" rows="10" cols="50"><!--[$event_text|pnvarprepfordisplay]--></textarea>
                 </div>
                 <div class="z-formrow">
@@ -126,8 +126,8 @@
             </fieldset>
 
             <div class="z-formbuttons">
-                <a href="<!--[pnmodurl modname=crpCalendar type=admin func=view]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
                 <!--[pnbutton src='button_ok.gif' set='icons/small' __alt="Update" __title="Update"]-->
+                <a href="<!--[pnmodurl modname=crpCalendar type=admin func=view]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
             </div>
         </div>
     </form>
