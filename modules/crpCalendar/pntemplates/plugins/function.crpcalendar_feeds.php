@@ -20,32 +20,31 @@
  */
 function smarty_function_crpcalendar_feeds($params, & $smarty)
 {
-	// Security check
-	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
-	{
-		return LogUtil :: registerPermissionError();
-	}
+    // Security check
+    if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
+    {
+        return LogUtil :: registerPermissionError();
+    }
 
-	if (pnModGetVar('crpCalendar', 'enablecategorization') && pnModGetVar('crpCalendar', 'crpcalendar_enable_rss'))
-	{
-		// load the category registry util
-		if (!($class = Loader :: loadClass('CategoryRegistryUtil')))
-			pn_exit('Unable to load class [CategoryRegistryUtil] ...');
-		if (!($class = Loader :: loadClass('CategoryUtil')))
-			pn_exit('Unable to load class [CategoryUtil] ...');
+    if (pnModGetVar('crpCalendar', 'enablecategorization') && pnModGetVar('crpCalendar', 'crpcalendar_enable_rss'))
+    {
+        // load the category registry util
+        if (!($class = Loader :: loadClass('CategoryRegistryUtil')))
+        pn_exit('Unable to load class [CategoryRegistryUtil] ...');
+        if (!($class = Loader :: loadClass('CategoryUtil')))
+        pn_exit('Unable to load class [CategoryUtil] ...');
 
-		$mainCat = CategoryRegistryUtil :: getRegisteredModuleCategory('crpCalendar', 'crpcalendar', 'Main', '/__SYSTEM__/Modules/crpCalendar');
-		$cats = CategoryUtil :: getCategoriesByParentID($mainCat);
-		$userLang = ZLanguage::getLanguageCode();
+        $mainCat = CategoryRegistryUtil :: getRegisteredModuleCategory('crpCalendar', 'crpcalendar', 'Main', '/__SYSTEM__/Modules/crpCalendar');
+        $cats = CategoryUtil :: getCategoriesByParentID($mainCat);
+        $userLang = ZLanguage::getLanguageCode();
 
-		foreach ($cats as $cat)
-		{
-			PageUtil :: addVar('rawtext', '<link rel="alternate" type="application/rss+xml" href="' . DataUtil :: formatForDisplay(pnModUrl('crpCalendar', 'user', 'getfeed', array (
-				'events_category' => $cat['id']
-			))) . '" title="' . _CRPCALENDAR_RSS . ' ' . $cat['display_name'][$userLang] . '" />');
-		}
-	}
+        foreach ($cats as $cat)
+        {
+            PageUtil :: addVar('rawtext', '<link rel="alternate" type="application/rss+xml" href="' . DataUtil :: formatForDisplay(pnModUrl('crpCalendar', 'user', 'getfeed', array (
+                'events_category' => $cat['id']
+            ))) . '" title="' . _CRPCALENDAR_RSS . ' ' . $cat['display_name'][$userLang] . '" />');
+        }
+    }
 
-	return;
+    return;
 }
-?>

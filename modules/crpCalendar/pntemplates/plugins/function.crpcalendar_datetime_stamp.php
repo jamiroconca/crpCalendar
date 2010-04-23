@@ -24,22 +24,22 @@
  */
 function smarty_function_crpcalendar_datetime_stamp($params, & $smarty)
 {
-	// Security check
-	if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
-	{
-		return LogUtil :: registerPermissionError();
-	}
+    // Security check
+    if (!SecurityUtil :: checkPermission('crpCalendar::', '::', ACCESS_READ))
+    {
+        return LogUtil :: registerPermissionError();
+    }
 
-	if (!$params['datetime'])
-		return true;
-	else
-		$datetime = $params['datetime'];
+    if (!$params['datetime'])
+    return true;
+    else
+    $datetime = $params['datetime'];
 
-	$res = DateUtil :: makeTimestamp($datetime);
+    $res = DateUtil :: makeTimestamp($datetime);
 
-	if (isset ($params['assign']) && $params['assign'])
-		$smarty->assign($params['assign'], $res);
-	else
-		return $res;
+    if (isset ($params['assign']) && $params['assign'])
+    $smarty->assign($params['assign'], $res);
+    else
+    return $res;
 
 }
