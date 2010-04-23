@@ -17,15 +17,8 @@
     </h3>
 
     <div class="crpcalendar_header">
-        <!--[if $event.cr_uid]-->
-        <!--[pnusergetvar name=uname uid=$event.cr_uid assign=cr_profilename]-->
-        <!--[pnmodurl modname=Profile func=view uname=$cr_profilename assign=cr_profilelink]-->
-        <!--[else]-->
-        <!--[assign var="cr_profilelink" value="#"]-->
-        <!--[pnmodgetvar module="Users" name="anonymous" assign=cr_profilename]-->
-        <!--[/if]-->
         <!--[gt text="Posted on"]--> <abbr class="dtstamp" title="<!--[$event.cr_date|pndate_format:"%Y%m%dT%H%MZ"]-->"><!--[$event.cr_date|pndate_format]--></abbr>
-        <!--[gt text="by"]--> <span class="uid"><a href="<!--[$cr_profilelink]-->"><!--[$cr_profilename]--></a></span>
+        <!--[gt text="by"]--> <span class="uid"><!--[$event.cr_uid|userprofilelink]--></span>
     </div>
 
     <div class="crpcalendar_body"">

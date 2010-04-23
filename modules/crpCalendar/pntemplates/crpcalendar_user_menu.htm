@@ -1,26 +1,30 @@
 <!--[crpcalendar_feeds]-->
 
-<div class="crpcalendar-rss">
-    <a href="http://microformats.org/wiki/hcalendar" title="hCalendar Wiki">
-        <!--[pnimg modname='crpCalendar' src='microformat_hcalendar.png' __alt="hCalendar microformat" ]-->
-    </a>
-    <a href="http://microformats.org/wiki/hcard" title="hCard Wiki">
-        <!--[pnimg modname='crpCalendar' src='microformat_hcard.png' __alt="hCard microformat" ]-->
-    </a>
-    <!--[if $crpcalendar_show_rss]-->
-    <a href="<!--[pnmodurl modname="crpCalendar" type="user" func="getfeed"]-->">
-        <!--[pnimg modname='crpCalendar' src='rss_button.gif' __alt="crpCalendar feed" ]-->
-    </a>
-    <!--[/if]-->
-    <a href="<!--[pnmodurl modname=crpCalendar func=ical_exports]-->"><!--[pnimg modname='crpCalendar'  src="ical.gif" __alt='crpCalendar iCal event']--></a>
+<div style="background: url(<!--[pngetbaseurl]-->/modules/crpCalendar/pnimages/<!--[$crpcalendar_theme]-->/time_bg.gif) repeat-x;">
+    <div class="crpcalendar-rss">
+        <a href="http://microformats.org/wiki/hcalendar" title="hCalendar Wiki">
+            <!--[pnimg modname='crpCalendar' src='microformat_hcalendar.png' __alt="hCalendar microformat" ]-->
+        </a>
+        <a href="http://microformats.org/wiki/hcard" title="hCard Wiki">
+            <!--[pnimg modname='crpCalendar' src='microformat_hcard.png' __alt="hCard microformat" ]-->
+        </a>
+        <!--[if $crpcalendar_show_rss]-->
+        <a href="<!--[pnmodurl modname="crpCalendar" type="user" func="getfeed"]-->">
+            <!--[pnimg modname='crpCalendar' src='rss_button.gif' __alt="crpCalendar feed" ]-->
+        </a>
+        <!--[/if]-->
+        <a href="<!--[pnmodurl modname=crpCalendar func=ical_exports]-->"><!--[pnimg modname='crpCalendar'  src="ical.gif" __alt='crpCalendar iCal event']--></a>
+    </div>
+
+    <h2><!--[sitename]--> <!--[gt text="Calendar"]--></h2>
+
 </div>
 
-<div class="crpcalendar-box" style="background: url(modules/crpCalendar/pnimages/<!--[$crpcalendar_theme]-->/time_bg.gif) repeat-x;">
-    <h1><!--[sitename]--> <!--[gt text="Calendar"]--></h1>
-
-    <div class="z-menu">
-        <!--[pnsessiongetvar name="crpCalendar_choosed_view" assign=choosed_view]-->
-        <!--[securityutil_checkpermission component="crpCalendar::" instance="::" level="ACCESS_COMMENT" assign="can_submit"]-->
+<div class="z-menu">
+    <!--[pnsessiongetvar name="crpCalendar_choosed_view" assign=choosed_view]-->
+    <!--[securityutil_checkpermission component="crpCalendar::" instance="::" level="ACCESS_COMMENT" assign="can_submit"]-->
+    <span class="z-menuitem-title">
+        [
         <a href="<!--[pnmodurl modname="crpCalendar" type="user" func="view"]-->"><!--[gt text="Events list"]--></a>
         |&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="day_view" t=$smarty.now]-->"><!--[gt text="Today"]--></a>
         |&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="week_view" t=$smarty.now]-->"><!--[gt text="This week"]--></a>
@@ -28,8 +32,8 @@
         <!--[if $can_submit]-->
         |&nbsp;<a href="<!--[pnmodurl modname="crpCalendar" type="user" func="new"]-->"><!--[gt text="Submit event"]--></a>
         <!--[/if]-->
-    </div>
-
+        ]
+    </span>
 </div>
 
 <div>

@@ -7,7 +7,7 @@
 <table class="z-datatable">
 
     <caption>
-        <!--[gt text="attendance to events"]-->
+        <!--[gt text="Attendance to events"]-->
     </caption>
 
     <thead>
@@ -18,39 +18,41 @@
         </tr>
     </thead>
 
-    <!--[foreach from=$users item=user]-->
-    <tr class="<!--[cycle values="odd,even"]-->  vcard">
-        <!--[assign var="uid" value=$user.uid]-->
+    <tbody>
+        <!--[foreach from=$users item=user]-->
+        <tr class="<!--[cycle values="z-odd,z-even"]-->  vcard">
+            <!--[assign var="uid" value=$user.uid]-->
 
-        <td>
-            <!--[if pnModAvailable("Avatar") && pnUserGetVar('_YOURAVATAR',$uid)]-->
-            <img class="photo" src="<!--[pnmodgetvar module="Avatar" name="avatardir"]-->/<!--[pnusergetvar name="_YOURAVATAR" uid=$uid]-->" alt="Avatar" />
-            <!--[elseif pnUserGetVar('_YOURAVATAR',$uid) neq '']-->
-            <img class="photo" src="images/avatar/<!--[pnusergetvar name="_YOURAVATAR" uid=$uid]-->" alt="Avatar" />
-            <!--[else]-->
-            <!--[pnimg modname='crpCalendar'  src="blank.jpg" class="photo" __alt="No avatar selected"]-->
-            <!--[/if]-->
-        </td>
+            <td>
+                <!--[if pnModAvailable("Avatar") && pnUserGetVar('_YOURAVATAR',$uid)]-->
+                <img class="photo" src="<!--[pnmodgetvar module="Avatar" name="avatardir"]-->/<!--[pnusergetvar name="_YOURAVATAR" uid=$uid]-->" alt="Avatar" />
+                <!--[elseif pnUserGetVar('_YOURAVATAR',$uid) neq '']-->
+                <img class="photo" src="images/avatar/<!--[pnusergetvar name="_YOURAVATAR" uid=$uid]-->" alt="Avatar" />
+                <!--[else]-->
+                <!--[pnimg modname='crpCalendar'  src="blank.jpg" class="photo" __alt="No avatar selected"]-->
+                <!--[/if]-->
+            </td>
 
-        <td>
-            <div>
-                <span class="fn n"><strong class="nickname"><!--[pnusergetvar name=uname uid=$uid]--></strong></span><br />
-                <span class="adr">
-                    <!--[if pnUserGetVar('_YLOCATION',$uid)]--><span class="locality"><!--[pnusergetvar name="_YLOCATION" uid=$uid]--></span><br /><!--[/if]-->
-                </span>
-                <!--[if pnUserGetVar('_UFAKEMAIL',$uid)]--><!--[gt text="_UFAKEMAIL"]-->: <a class="email" href="mailto:<!--[pnusergetvar name="_UFAKEMAIL" uid=$uid]-->"><!--[pnusergetvar name="_UFAKEMAIL" uid=$uid]--></a><br /><!--[/if]-->
-                <!--[if pnUserGetVar('_YOURHOMEPAGE',$uid)]--><!--[gt text="_YOURHOMEPAGE"]-->: <a class="url" href="<!--[pnusergetvar name="_YOURHOMEPAGE" uid=$uid]-->"><!--[pnusergetvar name="_YOURHOMEPAGE" uid=$uid]--></a><br /><!--[/if]-->
-            </div>
-        </td>
+            <td>
+                <div>
+                    <span class="fn n"><strong class="nickname"><!--[pnusergetvar name=uname uid=$uid]--></strong></span><br />
+                    <span class="adr">
+                        <!--[if pnUserGetVar('_YLOCATION',$uid)]--><span class="locality"><!--[pnusergetvar name="_YLOCATION" uid=$uid]--></span><br /><!--[/if]-->
+                    </span>
+                    <!--[if pnUserGetVar('_UFAKEMAIL',$uid)]--><!--[gt text="_UFAKEMAIL"]-->: <a class="email" href="mailto:<!--[pnusergetvar name="_UFAKEMAIL" uid=$uid]-->"><!--[pnusergetvar name="_UFAKEMAIL" uid=$uid]--></a><br /><!--[/if]-->
+                    <!--[if pnUserGetVar('_YOURHOMEPAGE',$uid)]--><!--[gt text="_YOURHOMEPAGE"]-->: <a class="url" href="<!--[pnusergetvar name="_YOURHOMEPAGE" uid=$uid]-->"><!--[pnusergetvar name="_YOURHOMEPAGE" uid=$uid]--></a><br /><!--[/if]-->
+                </div>
+            </td>
 
-        <td>
-            <!--[assign var="options" value=$user.options]-->
-            <!--[section name=options loop=$options]-->
-            <a href="<!--[$options[options].url|pnvarprepfordisplay]-->"><!--[pnimg modname='core' set='icons/extrasmall' src=$options[options].image alt=$options[options].title title=$options[options].title]--></a>
-            <!--[/section]-->
-        </td>
+            <td>
+                <!--[assign var="options" value=$user.options]-->
+                <!--[section name=options loop=$options]-->
+                <a href="<!--[$options[options].url|pnvarprepfordisplay]-->"><!--[pnimg modname='core' set='icons/extrasmall' src=$options[options].image alt=$options[options].title title=$options[options].title]--></a>
+                <!--[/section]-->
+            </td>
 
-    </tr>
-    <!--[/foreach]-->
+        </tr>
+        <!--[/foreach]-->
+    </tbody>
 </table>
 <!--[pager rowcount=$pager.numitems limit=$pager.itemsperpage posvar=startnum shift=1 img_prev=images/icons/extrasmall/previous.gif img_next=images/icons/extrasmall/next.gif]-->

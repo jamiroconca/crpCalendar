@@ -32,6 +32,7 @@
         </fieldset>
     </form>
     <!--[/if]-->
+
     <table class="z-admintable">
         <thead>
             <tr>
@@ -80,6 +81,8 @@
                     <!--[/section]-->
                 </td>
             </tr>
+            <!--[foreachelse]-->
+            <tr class="z-admintableempty"><td colspan="<!--[if $enablecategorization]-->8<!--[else]-->7<!--[/if]-->"><!--[gt text="No items found"]--></td></tr>
             <!--[/foreach]-->
         </tbody>
     </table>
