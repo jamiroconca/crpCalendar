@@ -1,5 +1,7 @@
 crpCalendar
-v0.5.4 - ??? 2009
+v0.5.5 - ??? 2010
+- added moultihook simple event needle
+v0.5.4 - 28 november 2009
 - added Content plugin for display category events, view ticket:63
 - added more sort options in admin, view ticket:73
 - added caption field for files
