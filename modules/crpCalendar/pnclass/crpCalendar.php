@@ -137,9 +137,9 @@ class crpCalendar
 			if (pnUserLoggedIn() && pnModGetVar('crpCalendar', 'enable_partecipation'))
 			{
 				if (!$this->dao->existPartecipation(pnUserGetVar('uid'), $item['eventid']))
-					$options[] = crpCalendar :: buildLinkArray(__("Add partecipation", $this->dom), $item, 'user');
+					$options[] = crpCalendar :: buildLinkArray(__("Add participation", $this->dom), $item, 'user');
 				else
-					$options[] = crpCalendar :: buildLinkArray(__("Delete partecipation", $this->dom), $item, 'user');
+					$options[] = crpCalendar :: buildLinkArray(__("Delete participation", $this->dom), $item, 'user');
 			}
 
 			// edit, copy, delete
@@ -205,9 +205,9 @@ class crpCalendar
 			if (pnUserLoggedIn() && pnModGetVar('crpCalendar', 'enable_partecipation'))
 			{
 				if (!$this->dao->existPartecipation(pnUserGetVar('uid'), $item['eventid']))
-					$options[] = crpCalendar :: buildLinkArray(__("Add partecipation", $this->dom), $item, 'user');
+					$options[] = crpCalendar :: buildLinkArray(__("Add participation", $this->dom), $item, 'user');
 				else
-					$options[] = crpCalendar :: buildLinkArray(__("Delete partecipation", $this->dom), $item, 'user');
+					$options[] = crpCalendar :: buildLinkArray(__("Delete participation", $this->dom), $item, 'user');
 			}
 
 			// edit, copy, delete
@@ -291,9 +291,9 @@ class crpCalendar
 				if (pnUserLoggedIn() && pnModGetVar('crpCalendar', 'enable_partecipation'))
 				{
 					if (!$this->dao->existPartecipation(pnUserGetVar('uid'), $item['eventid']))
-						$options[] = crpCalendar :: buildLinkArray(__("Add partecipation", $this->dom), $item, 'user');
+						$options[] = crpCalendar :: buildLinkArray(__("Add participation", $this->dom), $item, 'user');
 					else
-						$options[] = crpCalendar :: buildLinkArray(__("Delete partecipation", $this->dom), $item, 'user');
+						$options[] = crpCalendar :: buildLinkArray(__("Delete participation", $this->dom), $item, 'user');
 				}
 
 				// edit, copy, delete
@@ -437,9 +437,9 @@ class crpCalendar
 			if (pnUserLoggedIn() && pnModGetVar('crpCalendar', 'enable_partecipation'))
 			{
 				if (!$this->dao->existPartecipation(pnUserGetVar('uid'), $item['eventid']))
-					$options[] = crpCalendar :: buildLinkArray(__("Add partecipation", $this->dom), $item, 'user');
+					$options[] = crpCalendar :: buildLinkArray(__("Add participation", $this->dom), $item, 'user');
 				else
-					$options[] = crpCalendar :: buildLinkArray(__("Delete partecipation", $this->dom), $item, 'user');
+					$options[] = crpCalendar :: buildLinkArray(__("Delete participation", $this->dom), $item, 'user');
 			}
 
 			// edit, copy, delete
@@ -607,9 +607,9 @@ class crpCalendar
 		if (pnUserLoggedIn() && pnModGetVar('crpCalendar', 'enable_partecipation'))
 		{
 			if (!$this->dao->existPartecipation(pnUserGetVar('uid'), $item['eventid']))
-				$options[] = crpCalendar :: buildLinkArray(__("Add partecipation", $this->dom), $item, 'user');
+				$options[] = crpCalendar :: buildLinkArray(__("Add participation", $this->dom), $item, 'user');
 			else
-				$options[] = crpCalendar :: buildLinkArray(__("Delete partecipation", $this->dom), $item, 'user');
+				$options[] = crpCalendar :: buildLinkArray(__("Delete participation", $this->dom), $item, 'user');
 		}
 
 		$item['options'] = $options;
@@ -2676,22 +2676,22 @@ class crpCalendar
 					'title' => __("View", $this->dom)
 				);
 				break;
-			case "".__("Add partecipation", $this->dom)."" :
+			case "".__("Add participation", $this->dom)."" :
 				$linkArray = array (
 					'url' => pnModURL('crpCalendar', $actiontype, 'add_partecipation', array (
 						'eventid' => $item['eventid']
 					)),
 					'image' => 'add_user.gif',
-					'title' => __("Add partecipation", $this->dom)
+					'title' => __("Add participation", $this->dom)
 				);
 				break;
-			case "".__("Delete partecipation", $this->dom)."" :
+			case "".__("Delete participation", $this->dom)."" :
 				$linkArray = array (
 					'url' => pnModURL('crpCalendar', $actiontype, 'delete_partecipation', array (
 						'eventid' => $item['eventid']
 					)),
 					'image' => 'delete_user.gif',
-					'title' => __("Delete partecipation", $this->dom)
+					'title' => __("Delete participation", $this->dom)
 				);
 				break;
 			case "".__("Edit", $this->dom)."" :

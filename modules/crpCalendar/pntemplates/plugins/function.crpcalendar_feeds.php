@@ -28,6 +28,8 @@ function smarty_function_crpcalendar_feeds($params, & $smarty)
 
     if (pnModGetVar('crpCalendar', 'enablecategorization') && pnModGetVar('crpCalendar', 'crpcalendar_enable_rss'))
     {
+    	$dom = ZLanguage::getModuleDomain('crpCalendar');
+
         // load the category registry util
         if (!($class = Loader :: loadClass('CategoryRegistryUtil')))
         pn_exit('Unable to load class [CategoryRegistryUtil] ...');
@@ -42,7 +44,7 @@ function smarty_function_crpcalendar_feeds($params, & $smarty)
         {
             PageUtil :: addVar('rawtext', '<link rel="alternate" type="application/rss+xml" href="' . DataUtil :: formatForDisplay(pnModUrl('crpCalendar', 'user', 'getfeed', array (
                 'events_category' => $cat['id']
-            ))) . '" title="' . _CRPCALENDAR_RSS . ' ' . $cat['display_name'][$userLang] . '" />');
+            ))) . '" title="' . __('crpCalendar feed for',$dom). ' ' . $cat['display_name'][$userLang] . '" />');
         }
     }
 

@@ -55,7 +55,7 @@ function smarty_function_crpcalendar_yearnav($params, & $smarty)
     $navbar .= '<' . $container . '>';
     $navbar .= '<a href="' . DataUtil :: formatForDisplay(pnModUrl('crpCalendar', 'user', 'year_view', array (
 		't' => $nav['prev_year_time']
-    ))) . '" title="' . _CRPCALENDAR_PREV_YEAR . '">' . "\n";
+    ))) . '" title="' . __('Previous year', $dom) . '">' . "\n";
     $navbar .= $prev_year_char . "\n";
     $navbar .= '</a>' . "\n";
 
@@ -63,7 +63,7 @@ function smarty_function_crpcalendar_yearnav($params, & $smarty)
 
     $navbar .= '<a href="' . DataUtil :: formatForDisplay(pnModUrl('crpCalendar', 'user', 'year_view', array (
 		't' => $nav['next_year_time']
-    ))) . '" title="' . _CRPCALENDAR_NEXT_YEAR . '">' . "\n";
+    ))) . '" title="' . __('Next year', $dom) . '">' . "\n";
     $navbar .= $next_year_char . "\n";
     $navbar .= '</a>' . "\n";
     $navbar .= '</' . $container . '>';

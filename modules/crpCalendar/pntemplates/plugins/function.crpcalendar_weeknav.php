@@ -60,7 +60,7 @@ function smarty_function_crpcalendar_weeknav($params, & $smarty)
     $navbar .= '<' . $container . '>';
     $navbar .= '<a href="' . DataUtil :: formatForDisplay(pnModUrl('crpCalendar', 'user', 'week_view', array (
 		't' => $nav['prev_month_time']
-    ))) . '" title="' . _CRPCALENDAR_PREV_MONTH . '">' . "\n";
+    ))) . '" title="' . __('Previous month', $dom) . '">' . "\n";
     $navbar .= $prev_month_char . "\n";
     $navbar .= '</a>' . "\n";
 
@@ -68,7 +68,7 @@ function smarty_function_crpcalendar_weeknav($params, & $smarty)
 
     $navbar .= '<a href="' . DataUtil :: formatForDisplay(pnModUrl('crpCalendar', 'user', 'week_view', array (
 		't' => $nav['prev_week_time']
-    ))) . '" title="' . _CRPCALENDAR_PREV_WEEK . '">' . "\n";
+    ))) . '" title="' . __('Previous week', $dom) . '">' . "\n";
     $navbar .= $prev_week_char . "\n";
     $navbar .= '</a>' . "\n";
 
@@ -76,7 +76,7 @@ function smarty_function_crpcalendar_weeknav($params, & $smarty)
 
     $navbar .= '<a href="' . DataUtil :: formatForDisplay(pnModUrl('crpCalendar', 'user', 'week_view', array (
 		't' => $nav['next_week_time']
-    ))) . '" title="' . _CRPCALENDAR_NEXT_WEEK . '">' . "\n";
+    ))) . '" title="' . __('Next week', $dom) . '">' . "\n";
     $navbar .= $next_week_char . "\n";
     $navbar .= '</a>' . "\n";
 
@@ -84,7 +84,7 @@ function smarty_function_crpcalendar_weeknav($params, & $smarty)
 
     $navbar .= '<a href="' . DataUtil :: formatForDisplay(pnModUrl('crpCalendar', 'user', 'week_view', array (
 		't' => $nav['next_month_time']
-    ))) . '" title="' . _CRPCALENDAR_NEXT_MONTH . '">' . "\n";
+    ))) . '" title="' . __('Next month', $dom) . '">' . "\n";
     $navbar .= $next_month_char . "\n";
     $navbar .= '</a>' . "\n";
     $navbar .= '</' . $container . '>';

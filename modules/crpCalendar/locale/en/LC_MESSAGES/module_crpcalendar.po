@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zikula 1.2.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-06 20:32+0000\n"
-"PO-Revision-Date: 2010-03-06 21:17+0100\n"
+"POT-Creation-Date: 2010-05-04 11:16+0000\n"
+"PO-Revision-Date: 2010-05-04 12:51+0100\n"
 "Last-Translator: Daniele Conca <conca.daniele@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -48,10 +48,27 @@ msgstr "Simple event calendar"
 msgid "Error! Could not do what you wanted. Please check your input."
 msgstr "Error! Could not do what you wanted. Please check your input."
 
+#: pntemplates/plugins/function.crpcalendar_weeknav.php:63
+#: pntemplates/plugins/function.crpcalendar_monthnav.php:71
+msgid "Previous month"
+msgstr "Previous month"
+
+#: pntemplates/plugins/function.crpcalendar_weeknav.php:71
 #: pntemplates/plugins/function.crpcalendar_daynav.php:60
 #: pntemplates/blocks/crpcalendar_block_month.htm:23
 msgid "Previous week"
 msgstr "Previous week"
+
+#: pntemplates/plugins/function.crpcalendar_weeknav.php:79
+#: pntemplates/plugins/function.crpcalendar_daynav.php:78
+#: pntemplates/blocks/crpcalendar_block_month.htm:24
+msgid "Next week"
+msgstr "Next week"
+
+#: pntemplates/plugins/function.crpcalendar_weeknav.php:87
+#: pntemplates/plugins/function.crpcalendar_monthnav.php:79
+msgid "Next month"
+msgstr "Next month"
 
 #: pntemplates/plugins/function.crpcalendar_daynav.php:66
 #: pntemplates/blocks/crpcalendar_block_month.htm:25
@@ -63,10 +80,63 @@ msgstr "Yesterday"
 msgid "Tomorrow"
 msgstr "Tomorrow"
 
-#: pntemplates/plugins/function.crpcalendar_daynav.php:78
-#: pntemplates/blocks/crpcalendar_block_month.htm:24
-msgid "Next week"
-msgstr "Next week"
+#: pntemplates/plugins/function.crpcalendar_yearnav.php:58
+#: pntemplates/plugins/function.crpcalendar_monthnav.php:63
+msgid "Previous year"
+msgstr "Previous year"
+
+#: pntemplates/plugins/function.crpcalendar_yearnav.php:66
+#: pntemplates/plugins/function.crpcalendar_monthnav.php:87
+msgid "Next year"
+msgstr "Next year"
+
+#: pntemplates/plugins/function.crpcalendar_feeds.php:47
+msgid "crpCalendar feed for"
+msgstr "crpCalendar feed for"
+
+#: pntemplates/plugins/function.crpcalendarstatus.php:43
+#: pntemplates/plugins/function.crpcalendarstatus.php:48
+#: pntemplates/plugins/function.crpcalendarstatus.php:49
+#: pntemplates/plugins/function.crpcalendarstatus.php:60
+#: pntemplates/plugins/function.crpcalendarstatus.php:63
+#: pntemplates/plugins/function.crpcalendarstatus.php:66
+#: pntemplates/plugins/function.crpcalendarstatus.php:67
+msgid "Change status"
+msgstr "Change status"
+
+#: pntemplates/plugins/function.crpcalendarstatus.php:48
+#: pntemplates/plugins/function.crpcalendarstatus.php:60
+#: pntemplates/plugins/function.crpcalendarstatus.php:66
+#: pntemplates/crpcalendar_admin_new.htm:90
+#: pntemplates/crpcalendar_admin_modify.htm:112
+#: pntemplates/crpcalendar_admin_view.htm:15
+#: pntemplates/crpcalendar_admin_modifyconfig.htm:42
+msgid "Active"
+msgstr "Active"
+
+#: pntemplates/plugins/function.crpcalendarstatus.php:49
+#: pntemplates/plugins/function.crpcalendarstatus.php:63
+#: pntemplates/plugins/function.crpcalendarstatus.php:67
+#: pntemplates/crpcalendar_admin_new.htm:91
+#: pntemplates/crpcalendar_admin_modify.htm:113
+#: pntemplates/crpcalendar_admin_view.htm:16
+#: pntemplates/crpcalendar_admin_modifyconfig.htm:43
+msgid "Pending"
+msgstr "Pending"
+
+#: pntemplates/plugins/function.crpcalendarstatus.php:51
+#: pntemplates/plugins/function.crpcalendarstatus.php:69
+#: pntemplates/crpcalendar_admin_new.htm:92
+#: pntemplates/crpcalendar_admin_modify.htm:114
+#: pntemplates/crpcalendar_admin_view.htm:17
+#: pntemplates/crpcalendar_admin_modifyconfig.htm:44
+msgid "Rejected"
+msgstr "Rejected"
+
+#: pntemplates/plugins/function.crpcalendarstatus.php:51
+#: pntemplates/plugins/function.crpcalendarstatus.php:69
+msgid "Modify event for status change"
+msgstr "Modify event for status change"
 
 #: pntemplates/pnform/function.crpCalendarCategoryEventSelector.php:100
 #: pntemplates/pnform/function.crpCalendarEventSelector.php:123
@@ -172,7 +242,7 @@ msgid "Categorisation is enabled, choose a category"
 msgstr "Categorisation is enabled, choose a category"
 
 #: pnclass/crpCalendarDAO.php:1596
-#: pntemplates/crpcalendar_user_display.htm:95
+#: pntemplates/crpcalendar_user_display.htm:89
 msgid "None"
 msgstr "None"
 
@@ -218,10 +288,10 @@ msgstr "Su"
 #: pnclass/crpCalendar.php:500
 #: pnclass/crpCalendar.php:2670
 #: pnclass/crpCalendar.php:2676
-#: pntemplates/crpcalendar_user_edit.htm:78
-#: pntemplates/crpcalendar_user_edit.htm:100
-#: pntemplates/crpcalendar_admin_modify.htm:79
-#: pntemplates/crpcalendar_admin_modify.htm:103
+#: pntemplates/crpcalendar_user_edit.htm:75
+#: pntemplates/crpcalendar_user_edit.htm:97
+#: pntemplates/crpcalendar_admin_modify.htm:74
+#: pntemplates/crpcalendar_admin_modify.htm:94
 msgid "View"
 msgstr "View"
 
@@ -264,8 +334,8 @@ msgstr "Copy"
 #: pnclass/crpCalendar.php:602
 #: pnclass/crpCalendar.php:2715
 #: pnclass/crpCalendar.php:2721
-#: pntemplates/crpcalendar_admin_modify.htm:81
-#: pntemplates/crpcalendar_admin_modify.htm:105
+#: pntemplates/crpcalendar_admin_modify.htm:75
+#: pntemplates/crpcalendar_admin_modify.htm:95
 #: pntemplates/crpcalendar_user_notify_newevent.htm:4
 msgid "Delete"
 msgstr "Delete"
@@ -277,8 +347,8 @@ msgstr "Delete"
 #: pnclass/crpCalendar.php:610
 #: pnclass/crpCalendar.php:2679
 #: pnclass/crpCalendar.php:2685
-msgid "Add partecipation"
-msgstr "Add partecipation"
+msgid "Add participation"
+msgstr "Add participation"
 
 #: pnclass/crpCalendar.php:142
 #: pnclass/crpCalendar.php:210
@@ -287,22 +357,21 @@ msgstr "Add partecipation"
 #: pnclass/crpCalendar.php:612
 #: pnclass/crpCalendar.php:2688
 #: pnclass/crpCalendar.php:2694
-msgid "Delete partecipation"
-msgstr "Delete partecipation"
+msgid "Delete participation"
+msgstr "Delete participation"
 
 #: pnclass/crpCalendar.php:542
 #: pnclass/crpCalendar.php:2724
 #: pnclass/crpCalendar.php:2730
-#: pntemplates/crpcalendar_user_menu.htm:38
+#: pntemplates/crpcalendar_user_menu.htm:42
 #: pntemplates/crpcalendar_user_view_partecipations.htm:11
-#: pntemplates/crpcalendar_user_view_attendees.htm:10
 msgid "attendance to events"
 msgstr "attendance to events"
 
 #: pnclass/crpCalendar.php:592
 #: pnclass/crpCalendar.php:2733
 #: pnclass/crpCalendar.php:2739
-#: pntemplates/crpcalendar_user_menu.htm:15
+#: pntemplates/crpcalendar_user_menu.htm:16
 msgid "crpCalendar iCal event"
 msgstr "crpCalendar iCal event"
 
@@ -352,7 +421,7 @@ msgid "Done! Module configuration updated."
 msgstr "Done! Module configuration updated."
 
 #: pnclass/crpCalendar.php:1530
-#: pntemplates/crpcalendar_admin_modifyconfig.htm:158
+#: pntemplates/crpcalendar_admin_modifyconfig.htm:163
 msgid "ATOM"
 msgstr "ATOM"
 
@@ -362,13 +431,14 @@ msgstr "Notification of Event Creation"
 
 #: pnaccountapi.php:45
 #: pntemplates/crpcalendar_user_new.htm:6
-#: pntemplates/crpcalendar_user_menu.htm:29
+#: pntemplates/crpcalendar_user_menu.htm:33
 #: pntemplates/blocks/crpcalendar_block_month.htm:6
 #: pntemplates/blocks/crpcalendar_block_events.htm:6
 msgid "Submit event"
 msgstr "Submit event"
 
 #: pnaccountapi.php:53
+#: pntemplates/crpcalendar_user_view_attendees.htm:10
 msgid "Attendance to events"
 msgstr "Attendance to events"
 
@@ -377,7 +447,7 @@ msgid "Event"
 msgstr "Event"
 
 #: pnadminapi.php:51
-#: pntemplates/crpcalendar_search_options.htm:4
+#: pntemplates/crpcalendar_search_options.htm:3
 #: pntemplates/crpcalendar_user_menu.htm:19
 #: pntemplates/crpcalendar_admin_menu.htm:3
 msgid "Calendar"
@@ -433,448 +503,442 @@ msgstr "Main crpCalendar Category"
 msgid "Create event"
 msgstr "Create event"
 
-#: pntemplates/crpcalendar_admin_new.htm:11
-#: pntemplates/crpcalendar_admin_new.htm:18
-#: pntemplates/crpcalendar_admin_new.htm:51
-#: pntemplates/crpcalendar_admin_new.htm:79
-#: pntemplates/crpcalendar_user_edit.htm:20
-#: pntemplates/crpcalendar_user_edit.htm:53
-#: pntemplates/crpcalendar_user_edit.htm:105
-#: pntemplates/crpcalendar_admin_modify.htm:12
-#: pntemplates/crpcalendar_admin_modify.htm:21
-#: pntemplates/crpcalendar_admin_modify.htm:54
-#: pntemplates/crpcalendar_admin_modify.htm:110
-#: pntemplates/crpcalendar_user_new.htm:17
-#: pntemplates/crpcalendar_user_new.htm:50
-#: pntemplates/crpcalendar_user_new.htm:78
-msgid "*"
-msgstr "*"
-
-#: pntemplates/crpcalendar_admin_new.htm:11
-#: pntemplates/crpcalendar_admin_modify.htm:12
-msgid "Mandatory fields"
-msgstr "Mandatory fields"
-
-#: pntemplates/crpcalendar_admin_new.htm:16
-#: pntemplates/crpcalendar_admin_new.htm:79
-#: pntemplates/crpcalendar_user_edit.htm:18
-#: pntemplates/crpcalendar_user_edit.htm:105
-#: pntemplates/crpcalendar_admin_modify.htm:19
-#: pntemplates/crpcalendar_admin_modify.htm:110
+#: pntemplates/crpcalendar_admin_new.htm:15
+#: pntemplates/crpcalendar_admin_new.htm:78
+#: pntemplates/crpcalendar_user_edit.htm:17
+#: pntemplates/crpcalendar_user_edit.htm:102
+#: pntemplates/crpcalendar_admin_modify.htm:17
+#: pntemplates/crpcalendar_admin_modify.htm:100
 #: pntemplates/crpcalendar_user_new.htm:15
-#: pntemplates/crpcalendar_user_new.htm:78
+#: pntemplates/crpcalendar_user_new.htm:76
 #: pntemplates/crpcalendar_user_notify_newevent.htm:8
 msgid "Content"
 msgstr "Content"
 
-#: pntemplates/crpcalendar_admin_new.htm:18
-#: pntemplates/crpcalendar_user_edit.htm:20
-#: pntemplates/crpcalendar_admin_modify.htm:21
+#: pntemplates/crpcalendar_admin_new.htm:17
+#: pntemplates/crpcalendar_user_edit.htm:19
+#: pntemplates/crpcalendar_admin_modify.htm:19
 #: pntemplates/crpcalendar_user_new.htm:17
 #: pntemplates/crpcalendar_user_notify_newevent.htm:4
 #: pntemplates/crpcalendar_user_view_month.htm:23
 #: pntemplates/crpcalendar_user_view_year_grouped.htm:14
-#: pntemplates/crpcalendar_admin_view.htm:23
-#: pntemplates/crpcalendar_admin_view.htm:38
+#: pntemplates/crpcalendar_admin_view.htm:22
+#: pntemplates/crpcalendar_admin_view.htm:39
 #: pntemplates/crpcalendar_user_view_year_flat.htm:11
 #: pntemplates/crpcalendar_user_view_partecipations.htm:27
-#: pntemplates/crpcalendar_user_view.htm:18
+#: pntemplates/crpcalendar_user_view.htm:17
 msgid "Title"
 msgstr "Title"
 
-#: pntemplates/crpcalendar_admin_new.htm:22
-#: pntemplates/crpcalendar_user_edit.htm:24
-#: pntemplates/crpcalendar_admin_modify.htm:25
+#: pntemplates/crpcalendar_admin_new.htm:21
+#: pntemplates/crpcalendar_user_edit.htm:23
+#: pntemplates/crpcalendar_admin_modify.htm:23
 #: pntemplates/crpcalendar_user_new.htm:21
 msgid "PermaLink URL title"
 msgstr "PermaLink URL title"
 
-#: pntemplates/crpcalendar_admin_new.htm:24
-#: pntemplates/crpcalendar_user_edit.htm:26
-#: pntemplates/crpcalendar_admin_modify.htm:27
+#: pntemplates/crpcalendar_admin_new.htm:23
+#: pntemplates/crpcalendar_user_edit.htm:25
+#: pntemplates/crpcalendar_admin_modify.htm:25
 #: pntemplates/crpcalendar_user_new.htm:23
 msgid "(Blank = auto-generate)"
 msgstr "(Blank = auto-generate)"
 
-#: pntemplates/crpcalendar_admin_new.htm:27
-#: pntemplates/crpcalendar_user_edit.htm:29
-#: pntemplates/crpcalendar_admin_modify.htm:30
+#: pntemplates/crpcalendar_admin_new.htm:26
+#: pntemplates/crpcalendar_user_edit.htm:28
+#: pntemplates/crpcalendar_admin_modify.htm:28
 #: pntemplates/crpcalendar_user_new.htm:26
-#: pntemplates/crpcalendar_user_simple_display.htm:55
+#: pntemplates/crpcalendar_user_simple_display.htm:48
 #: pntemplates/crpcalendar_user_notify_newevent.htm:5
 #: pntemplates/blocks/crpcalendar_block_locationevents_modify.htm:13
-#: pntemplates/blocks/crpcalendar_block_locationevents_modify.htm:19
-#: pntemplates/crpcalendar_user_display.htm:60
+#: pntemplates/blocks/crpcalendar_block_locationevents_modify.htm:18
+#: pntemplates/crpcalendar_user_display.htm:53
 msgid "Location"
 msgstr "Location"
 
-#: pntemplates/crpcalendar_admin_new.htm:32
-#: pntemplates/crpcalendar_user_edit.htm:34
-#: pntemplates/crpcalendar_admin_modify.htm:35
+#: pntemplates/crpcalendar_admin_new.htm:31
+#: pntemplates/crpcalendar_user_edit.htm:33
+#: pntemplates/crpcalendar_admin_modify.htm:33
 #: pntemplates/crpcalendar_user_new.htm:31
 msgid "from Locations module"
 msgstr "from Locations module"
 
-#: pntemplates/crpcalendar_admin_new.htm:38
-#: pntemplates/crpcalendar_user_edit.htm:40
-#: pntemplates/crpcalendar_admin_modify.htm:41
-#: pntemplates/crpcalendar_user_new.htm:37
+#: pntemplates/crpcalendar_admin_new.htm:36
+#: pntemplates/crpcalendar_user_edit.htm:38
+#: pntemplates/crpcalendar_admin_modify.htm:38
+#: pntemplates/crpcalendar_user_new.htm:36
 msgid "URL (with http://)"
 msgstr "URL (with http://)"
 
-#: pntemplates/crpcalendar_admin_new.htm:42
-#: pntemplates/crpcalendar_user_edit.htm:44
-#: pntemplates/crpcalendar_admin_modify.htm:45
-#: pntemplates/crpcalendar_user_new.htm:41
-#: pntemplates/crpcalendar_user_simple_display.htm:67
+#: pntemplates/crpcalendar_admin_new.htm:40
+#: pntemplates/crpcalendar_user_edit.htm:42
+#: pntemplates/crpcalendar_admin_modify.htm:42
+#: pntemplates/crpcalendar_user_new.htm:40
+#: pntemplates/crpcalendar_user_simple_display.htm:60
 #: pntemplates/crpcalendar_user_notify_newevent.htm:6
-#: pntemplates/crpcalendar_user_display.htm:72
+#: pntemplates/crpcalendar_user_display.htm:65
 msgid "Contact"
 msgstr "Contact"
 
-#: pntemplates/crpcalendar_admin_new.htm:46
-#: pntemplates/crpcalendar_user_edit.htm:48
-#: pntemplates/crpcalendar_admin_modify.htm:49
-#: pntemplates/crpcalendar_user_new.htm:45
-#: pntemplates/crpcalendar_user_simple_display.htm:64
+#: pntemplates/crpcalendar_admin_new.htm:44
+#: pntemplates/crpcalendar_user_edit.htm:46
+#: pntemplates/crpcalendar_admin_modify.htm:46
+#: pntemplates/crpcalendar_user_new.htm:44
+#: pntemplates/crpcalendar_user_simple_display.htm:57
 #: pntemplates/crpcalendar_user_notify_newevent.htm:7
-#: pntemplates/crpcalendar_user_display.htm:69
+#: pntemplates/crpcalendar_user_display.htm:62
 msgid "Organiser"
 msgstr "Organiser"
 
-#: pntemplates/crpcalendar_admin_new.htm:51
-#: pntemplates/crpcalendar_user_edit.htm:53
-#: pntemplates/crpcalendar_user_daylist_grouped.htm:44
-#: pntemplates/crpcalendar_admin_modify.htm:54
-#: pntemplates/crpcalendar_user_new.htm:50
+#: pntemplates/crpcalendar_admin_new.htm:49
+#: pntemplates/crpcalendar_user_edit.htm:51
+#: pntemplates/crpcalendar_user_daylist_grouped.htm:47
+#: pntemplates/crpcalendar_admin_modify.htm:51
+#: pntemplates/crpcalendar_user_new.htm:49
 #: pntemplates/content/crpcalendar_event.htm:4
 #: pntemplates/content/crpcalendar_category.htm:2
-#: pntemplates/crpcalendar_user_view_month.htm:56
-#: pntemplates/crpcalendar_user_daylist_flat.htm:42
+#: pntemplates/crpcalendar_user_view_month.htm:57
+#: pntemplates/crpcalendar_user_daylist_flat.htm:45
 #: pntemplates/blocks/crpcalendar_block_categoryevents_modify.htm:12
-#: pntemplates/crpcalendar_user_view_year_grouped.htm:47
+#: pntemplates/crpcalendar_user_view_year_grouped.htm:48
 #: pntemplates/crpcalendar_admin_view.htm:10
-#: pntemplates/crpcalendar_admin_view.htm:42
-#: pntemplates/crpcalendar_user_view_year_flat.htm:44
-#: pntemplates/crpcalendar_user_view_partecipations.htm:63
-#: pntemplates/ical/crpcalendar_admin_import_ics.htm:11
+#: pntemplates/crpcalendar_admin_view.htm:43
+#: pntemplates/crpcalendar_user_view_year_flat.htm:45
+#: pntemplates/crpcalendar_user_view_partecipations.htm:64
+#: pntemplates/ical/crpcalendar_admin_import_ics.htm:13
 #: pntemplates/crpcalendar_user_view.htm:54
-#: pntemplates/crpcalendar_user_filtermenu.htm:9
+#: pntemplates/crpcalendar_user_filtermenu.htm:10
 msgid "Category"
 msgstr "Category"
 
-#: pntemplates/crpcalendar_admin_new.htm:58
-#: pntemplates/crpcalendar_user_edit.htm:60
-#: pntemplates/crpcalendar_admin_modify.htm:61
-#: pntemplates/crpcalendar_user_new.htm:57
+#: pntemplates/crpcalendar_admin_new.htm:51
+#: pntemplates/crpcalendar_user_edit.htm:52
+#: pntemplates/crpcalendar_admin_modify.htm:53
+#: pntemplates/crpcalendar_user_new.htm:50
+#: pntemplates/content/crpcalendar_event.htm:5
+#: pntemplates/content/crpcalendar_category.htm:3
+#: pntemplates/ical/crpcalendar_admin_import_ics.htm:15
+msgid "Choose Category"
+msgstr "Choose Category"
+
+#: pntemplates/crpcalendar_admin_new.htm:57
+#: pntemplates/crpcalendar_user_edit.htm:57
+#: pntemplates/crpcalendar_admin_modify.htm:59
+#: pntemplates/crpcalendar_user_new.htm:55
 msgid "Language"
 msgstr "Language"
 
-#: pntemplates/crpcalendar_admin_new.htm:63
-#: pntemplates/crpcalendar_user_edit.htm:65
-#: pntemplates/crpcalendar_admin_modify.htm:66
-#: pntemplates/crpcalendar_user_new.htm:62
+#: pntemplates/crpcalendar_admin_new.htm:62
+#: pntemplates/crpcalendar_user_edit.htm:62
+#: pntemplates/crpcalendar_admin_modify.htm:64
+#: pntemplates/crpcalendar_user_new.htm:60
 msgid "Event image (.gif, .jpg, .png) - Max"
 msgstr "Event image (.gif, .jpg, .png) - Max"
 
-#: pntemplates/crpcalendar_admin_new.htm:66
-#: pntemplates/crpcalendar_user_edit.htm:68
-#: pntemplates/crpcalendar_admin_modify.htm:69
-#: pntemplates/crpcalendar_user_new.htm:65
+#: pntemplates/crpcalendar_admin_new.htm:62
+#: pntemplates/crpcalendar_admin_new.htm:73
+#: pntemplates/crpcalendar_user_edit.htm:62
+#: pntemplates/crpcalendar_user_edit.htm:85
+#: pntemplates/crpcalendar_admin_modify.htm:64
+#: pntemplates/crpcalendar_admin_modify.htm:85
+#: pntemplates/crpcalendar_user_new.htm:60
+msgid "KBytes"
+msgstr "KBytes"
+
+#: pntemplates/crpcalendar_admin_new.htm:65
+#: pntemplates/crpcalendar_user_edit.htm:65
+#: pntemplates/crpcalendar_admin_modify.htm:67
+#: pntemplates/crpcalendar_user_new.htm:63
 msgid "Image would be resized to"
 msgstr "Image would be resized to"
 
-#: pntemplates/crpcalendar_admin_new.htm:69
-#: pntemplates/crpcalendar_user_edit.htm:83
-#: pntemplates/crpcalendar_admin_modify.htm:86
-#: pntemplates/crpcalendar_user_new.htm:68
+#: pntemplates/crpcalendar_admin_new.htm:68
+#: pntemplates/crpcalendar_user_edit.htm:80
+#: pntemplates/crpcalendar_admin_modify.htm:80
+#: pntemplates/crpcalendar_user_new.htm:66
 msgid "Image caption"
 msgstr "Image caption"
 
-#: pntemplates/crpcalendar_admin_new.htm:71
-#: pntemplates/crpcalendar_user_edit.htm:85
-#: pntemplates/crpcalendar_admin_modify.htm:88
-#: pntemplates/crpcalendar_user_new.htm:70
+#: pntemplates/crpcalendar_admin_new.htm:70
+#: pntemplates/crpcalendar_user_edit.htm:82
+#: pntemplates/crpcalendar_admin_modify.htm:82
+#: pntemplates/crpcalendar_user_new.htm:68
 msgid "Image caption will be displayed only if an image is present"
 msgstr "Image caption will be displayed only if an image is present"
 
-#: pntemplates/crpcalendar_admin_new.htm:74
-#: pntemplates/crpcalendar_user_edit.htm:88
-#: pntemplates/crpcalendar_admin_modify.htm:91
-#: pntemplates/crpcalendar_user_new.htm:73
-#: pntemplates/ical/crpcalendar_admin_import_ics.htm:17
+#: pntemplates/crpcalendar_admin_new.htm:73
+#: pntemplates/crpcalendar_user_edit.htm:85
+#: pntemplates/crpcalendar_admin_modify.htm:85
+#: pntemplates/crpcalendar_user_new.htm:71
+#: pntemplates/ical/crpcalendar_admin_import_ics.htm:19
 msgid "Event document"
 msgstr "Event document"
 
 #: pntemplates/crpcalendar_admin_new.htm:83
-#: pntemplates/crpcalendar_user_edit.htm:109
-#: pntemplates/crpcalendar_admin_modify.htm:114
-#: pntemplates/crpcalendar_user_new.htm:82
-msgid "Day event"
-msgstr "Day event"
-
-#: pntemplates/crpcalendar_admin_new.htm:91
-#: pntemplates/crpcalendar_user_edit.htm:117
-#: pntemplates/crpcalendar_user_daylist_grouped.htm:60
-#: pntemplates/crpcalendar_admin_modify.htm:122
-#: pntemplates/crpcalendar_user_new.htm:90
-#: pntemplates/crpcalendar_user_simple_display.htm:46
-#: pntemplates/crpcalendar_user_simple_display.htm:49
-#: pntemplates/crpcalendar_user_view_month.htm:73
-#: pntemplates/crpcalendar_user_view_month.htm:78
-#: pntemplates/crpcalendar_user_daylist_flat.htm:58
-#: pntemplates/crpcalendar_user_view_year_grouped.htm:64
-#: pntemplates/crpcalendar_user_view_year_grouped.htm:69
-#: pntemplates/crpcalendar_admin_view.htm:22
-#: pntemplates/crpcalendar_admin_view.htm:44
-#: pntemplates/crpcalendar_user_view_year_flat.htm:61
-#: pntemplates/crpcalendar_user_view_year_flat.htm:66
-#: pntemplates/crpcalendar_user_view_partecipations.htm:75
-#: pntemplates/crpcalendar_user_view_partecipations.htm:80
-#: pntemplates/crpcalendar_user_view.htm:71
-#: pntemplates/crpcalendar_user_view.htm:76
-#: pntemplates/crpcalendar_user_display.htm:51
-#: pntemplates/crpcalendar_user_display.htm:54
-msgid "Start date"
-msgstr "Start date"
-
-#: pntemplates/crpcalendar_admin_new.htm:98
-#: pntemplates/crpcalendar_user_edit.htm:123
-#: pntemplates/crpcalendar_user_daylist_grouped.htm:61
-#: pntemplates/crpcalendar_admin_modify.htm:128
-#: pntemplates/crpcalendar_user_new.htm:97
-#: pntemplates/crpcalendar_user_simple_display.htm:47
-#: pntemplates/crpcalendar_user_simple_display.htm:50
-#: pntemplates/crpcalendar_user_view_month.htm:74
-#: pntemplates/crpcalendar_user_view_month.htm:79
-#: pntemplates/crpcalendar_user_daylist_flat.htm:59
-#: pntemplates/crpcalendar_user_view_year_grouped.htm:65
-#: pntemplates/crpcalendar_user_view_year_grouped.htm:70
-#: pntemplates/crpcalendar_admin_view.htm:24
-#: pntemplates/crpcalendar_admin_view.htm:45
-#: pntemplates/crpcalendar_user_view_year_flat.htm:62
-#: pntemplates/crpcalendar_user_view_year_flat.htm:67
-#: pntemplates/crpcalendar_user_view_partecipations.htm:76
-#: pntemplates/crpcalendar_user_view_partecipations.htm:81
-#: pntemplates/crpcalendar_user_view.htm:72
-#: pntemplates/crpcalendar_user_view.htm:77
-#: pntemplates/crpcalendar_user_display.htm:52
-#: pntemplates/crpcalendar_user_display.htm:55
-msgid "End date"
-msgstr "End date"
-
-#: pntemplates/crpcalendar_admin_new.htm:106
-msgid "Other start date for this event"
-msgstr "Other start date for this event"
-
-#: pntemplates/crpcalendar_admin_new.htm:127
-#: pntemplates/crpcalendar_admin_modify.htm:135
+#: pntemplates/crpcalendar_admin_modify.htm:105
 msgid "Formicula form identifier"
 msgstr "Formicula form identifier"
 
-#: pntemplates/crpcalendar_admin_new.htm:132
-#: pntemplates/crpcalendar_admin_modify.htm:140
-#: pntemplates/crpcalendar_admin_view.htm:13
-#: pntemplates/crpcalendar_admin_view.htm:46
+#: pntemplates/crpcalendar_admin_new.htm:88
+#: pntemplates/crpcalendar_admin_modify.htm:110
+#: pntemplates/crpcalendar_admin_view.htm:12
+#: pntemplates/crpcalendar_admin_view.htm:47
 #: pntemplates/crpcalendar_user_filtermenu.htm:32
 msgid "Status"
 msgstr "Status"
 
-#: pntemplates/crpcalendar_admin_new.htm:134
-#: pntemplates/crpcalendar_admin_modify.htm:142
-#: pntemplates/crpcalendar_admin_view.htm:16
-#: pntemplates/crpcalendar_admin_modifyconfig.htm:42
-msgid "Active"
-msgstr "Active"
+#: pntemplates/crpcalendar_admin_new.htm:97
+#: pntemplates/crpcalendar_admin_modify.htm:119
+msgid "Date settings"
+msgstr "Date settings"
 
-#: pntemplates/crpcalendar_admin_new.htm:135
-#: pntemplates/crpcalendar_admin_modify.htm:143
-#: pntemplates/crpcalendar_admin_view.htm:17
-#: pntemplates/crpcalendar_admin_modifyconfig.htm:43
-msgid "Pending"
-msgstr "Pending"
+#: pntemplates/crpcalendar_admin_new.htm:99
+#: pntemplates/crpcalendar_user_edit.htm:106
+#: pntemplates/crpcalendar_admin_modify.htm:121
+#: pntemplates/crpcalendar_user_new.htm:80
+msgid "Day event"
+msgstr "Day event"
 
-#: pntemplates/crpcalendar_admin_new.htm:136
-#: pntemplates/crpcalendar_admin_modify.htm:144
-#: pntemplates/crpcalendar_admin_view.htm:18
-#: pntemplates/crpcalendar_admin_modifyconfig.htm:44
-msgid "Rejected"
-msgstr "Rejected"
+#: pntemplates/crpcalendar_admin_new.htm:107
+#: pntemplates/crpcalendar_user_edit.htm:114
+#: pntemplates/crpcalendar_user_daylist_grouped.htm:56
+#: pntemplates/crpcalendar_admin_modify.htm:129
+#: pntemplates/crpcalendar_user_new.htm:88
+#: pntemplates/crpcalendar_user_simple_display.htm:39
+#: pntemplates/crpcalendar_user_simple_display.htm:42
+#: pntemplates/crpcalendar_user_view_month.htm:67
+#: pntemplates/crpcalendar_user_view_month.htm:72
+#: pntemplates/crpcalendar_user_daylist_flat.htm:54
+#: pntemplates/crpcalendar_user_view_year_grouped.htm:58
+#: pntemplates/crpcalendar_user_view_year_grouped.htm:63
+#: pntemplates/crpcalendar_admin_view.htm:21
+#: pntemplates/crpcalendar_admin_view.htm:45
+#: pntemplates/crpcalendar_user_view_year_flat.htm:55
+#: pntemplates/crpcalendar_user_view_year_flat.htm:60
+#: pntemplates/crpcalendar_user_view_partecipations.htm:74
+#: pntemplates/crpcalendar_user_view_partecipations.htm:79
+#: pntemplates/crpcalendar_user_view.htm:64
+#: pntemplates/crpcalendar_user_view.htm:69
+#: pntemplates/crpcalendar_user_display.htm:44
+#: pntemplates/crpcalendar_user_display.htm:47
+msgid "Start date"
+msgstr "Start date"
 
-#: pntemplates/crpcalendar_admin_new.htm:142
-#: pntemplates/crpcalendar_user_edit.htm:131
-#: pntemplates/crpcalendar_admin_modify.htm:158
-#: pntemplates/crpcalendar_user_new.htm:106
-#: pntemplates/crpcalendar_admin_delete.htm:15
-#: pntemplates/crpcalendar_admin_purge.htm:24
-#: pntemplates/ical/crpcalendar_admin_import_ics.htm:23
-#: pntemplates/crpcalendar_admin_modifyconfig.htm:99
-#: pntemplates/crpcalendar_admin_modifyconfig.htm:163
-msgid "Cancel"
-msgstr "Cancel"
+#: pntemplates/crpcalendar_admin_new.htm:116
+#: pntemplates/crpcalendar_user_edit.htm:120
+#: pntemplates/crpcalendar_user_daylist_grouped.htm:57
+#: pntemplates/crpcalendar_admin_modify.htm:137
+#: pntemplates/crpcalendar_user_new.htm:97
+#: pntemplates/crpcalendar_user_simple_display.htm:40
+#: pntemplates/crpcalendar_user_simple_display.htm:43
+#: pntemplates/crpcalendar_user_view_month.htm:68
+#: pntemplates/crpcalendar_user_view_month.htm:73
+#: pntemplates/crpcalendar_user_daylist_flat.htm:55
+#: pntemplates/crpcalendar_user_view_year_grouped.htm:59
+#: pntemplates/crpcalendar_user_view_year_grouped.htm:64
+#: pntemplates/crpcalendar_admin_view.htm:23
+#: pntemplates/crpcalendar_admin_view.htm:46
+#: pntemplates/crpcalendar_user_view_year_flat.htm:56
+#: pntemplates/crpcalendar_user_view_year_flat.htm:61
+#: pntemplates/crpcalendar_user_view_partecipations.htm:75
+#: pntemplates/crpcalendar_user_view_partecipations.htm:80
+#: pntemplates/crpcalendar_user_view.htm:65
+#: pntemplates/crpcalendar_user_view.htm:70
+#: pntemplates/crpcalendar_user_display.htm:45
+#: pntemplates/crpcalendar_user_display.htm:48
+msgid "End date"
+msgstr "End date"
 
-#: pntemplates/crpcalendar_admin_new.htm:143
-#: pntemplates/crpcalendar_user_new.htm:107
+#: pntemplates/crpcalendar_admin_new.htm:126
+msgid "Other start date for this event"
+msgstr "Other start date for this event"
+
+#: pntemplates/crpcalendar_admin_new.htm:147
+#: pntemplates/crpcalendar_user_new.htm:108
 msgid "Create"
 msgstr "Create"
 
-#: pntemplates/crpcalendar_admin_new.htm:144
+#: pntemplates/crpcalendar_admin_new.htm:148
 msgid "Create and reenter"
 msgstr "Create and reenter"
 
-#: pntemplates/crpcalendar_user_edit.htm:7
+#: pntemplates/crpcalendar_admin_new.htm:149
+#: pntemplates/crpcalendar_user_edit.htm:130
+#: pntemplates/crpcalendar_admin_modify.htm:157
+#: pntemplates/crpcalendar_user_new.htm:109
+#: pntemplates/crpcalendar_admin_delete.htm:16
+#: pntemplates/crpcalendar_admin_purge.htm:29
+#: pntemplates/ical/crpcalendar_admin_import_ics.htm:27
+#: pntemplates/crpcalendar_admin_modifyconfig.htm:100
+#: pntemplates/crpcalendar_admin_modifyconfig.htm:171
+msgid "Cancel"
+msgstr "Cancel"
+
+#: pntemplates/crpcalendar_user_edit.htm:6
 msgid "Edit event"
 msgstr "Edit event"
 
-#: pntemplates/crpcalendar_user_edit.htm:72
-#: pntemplates/crpcalendar_user_edit.htm:94
-#: pntemplates/crpcalendar_admin_modify.htm:73
-#: pntemplates/crpcalendar_admin_modify.htm:97
+#: pntemplates/crpcalendar_user_edit.htm:69
+#: pntemplates/crpcalendar_user_edit.htm:91
+#: pntemplates/crpcalendar_admin_modify.htm:71
+#: pntemplates/crpcalendar_admin_modify.htm:91
 msgid "Current file"
 msgstr "Current file"
 
-#: pntemplates/crpcalendar_user_edit.htm:132
-#: pntemplates/crpcalendar_admin_modify.htm:159
-#: pntemplates/ical/crpcalendar_admin_import_ics.htm:24
+#: pntemplates/crpcalendar_user_edit.htm:73
+#: pntemplates/crpcalendar_user_edit.htm:95
+#: pntemplates/crpcalendar_admin_modify.htm:73
+#: pntemplates/crpcalendar_admin_modify.htm:93
+#: pntemplates/ical/crpcalendar_admin_import_ics.htm:19
+msgid "Bytes"
+msgstr "Bytes"
+
+#: pntemplates/crpcalendar_user_edit.htm:129
+#: pntemplates/crpcalendar_admin_modify.htm:155
+#: pntemplates/ical/crpcalendar_admin_import_ics.htm:26
 msgid "Update"
 msgstr "Update"
 
-#: pntemplates/crpcalendar_user_daylist_grouped.htm:11
+#: pntemplates/crpcalendar_user_daylist_grouped.htm:12
 #: pntemplates/crpcalendar_user_view_month.htm:21
-#: pntemplates/crpcalendar_user_daylist_flat.htm:9
+#: pntemplates/crpcalendar_user_daylist_flat.htm:10
 #: pntemplates/crpcalendar_user_view_year_grouped.htm:12
 #: pntemplates/crpcalendar_user_view_year_flat.htm:9
 #: pntemplates/crpcalendar_user_view_partecipations.htm:25
 #: pntemplates/crpcalendar_admin_modifyconfig.htm:92
 #: pntemplates/crpcalendar_user_view_attendees.htm:15
-#: pntemplates/crpcalendar_user_view.htm:16
+#: pntemplates/crpcalendar_user_view.htm:15
 msgid "Images"
 msgstr "Images"
 
-#: pntemplates/crpcalendar_user_daylist_grouped.htm:13
+#: pntemplates/crpcalendar_user_daylist_grouped.htm:14
 #: pntemplates/crpcalendar_user_view_month.htm:24
-#: pntemplates/crpcalendar_user_daylist_flat.htm:11
+#: pntemplates/crpcalendar_user_daylist_flat.htm:12
 #: pntemplates/crpcalendar_user_view_year_grouped.htm:15
 #: pntemplates/crpcalendar_user_view_year_flat.htm:12
 #: pntemplates/crpcalendar_user_view_partecipations.htm:28
 #: pntemplates/crpcalendar_user_view_attendees.htm:17
-#: pntemplates/crpcalendar_user_view.htm:19
+#: pntemplates/crpcalendar_user_view.htm:18
 msgid "Event detail"
 msgstr "Event detail"
 
-#: pntemplates/crpcalendar_user_daylist_grouped.htm:56
-#: pntemplates/crpcalendar_user_simple_display.htm:27
-#: pntemplates/crpcalendar_user_view_month.htm:68
-#: pntemplates/crpcalendar_user_daylist_flat.htm:54
-#: pntemplates/crpcalendar_user_view_year_grouped.htm:59
-#: pntemplates/crpcalendar_user_view_year_flat.htm:56
-#: pntemplates/crpcalendar_user_view_partecipations.htm:70
-#: pntemplates/crpcalendar_user_view.htm:66
-#: pntemplates/crpcalendar_user_display.htm:26
+#: pntemplates/crpcalendar_user_daylist_grouped.htm:52
+#: pntemplates/crpcalendar_user_simple_display.htm:20
+#: pntemplates/crpcalendar_user_view_month.htm:62
+#: pntemplates/crpcalendar_user_daylist_flat.htm:50
+#: pntemplates/crpcalendar_user_view_year_grouped.htm:53
+#: pntemplates/crpcalendar_user_view_year_flat.htm:50
+#: pntemplates/crpcalendar_user_view_partecipations.htm:69
+#: pntemplates/crpcalendar_user_view.htm:59
+#: pntemplates/crpcalendar_user_display.htm:19
 msgid "Posted on"
 msgstr "Posted on"
 
-#: pntemplates/crpcalendar_user_daylist_grouped.htm:57
-#: pntemplates/crpcalendar_user_simple_display.htm:28
+#: pntemplates/crpcalendar_user_daylist_grouped.htm:53
+#: pntemplates/crpcalendar_user_simple_display.htm:21
 #: pntemplates/crpcalendar_user_notify_newevent.htm:9
-#: pntemplates/crpcalendar_user_view_month.htm:69
-#: pntemplates/crpcalendar_user_daylist_flat.htm:55
-#: pntemplates/crpcalendar_user_view_year_grouped.htm:60
-#: pntemplates/crpcalendar_admin_view.htm:40
-#: pntemplates/crpcalendar_user_view_year_flat.htm:57
-#: pntemplates/crpcalendar_user_view_partecipations.htm:71
-#: pntemplates/crpcalendar_user_view.htm:67
-#: pntemplates/crpcalendar_user_display.htm:27
-#: pntemplates/crpcalendar_user_display.htm:93
+#: pntemplates/crpcalendar_user_view_month.htm:63
+#: pntemplates/crpcalendar_user_daylist_flat.htm:51
+#: pntemplates/crpcalendar_user_view_year_grouped.htm:54
+#: pntemplates/crpcalendar_admin_view.htm:41
+#: pntemplates/crpcalendar_user_view_year_flat.htm:51
+#: pntemplates/crpcalendar_user_view_partecipations.htm:70
+#: pntemplates/crpcalendar_user_view.htm:60
+#: pntemplates/crpcalendar_user_display.htm:20
+#: pntemplates/crpcalendar_user_display.htm:86
 msgid "by"
 msgstr "by"
 
-#: pntemplates/crpcalendar_user_monthlist.htm:26
-#: pntemplates/crpcalendar_user_monthlist.htm:77
+#: pntemplates/crpcalendar_user_monthlist.htm:29
+#: pntemplates/crpcalendar_user_monthlist.htm:80
 msgid "week"
 msgstr "week"
 
-#: pntemplates/crpcalendar_user_monthlist.htm:29
-#: pntemplates/crpcalendar_user_monthlist.htm:80
-#: pntemplates/crpcalendar_user_menu.htm:48
-#: pntemplates/blocks/crpcalendar_block_month.htm:45
-#: pntemplates/blocks/crpcalendar_block_month.htm:86
+#: pntemplates/crpcalendar_user_monthlist.htm:32
+#: pntemplates/crpcalendar_user_monthlist.htm:83
+#: pntemplates/crpcalendar_user_menu.htm:52
+#: pntemplates/blocks/crpcalendar_block_month.htm:48
+#: pntemplates/blocks/crpcalendar_block_month.htm:89
 msgid "Weekly view"
 msgstr "Weekly view"
 
-#: pntemplates/crpcalendar_admin_modify.htm:7
+#: pntemplates/crpcalendar_admin_modify.htm:6
 msgid "Modify event"
 msgstr "Modify event"
 
-#: pntemplates/crpcalendar_admin_modify.htm:150
+#: pntemplates/crpcalendar_admin_modify.htm:147
 msgid "Meta data"
 msgstr "Meta data"
 
-#: pntemplates/crpcalendar_admin_modify.htm:153
+#: pntemplates/crpcalendar_admin_modify.htm:150
 #, php-format
 msgid "Created by %s"
 msgstr "Created by %s"
 
-#: pntemplates/crpcalendar_admin_modify.htm:154
+#: pntemplates/crpcalendar_admin_modify.htm:151
 #, php-format
 msgid "Created on %s"
 msgstr "Created on %s"
 
-#: pntemplates/crpcalendar_search_options.htm:6
+#: pntemplates/crpcalendar_user_new.htm:71
+msgid "Kytes"
+msgstr "Kytes"
+
+#: pntemplates/crpcalendar_search_options.htm:5
 msgid "Archive"
 msgstr "Archive"
 
-#: pntemplates/crpcalendar_user_simple_display.htm:70
+#: pntemplates/crpcalendar_user_simple_display.htm:63
 #: pntemplates/locations/crpcalendar_user_location_card.htm:38
-#: pntemplates/crpcalendar_user_display.htm:75
+#: pntemplates/crpcalendar_user_display.htm:68
 msgid "URL"
 msgstr "URL"
 
-#: pntemplates/crpcalendar_user_menu.htm:5
+#: pntemplates/crpcalendar_user_menu.htm:6
 msgid "hCalendar microformat"
 msgstr "hCalendar microformat"
 
-#: pntemplates/crpcalendar_user_menu.htm:8
+#: pntemplates/crpcalendar_user_menu.htm:9
 msgid "hCard microformat"
 msgstr "hCard microformat"
 
-#: pntemplates/crpcalendar_user_menu.htm:12
-#: pntemplates/crpcalendar_admin_modifyconfig.htm:144
+#: pntemplates/crpcalendar_user_menu.htm:13
+#: pntemplates/crpcalendar_admin_modifyconfig.htm:146
 msgid "crpCalendar feed"
 msgstr "crpCalendar feed"
 
-#: pntemplates/crpcalendar_user_menu.htm:24
-#: pntemplates/crpcalendar_user_menu.htm:46
+#: pntemplates/crpcalendar_user_menu.htm:28
+#: pntemplates/crpcalendar_user_menu.htm:50
 #: pntemplates/blocks/crpcalendar_block_month.htm:6
 #: pntemplates/blocks/crpcalendar_block_events.htm:6
 msgid "Events list"
 msgstr "Events list"
 
-#: pntemplates/crpcalendar_user_menu.htm:25
+#: pntemplates/crpcalendar_user_menu.htm:29
 msgid "Today"
 msgstr "Today"
 
-#: pntemplates/crpcalendar_user_menu.htm:26
+#: pntemplates/crpcalendar_user_menu.htm:30
 msgid "This week"
 msgstr "This week"
 
-#: pntemplates/crpcalendar_user_menu.htm:27
+#: pntemplates/crpcalendar_user_menu.htm:31
 msgid "This month"
 msgstr "This month"
 
-#: pntemplates/crpcalendar_user_menu.htm:43
+#: pntemplates/crpcalendar_user_menu.htm:47
 msgid "Attendees"
 msgstr "Attendees"
 
-#: pntemplates/crpcalendar_user_menu.htm:47
+#: pntemplates/crpcalendar_user_menu.htm:51
 msgid "Daily view"
 msgstr "Daily view"
 
-#: pntemplates/crpcalendar_user_menu.htm:49
+#: pntemplates/crpcalendar_user_menu.htm:53
 msgid "Monthly view"
 msgstr "Monthly view"
 
-#: pntemplates/crpcalendar_user_menu.htm:50
+#: pntemplates/crpcalendar_user_menu.htm:54
 msgid "Yearly view"
 msgstr "Yearly view"
 
@@ -882,13 +946,13 @@ msgstr "Yearly view"
 msgid "Event creation"
 msgstr "Event creation"
 
-#: pntemplates/crpcalendar_user_notify_newevent.htm:15
+#: pntemplates/crpcalendar_user_notify_newevent.htm:13
 msgid "Please do not reply to this email! This is just an automatical generated text..."
 msgstr "Please do not reply to this email! This is just an automatical generated text..."
 
 #: pntemplates/crpcalendar_user_view_month.htm:15
 #: pntemplates/crpcalendar_user_view_year_flat.htm:3
-#: pntemplates/crpcalendar_user_view.htm:10
+#: pntemplates/crpcalendar_user_view.htm:9
 msgid "Calendar event's list"
 msgstr "Calendar event's list"
 
@@ -896,10 +960,17 @@ msgstr "Calendar event's list"
 msgid "Delete event"
 msgstr "Delete event"
 
-#: pntemplates/crpcalendar_admin_delete.htm:12
-#: pntemplates/crpcalendar_admin_delete.htm:16
-#: pntemplates/crpcalendar_admin_purge.htm:15
-#: pntemplates/crpcalendar_admin_purge.htm:25
+#: pntemplates/crpcalendar_admin_delete.htm:7
+msgid "Do you really want to delete this event?"
+msgstr "Do you really want to delete this event?"
+
+#: pntemplates/crpcalendar_admin_delete.htm:13
+#: pntemplates/crpcalendar_admin_purge.htm:10
+msgid "Confirmation prompt"
+msgstr "Confirmation prompt"
+
+#: pntemplates/crpcalendar_admin_delete.htm:15
+#: pntemplates/crpcalendar_admin_purge.htm:28
 msgid "Confirm deletion?"
 msgstr "Confirm deletion?"
 
@@ -923,11 +994,17 @@ msgstr "Days interval to show"
 msgid "Maximum number of events"
 msgstr "Maximum number of events"
 
-#: pntemplates/blocks/crpcalendar_block_events.htm:31
+#: pntemplates/blocks/crpcalendar_block_categoryevents_modify.htm:13
+#: pntemplates/crpcalendar_admin_view.htm:11
+#: pntemplates/crpcalendar_user_filtermenu.htm:11
+msgid "All"
+msgstr "All"
+
+#: pntemplates/blocks/crpcalendar_block_events.htm:28
 msgid "There are no events in the next"
 msgstr "There are no events in the next"
 
-#: pntemplates/blocks/crpcalendar_block_events.htm:31
+#: pntemplates/blocks/crpcalendar_block_events.htm:28
 msgid "days"
 msgstr "days"
 
@@ -939,56 +1016,60 @@ msgstr "Display week links into table"
 msgid "Display events into table"
 msgstr "Display events into table"
 
-#: pntemplates/crpcalendar_admin_purge.htm:15
-msgid "action not reversible, events will be deleted from database"
-msgstr "action not reversible, events will be deleted from database"
+#: pntemplates/crpcalendar_admin_purge.htm:11
+msgid "Please confirm deletion. This action is not reversible, events will be deleted from database"
+msgstr "Please confirm deletion. This action is not reversible, events will be deleted from database"
 
 #: pntemplates/crpcalendar_admin_purge.htm:18
-msgid "Up to and including date"
-msgstr "Up to and including date"
+msgid "Including from date"
+msgstr "Including from date"
 
 #: pntemplates/crpcalendar_admin_view.htm:3
 msgid "Calendar List"
 msgstr "Calendar List"
 
-#: pntemplates/crpcalendar_admin_view.htm:15
+#: pntemplates/crpcalendar_admin_view.htm:14
 #: pntemplates/crpcalendar_user_filtermenu.htm:34
 msgid "Not specified"
 msgstr "Not specified"
 
-#: pntemplates/crpcalendar_admin_view.htm:20
+#: pntemplates/crpcalendar_admin_view.htm:19
 msgid "Order by"
 msgstr "Order by"
 
-#: pntemplates/crpcalendar_admin_view.htm:26
+#: pntemplates/crpcalendar_admin_view.htm:25
 msgid "Sorting"
 msgstr "Sorting"
 
-#: pntemplates/crpcalendar_admin_view.htm:28
+#: pntemplates/crpcalendar_admin_view.htm:27
 msgid "Descendant"
 msgstr "Descendant"
 
-#: pntemplates/crpcalendar_admin_view.htm:29
+#: pntemplates/crpcalendar_admin_view.htm:28
 msgid "Ascendant"
 msgstr "Ascendant"
 
-#: pntemplates/crpcalendar_admin_view.htm:31
+#: pntemplates/crpcalendar_admin_view.htm:30
 #: pntemplates/crpcalendar_user_filtermenu.htm:40
 msgid "Submit"
 msgstr "Submit"
 
-#: pntemplates/crpcalendar_admin_view.htm:32
+#: pntemplates/crpcalendar_admin_view.htm:31
 #: pntemplates/crpcalendar_user_filtermenu.htm:41
 msgid "Clear"
 msgstr "Clear"
 
-#: pntemplates/crpcalendar_admin_view.htm:39
+#: pntemplates/crpcalendar_admin_view.htm:40
 msgid "Internal ID"
 msgstr "Internal ID"
 
-#: pntemplates/crpcalendar_admin_view.htm:47
+#: pntemplates/crpcalendar_admin_view.htm:48
 msgid "Options"
 msgstr "Options"
+
+#: pntemplates/crpcalendar_admin_view.htm:85
+msgid "No items found"
+msgstr "No items found"
 
 #: pntemplates/locations/crpcalendar_user_location_card.htm:24
 msgid "Phone"
@@ -1003,15 +1084,16 @@ msgid "E-mail address"
 msgstr "E-mail address"
 
 #: pntemplates/crpcalendar_user_view_partecipations.htm:18
-#: pntemplates/crpcalendar_user_view_attendees.htm:31
+#: pntemplates/crpcalendar_user_view_attendees.htm:32
 msgid "No avatar selected"
 msgstr "No avatar selected"
 
 #: pntemplates/ical/crpcalendar_admin_import_ics.htm:5
+#: pntemplates/ical/crpcalendar_admin_import_ics.htm:11
 msgid "iCal import"
 msgstr "iCal import"
 
-#: pntemplates/crpcalendar_user_view_year.htm:20
+#: pntemplates/crpcalendar_user_view_year.htm:19
 msgid "No events to be shown"
 msgstr "No events to be shown"
 
@@ -1036,20 +1118,20 @@ msgid "Items per page"
 msgstr "Items per page"
 
 #: pntemplates/crpcalendar_admin_modifyconfig.htm:20
-msgid "Max upload image size (bytes)"
-msgstr "Max upload image size (bytes)"
+msgid "Max upload image size (Bytes)"
+msgstr "Max upload image size (Bytes)"
 
 #: pntemplates/crpcalendar_admin_modifyconfig.htm:24
-msgid "Max upload document size (bytes)"
-msgstr "Max upload document size (bytes)"
+msgid "Max upload document size (Bytes)"
+msgstr "Max upload document size (Bytes)"
 
 #: pntemplates/crpcalendar_admin_modifyconfig.htm:28
 msgid "Notification for user's creation (none if empty)"
 msgstr "Notification for user's creation (none if empty)"
 
 #: pntemplates/crpcalendar_admin_modifyconfig.htm:32
-msgid "Enable user's partecipation to events"
-msgstr "Enable user's partecipation to events"
+msgid "Enable user's participation to events"
+msgstr "Enable user's participation to events"
 
 #: pntemplates/crpcalendar_admin_modifyconfig.htm:36
 msgid "Mandatory event description"
@@ -1115,71 +1197,71 @@ msgstr "Show sub-categories events when watching a category"
 msgid "GD Library"
 msgstr "GD Library"
 
-#: pntemplates/crpcalendar_admin_modifyconfig.htm:97
+#: pntemplates/crpcalendar_admin_modifyconfig.htm:98
 msgid "OK"
 msgstr "OK"
 
-#: pntemplates/crpcalendar_admin_modifyconfig.htm:103
+#: pntemplates/crpcalendar_admin_modifyconfig.htm:105
 msgid "GD Library requirement failed"
 msgstr "GD Library requirement failed"
 
-#: pntemplates/crpcalendar_admin_modifyconfig.htm:107
+#: pntemplates/crpcalendar_admin_modifyconfig.htm:109
 msgid "crpCalendar use GD Library"
 msgstr "crpCalendar use GD Library"
 
-#: pntemplates/crpcalendar_admin_modifyconfig.htm:111
+#: pntemplates/crpcalendar_admin_modifyconfig.htm:113
 msgid "Show thumbnails in user list"
 msgstr "Show thumbnails in user list"
 
-#: pntemplates/crpcalendar_admin_modifyconfig.htm:115
+#: pntemplates/crpcalendar_admin_modifyconfig.htm:117
 msgid "Event image width"
 msgstr "Event image width"
 
-#: pntemplates/crpcalendar_admin_modifyconfig.htm:119
+#: pntemplates/crpcalendar_admin_modifyconfig.htm:121
 msgid "User list thumbnail width"
 msgstr "User list thumbnail width"
 
-#: pntemplates/crpcalendar_admin_modifyconfig.htm:124
+#: pntemplates/crpcalendar_admin_modifyconfig.htm:126
 msgid "Other modules"
 msgstr "Other modules"
 
-#: pntemplates/crpcalendar_admin_modifyconfig.htm:127
+#: pntemplates/crpcalendar_admin_modifyconfig.htm:129
 msgid "Enable Locations"
 msgstr "Enable Locations"
 
-#: pntemplates/crpcalendar_admin_modifyconfig.htm:132
+#: pntemplates/crpcalendar_admin_modifyconfig.htm:134
 msgid "Enable formicula"
 msgstr "Enable formicula"
 
-#: pntemplates/crpcalendar_admin_modifyconfig.htm:137
+#: pntemplates/crpcalendar_admin_modifyconfig.htm:139
 msgid "PermaLinks"
 msgstr "PermaLinks"
 
-#: pntemplates/crpcalendar_admin_modifyconfig.htm:139
+#: pntemplates/crpcalendar_admin_modifyconfig.htm:141
 msgid "Add category title to PermaLink"
 msgstr "Add category title to PermaLink"
 
-#: pntemplates/crpcalendar_admin_modifyconfig.htm:146
+#: pntemplates/crpcalendar_admin_modifyconfig.htm:148
 msgid "Enable RSS feed"
 msgstr "Enable RSS feed"
 
-#: pntemplates/crpcalendar_admin_modifyconfig.htm:150
+#: pntemplates/crpcalendar_admin_modifyconfig.htm:152
 msgid "Display link to RSS feed"
 msgstr "Display link to RSS feed"
 
-#: pntemplates/crpcalendar_admin_modifyconfig.htm:154
+#: pntemplates/crpcalendar_admin_modifyconfig.htm:156
 msgid "Feed format"
 msgstr "Feed format"
 
-#: pntemplates/crpcalendar_admin_modifyconfig.htm:156
+#: pntemplates/crpcalendar_admin_modifyconfig.htm:159
 msgid "RSS 1.0"
 msgstr "RSS 1.0"
 
-#: pntemplates/crpcalendar_admin_modifyconfig.htm:157
+#: pntemplates/crpcalendar_admin_modifyconfig.htm:161
 msgid "RSS 2.0"
 msgstr "RSS 2.0"
 
-#: pntemplates/crpcalendar_admin_modifyconfig.htm:164
+#: pntemplates/crpcalendar_admin_modifyconfig.htm:170
 msgid "Update Configuration"
 msgstr "Update Configuration"
 
@@ -1187,11 +1269,11 @@ msgstr "Update Configuration"
 msgid "Name"
 msgstr "Name"
 
-#: pntemplates/crpcalendar_user_view_attendees.htm:41
+#: pntemplates/crpcalendar_user_view_attendees.htm:42
 msgid "_UFAKEMAIL"
 msgstr "_UFAKEMAIL"
 
-#: pntemplates/crpcalendar_user_view_attendees.htm:42
+#: pntemplates/crpcalendar_user_view_attendees.htm:43
 msgid "_YOURHOMEPAGE"
 msgstr "_YOURHOMEPAGE"
 
@@ -1215,27 +1297,32 @@ msgstr "Upcoming"
 msgid "Archived"
 msgstr "Archived"
 
-#: pntemplates/crpcalendar_user_display.htm:93
-msgid "Event partecipations"
-msgstr "Event partecipations"
+#: pntemplates/crpcalendar_user_display.htm:86
+msgid "Event participations"
+msgstr "Event participations"
 
-#: pntemplates/crpcalendar_user_display.htm:93
+#: pntemplates/crpcalendar_user_display.htm:86
 msgid "registered users"
 msgstr "registered users"
 
-#: pntemplates/crpcalendar_user_display.htm:101
+#: pntemplates/crpcalendar_user_display.htm:96
 msgid "user's attendance to events"
 msgstr "user's attendance to events"
 
-#: pntemplates/crpcalendar_user_display.htm:109
+#: pntemplates/crpcalendar_user_display.htm:105
 msgid "Words in text"
 msgstr "Words in text"
 
-#: pntemplates/crpcalendar_user_display.htm:109
+#: pntemplates/crpcalendar_user_display.htm:105
 msgid "Reads"
 msgstr "Reads"
 
-#: pntemplates/crpcalendar_user_display.htm:111
+#: pntemplates/crpcalendar_user_display.htm:107
 msgid "Print Page"
 msgstr "Print Page"
+
+#~ msgid "*"
+#~ msgstr "*"
+#~ msgid "Mandatory fields"
+#~ msgstr "Mandatory fields"
 

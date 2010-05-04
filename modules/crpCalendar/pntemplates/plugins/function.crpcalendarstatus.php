@@ -31,6 +31,7 @@ function smarty_function_crpcalendarstatus($params, & $smarty)
         return LogUtil :: registerPermissionError();
     }
 
+	$dom = ZLanguage::getModuleDomain('crpCalendar');
     $statusimage = '';
 
     if (!$params['fake'])
@@ -39,15 +40,15 @@ function smarty_function_crpcalendarstatus($params, & $smarty)
         $statusimage .= '<a href="' . DataUtil :: formatForDisplay(pnModUrl('crpCalendar', 'admin', 'change_status', array (
                 'eventid' => $params['eventid'],
                 'obj_status' => $params['status']
-        ))) . '" title="' . _CRPCALENDAR_CHANGE_STATUS . '">' . "\n";
+        ))) . '" title="' . __('Change status', $dom) . '">' . "\n";
         else
         $statusimage .= '';
 
         if ($params['status'] == 'A')
-        $statusimage .= '<img id="eventstatus_' . $params['eventid'] . '" src="modules/crpCalendar/pnimages/green_dot.gif" alt="' . _ACTIVE . '" title="' . _CRPCALENDAR_CHANGE_STATUS . '"/>' . "\n</a>\n";
-        elseif ($params['status'] == 'P') $statusimage .= '<img id="eventstatus_' . $params['eventid'] . '" src="modules/crpCalendar/pnimages/yellow_dot.gif" alt="' . _CRPCALENDAR_PENDING . '" title="' . _CRPCALENDAR_CHANGE_STATUS . '"/>' . "\n</a>\n";
+        $statusimage .= '<img id="eventstatus_' . $params['eventid'] . '" src="modules/crpCalendar/pnimages/green_dot.gif" alt="' . __('Active', $dom) . '" title="' . __('Change status', $dom) . '"/>' . "\n</a>\n";
+        elseif ($params['status'] == 'P') $statusimage .= '<img id="eventstatus_' . $params['eventid'] . '" src="modules/crpCalendar/pnimages/yellow_dot.gif" alt="' . __('Pending', $dom) . '" title="' . __('Change status', $dom) . '"/>' . "\n</a>\n";
         else
-        $statusimage .= '<img id="eventstatus_' . $params['eventid'] . '" src="modules/crpCalendar/pnimages/red_dot.gif" alt="' . _CRPCALENDAR_REJECTED . '" title="' . _CRPCALENDAR_CHANGE_STATUS_MODIFYING . '" />' . "\n";
+        $statusimage .= '<img id="eventstatus_' . $params['eventid'] . '" src="modules/crpCalendar/pnimages/red_dot.gif" alt="' . __('Rejected', $dom) . '" title="' . __('Modify event for status change', $dom) . '" />' . "\n";
     }
     else
     {
@@ -56,16 +57,16 @@ function smarty_function_crpcalendarstatus($params, & $smarty)
             $statusimage .= "<a href='javascript:void(0);'>";
             $statusimage .= '<img id="eventstatus_fake_A_' . $params['eventid'] . '" ';
             $statusimage .= ($params['status'] == 'P') ? ' style="display:none" ' : '';
-            $statusimage .= '" onclick="togglestatus(\'' . $params['eventid'] . '\',\'A\')" src="modules/crpCalendar/pnimages/green_dot.gif" alt="' . _ACTIVE . '" title="' . _CRPCALENDAR_CHANGE_STATUS . '"/>' . "\n";
+            $statusimage .= '" onclick="togglestatus(\'' . $params['eventid'] . '\',\'A\')" src="modules/crpCalendar/pnimages/green_dot.gif" alt="' . __('Active', $dom) . '" title="' . __('Change status', $dom) . '"/>' . "\n";
             $statusimage .= '<img id="eventstatus_fake_P_' . $params['eventid'] . '"';
             $statusimage .= ($params['status'] == 'A') ? ' style="display:none" ' : '';
-            $statusimage .= 'onclick="togglestatus(\'' . $params['eventid'] . '\',\'P\')" src="modules/crpCalendar/pnimages/yellow_dot.gif" alt="' . _CRPCALENDAR_PENDING . '" title="' . _CRPCALENDAR_CHANGE_STATUS . '"/>' . "\n";
+            $statusimage .= 'onclick="togglestatus(\'' . $params['eventid'] . '\',\'P\')" src="modules/crpCalendar/pnimages/yellow_dot.gif" alt="' . __('Pending', $dom) . '" title="' . __('Change status', $dom) . '"/>' . "\n";
             $statusimage .= "</a>";
         }
-        elseif ($params['status'] == 'A') $statusimage .= '<img id="eventstatus_' . $params['eventid'] . '" src="modules/crpCalendar/pnimages/green_dot.gif" alt="' . _ACTIVE . '" title="' . _CRPCALENDAR_CHANGE_STATUS . '"/>' . "\n";
-        elseif ($params['status'] == 'P') $statusimage .= '<img id="eventstatus_' . $params['eventid'] . '" src="modules/crpCalendar/pnimages/yellow_dot.gif" alt="' . _CRPCALENDAR_PENDING . '" title="' . _CRPCALENDAR_CHANGE_STATUS . '"/>' . "\n";
+        elseif ($params['status'] == 'A') $statusimage .= '<img id="eventstatus_' . $params['eventid'] . '" src="modules/crpCalendar/pnimages/green_dot.gif" alt="' . __('Active', $dom) . '" title="' . __('Change status', $dom) . '"/>' . "\n";
+        elseif ($params['status'] == 'P') $statusimage .= '<img id="eventstatus_' . $params['eventid'] . '" src="modules/crpCalendar/pnimages/yellow_dot.gif" alt="' . __('Pending', $dom) . '" title="' . __('Change status', $dom) . '"/>' . "\n";
         else
-        $statusimage .= '<img id="eventstatus_' . $params['eventid'] . '" src="modules/crpCalendar/pnimages/red_dot.gif" alt="' . _CRPCALENDAR_REJECTED . '" title="' . _CRPCALENDAR_CHANGE_STATUS_MODIFYING . '" />' . "\n";
+        $statusimage .= '<img id="eventstatus_' . $params['eventid'] . '" src="modules/crpCalendar/pnimages/red_dot.gif" alt="' . __('Rejected', $dom) . '" title="' . __('Modify event for status change', $dom) . '" />' . "\n";
 
     }
 
