@@ -262,6 +262,9 @@ function crpCalendar_upgrade($oldversion)
 			return crpCalendar_upgrade("0.5.4");
 			break;
 		case "0.5.4" :
+		    $sql = "ALTER TABLE $tables[crpcalendar] ADD featured INT( 1 ) NOT NULL DEFAULT '1' AFTER counter";
+            if (!DBUtil :: executeSQL($sql))
+                return LogUtil :: registerError(__('Error! Table update failed.', $dom));
 			break;
 	}
 	return true;

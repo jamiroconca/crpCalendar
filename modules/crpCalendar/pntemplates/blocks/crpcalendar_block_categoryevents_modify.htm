@@ -12,3 +12,12 @@
     <label for="events_category"><!--[gt text="Category" domain="module_crpcalendar"]--></label>
     <!--[selector_category category=$mainCategory name="events_category" selectedValue=$events_category defaultValue="0" __defaultText="All"]-->
 </div>
+
+<div class="z-formrow">
+    <label for="eventsblock_featured"><!--[gt text="Event type" domain="module_crpcalendar"]--></label>
+    <select id ="eventsblock_featured" name="featured">
+        <option value="-1" <!--[if $featured == '-1']-->selected="selected"<!--[/if]-->><!--[gt text="Not specified" domain="module_crpcalendar"]--></option>
+        <option value="1" <!--[if $featured == '1']-->selected="selected"<!--[/if]-->><!--[gt text="Featured Event" domain="module_crpcalendar"]--></option>
+        <option value="0" <!--[if $featured == '0']-->selected="selected"<!--[/if]-->><!--[gt text="Non Featured Event" domain="module_crpcalendar"]--></option>
+    </select>
+</div>

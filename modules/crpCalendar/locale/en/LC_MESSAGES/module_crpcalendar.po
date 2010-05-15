@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Zikula 1.2.x\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-05-04 11:16+0000\n"
-"PO-Revision-Date: 2010-05-04 12:51+0100\n"
+"PO-Revision-Date: 2010-05-09 19:04+0100\n"
 "Last-Translator: Daniele Conca <conca.daniele@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -1323,6 +1323,6 @@ msgstr "Print Page"
 
 #~ msgid "*"
 #~ msgstr "*"
+
 #~ msgid "Mandatory fields"
 #~ msgstr "Mandatory fields"
-

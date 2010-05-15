@@ -17,12 +17,12 @@
  */
 function crpCalendar_pntables()
 {
-	// Initialise table array
-	$pntable = array ();
+    // Initialise table array
+    $pntable = array ();
 
-	// Full table definition
-	$pntable['crpcalendar'] = DBUtil :: getLimitedTablename('crpcalendar');
-	$pntable['crpcalendar_column'] = array (
+    // Full table definition
+    $pntable['crpcalendar'] = DBUtil :: getLimitedTablename('crpcalendar');
+    $pntable['crpcalendar_column'] = array (
 		'eventid' => 'eventid',
 		'title' => 'title',
 		'urltitle' => 'urltitle',
@@ -38,9 +38,9 @@ function crpCalendar_pntables()
 		'language' => 'language',
 		'counter' => 'counter',
 		'id_formicula' => 'id_formicula',
-
-	);
-	$pntable['crpcalendar_column_def'] = array (
+		'featured' => 'featured',
+    );
+    $pntable['crpcalendar_column_def'] = array (
 		'eventid' => 'I(11) AUTOINCREMENT PRIMARY',
 		'title' => "X NOTNULL DEFAULT ''",
 		'urltitle' => "X NOTNULL DEFAULT ''",
@@ -55,11 +55,12 @@ function crpCalendar_pntables()
 		'day_event' => "I(1) NOTNULL DEFAULT 1",
 		'language' => "C(30) NOTNULL DEFAULT ''",
 		'counter' => "I(11) NOTNULL DEFAULT 0",
-		'id_formicula' => "C(255) NOTNULL DEFAULT ''"
-	);
+		'id_formicula' => "C(255) NOTNULL DEFAULT ''",
+		'featured' => "I(1) NOTNULL DEFAULT 1",
+    );
 
-	$pntable['crpcalendar_files'] = DBUtil :: getLimitedTablename('crpcalendar_files');
-	$pntable['crpcalendar_files_column'] = array (
+    $pntable['crpcalendar_files'] = DBUtil :: getLimitedTablename('crpcalendar_files');
+    $pntable['crpcalendar_files_column'] = array (
 		'id' => 'id',
 		'eventid' => 'eventid',
 		'document_type' => 'document_type',
@@ -67,36 +68,36 @@ function crpCalendar_pntables()
 		'content_type' => 'content_type',
 		'size' => 'size',
 		'binary_data' => 'binary_data'
-	);
+		);
 
-	$pntable['crpcalendar_files_column_def'] = array (
+		$pntable['crpcalendar_files_column_def'] = array (
 		'id' => 'I(11) AUTOINCREMENT PRIMARY',
 		'eventid' => "I(11) NOTNULL DEFAULT 0",
 		'document_type' => "C(255) NOTNULL DEFAULT ''",
 		'name' => "C(255) NOTNULL DEFAULT ''",
-		'content_type' => "C(255) NOTNULL DEFAULT ''",
+        'content_type' => "C(255) NOTNULL DEFAULT ''",
 		'size' => "I NOTNULL DEFAULT 0",
 		'binary_data' => "B NOTNULL"
-	);
+		);
 
-	$pntable['crpcalendar_attendee'] = DBUtil :: getLimitedTablename('crpcalendar_attendee');
-	$pntable['crpcalendar_attendee_column'] = array (
+		$pntable['crpcalendar_attendee'] = DBUtil :: getLimitedTablename('crpcalendar_attendee');
+		$pntable['crpcalendar_attendee_column'] = array (
 		'uid' => 'uid',
 		'eventid' => 'eventid',
 
-	);
-	$pntable['crpcalendar_attendee_column_def'] = array (
+		);
+		$pntable['crpcalendar_attendee_column_def'] = array (
 		'uid' => "I(11) NOTNULL DEFAULT 0",
 		'eventid' => "I(11) NOTNULL DEFAULT 0"
-	);
+		);
 
-	// Enable categorization services
-	$pntable['crpcalendar_db_extra_enable_categorization'] = pnModGetVar('crpCalendar', 'enablecategorization');
-	$pntable['crpcalendar_primary_key_column'] = 'eventid';
+		// Enable categorization services
+		$pntable['crpcalendar_db_extra_enable_categorization'] = pnModGetVar('crpCalendar', 'enablecategorization');
+		$pntable['crpcalendar_primary_key_column'] = 'eventid';
 
-	// add standard data fields
-	ObjectUtil :: addStandardFieldsToTableDefinition($pntable['crpcalendar_column']);
-	ObjectUtil :: addStandardFieldsToTableDataDefinition($pntable['crpcalendar_column_def']);
+		// add standard data fields
+		ObjectUtil :: addStandardFieldsToTableDefinition($pntable['crpcalendar_column']);
+		ObjectUtil :: addStandardFieldsToTableDataDefinition($pntable['crpcalendar_column_def']);
 
-	return $pntable;
+		return $pntable;
 }

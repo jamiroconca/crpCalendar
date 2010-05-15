@@ -107,6 +107,14 @@
                 </div>
                 <!--[/if]-->
                 <div class="z-formrow">
+                    <label for="crpcalendar_featured"><!--[gt text="Featured event"]--></label>
+                    <!--[if $featured eq 1]-->
+                    <input id="crpcalendar_featured" name="event[featured]" type="checkbox" value="1" checked="checked" />
+                    <!--[else]-->
+                    <input id="crpcalendar_featured" name="event[featured]" type="checkbox" value="1" />
+                    <!--[/if]-->
+                </div>
+                <div class="z-formrow">
                     <label for="crpcalendar_event_status"><!--[gt text="Status"]--></label>
                     <select id="crpcalendar_event_status" name="event[obj_status]">
                         <option value="A"<!--[if $obj_status eq 'A']--> selected="selected"<!--[/if]-->><!--[gt text="Active"]--></option>

@@ -71,6 +71,7 @@ function crpCalendar_categoryeventsblock_display($blockinfo)
 	$apiargs['active'] = 'A';
 	$apiargs['modvars'] = $modvars;
 	$apiargs['modvars']['itemsperpage'] = $vars['numitems'];
+	$apiargs['featured'] = $vars['featured'];
 	$apiargs['sortOrder'] = 'ASC';
 
 	// call the api
@@ -138,6 +139,7 @@ function crpCalendar_categoryeventsblock_update($blockinfo)
 	$vars['limit'] = (int) FormUtil :: getPassedValue('limit', null, 'POST');
 	$vars['numitems'] = (int) FormUtil :: getPassedValue('numitems', null, 'POST');
 	$vars['events_category'] = FormUtil :: getPassedValue('events_category', null);
+	$vars['featured'] = (int) FormUtil :: getPassedValue('featured', null, 'POST');
 
 	// write back the new contents
 	$blockinfo['content'] = pnBlockVarsToContent($vars);

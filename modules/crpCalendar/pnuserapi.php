@@ -27,7 +27,7 @@ function crpCalendar_userapi_getall($navigationValues)
 
 	$calendar = new crpCalendar();
 
-	return $calendar->dao->adminList($navigationValues['startnum'], $navigationValues['category'], $navigationValues['clear'], $navigationValues['ignoreml'], $navigationValues['modvars'], $navigationValues['mainCat'], 'A', $navigationValues['interval'], $navigationValues['sortOrder'], $navigationValues['startDate'], $navigationValues['endDate'], $navigationValues['typeList'], $navigationValues['bylocation']);
+	return $calendar->dao->adminList($navigationValues['startnum'], $navigationValues['category'], $navigationValues['clear'], $navigationValues['ignoreml'], $navigationValues['modvars'], $navigationValues['mainCat'], 'A', $navigationValues['interval'], $navigationValues['sortOrder'], $navigationValues['startDate'], $navigationValues['endDate'], $navigationValues['typeList'], $navigationValues['bylocation'], 'start_date', $navigationValues['featured']);
 }
 
 /**

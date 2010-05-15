@@ -73,6 +73,7 @@
                 <td>
                     <span class="crp-status-real"><!--[crpcalendarstatus status=$event.obj_status eventid=$event.eventid]--></span>
                     <span class="crp-status-fake z-hide"><!--[crpcalendarstatus status=$event.obj_status eventid=$event.eventid fake=true]--></span>
+                    <!--[if $event.featured]--><!--[pnimg modname='core' set='icons/extrasmall' src='services.gif' __alt="Featured event" ]--><!--[/if]-->
                 </td>
                 <td>
                     <!--[assign var="options" value=$event.options]-->
