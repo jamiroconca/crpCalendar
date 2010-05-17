@@ -17,7 +17,7 @@
 function crpCalendar_categoryeventsblock_init()
 {
 	// Security
-	pnSecAddSchema('Categoryeventsblock::', 'Block title::');
+	SecurityUtil::registerPermissionSchema('Categoryeventsblock::', 'Block title::');
 }
 
 /**

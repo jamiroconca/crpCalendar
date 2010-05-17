@@ -17,7 +17,7 @@
 function crpCalendar_eventsblock_init()
 {
 	// Security
-	pnSecAddSchema('Eventsblock::', 'Block title::');
+	SecurityUtil::registerPermissionSchema('Eventsblock::', 'Block title::');
 }
 
 /**

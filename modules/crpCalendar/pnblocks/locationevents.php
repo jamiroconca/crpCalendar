@@ -19,7 +19,7 @@ Loader :: includeOnce('modules/crpCalendar/pnclass/crpCalendar.php');
 function crpCalendar_locationeventsblock_init()
 {
 	// Security
-	pnSecAddSchema('Locationeventsblock::', 'Block title::');
+	SecurityUtil::registerPermissionSchema('Locationeventsblock::', 'Block title::');
 }
 
 /**

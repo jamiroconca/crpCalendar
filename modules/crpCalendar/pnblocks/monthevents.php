@@ -19,7 +19,7 @@ Loader :: includeOnce('modules/crpCalendar/pnclass/crpCalendar.php');
 function crpCalendar_montheventsblock_init()
 {
 	// Security
-	pnSecAddSchema('Montheventsblock::', 'Block title::');
+	SecurityUtil::registerPermissionSchema('Montheventsblock::', 'Block title::');
 }
 
 /**
