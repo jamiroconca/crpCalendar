@@ -1,0 +1,54 @@
+<!--[pnajaxheader modname=crpLicense filename=crplicense.js noscriptaculous=true nobehaviour=true]-->
+
+<!--[include file="crplicense_admin_menu.htm"]-->
+<!--[pnml name=_CRPLICENSE_LICENSE html=1 assign=itemname]-->
+<!--[pnml name="_CREATEITEM" i=$itemname assign=templatetitle]-->
+<div class="pn-admincontainer">
+<div class="pn-adminpageicon"><!--[pnimg modname=core src=filenew.gif set=icons/large alt=$templatetitle]--></div>
+<h2><!--[$templatetitle]--></h2>
+<span class="crpcalendar-required"><!--[pnml name="_CRPLICENSE_REQUIRED" html=1]--></span> <!--[pnml name="_CRPLICENSE_REQUIRED_TEXT"]-->
+<form class="pn-form" action="<!--[pnmodurl modname="crpLicense" type="admin" func="create"]-->" method="post" enctype="multipart/form-data">
+<div>
+	<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="crpLicense"]-->" />
+	<fieldset class="pn-form-fieldset">
+  <legend><!--[pnml name=_CONTENT]--></legend>
+	  <div class="pn-formrow">
+    	<label for="license_name"><!--[pnml name="_CRPLICENSE_NAME" html=1]--> <span class="crplicense-required"><!--[pnml name="_CRPLICENSE_REQUIRED" html=1]--></span></label>
+    	<input id="license_name" class="pn-form-text" name="license[name]" type="text" size="32" maxlength="255" value="<!--[$name|pnvarprephtmldisplay]-->" />
+	  </div>
+	  
+	  <div class="pn-formrow">
+	    <label for="license_descr"><!--[pnml name="_CONTENT" html=1]--></label>
+   		<textarea id="license_descr" class="pn-form-text" name="license[descr]" rows="12" cols="64"><!--[$descr|pnvarprepfordisplay]--></textarea>
+    </div>
+    
+    <div class="pn-formrow">
+   		<label for="license_url"><!--[pnml name="_CRPLICENSE_URL_HINT" html=1]--></label>
+   		<input id="license_url" class="pn-form-text" name="license[url]" type="text" size="32" maxlength="255" value="<!--[$url|pnvarprephtmldisplay]-->" />
+    </div>
+
+		<div class="pn-formrow">
+	    <label for="license_image"><!--[pnml name="_CRPLICENSE_EVENT_IMAGE" html=1]--> <!--[pnmodgetvar module=crpLicense name=file_dimension]--> bytes</label>
+   		<input type="hidden" name="MAX_FILE_SIZE" value="<!--[pnmodgetvar module=crpLicense name=file_dimension]-->"/>
+   		<input id="license_image" name="license_image" type="file" size="32"/>
+   		<span class="pn-sub"><!--[pnml name="_CRPLICENSE_IMAGE_RESIZE"]--> <!--[pnmodgetvar module=crpLicense name=image_width]--> px</span>
+    </div>
+
+		<div class="pn-formrow">
+			<label for="crplicense_event_status"><!--[pnml name="_CRPLICENSE_STATUS" html=1]--></label>
+			<select id="crplicense_event_status" name="license[obj_status]">
+				<option value="A"<!--[if $obj_status eq 'A']--> selected="selected"<!--[/if]-->><!--[pnml name="_ACTIVE" html=1]--></option>
+				<option value="P"<!--[if $obj_status eq 'P']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPLICENSE_PENDING"]--></option>
+				<option value="R"<!--[if $obj_status eq 'R']--> selected="selected"<!--[/if]-->><!--[pnml name="_CRPLICENSE_REJECTED" html=1]--></option>
+			</select>
+		</div>
+		<!--[pnmodcallhooks hookobject=item hookaction=new module=crpLicense]-->
+    </fieldset>		
+    <div class="pn-formrow pn-formbuttons">
+    	<a href="<!--[pnmodurl modname=crpLicense type=admin func=view]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt="_CANCEL" title="_CANCEL"]--></a>
+    	<!--[pnbutton src=button_ok.gif set=icons/small alt="_CREATE" title="_CREATE"]-->
+    </div>
+</div>
+</form>
+
+</div>

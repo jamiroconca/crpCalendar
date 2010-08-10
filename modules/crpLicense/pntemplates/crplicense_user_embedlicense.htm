@@ -1,0 +1,12 @@
+<!--[if pnModLangLoad('crpLicense')]--><!-- lang load hack --><!--[/if]-->
+
+<div><strong><!--[pnml name="_CRPLICENSE_LICENSE_USE" html=1]--> <!--[$licenseChoosed.0.name]--></strong></div>
+<div>
+<!--[if $licenseChoosed.0.url]--><a href="<!--[$licenseChoosed.0.url]-->" title="<!--[$licenseChoosed.0.name]-->"><!--[/if]-->
+<!--[if $crplicense_use_gd eq '1']-->
+<img src="<!--[pnmodurl modname="crpLicense" type="user" func="get_thumbnail" id=$licenseChoosed.0.id width=$userlist_width]-->" alt="<!--[$licenseChoosed.0.name]-->" title="<!--[$licenseChoosed.0.name]-->"/>
+<!--[else]-->
+<img src="<!--[pnmodurl modname="crpLicense" type="user" func="get_image" id=$licenseChoosed.0.id]-->" alt="<!--[$licenseChoosed.0.name]-->" title="<!--[$licenseChoosed.0.name]-->" width="<!--[$userlist_width]-->px"/>
+<!--[/if]-->
+<!--[if $licenseChoosed.0.url]--></a><!--[/if]-->
+</div>

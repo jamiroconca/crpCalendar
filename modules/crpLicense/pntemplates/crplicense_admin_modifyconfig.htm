@@ -1,0 +1,66 @@
+<!--[pnajaxheader modname=crpLicense filename=crplicense.js noscriptaculous=true nobehaviour=true]-->
+<!--[include file="crplicense_admin_menu.htm"]-->
+<div class="pn-admincontainer">
+<div class="pn-adminpageicon"><!--[pnimg modname=core src=configure.gif set=icons/large alt='_MODIFYCONFIG' altml=true]--></div>
+<h2><!--[pnml name="_MODIFYCONFIG" html=1]--></h2>
+<form class="pn-adminform" action="<!--[pnmodurl modname="crpLicense" type="admin" func="updateconfig"]-->" method="post" enctype="application/x-www-form-urlencoded">
+<div>
+	<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="crpLicense"]-->" />
+	<fieldset>
+		<legend><!--[pnml name=_CRPLICENSE_GENERAL html=1]--></legend>
+		<div class="pn-adminformrow">
+			<label for="crplicense_itemsperpage"><!--[pnml name="_ITEMSPERPAGE" html=1]--></label>
+			<input id="crplicense_itemsperpage" type="text" name="itemsperpage" size="3" value="<!--[$itemsperpage|pnvarprepfordisplay]-->" />
+		</div>
+		<div class="pn-adminformrow">
+			<label for="crplicense_file_dimension"><!--[pnml name="_CRPLICENSE_FILE_DIMENSION" html=1]--></label>
+			<input id="crplicense_file_dimension" type="text" name="file_dimension" maxlength="6" size="7" value="<!--[$file_dimension|pnvarprepfordisplay]-->" />
+		</div>
+	</fieldset>
+	
+	<fieldset>
+		<legend><!--[pnml name=_CRPLICENSE_IMAGES html=1]--></legend>		
+		<div class="pn-adminformrow">
+			<label for="crplicense_gd_version"><!--[pnml name="_CRPLICENSE_GD_AVAILABLE" html=1]--></label>
+			<input id="crplicense_gd_version" type="text" name="gd_version" disabled="disabled" size="32" value="<!--[$gd_version.string|pnvarprepfordisplay]-->" />
+			<!--[if $gd_version.value >= 2]-->
+				<!--[pnimg modname=core src=button_ok.gif set=icons/small altml=true titleml=true alt="_OK" title="_OK"]-->
+			<!--[else]-->
+				<!--[pnimg modname=core src=editdelete.gif set=icons/small altml=true titleml=true alt="_ERROR" title="_ERROR"]-->
+			<!--[/if]-->
+		</div>
+		<div class="pn-adminformrow pn-hide" id="crplicense_use_browser">
+			<label><!--[pnml name="_CRPLICENSE_USE_BROWSER" html=1]--></label>
+			<input type="hidden" name="crplicense_use_gd" value="0" />
+		</div>
+		<div class="pn-adminformrow">
+			<label for="crplicense_use_gd"><!--[pnml name="_CRPLICENSE_USE_GD" html=1]--></label>
+			<input id="crplicense_use_gd" type="checkbox" name="crplicense_use_gd"<!--[if $crplicense_use_gd]--> checked="checked"<!--[/if]--> />
+		</div>
+		<div class="pn-adminformrow">
+			<label for="crplicense_userlist_image"><!--[pnml name="_CRPLICENSE_USERLIST_IMAGE" html=1]--></label>
+			<input id="crplicense_userlist_image" type="checkbox" name="crplicense_userlist_image"<!--[if $crplicense_userlist_image]--> checked="checked"<!--[/if]--> />
+		</div>		
+		<div class="pn-adminformrow">
+			<label for="crplicense_image_width"><!--[pnml name="_CRPLICENSE_IMAGE_WIDTH" html=1]--></label>
+			<input id="crplicense_image_width" type="text" name="image_width" maxlength="3" size="4" value="<!--[$image_width|pnvarprepfordisplay]-->" />
+		</div>
+		<div class="pn-adminformrow">
+			<label for="userlist_width"><!--[pnml name="_CRPLICENSE_USERLIST_WIDTH" html=1]--></label>
+			<input id="userlist_width" type="text" name="userlist_width" maxlength="3" size="4" value="<!--[$userlist_width|pnvarprepfordisplay]-->" />
+		</div>
+	</fieldset>
+
+    <!--[pnmodcallhooks hookobject=module hookaction=modifyconfig module=crpLicense]-->
+    <div class="pn-adminformrow pn-adminformbuttons">
+    <a href="<!--[pnmodurl modname=crpLicense type=admin func=view]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt="_CANCEL" title="_CANCEL"]--></a>
+    <!--[pnbutton src=button_ok.gif set=icons/small alt="_UPDATECONFIG" title="_UPDATECONFIG"]-->
+    </div>
+</div>
+</form>
+
+<script type="text/javascript">
+	Event.observe(window, 'load', function(){crpLicenseConfigInit('<!--[$gd_version.value]-->');}, false);
+</script>
+
+</div>

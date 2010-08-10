@@ -1,0 +1,51 @@
+<!--[pnajaxheader modname=crpLicense filename=crplicense.js noscriptaculous=true nobehaviour=true]-->
+<!--[include file="crplicense_admin_menu.htm"]-->
+<!--[pnml name=_CRPLICENSE_LICENSES assign=itemname]-->
+<!--[pnml name="_VIEWITEMS" i=$itemname assign=templatetitle]-->
+<div class="pn-admincontainer">
+<div class="pn-adminpageicon"><!--[pnimg modname=core src=windowlist.gif set=icons/large alt=$templatetitle]--></div>
+<h2><!--[$templatetitle]--></h2>
+
+<table class="pn-admintable">
+  <tr>
+  		<!--[if $crplicense_userlist_image]-->
+	    <th><!--[pnml name="_CRPLICENSE_IMAGES" html=1]--></th>
+		  <!--[/if]-->
+      <th><!--[pnml name="_TITLE"]--></th>
+      <th><!--[pnml name="_ID"]--></th>
+	  	<th><!--[pnml name="_CRPLICENSE_STATUS"]--></th>
+      <th><!--[pnml name="_OPTIONS"]--></th>
+  </tr>
+  <!--[foreach from=$licenses item=license]-->
+    <tr class="<!--[cycle values="pn-odd,pn-even"]-->">
+    	<!--[if $crplicense_userlist_image]-->
+			<td>
+				<!--[if $crplicense_use_gd eq '1']-->
+				<img src="<!--[pnmodurl modname="crpLicense" type="user" func="get_thumbnail" id=$license.id width=$userlist_width]-->" alt="<!--[$license.name]-->" title="<!--[$license.name]-->"/>
+				<!--[else]-->
+				<img src="<!--[pnmodurl modname="crpLicense" type="user" func="get_image" id=$license.id]-->" alt="<!--[$license.name]-->" title="<!--[$license.name]-->" width="<!--[$userlist_width]-->px"/>
+				<!--[/if]-->
+			</td>
+			<!--[/if]-->
+      <td><!--[$license.name|pnvarprephtmldisplay]--></td>
+      <td><!--[$license.id|pnvarprephtmldisplay]--></td>
+	  	<td>
+	  	<span class="crp-status-real"><!--[crplicensestatus status=$license.obj_status id=$license.id]--></span>
+	  	<span class="crp-status-fake pn-hide"><!--[crplicensestatus status=$license.obj_status id=$license.id fake=true]--></span>
+	  	</td>	
+      <td>
+        <!--[assign var="options" value=$license.options]-->
+        <!--[section name=options loop=$options]-->
+          <a href="<!--[$options[options].url|pnvarprepfordisplay]-->"><!--[pnimg modname=core set=icons/extrasmall src=$options[options].image alt=$options[options].title]--></a>
+        <!--[/section]-->
+      </td>
+    </tr>
+  <!--[/foreach]-->
+</table>
+
+<script type="text/javascript">
+	Event.observe(window, 'load', function(){crpLicenseAdminViewInit();}, false);
+</script>
+
+<!--[pager rowcount=$pager.numitems limit=$pager.itemsperpage posvar=startnum shift=1 img_prev=images/icons/extrasmall/previous.gif img_next=images/icons/extrasmall/next.gif]-->
+</div>
