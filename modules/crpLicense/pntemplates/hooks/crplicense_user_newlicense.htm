@@ -1,0 +1,12 @@
+<!--[if pnModLangLoad('crpLicense')]--><!-- lang load hack --><!--[/if]-->
+
+<h4><!--[pnml name="_CRPLICENSE_LICENSES" html=1]--></h4>
+<div class="pn-formrow">
+	<label for="licenselist"><!--[pnml name="_CRPLICENSE_LICENSE_USE" html=1]--></label>
+	<select id="licenselist" name="licenselist">
+		<option></option>
+		<!--[section name=k loop=$licenseArray]-->
+		<option value="<!--[$licenseArray[k].id]-->"><!--[$licenseArray[k].name]--></option>
+		<!--[/section]-->
+	</select>
+</div>
