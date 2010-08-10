@@ -1,0 +1,33 @@
+
+<!--[include file="crptalk_admin_menu.htm"]-->
+<div class="pn-admincontainer">
+<div class="pn-adminpageicon"><!--[pnimg modname=core src=configure.gif set=icons/large alt='_MODIFYCONFIG' altml=true]--></div>
+<h2><!--[pnml name="_MODIFYCONFIG" html=1]--></h2>
+<form class="pn-adminform" action="<!--[pnmodurl modname="crpTalk" type="admin" func="updateconfig"]-->" method="post" enctype="application/x-www-form-urlencoded">
+<div>
+	<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="crpTalk"]-->" />
+	<fieldset>
+		<legend><!--[pnml name=_CRPTALK_GENERAL html=1]--></legend>
+		<div class="pn-adminformrow">
+			<label for="crptalk_talk_widget_width"><!--[pnml name="_CRPTALK_WIDGET_WIDTH" html=1]--></label>
+			<input id="crptalk_talk_widget_width" type="text" name="talk_widget_width" maxlength="4" size="7" value="<!--[$talk_widget_width|pnvarprepfordisplay]-->" />
+		</div>
+		<div class="pn-adminformrow">
+			<label for="crptalk_talk_widget_height"><!--[pnml name="_CRPTALK_WIDGET_HEIGTH" html=1]--></label>
+			<input id="crptalk_talk_widget_height" type="text" name="talk_widget_height" maxlength="4" size="7" value="<!--[$talk_widget_height|pnvarprepfordisplay]-->" />
+		</div>
+		<div class="pn-adminformrow">
+			<label for="crptalk_talk_chatback_hash_key"><!--[pnml name="_CRPTALK_CHATBACK_HASH_KEY" html=1]--></label>
+			<input id="crptalk_talk_chatback_hash_key" type="text" name="talk_chatback_hash_key" size="64" value="<!--[$talk_chatback_hash_key|pnvarprepfordisplay]-->" />
+		</div>
+	</fieldset>
+
+  <div class="pn-adminformrow pn-adminformbuttons">
+    <a href="<!--[pnmodurl modname=crpTalk type=admin func=view]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt="_CANCEL" title="_CANCEL"]--></a>
+    <!--[pnbutton src=button_ok.gif set=icons/small alt="_UPDATECONFIG" title="_UPDATECONFIG"]-->
+  </div>
+  
+</div>
+</form>
+
+</div>
